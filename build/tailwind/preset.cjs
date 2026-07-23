@@ -107,7 +107,8 @@ module.exports = {
           "muted-blue-gray": "#667085",
           "dark-slate": "#101828",
           "charcoal": "#2f3537",
-          "indigo-navy": "#393960"
+          "indigo-navy": "#393960",
+          "loader-blue": "#30699d"
         }
       },
       "fontFamily": {

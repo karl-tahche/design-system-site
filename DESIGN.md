@@ -83,6 +83,7 @@ colors:
   extended-dark-slate: "#101828"
   extended-charcoal: "#2F3537"
   extended-indigo-navy: "#393960"
+  extended-loader-blue: "#30699D"
   primary: "{colors.primary-500}"
   secondary: "{colors.secondary-500}"
   neutral: "{colors.neutral-500}"
@@ -427,6 +428,50 @@ components:
     width: 512px
   modal-vertical:
     width: 384px
+  button-group:
+    backgroundColor: "{colors.neutral-100}"
+    rounded: "{rounded.md}"
+    padding: 4px
+  button-group-active:
+    backgroundColor: "#FFFFFF"
+    textColor: "{colors.primary-600}"
+    rounded: "{rounded.sm}"
+  form-control-switch-off:
+    backgroundColor: "{colors.neutral-200}"
+    rounded: "{rounded.full}"
+  form-control-switch-on:
+    backgroundColor: "{colors.primary-500}"
+    rounded: "{rounded.full}"
+  file-upload:
+    backgroundColor: "#FFFFFF"
+    textColor: "{colors.neutral-700}"
+    rounded: "{rounded.3xl}"
+    padding: 24px
+  file-upload-drag-over:
+    backgroundColor: "{colors.primary-50}"
+  pagination-active:
+    backgroundColor: transparent
+    textColor: "{colors.primary-500}"
+    rounded: "{rounded.sm}"
+  pagination-active-filled:
+    backgroundColor: "{colors.primary-500}"
+    textColor: "#FFFFFF"
+    rounded: "{rounded.sm}"
+  side-nav-active:
+    backgroundColor: "{colors.secondary-500}"
+    textColor: "{colors.primary-500}"
+    rounded: "{rounded.md}"
+  loader:
+    textColor: "{colors.extended-loader-blue}"
+    size: 40px
+  loader-screen:
+    backgroundColor: "{colors.neutral-100}"
+  data-display-label:
+    textColor: "{colors.neutral-800}"
+    typography: "{typography.paragraph-small}"
+  data-display-value:
+    textColor: "{colors.neutral-800}"
+    typography: "{typography.paragraph-small-medium}"
 ---
 
 ## Overview
@@ -448,12 +493,12 @@ Two tiers, deliberately kept separate:
 
 Each semantic ramp (`success`/`warning`/`destructive`) runs 50→900 and should only be used for state communication — a destructive action, a warning banner, a success toast — never as a decorative accent. Within any ramp: 50/100 for tinted backgrounds and hover fills, 500 for the primary interactive tone, 700–900 for high-contrast text or dark-surface contexts.
 
-**`neutral-750` (`#3F3F3F`) is new** — not a Figma foundation-page color, but a real, heavily-used gray discovered by auditing live components directly. It's the actual secondary/body text color in Breadcrumb, Tab, Table Header, Table Content Cell, Pagination, Side Nav Item, Tooltip, Button Group, Button Tertiary, and Accordion — used in more places than `neutral-700` itself, despite never having been documented anywhere before this.
+**`neutral-750` (`#3F3F3F`) is new** — not a Figma foundation-page color, but a real, heavily-used gray discovered by auditing live components directly. It's the actual secondary/body text color in Breadcrumb, Tab, Table Header, Table Content Cell, Tooltip, Button Tertiary, and Accordion — used in more places than `neutral-700` itself, despite never having been documented anywhere before this. **Corrected 2026-07-25**: Pagination, Side Nav Item, and Button Group were removed from this list — a real-code audit found none of the three actually uses it (see their own sections below for what they really use).
 
 **Two new categories, promoted from a real-usage audit of all 5 codebases, not from Figma:**
 
 - **`request`** (facilities/cashAdvance/room/pettyCash/procurement/businessTrip/coe) — real, needed design vocabulary for request-type status badges, previously defined identically in 4 of 5 apps' Tailwind configs but wired inconsistently: one app uses it correctly via real classes, two need the exact same colors but hardcode the hex instead, and one never needs it in practice. Promoted here so the class-based path becomes the actual path of least resistance instead of copy-pasting hex.
-- **`extended`** (muted-blue-gray, dark-slate, charcoal, indigo-navy) — ratified 2026-07-25. Four hardcoded hex values that recur across 3+ of the 5 apps at real volume (6–60 instances each) serving a genuine, currently-untokenized need, mostly muted icon/chrome colors — none close enough to an existing `neutral` step to substitute without a visible shift, so each is kept as its own named tier rather than folded in.
+- **`extended`** (muted-blue-gray, dark-slate, charcoal, indigo-navy) — ratified 2026-07-25. Four hardcoded hex values that recur across 3+ of the 5 apps at real volume (6–60 instances each) serving a genuine, currently-untokenized need, mostly muted icon/chrome colors — none close enough to an existing `neutral` step to substitute without a visible shift, so each is kept as its own named tier rather than folded in. **A 5th, `loader-blue` (`#30699D`), was added the same day** from a real Loader-component audit — the default spinner color in a shared `Loader.vue`/`LoaderScreen.vue` pair across 4 of the 5 apps, distinct from `primary-500`. Unlike the other four, this one has a real, tokenized alternative already shipping (career-web's own Loader uses `primary-500` directly) — worth an explicit design decision on whether to migrate the other 4 apps to `primary-500` rather than keeping two blues.
 
 **A structural gap, not just a discipline problem**: every app hardcodes token-matching hex values — most heavily `primary-500`, which in one app (client-web) is hardcoded *more often* (157×) than the actual Tailwind class is used (117×). Almost all of this "ghost usage" is inside inline SVG icon `fill`/`stroke` attributes, which can't take Tailwind classes directly. The fix is a token-aware icon component (a `color` prop that maps to the token set), not a reminder to "just use the class."
 
@@ -508,9 +553,9 @@ A 7th token, `focus-ring`, is now `rgba(53, 61, 215, 0.12)` at 3px with no blur 
 
 ## Components
 
-Not an exhaustive catalog — a shared vocabulary. Figma's real component library (audited directly) already documents a working set: Accordion, Avatar, Badge, Breadcrumb, Button, Button Group, Data Display, Date Picker, File Upload, Form Control, Inline Alert, Sticky Alert, Input Field, List Field, Loader, Modal, Pagination, Progress Bar, Progress Step, Side Navigation, Stat, Tab, Table, Title, and Tooltip. Those names are the shared vocabulary for what a "Button" or "Badge" means across the org, even though each app is free to implement its own.
+Not an exhaustive catalog — a shared vocabulary. Figma's real component library (audited directly) already documents a working set: Accordion, Avatar, Badge, Breadcrumb, Button, Button Group, Data Display, Date Picker, File Upload, Form Control, Inline Alert, Sticky Alert, Input Field, List Field, Loader, Modal, Pagination, Progress Bar, Progress Step, Side Navigation, Stat, Tab, Table, Title, and Tooltip. Those names are the shared vocabulary for what a "Button" or "Badge" means across the org, even though each app is free to implement its own. **As of 2026-07-25, every one of these 25 names now has either a real frontmatter entry, a documented real-code correction, or an explicit "not yet real, don't invent" note** — none are silently missing anymore, though several (List Field, Progress Step, Date Picker, Sticky Alert) are honestly thin or absent in real code today.
 
-The composite tokens in this file's frontmatter (`button-*`, `badge-filled-*`, `badge-outlined-*`, `badge-accent`, `input-field-*`, `modal-*`, `accordion`, `avatar`, `breadcrumb`, `alert-inline-*`, `tab-line`, `tab-pill`, `tab-active`, `table-header`, `progress-bar-track`, `tooltip`, `title`, `stat`) are reference points for the primitives every app already reimplements independently — not a mandate to build a shared component package. Use them as a starting shape; diverge where a specific app's needs require it, as long as the underlying color/type/spacing/radius tokens are still the ones referenced above.
+The composite tokens in this file's frontmatter (`button-*`, `badge-filled-*`, `badge-outlined-*`, `badge-accent`, `input-field-*`, `modal-*`, `accordion`, `avatar`, `breadcrumb`, `alert-inline-*`, `tab-line`, `tab-pill`, `tab-active`, `table-header`, `progress-bar-track`, `tooltip`, `title`, `stat`, `button-group*`, `form-control-switch-*`, `file-upload*`, `pagination-active*`, `side-nav-active`, `loader*`, `data-display-*`) are reference points for the primitives every app already reimplements independently — not a mandate to build a shared component package. Use them as a starting shape; diverge where a specific app's needs require it, as long as the underlying color/type/spacing/radius tokens are still the ones referenced above.
 
 ### Button — confirmed directly from Figma
 
@@ -524,7 +569,7 @@ Unlike the other components below, Button's tokens are pulled from live Figma de
 - **Loading reuses Disabled's appearance, plus a spinner — it's not a fourth distinct color state**: real code across 4 of the 5 apps composes loading externally (consumer passes `:disabled="isLoading"` to Button, then renders a separate `Loader`/spinner alongside the label — label stays visible, no dimming or resizing). Only career-web's Button has a built-in `loading` prop doing the same thing internally (spinner + label both shown, `disabled` set). Recommendation: codify the real cross-app visual (spinner beside label, Disabled's color state, nothing dims or resizes) as canonical, and promote career-web's single-prop shape as the target API — not the 4-app pattern of every consumer wiring up its own external spinner.
 - **Outlined and Tertiary both have a border** (`primary-500` and `neutral-200` respectively) that isn't representable in the frontmatter — checked 2026-07-25: `component_sub_tokens` (`backgroundColor`/`textColor`/`typography`/`rounded`/`padding`/`size`/`height`/`width`) is fixed by the `@google/design.md` spec itself, not something this repo's generator controls, and adding an unrecognized field (tested directly against the real lint CLI) produces a permanent "not a recognized component sub-token" warning on every future lint run rather than a clean pass. This is a durable spec limitation, not an unfinished gap in this file — border specs are correct and complete here in prose, just not machine-readable from the YAML. If you're implementing these types, add the border yourself from the values stated here.
 - **Link has no background, border, or horizontal padding** — text and icons only, vertical padding matching the other types at its size.
-- The lint warnings on `button-outlined`/`button-link`/`input-field-line`/`badge-outlined-*` about low contrast against a "transparent" background are a known linter limitation (it can't evaluate contrast with nothing behind it) — all of these sit on a white page in practice, where their text colors pass comfortably (confirmed by `button-secondary`'s identical primary-500 text passing against its primary-50 background, and neutral-900 being the standard body-text color used everywhere else in this file against white).
+- The lint warnings on `button-outlined`/`button-link`/`input-field-line`/`badge-outlined-*`/`pagination-active` about low contrast against a "transparent" background are a known linter limitation (it can't evaluate contrast with nothing behind it) — all of these sit on a white page in practice, where their text colors pass comfortably (confirmed by `button-secondary`'s identical primary-500 text passing against its primary-50 background, and neutral-900 being the standard body-text color used everywhere else in this file against white).
 
 ### Input Field — confirmed directly from Figma
 
@@ -574,6 +619,46 @@ The Large/Primary/Filled/Default variant is `primary-500` background with **whit
 - **Title**: the page-heading component, not a token — `heading-h2` for the title text (inheriting that token's H2 weight conflict directly), `paragraph-small` overline/description in `neutral-500`, a circular `primary-50` icon container, and an optional action pair (Secondary + Primary button, Medium size).
 - **Stat**: white background, `rounded.md`, `24px` padding, the confirmed `elevation.small` shadow. The big number uses `heading-h3` (the style this audit corrected to Semibold/600), with an optional `success-50`/`success-500` percentage badge — the same bg-50/text-500 semantic pairing used elsewhere, now confirmed for the Success ramp specifically, not just Primary.
 
+### Button Group, Switch — confirmed and corrected via real code, 2026-07-25
+
+11 components named in Figma's real library had zero dedicated entry in this file until this pass — a real structural gap, not an oversight in how the file reads. Two are covered here:
+
+- **Button Group**: the literal `ButtonGroup.vue` component found in code (present in 3 of 5 apps, only 2 real usage sites) turns out to be a bare, unstyled `flex` wrapper — no background, border, text color, or shadow of its own, and it groups *unrelated* action buttons (e.g. "Edit" + a dropdown chevron), not a true segmented control. The actual segmented/toggle behavior this file's `radius.md` and `elevation.xsmall` tokens were originally attributed to lives in a differently-named real component, `ListViewToggle.vue` (recruitment-portal only, 1 usage): an `neutral-100` track at `radius.md` (8px) with `4px` padding, individual segments at `radius.sm` (6px), and an active segment that's `white`/`primary-600`/`shadow-sm` (visually matching `elevation.xsmall`'s shape, though the real class used is Tailwind's generic `shadow-sm`, not the project's own named utility — a byte-level gap worth closing, not just a visual match). `button-group`/`button-group-active` in the frontmatter represent this real pattern, not the unstyled `ButtonGroup.vue`.
+- **Form Control (Switch)**: a shared `FormToggle.vue` (4 of 5 apps, absent in career-web) confirms `radius.full` on both track and thumb — real and solid. Its "on" color, however, is a real, un-themed gap: every real copy uses Tailwind's stock `bg-blue-600`, never re-themed to `primary-500` — a copy-pasted third-party (Flowbite-style) snippet that was never wired to this design system's tokens. `form-control-switch-on` in the frontmatter is the **recommended** fix (`primary-500`), not a description of what's currently shipped — flagged explicitly so it isn't mistaken for an already-resolved gap.
+
+### File Upload — confirmed via real code, corrects an earlier Figma-only claim
+
+A shared `FormUploadBox.vue` (4 of 5 apps, ~11 real usage sites): white background, solid `1px` `neutral-200` border (not dashed, despite that being the more common convention elsewhere), and — **correcting this file's earlier claim that File Upload confirmed `radius.sm` (6px)** — every real copy uses an explicit `20px` (`radius.3xl`) radius, overriding Tailwind's own `rounded-lg` class also present in the same markup. Drag-over state (`primary-50` background, `primary-300` border) and a hover scale+shadow effect exist only in client-web's fullest copy; the other 3 real copies lack drag-state styling entirely. File-type icons are colored by extension (`primary-500` for docs, `destructive-500`-equivalent stock `red-500` for PDF/PPT, `success-400` for spreadsheets) — the same stock-class-matches-token-value pattern already flagged for Badge's Destructive variant.
+
+### Pagination, Side Navigation — confirmed and corrected via real code, 2026-07-25
+
+Both had existing claims in this file (via `neutral-750`, and a `6px` radius for Side Nav Item) that turned out to be **Figma-only — a real-code audit found neither is actually true**:
+
+- **Pagination**: real inactive text is `neutral-700` (`#4F4F4F`) or `neutral-500`, never `neutral-750`. Two competing real active-page patterns exist, not one: an outline style (`border-primary-500`/`text-primary-500`, transparent fill) is the majority default across career-web, client-web, client-dashboard, and recruitment-portal's V1 — `pagination-active` in the frontmatter represents this. recruitment-portal's V2 diverges to a filled `bg-primary-500`/white-text variant (`pagination-active-filled`), documented as a real alternate, not the default. Prev/next arrows disable correctly at the first/last page in every implementation, recoloring to a muted neutral and reducing opacity.
+- **Side Navigation**: real active state is `bg-secondary-500` at `radius.md` (8px, not 6px) with `primary-500` text — no neutral step involved at all, and no left-border indicator anywhere. Inactive is plain white text; hover shifts to `secondary-500` text with bold weight. No badge/count-indicator element exists in any real implementation either — the `label-xsmall` "Side Nav Item badge" claim in `typography.json` was also Figma-only and has been corrected. Collapsed/expanded rail behavior (V2 sidebars only) shows/hides labels with a 250ms delay and reveals a tooltip on hover — real, but not yet reflected as its own token.
+
+### Loader — new, confirmed via real code
+
+Two real, shared component families exist across the suite (evidence of parallel-but-uncoordinated builds, not one shared package): a `Loader.vue`/`LoaderScreen.vue` pair, byte-identical across client-web, client-dashboard, and recruitment-portal, plus career-web's own independent equivalent. Real, confirmed findings:
+
+- **A genuine 5-step size scale**: `xs` (10px) / `sm` (20px) / `md` (40px, the default) / `lg` (60px) / `xl` (80px) — drawn from a fixed scale in code (`constants.ts`), not arbitrary per-usage pixel values.
+- **Implementation**: a CSS border-spin circle (`border-2`-style ring with `border-t-color: transparent`), colored either white (on a filled button, matching the canonical spinner-beside-label Loading pattern documented under Button above) or a brand blue on light backgrounds — but which blue differs by app: career-web correctly uses `primary-500`, while the other 3 apps default to an un-themed, currently-untokenized `#30699D` (see the new `extended.loader-blue` color).
+- **`LoaderScreen`** is the full-page overlay variant: `neutral-100`-equivalent backdrop at ~40% opacity, fixed and centered, wrapping the same Loader component at `xl` (80px) — not a separate component, just a size-plus-backdrop composition.
+- **Rotation duration is `1s`, `linear`** — deliberately outside this file's `fast`/`base`/`slow` (150/250/500ms) motion scale, since no app overrides Tailwind's default `spin` keyframe. Consistent with the `linear` easing already reserved for spinners/marquees in `motion.json`, just a distinct duration for a distinct, continuous-rotation use case.
+
+### Data Display — new, real but thin evidence
+
+A real label/value display pattern exists in `EmployeeDetails.vue` (client-dashboard, 3 real usage sites) — the only clean match found across all 5 apps for a genuinely read-only (not editable, not tabular) field-display pattern. Label and value share the exact same text color (`neutral-800`), differentiated only by font-weight — regular for the label, **semibold** for the value, not this file's existing `paragraph-small-medium` (Medium/500) token, which is the closest real match but one weight-tier lighter than what's actually shipped. `data-display-value` uses `paragraph-small-medium` as the nearest existing token rather than inventing a new semibold-14px style for one source file's evidence — revisit if a second real usage of the exact semibold weight surfaces. Rows are separated by margin only (`32px`, no divider rule), with an empty-state fallback in `neutral-500`.
+
+### Not yet real: List Field, Progress Step, Date Picker, Sticky Alert
+
+Four names from Figma's real component library that a 2026-07-25 real-code audit found little-to-no real implementation for — documented here as genuinely open, not silently skipped or invented around:
+
+- **List Field**: no component literally named this exists. The closest real pattern (dynamic recipient-row repeaters) uses the shared Button component's remove/add controls — its `radius.sm` (6px) is directly confirmed in recruitment-portal's own Button.vue, but dashboard-main's equivalent Button drifts to Tailwind's stock `4px` instead. This isn't a new token; it's the existing Button radius token, real in one app and drifted in another.
+- **Progress Step**: no horizontal step-progress UI exists anywhere — only step-index logic (a ref that swaps which form is visible) with zero visual step indicator. A visually adjacent but functionally different pattern (numbered circular badges for approval-stage chains, no connecting lines) exists in one app but isn't the same component. Don't invent a token for a component that isn't built yet.
+- **Date Picker**: two different third-party libraries are wrapped across the 5 apps (`@vuepic/vue-datepicker` in 2 apps, `v-calendar` in another), but neither has ANY custom theming applied to the calendar surface itself — only the trigger input is styled. This is a real theming gap, not evidence to build a token from; the calendar popup today is 100% library-default styling.
+- **Sticky Alert**: distinct from the already-documented Alert Inline (a dismissable inline banner) — no persistent, viewport-anchored banner component exists anywhere in real code. The one fixed-position candidate found is a one-time full-page success splash, not a reusable announcement pattern.
+
 ## Do's and Don'ts
 
 These are drawn directly from patterns found across all 5 production apps during the audit that produced this file — each one caused a real, shipped inconsistency. One exception, marked where it appears: an item surfaced by checking this file itself against general product-UI best practice, not the 5-app audit — used only where it identifies a concrete, checkable gap in this file, not as an excuse to import generic advice wholesale.
@@ -597,3 +682,5 @@ These are drawn directly from patterns found across all 5 production apps during
 - **Do** pair every real transition/animation with a `prefers-reduced-motion` fallback. **Don't** assume it's handled somewhere else in the app just because one app in the suite does it well — career-web handles it consistently across 11 files, but client-web, client-dashboard, recruitment-portal, and dashboard have zero handling between them, a real, current gap found by the 2026-07-25 motion audit, not a hypothetical.
 - **Do** treat a matching *value* as a real token-drift signal even when the *class name* looks unrelated. **Don't** assume "it's not hardcoded, it's just a class" is automatically safe — Badge's real Destructive-filled variant uses Tailwind's stock `bg-red-500`, not a `destructive-*` class; it's only harmless because `red-500` and `destructive-500` happen to be the exact same hex today, a coincidence this file's audit had to verify, not something the class name itself guaranteed.
 - **Do** add `aria-selected` (or the equivalent state attribute) to every real Tab implementation. **Don't** assume a working visual active-state means the interaction is accessible — the 2026-07-25 code audit found the selected/active tab is styled correctly and consistently everywhere it's built, but `aria-selected` is absent from every real Tab implementation across all 5 apps.
+- **Do** treat an old Figma-sourced claim as provisional until real code actually confirms it. **Don't** assume a value survives just because it's already written down here — a single 2026-07-25 audit pass found three separate claims (File Upload's radius, Pagination's and Side Navigation's use of `neutral-750`, Side Navigation's badge text style) that were Figma-only and didn't survive contact with real code. Being written into this file once isn't the same as being confirmed; re-check when you touch a component that hasn't had a real-code pass yet.
+- **Do** flag a copy-pasted, never-re-themed third-party snippet as a real gap, not a style choice. **Don't** assume every real, repeated pattern is intentional — Form Control Switch's "on" state is `bg-blue-600` (Tailwind stock blue) identically across all 4 real copies, but that's a Flowbite snippet that was never wired to `primary-500`, not a deliberate decision to use a second blue.

@@ -217,7 +217,7 @@
       },
       "$type": "typography",
       "$confirmed": true,
-      "$description": "Confirmed repeatedly via live Figma design context: Button (Size=Small label), Avatar Group overflow badge, Side Nav Item badge, Tab badge, and Table Content Cell's avatar-group overflow badge all use this exact 12/15 Medium style. Distinct from paragraph-xsmall: same fontSize but a tighter 15px line-height and Medium weight."
+      "$description": "Confirmed repeatedly via live Figma design context: Button (Size=Small label), Avatar Group overflow badge, Tab badge, and Table Content Cell's avatar-group overflow badge all use this exact 12/15 Medium style. Distinct from paragraph-xsmall: same fontSize but a tighter 15px line-height and Medium weight. CORRECTED 2026-07-25: 'Side Nav Item badge' was removed from this list — a real-code audit of all 5 apps found no badge/count-indicator element anywhere in any real Side Navigation implementation; this was a Figma-only claim that didn't survive contact with real code."
     },
     "overline": {
       "$value": {
