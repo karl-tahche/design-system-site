@@ -123,13 +123,13 @@ typography:
   heading-h5:
     fontFamily: Inter, Arial, Helvetica, sans-serif
     fontSize: 24px
-    fontWeight: 600
+    fontWeight: 500
     lineHeight: 32px
     letterSpacing: -0.02em
   heading-h6:
     fontFamily: Inter, Arial, Helvetica, sans-serif
     fontSize: 20px
-    fontWeight: 600
+    fontWeight: 500
     lineHeight: 28px
     letterSpacing: -0.02em
   paragraph-large-regular:
@@ -379,7 +379,11 @@ The type scale below covers display sizes down to overline. Confirmed weights, s
 
 **⚠️ `heading-h2` has a real, unresolved conflict**: the Typography foundation page's own named Figma variable says Extrabold (800), but the Title component renders the same 36/44 size as Bold (700) instead. Two parts of the same Figma file disagree. This file keeps 800 (the foundation page's stated value) as the default, but that's a tiebreaker, not a resolution — it needs an explicit design decision.
 
-**A real-usage audit of all 5 apps found two more things worth a design decision**: `display-small` (44px) is the weakest size in the entire scale — dead in 3 of 5 apps, and only a single low-volume use in each of the other 2 — sitting so close to the solidly-used `heading-h1` (40px, live in 4 of 5 apps) that it looks redundant rather than necessary. And **13px is a real gap this scale doesn't cover**: it recurs 116+ times across 3 of the 5 apps, sitting right between `paragraph-xsmall` (12px) and `paragraph-small` (14px) — not formalized as a token here since the audit only surfaced the size, not a complete confirmed style (weight/line-height), but flagged for a decision rather than left as silent drift.
+**Every style is now emitted as a composite `.text-{name}` Tailwind class** (`.text-heading-h2`, `.text-paragraph-small`, etc.), bundling font-size, line-height, letter-spacing, and font-weight into one class, shipped via a plugin in the Tailwind preset — see `build.mjs` in the tokens repo. This is the fix for the `heading-h2`-style conflict above and for Figma-vs-code weight mismatches generally: Tailwind's own `fontSize` theme key can't carry font-weight, so a text style built from two separately-applied utilities (`text-2xl` + `font-medium`) can drift apart the moment either one changes independently. One class removes that failure mode.
+
+**Two consolidations applied from real usage, following the same logic as the tokens themselves** (prefer the value with the most evidence): `heading-h5`/`heading-h6` moved from an unconfirmed Semibold(600) guess to Medium(500) — Medium is confirmed 5/5 times everywhere else it appears in this scale, the strongest evidence of any weight tier, versus Semibold's weaker 3/5. And `display-small` (44px) is **deprecated** in favor of `heading-h1` (40px): it was the weakest size in the entire scale (dead in 3 of 5 apps, a single low-volume use in the other 2) sitting close enough to the solidly-used `heading-h1` that the distinction looks accidental, not intentional. Its `.text-display-small` class still exists — rendering identically to `.text-heading-h1` via an explicit alias — so nothing already pointing at it breaks, but new work should reference `heading-h1` directly.
+
+**13px is a real gap this scale doesn't cover, resolved rather than left open**: it recurs 116+ times across 3 of the 5 apps, sitting right between `paragraph-xsmall` (12px) and `paragraph-small` (14px). Not formalized as its own token — it's almost certainly Figma/rem-rounding drift (`0.8125rem` is an unusually precise, non-round value for a deliberate design choice), not an intentional size. Recommended fix at the code level: snap any `text-[13px]` usage to `paragraph-small` (14px), the single most dominant body size in every app, rather than manufacturing a permanent token to match an accident.
 
 ## Layout
 
@@ -476,3 +480,4 @@ These are drawn directly from patterns found across all 5 production apps during
 - **Do** check real class usage across all 5 apps before trusting what a Tailwind config file merely defines. **Don't** assume a color/radius/shadow is load-bearing just because it's configured — every app has ramp steps, breakpoints, and shadow tokens that are 100% dead in practice, and config alone can't tell you that.
 - **Do** give icons a token-aware `color` prop that maps to this file's color tokens. **Don't** accept that SVG `fill`/`stroke` attributes "just can't use Tailwind classes" as a reason to hardcode hex — it's the single biggest source of token drift found in this audit (one app hardcodes `primary-500`'s hex more often than it uses the actual class).
 - **Do** wire this file's radius and font-size scales into each app's actual Tailwind config. **Don't** leave them as documentation-only — none of the 5 apps currently configure a custom `borderRadius` or `fontSize` at all, which is exactly why arbitrary `rounded-[10px]`/`text-[13px]`-style values are everywhere.
+- **Do** apply a text style as one composite class (`.text-heading-h2`). **Don't** hand-pair a size utility with a separate weight utility (`text-2xl font-medium`) — the two can be edited independently and drift apart, which is exactly how the `heading-h2` Extrabold-vs-Bold conflict happened in the first place.

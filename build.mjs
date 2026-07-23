@@ -13,6 +13,9 @@ StyleDictionary.registerFormat({
     const spacing = {};
     const borderRadius = {};
     const boxShadow = {};
+    // name -> { fontSize, lineHeight, letterSpacing, fontWeight, alias } — used below
+    // to build composite .text-{name} classes, not just the fontSize theme key.
+    const textStylesRaw = {};
 
     for (const token of dictionary.allTokens) {
       const [category, ...rest] = token.path;
@@ -37,6 +40,13 @@ StyleDictionary.registerFormat({
             v.fontSize,
             { lineHeight: v.lineHeight, letterSpacing: v.letterSpacing },
           ];
+          textStylesRaw[name] = {
+            fontSize: v.fontSize,
+            lineHeight: v.lineHeight,
+            letterSpacing: v.letterSpacing,
+            fontWeight: v.fontWeight,
+            alias: token.$alias,
+          };
         }
       }
 
@@ -53,19 +63,79 @@ StyleDictionary.registerFormat({
       }
     }
 
+    // ── Best practice: composite text-style classes ─────────────────────
+    // Tailwind's own `fontSize` theme key can bundle size/line-height/tracking
+    // into one value, but NOT font-weight — so a design-system text style built
+    // from two separately-applied utilities (text-2xl + font-medium) can drift
+    // apart the moment either one changes independently. That's exactly how
+    // this file's own heading-h2 conflict and the general Figma-vs-code weight
+    // mismatches happened. One `.text-{name}` class per named style, shipped as
+    // a Tailwind plugin, removes that failure mode: size and weight can no
+    // longer be applied (or omitted) independently.
+    //
+    // Deprecated tokens ($alias set) render using their replacement's resolved
+    // values, not their own now-superseded ones — so anything still referencing
+    // the deprecated class looks identical to the replacement rather than subtly
+    // different, while docs point authors at the replacement going forward.
+    const sansStack = fontFamily.sans ? fontFamily.sans.join(', ') : 'Inter, Arial, Helvetica, sans-serif';
+    const textStyles = {};
+    for (const [name, style] of Object.entries(textStylesRaw)) {
+      const resolved = (style.alias && textStylesRaw[style.alias]) || style;
+      const decl = {
+        fontFamily: sansStack,
+        fontSize: resolved.fontSize,
+        lineHeight: resolved.lineHeight,
+        fontWeight: String(resolved.fontWeight),
+      };
+      if (resolved.letterSpacing && resolved.letterSpacing !== '0') decl.letterSpacing = resolved.letterSpacing;
+      // Real, confirmed usage (Table Header) — uppercase isn't part of the
+      // token's own fontSize/lineHeight/weight value, so it's applied here.
+      if (name === 'overline') decl.textTransform = 'uppercase';
+      textStyles[`.text-${name}`] = decl;
+    }
+
     const body = {
       theme: {
         extend: { colors, fontFamily, fontSize, spacing, borderRadius, boxShadow },
       },
     };
+    // JSON.stringify can't serialize a function, so the plugin is spliced in as
+    // literal JS after the theme object rather than included in `body` above.
+    const themeJson = JSON.stringify(body, null, 2);
+    const withoutClosingBrace = themeJson.slice(0, -1); // drop the root object's trailing "}"
+    const textStylesJson = JSON.stringify(textStyles, null, 2);
 
-    return `// GENERATED FILE — do not edit by hand.\n// Source of truth: tahche-design-tokens/tokens/*.json\n// Rebuilds on every merge to main via Style Dictionary (see build.mjs).\nmodule.exports = ${JSON.stringify(body, null, 2)};\n`;
+    return `// GENERATED FILE — do not edit by hand.
+// Source of truth: tahche-design-tokens/tokens/*.json
+// Rebuilds on every merge to main via Style Dictionary (see build.mjs).
+//
+// Ships one composite ".text-{style}" class per named typography style
+// (e.g. .text-heading-h2 { font-size: 36px; line-height: 44px; font-weight: 800; ... })
+// via a Tailwind plugin, alongside the usual theme.extend values. Prefer these
+// over separately combining text-{size} + font-{weight} utilities, which can
+// drift apart independently — see build.mjs for why.
+module.exports = ${withoutClosingBrace},
+  "plugins": [
+    function ({ addComponents }) {
+      addComponents(${textStylesJson});
+    },
+  ]
+};
+`;
   },
 });
 
-// Custom format: font-weight lookup, since Tailwind's fontSize tuple only
-// carries lineHeight/letterSpacing — weight has to be applied as a separate
-// utility (font-bold, font-medium, etc.) by whoever consumes a typography token.
+// Custom format: font-weight lookup. Kept even now that the Tailwind preset
+// also ships composite .text-{name} classes (which bundle weight in already) —
+// useful for anyone consuming fontSize/font-weight as separate utilities on
+// purpose, and as a quick confirmed/proposed/deprecated status check per style.
+//
+// Reads the explicit $confirmed/$deprecated/$alias metadata on each token
+// rather than pattern-matching the prose $description — regex-parsing text
+// for machine-readable status is fragile by construction (e.g. a description
+// that says "confirmed — corrected from an earlier proposed guess" trips a
+// naive /proposed/ check even though the token IS confirmed). Explicit fields
+// don't have that failure mode.
 StyleDictionary.registerFormat({
   name: 'tokens/weights-json',
   format: ({ dictionary }) => {
@@ -73,7 +143,12 @@ StyleDictionary.registerFormat({
     for (const token of dictionary.allTokens) {
       if (token.path[0] === 'typography' && token.path[1] !== 'fontFamily') {
         const v = token.$value ?? token.value;
-        weights[token.path[1]] = { fontWeight: v.fontWeight, confirmed: !/proposed/i.test(token.$description ?? '') };
+        weights[token.path[1]] = {
+          fontWeight: v.fontWeight,
+          confirmed: token.$confirmed === true || token.$confirmed === 'true',
+          deprecated: token.$deprecated === true || token.$deprecated === 'true',
+          ...(token.$alias ? { alias: token.$alias } : {}),
+        };
       }
     }
     return JSON.stringify(weights, null, 2) + '\n';

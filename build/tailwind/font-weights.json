@@ -1,74 +1,93 @@
 {
   "display-large": {
     "fontWeight": 700,
-    "confirmed": false
+    "confirmed": false,
+    "deprecated": false
   },
   "display-small": {
     "fontWeight": 700,
-    "confirmed": false
+    "confirmed": false,
+    "deprecated": true,
+    "alias": "heading-h1"
   },
   "heading-h1": {
     "fontWeight": 800,
-    "confirmed": false
+    "confirmed": false,
+    "deprecated": false
   },
   "heading-h2": {
     "fontWeight": 800,
-    "confirmed": true
+    "confirmed": true,
+    "deprecated": false
   },
   "heading-h3": {
     "fontWeight": 600,
-    "confirmed": false
+    "confirmed": true,
+    "deprecated": false
   },
   "heading-h4": {
     "fontWeight": 500,
-    "confirmed": true
+    "confirmed": true,
+    "deprecated": false
   },
   "heading-h5": {
-    "fontWeight": 600,
-    "confirmed": false
+    "fontWeight": 500,
+    "confirmed": false,
+    "deprecated": false
   },
   "heading-h6": {
-    "fontWeight": 600,
-    "confirmed": false
+    "fontWeight": 500,
+    "confirmed": false,
+    "deprecated": false
   },
   "paragraph-large-regular": {
     "fontWeight": 400,
-    "confirmed": true
+    "confirmed": true,
+    "deprecated": false
   },
   "paragraph-large-medium": {
     "fontWeight": 500,
-    "confirmed": true
+    "confirmed": true,
+    "deprecated": false
   },
   "paragraph-large-semibold": {
     "fontWeight": 600,
-    "confirmed": true
+    "confirmed": true,
+    "deprecated": false
   },
   "paragraph-medium": {
     "fontWeight": 400,
-    "confirmed": false
+    "confirmed": false,
+    "deprecated": false
   },
   "paragraph-medium-medium": {
     "fontWeight": 500,
-    "confirmed": true
+    "confirmed": true,
+    "deprecated": false
   },
   "paragraph-small": {
     "fontWeight": 400,
-    "confirmed": true
+    "confirmed": true,
+    "deprecated": false
   },
   "paragraph-small-medium": {
     "fontWeight": 500,
-    "confirmed": true
+    "confirmed": true,
+    "deprecated": false
   },
   "paragraph-xsmall": {
     "fontWeight": 400,
-    "confirmed": false
+    "confirmed": true,
+    "deprecated": false
   },
   "label-xsmall": {
     "fontWeight": 500,
-    "confirmed": true
+    "confirmed": true,
+    "deprecated": false
   },
   "overline": {
     "fontWeight": 600,
-    "confirmed": false
+    "confirmed": true,
+    "deprecated": false
   }
 }

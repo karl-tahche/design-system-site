@@ -1,6 +1,12 @@
 // GENERATED FILE — do not edit by hand.
 // Source of truth: tahche-design-tokens/tokens/*.json
 // Rebuilds on every merge to main via Style Dictionary (see build.mjs).
+//
+// Ships one composite ".text-{style}" class per named typography style
+// (e.g. .text-heading-h2 { font-size: 36px; line-height: 44px; font-weight: 800; ... })
+// via a Tailwind plugin, alongside the usual theme.extend values. Prefer these
+// over separately combining text-{size} + font-{weight} utilities, which can
+// drift apart independently — see build.mjs for why.
 module.exports = {
   "theme": {
     "extend": {
@@ -279,4 +285,129 @@ module.exports = {
       }
     }
   }
+,
+  "plugins": [
+    function ({ addComponents }) {
+      addComponents({
+  ".text-display-large": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "52px",
+    "lineHeight": "56px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em"
+  },
+  ".text-display-small": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "40px",
+    "lineHeight": "48px",
+    "fontWeight": "800",
+    "letterSpacing": "-0.02em"
+  },
+  ".text-heading-h1": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "40px",
+    "lineHeight": "48px",
+    "fontWeight": "800",
+    "letterSpacing": "-0.02em"
+  },
+  ".text-heading-h2": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "36px",
+    "lineHeight": "44px",
+    "fontWeight": "800",
+    "letterSpacing": "-0.02em"
+  },
+  ".text-heading-h3": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "32px",
+    "lineHeight": "40px",
+    "fontWeight": "600",
+    "letterSpacing": "-0.02em"
+  },
+  ".text-heading-h4": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "28px",
+    "lineHeight": "36px",
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em"
+  },
+  ".text-heading-h5": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "24px",
+    "lineHeight": "32px",
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em"
+  },
+  ".text-heading-h6": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "20px",
+    "lineHeight": "28px",
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em"
+  },
+  ".text-paragraph-large-regular": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "18px",
+    "lineHeight": "28px",
+    "fontWeight": "400"
+  },
+  ".text-paragraph-large-medium": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "18px",
+    "lineHeight": "28px",
+    "fontWeight": "500"
+  },
+  ".text-paragraph-large-semibold": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "18px",
+    "lineHeight": "28px",
+    "fontWeight": "600"
+  },
+  ".text-paragraph-medium": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "24px",
+    "fontWeight": "400"
+  },
+  ".text-paragraph-medium-medium": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "24px",
+    "fontWeight": "500"
+  },
+  ".text-paragraph-small": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "14px",
+    "lineHeight": "20px",
+    "fontWeight": "400"
+  },
+  ".text-paragraph-small-medium": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "14px",
+    "lineHeight": "20px",
+    "fontWeight": "500"
+  },
+  ".text-paragraph-xsmall": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "12px",
+    "lineHeight": "16px",
+    "fontWeight": "400"
+  },
+  ".text-label-xsmall": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "12px",
+    "lineHeight": "15px",
+    "fontWeight": "500"
+  },
+  ".text-overline": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "12px",
+    "lineHeight": "20px",
+    "fontWeight": "600",
+    "letterSpacing": "1px",
+    "textTransform": "uppercase"
+  }
+});
+    },
+  ]
 };
