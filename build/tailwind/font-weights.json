@@ -43,13 +43,25 @@
     "fontWeight": 400,
     "confirmed": false
   },
+  "paragraph-medium-medium": {
+    "fontWeight": 500,
+    "confirmed": true
+  },
   "paragraph-small": {
     "fontWeight": 400,
     "confirmed": false
   },
+  "paragraph-small-medium": {
+    "fontWeight": 500,
+    "confirmed": true
+  },
   "paragraph-xsmall": {
     "fontWeight": 400,
     "confirmed": false
+  },
+  "label-xsmall": {
+    "fontWeight": 500,
+    "confirmed": true
   },
   "overline": {
     "fontWeight": 600,

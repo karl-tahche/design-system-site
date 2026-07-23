@@ -135,16 +135,31 @@ typography:
     fontSize: 16px
     fontWeight: 400
     lineHeight: 24px
+  paragraph-medium-medium:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 16px
+    fontWeight: 500
+    lineHeight: 24px
   paragraph-small:
     fontFamily: Inter, Arial, Helvetica, sans-serif
     fontSize: 14px
     fontWeight: 400
+    lineHeight: 20px
+  paragraph-small-medium:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 14px
+    fontWeight: 500
     lineHeight: 20px
   paragraph-xsmall:
     fontFamily: Inter, Arial, Helvetica, sans-serif
     fontSize: 12px
     fontWeight: 400
     lineHeight: 20px
+  label-xsmall:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 12px
+    fontWeight: 500
+    lineHeight: 15px
   overline:
     fontFamily: Inter, Arial, Helvetica, sans-serif
     fontSize: 12px
@@ -178,24 +193,54 @@ spacing:
   "48": 192px
 components:
   button-primary:
-    backgroundColor: "{colors.primary}"
+    backgroundColor: "{colors.primary-500}"
     textColor: "#FFFFFF"
-    typography: "{typography.paragraph-medium}"
-    rounded: "{rounded.lg}"
-    height: 40px
-    padding: 0 16px
+    typography: "{typography.paragraph-medium-medium}"
+    rounded: "{rounded.sm}"
+    height: 48px
+    padding: 12px 20px
   button-primary-hover:
-    backgroundColor: "{colors.primary-400}"
+    backgroundColor: "{colors.primary-600}"
+  button-primary-pressed:
+    backgroundColor: "{colors.primary-600}"
+    textColor: "{colors.primary-200}"
   button-primary-disabled:
-    backgroundColor: "{colors.neutral-200}"
-    textColor: "{colors.neutral-700}"
-  button-secondary:
-    backgroundColor: "#FFFFFF"
-    textColor: "{colors.primary-600}"
-    typography: "{typography.paragraph-medium}"
-    rounded: "{rounded.lg}"
+    backgroundColor: "{colors.primary-300}"
+    textColor: "#FFFFFF"
+  button-primary-medium:
     height: 40px
-    padding: 0 16px
+    padding: 10px 16px
+    typography: "{typography.paragraph-small-medium}"
+  button-primary-small:
+    height: 28px
+    padding: 6px 12px
+    typography: "{typography.label-xsmall}"
+  button-secondary:
+    backgroundColor: "{colors.primary-50}"
+    textColor: "{colors.primary-500}"
+    typography: "{typography.paragraph-medium-medium}"
+    rounded: "{rounded.sm}"
+    height: 48px
+    padding: 12px 20px
+  button-outlined:
+    backgroundColor: transparent
+    textColor: "{colors.primary-500}"
+    typography: "{typography.paragraph-medium-medium}"
+    rounded: "{rounded.sm}"
+    height: 48px
+    padding: 12px 20px
+  button-tertiary:
+    backgroundColor: "#FFFFFF"
+    textColor: "{colors.neutral-700}"
+    typography: "{typography.paragraph-medium-medium}"
+    rounded: "{rounded.sm}"
+    height: 48px
+    padding: 12px 20px
+  button-link:
+    backgroundColor: transparent
+    textColor: "{colors.primary-500}"
+    typography: "{typography.paragraph-medium-medium}"
+    padding: 12px 0
   badge:
     backgroundColor: "{colors.primary-50}"
     textColor: "{colors.primary-700}"
@@ -258,7 +303,19 @@ Radius is a proposed scale, not a ratified one — no Figma foundation page for 
 
 Not an exhaustive catalog — a shared vocabulary. Figma's real component library (audited directly) already documents a working set: Accordion, Avatar, Badge, Breadcrumb, Button, Button Group, Data Display, Date Picker, File Upload, Form Control, Inline Alert, Sticky Alert, Input Field, List Field, Loader, Modal, Pagination, Progress Bar, Progress Step, Side Navigation, Stat, Tab, Table, Title, and Tooltip. Those names are the shared vocabulary for what a "Button" or "Badge" means across the org, even though each app is free to implement its own.
 
-The composite tokens in this file's frontmatter (`button-primary`, `badge`, `input-field`, `modal`, and their state variants) are reference points for the handful of primitives every app already reimplements independently — not a mandate to build a shared component package. Use them as a starting shape; diverge where a specific app's needs require it, as long as the underlying color/type/spacing/radius tokens are still the ones referenced above.
+The composite tokens in this file's frontmatter (`button-*`, `badge`, `input-field`, `modal`, and their state variants) are reference points for the handful of primitives every app already reimplements independently — not a mandate to build a shared component package. Use them as a starting shape; diverge where a specific app's needs require it, as long as the underlying color/type/spacing/radius tokens are still the ones referenced above.
+
+### Button — confirmed directly from Figma
+
+Unlike the other components below, Button's tokens are pulled from live Figma design context (the actual selected component, not an inference) — checked against the full Size × Type × State matrix, not just one variant:
+
+- **Radius is `6px` (`rounded.sm`) on every Button variant**, all 3 sizes, all 5 types (Primary/Secondary/Outlined/Tertiary/Link) — the first real confirmation for the `rounded` scale, which otherwise has no Figma source (see Shapes above).
+- **Size drives height and padding**, consistently across every type: Large is `48px` height / `12px 20px` padding, Medium is `40px` / `10px 16px`, Small is `28px` / `6px 12px`. Icon size scales with it too: `20px` at Large/Medium, `16px` at Small.
+- **State changes color only, never size**: Primary's Default (`primary-500` bg, white text) → Hover (`primary-600` bg) → Pressed (also `primary-600` bg, but text shifts to `primary-200` — a real, distinct state, not a duplicate of Hover) → Disabled (`primary-300` bg, white text).
+- **⚠️ The Disabled state is a confirmed WCAG failure, not a placeholder**: white text on `primary-300` (`#8D92EB`) measures 2.82:1, below the 4.5:1 AA minimum. This is what's actually in Figma today — flagged here for a design decision, not silently corrected to something that "looks right."
+- **Outlined and Tertiary both have a border** (`primary-500` and `neutral-200` respectively) that isn't representable in this file's `components` schema — it only supports `backgroundColor`/`textColor`/`typography`/`rounded`/`padding`/`size`/`height`/`width`, no border token. If you're implementing these types, add the border yourself; it's real, just not encodable here.
+- **Link has no background, border, or horizontal padding** — text and icons only, vertical padding matching the other types at its size.
+- The lint warnings on `button-outlined`/`button-link` about low contrast against a "transparent" background are a known linter limitation (it can't evaluate contrast with nothing behind it) — both sit on a white page in practice, where `primary-500` text passes comfortably (confirmed by `button-secondary`'s identical text color passing against its `primary-50` background).
 
 ## Do's and Don'ts
 

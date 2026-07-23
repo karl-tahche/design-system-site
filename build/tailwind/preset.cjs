@@ -174,7 +174,21 @@ module.exports = {
             "letterSpacing": "0"
           }
         ],
+        "paragraph-medium-medium": [
+          "16px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "0"
+          }
+        ],
         "paragraph-small": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0"
+          }
+        ],
+        "paragraph-small-medium": [
           "14px",
           {
             "lineHeight": "20px",
@@ -185,6 +199,13 @@ module.exports = {
           "12px",
           {
             "lineHeight": "20px",
+            "letterSpacing": "0"
+          }
+        ],
+        "label-xsmall": [
+          "12px",
+          {
+            "lineHeight": "15px",
             "letterSpacing": "0"
           }
         ],
