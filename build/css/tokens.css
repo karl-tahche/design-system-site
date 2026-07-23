@@ -75,10 +75,10 @@
   --elevation-small: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px -1px rgba(16, 24, 40, 0.1);
   --elevation-medium: 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1);
   --elevation-large: 0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1);
-  --elevation-xlarge: 0px 20px 25px -5px rgba(16, 24, 40, 0.1), 0px 8px 10px -6px rgba(16, 24, 40, 0.1);
+  --elevation-xlarge: 0px 20px 25px -5px rgba(16, 24, 40, 0.1), 0px 8px 10px -6px rgba(16, 24, 40, 0.1); /** Confirmed twice — once via a named Figma variable, again via live design context on the Modal component (both Horizontal and Vertical alignment). */
   --elevation-xxlarge: 0px 25px 50px -12px rgba(16, 24, 40, 0.25);
   --radius-none: 0px;
-  --radius-sm: 6px; /** Confirmed twice — every Button variant (Primary/Secondary/Outlined/Tertiary × Large/Medium/Small) and the Input Field/Box component all use this exact value. */
+  --radius-sm: 6px; /** Confirmed three times over — every Button variant (Primary/Secondary/Outlined/Tertiary × Large/Medium/Small), Input Field/Box, and Modal (both alignments) all use this exact value. The strongest-evidenced token in this file. */
   --radius-md: 8px;
   --radius-lg: 10px;
   --radius-xl: 12px;
@@ -111,10 +111,10 @@
   --typography-heading-h5: 600 24px/32px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
   --typography-heading-h6: 600 20px/28px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
   --typography-paragraph-large-regular: 400 18px/28px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Paragraph/Large/Regular'. */
-  --typography-paragraph-large-medium: 500 18px/28px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Paragraph/Large/Medium'. */
+  --typography-paragraph-large-medium: 500 18px/28px var(--typography-font-family-sans); /** Confirmed twice — a named Figma variable ('Paragraph/Large/Medium'), and again via live design context on the Modal component's heading text. */
   --typography-paragraph-medium: 400 16px/24px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
   --typography-paragraph-medium-medium: 500 16px/24px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Button component (Size=Large label uses Inter Medium 16/24) — same size as paragraph-medium, Medium weight instead of Regular, same pairing pattern as paragraph-large-regular/medium. */
-  --typography-paragraph-small: 400 14px/20px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Input Field component (Box and Line variants both use Inter Regular 14/20 for value/placeholder/helper text). */
+  --typography-paragraph-small: 400 14px/20px var(--typography-font-family-sans); /** Confirmed twice via live Figma design context: Input Field (Box and Line variants, value/placeholder/helper text) and Modal (description text). */
   --typography-paragraph-small-medium: 500 14px/20px var(--typography-font-family-sans); /** Confirmed twice via live Figma design context: Button (Size=Medium label) and Input Field (label text) both use Inter Medium 14/20. */
   --typography-paragraph-xsmall: 400 12px/20px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
   --typography-label-xsmall: 500 12px/15px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Button component (Size=Small label). Distinct from paragraph-xsmall: same fontSize but a tighter 15px line-height and Medium weight — genuinely a different style, not a variant of it. */

@@ -149,9 +149,11 @@ const components = {
   'input-field-line-disabled': { textColor: '{colors.neutral-400}' },
   modal: {
     backgroundColor: '#FFFFFF',
-    rounded: '{rounded.xl}',
+    rounded: '{rounded.sm}',
     padding: '24px',
   },
+  'modal-horizontal': { width: '512px' },
+  'modal-vertical': { width: '384px' },
 };
 
 const frontmatter = {
@@ -233,6 +235,14 @@ Two visual styles, \`Box\` (bordered) and \`Line\` (bottom-border only), each ac
 - **A focused or typing \`Box\` gets a 4px focus ring** (\`elevation.focus-ring\`, \`#E1E1FE\`) — a new token this audit surfaced, not previously in this file.
 - **\`Line\` never gets that ring** — focus only changes its bottom-border color, same state-to-color mapping as \`Box\`. This is a real, deliberate difference between the two styles, not an inconsistency to fix.
 - **Destructive state**: border shifts to \`destructive-300\`, and helper text shifts to \`destructive-500\` — the one part of the error state representable in the \`components\` schema (\`input-field-box-error\`).
+
+### Modal — confirmed directly from Figma
+
+- Shared across both alignment variants: white background, \`6px\` radius (\`rounded.sm\` — a third component now confirming this token, alongside Button and Input Field), \`24px\` padding all around, and the \`elevation.xlarge\` shadow — independently confirmed twice, once from a named Figma variable and once from this live design context pull.
+- **Fixed width per alignment, not a token — a real content-driven size**: \`modal-horizontal\` is \`512px\`, \`modal-vertical\` is \`384px\`. \`32px\` gap separates the content block from the actions row.
+- **Heading** uses \`paragraph-large-medium\` (18/28, Medium — now confirmed twice), **description** uses \`paragraph-small\` (14/20, Regular — now confirmed three times over across Button, Input, and Modal).
+- A circular leading icon container (\`primary-50\` background, \`48px\`, fully rounded) is optional, as is the description and the top-right close icon.
+- **⚠️ A real inconsistency in Figma itself, not a placeholder or an error on this side**: the Vertical modal's action buttons combine Large button padding (\`20px 12px\`) with a hardcoded \`40px\` height — Medium's height paired with Large's padding, mixed together. The Horizontal modal's buttons don't have this issue (Medium padding, Medium implied height). Worth a design decision on which is correct rather than silently picking one.
 
 ## Do's and Don'ts
 

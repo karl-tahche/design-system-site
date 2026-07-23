@@ -2,7 +2,7 @@
   "radius": {
     "$description": "PARTIALLY CONFIRMED — no dedicated Figma foundation page for border-radius exists, but 'sm' is now confirmed directly: every Button variant (Primary/Secondary/Outlined/Tertiary, all 3 sizes) uses exactly 6px via live Figma design context. md/lg/xl/2xl/full are still inferred from arbitrary rounded-[Npx] values in the 5 codebases and need an explicit design decision.",
     "none": { "$value": "0px", "$type": "dimension" },
-    "sm": { "$value": "6px", "$type": "dimension", "$description": "Confirmed twice — every Button variant (Primary/Secondary/Outlined/Tertiary × Large/Medium/Small) and the Input Field/Box component all use this exact value." },
+    "sm": { "$value": "6px", "$type": "dimension", "$description": "Confirmed three times over — every Button variant (Primary/Secondary/Outlined/Tertiary × Large/Medium/Small), Input Field/Box, and Modal (both alignments) all use this exact value. The strongest-evidenced token in this file." },
     "md": { "$value": "8px", "$type": "dimension" },
     "lg": { "$value": "10px", "$type": "dimension" },
     "xl": { "$value": "12px", "$type": "dimension" },
