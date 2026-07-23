@@ -1,12 +1,12 @@
 {
   "radius": {
-    "$description": "PARTIALLY CONFIRMED — no dedicated Figma foundation page for border-radius exists, but 'sm' is now confirmed directly: every Button variant (Primary/Secondary/Outlined/Tertiary, all 3 sizes) uses exactly 6px via live Figma design context. md/lg/xl/2xl/full are still inferred from arbitrary rounded-[Npx] values in the 5 codebases and need an explicit design decision.",
+    "$description": "PARTIALLY CONFIRMED — no dedicated Figma foundation page for border-radius exists, but 'sm' and 'md' are now confirmed directly via live Figma design context across many components. lg/xl/2xl are still inferred from arbitrary rounded-[Npx] values in the 5 codebases and need an explicit design decision.",
     "none": { "$value": "0px", "$type": "dimension" },
-    "sm": { "$value": "6px", "$type": "dimension", "$description": "Confirmed three times over — every Button variant (Primary/Secondary/Outlined/Tertiary × Large/Medium/Small), Input Field/Box, and Modal (both alignments) all use this exact value. The strongest-evidenced token in this file." },
-    "md": { "$value": "8px", "$type": "dimension" },
+    "sm": { "$value": "6px", "$type": "dimension", "$description": "Confirmed across Button (all variants/sizes), Input Field/Box, Modal, Accordion (implicit, no radius), File Upload Prompt, Tab/Pill, Side Nav Item, List Field Right Content button, and Table Leading Cell's icon container. The single most-evidenced token in this file." },
+    "md": { "$value": "8px", "$type": "dimension", "$description": "Confirmed via Button Group (the rounded corners of a segmented control), Stat, and Tooltip — all three independently use exactly 8px." },
     "lg": { "$value": "10px", "$type": "dimension" },
     "xl": { "$value": "12px", "$type": "dimension" },
     "2xl": { "$value": "16px", "$type": "dimension" },
-    "full": { "$value": "9999px", "$type": "dimension" }
+    "full": { "$value": "9999px", "$type": "dimension", "$description": "Confirmed via Avatar (circular, literal Figma value 100px which renders identically to 9999px at any realistic size), Badge (24px on a 32px-tall pill — over-rounded to guarantee a full pill regardless of height), and Form Control Switch." }
   }
 }

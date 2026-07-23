@@ -38,6 +38,7 @@ module.exports = {
           "500": "#b3b4b8",
           "600": "#737375",
           "700": "#4f4f4f",
+          "750": "#3f3f3f",
           "800": "#2e2e2e",
           "900": "#141414"
         },
@@ -167,6 +168,13 @@ module.exports = {
             "letterSpacing": "0"
           }
         ],
+        "paragraph-large-semibold": [
+          "18px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "0"
+          }
+        ],
         "paragraph-medium": [
           "16px",
           {
@@ -198,7 +206,7 @@ module.exports = {
         "paragraph-xsmall": [
           "12px",
           {
-            "lineHeight": "20px",
+            "lineHeight": "16px",
             "letterSpacing": "0"
           }
         ],
@@ -212,8 +220,8 @@ module.exports = {
         "overline": [
           "12px",
           {
-            "lineHeight": "16px",
-            "letterSpacing": "0.04em"
+            "lineHeight": "20px",
+            "letterSpacing": "1px"
           }
         ]
       },

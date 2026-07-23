@@ -16,7 +16,7 @@
     "confirmed": true
   },
   "heading-h3": {
-    "fontWeight": 700,
+    "fontWeight": 600,
     "confirmed": false
   },
   "heading-h4": {
@@ -37,6 +37,10 @@
   },
   "paragraph-large-medium": {
     "fontWeight": 500,
+    "confirmed": true
+  },
+  "paragraph-large-semibold": {
+    "fontWeight": 600,
     "confirmed": true
   },
   "paragraph-medium": {

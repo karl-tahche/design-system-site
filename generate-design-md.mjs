@@ -122,13 +122,54 @@ const components = {
     typography: '{typography.paragraph-medium-medium}',
     padding: '12px 0',
   },
-  badge: {
-    backgroundColor: '{colors.primary-50}',
-    textColor: '{colors.primary-700}',
-    typography: '{typography.paragraph-xsmall}',
+  'badge-filled-primary': {
+    backgroundColor: '{colors.primary-500}',
+    textColor: '#FFFFFF',
+    typography: '{typography.paragraph-small-medium}',
     rounded: '{rounded.full}',
-    padding: '2px 8px',
+    padding: '6px 16px',
   },
+  accordion: {
+    backgroundColor: '#FFFFFF',
+    textColor: '{colors.neutral-800}',
+    typography: '{typography.paragraph-large-semibold}',
+    padding: '26px 16px',
+  },
+  avatar: {
+    backgroundColor: '{colors.neutral-100}',
+    rounded: '{rounded.full}',
+    size: '40px',
+  },
+  'avatar-initials': { backgroundColor: '{colors.primary-50}', textColor: '{colors.primary-500}' },
+  breadcrumb: { textColor: '{colors.neutral-750}', typography: '{typography.paragraph-small}' },
+  'alert-inline-primary': {
+    backgroundColor: '{colors.primary-50}',
+    textColor: '{colors.primary-800}',
+    rounded: '{rounded.sm}',
+    padding: '12px 20px',
+  },
+  'tab-line': { textColor: '{colors.neutral-750}', typography: '{typography.paragraph-small-medium}', padding: '16px' },
+  'tab-pill': {
+    textColor: '{colors.neutral-750}',
+    typography: '{typography.paragraph-small-medium}',
+    rounded: '{rounded.sm}',
+    padding: '8px 12px',
+  },
+  'table-header': {
+    backgroundColor: '#FFFFFF',
+    textColor: '{colors.neutral-750}',
+    typography: '{typography.overline}',
+    padding: '12px 24px',
+  },
+  'progress-bar-track': { backgroundColor: '{colors.neutral-100}', rounded: '{rounded.full}' },
+  tooltip: { backgroundColor: '#FFFFFF', textColor: '{colors.neutral-900}', rounded: '{rounded.md}', padding: '16px' },
+  title: {
+    backgroundColor: '#FFFFFF',
+    textColor: '{colors.neutral-900}',
+    typography: '{typography.heading-h2}',
+    padding: '24px 0',
+  },
+  stat: { backgroundColor: '#FFFFFF', rounded: '{rounded.md}', padding: '24px' },
   'input-field-box': {
     backgroundColor: '#FFFFFF',
     textColor: '{colors.neutral-900}',
@@ -188,11 +229,15 @@ Two tiers, deliberately kept separate:
 
 Each semantic ramp (\`success\`/\`warning\`/\`destructive\`) runs 50→900 and should only be used for state communication — a destructive action, a warning banner, a success toast — never as a decorative accent. Within any ramp: 50/100 for tinted backgrounds and hover fills, 500 for the primary interactive tone, 700–900 for high-contrast text or dark-surface contexts.
 
+**\`neutral-750\` (\`#3F3F3F\`) is new** — not a Figma foundation-page color, but a real, heavily-used gray discovered by auditing live components directly. It's the actual secondary/body text color in Breadcrumb, Tab, Table Header, Table Content Cell, Pagination, Side Nav Item, Tooltip, Button Group, Button Tertiary, and Accordion — used in more places than \`neutral-700\` itself, despite never having been documented anywhere before this.
+
 ## Typography
 
 **Inter** is the typeface actually rendering across all 5 apps today — but historically it was applied only via a global CSS override (\`* { font-family: Inter !important }\`), never registered in Tailwind's own \`fontFamily\` config. That's fixed at the token level here: \`typography.fontFamily\` resolves to Inter with system fallbacks, and should be wired as Tailwind's \`fontFamily.sans\`, not a separate custom key.
 
-The type scale below covers display sizes down to overline. Not every weight is equally certain: \`heading-h2\` (Extrabold/800), \`heading-h4\` (Medium/500), and \`paragraph-large\` (Regular/400 and Medium/500) came from bound Figma variables and are confirmed. Every other weight is a proposed default — check \`build/tailwind/font-weights.json\` in the tokens repo for the live confirmed/proposed status before treating one as final.
+The type scale below covers display sizes down to overline. Confirmed weights, sourced from either bound Figma variables or live design-context pulls against real components: \`heading-h2\` (Extrabold/800), \`heading-h3\` (Semibold/600, via Stat), \`heading-h4\` (Medium/500), \`paragraph-large\` (Regular/400, Medium/500, and Semibold/600 via Accordion), \`paragraph-medium\` (Medium/500, via Button), \`paragraph-small\` (Regular/400 and Medium/500, via Input Field and Button), \`paragraph-xsmall\` (Regular/400, via Tooltip — note its line-height is 16px, not the more common 20px), \`label-xsmall\` (Medium/500, a distinct 12/15 style used for small badges), and \`overline\` (Semibold/600, uppercase, 1px tracking, via Table Header). Every other weight is a proposed default — check \`build/tailwind/font-weights.json\` in the tokens repo for the live confirmed/proposed status before treating one as final.
+
+**⚠️ \`heading-h2\` has a real, unresolved conflict**: the Typography foundation page's own named Figma variable says Extrabold (800), but the Title component renders the same 36/44 size as Bold (700) instead. Two parts of the same Figma file disagree. This file keeps 800 (the foundation page's stated value) as the default, but that's a tiebreaker, not a resolution — it needs an explicit design decision.
 
 ## Layout
 
@@ -202,17 +247,19 @@ Breakpoints are a proposed change, not yet ratified: every app currently carries
 
 ## Elevation & Depth
 
-A 6-step shadow scale, already identical across Figma and all 5 apps (a rare case with no conflict to resolve) — built on a single neutral shadow color (\`rgba(16,24,40,*)\`) at increasing offset/blur/spread. Use \`xsmall\` for subtle separation between adjacent surfaces (a card against its page background), \`small\`/\`medium\` for dropdowns and popovers, \`large\`/\`xlarge\` for modals and sheets, and reserve \`xxlarge\` for the single heaviest overlay in a given view.
+A 6-step shadow scale, already identical across Figma and all 5 apps (a rare case with no conflict to resolve) — built on a single neutral shadow color (\`rgba(16,24,40,*)\`) at increasing offset/blur/spread. Use \`xsmall\` for subtle separation between adjacent surfaces (a card against its page background), \`small\`/\`medium\` for dropdowns and popovers, \`large\`/\`xlarge\` for modals and sheets, and reserve \`xxlarge\` for the single heaviest overlay in a given view. \`xsmall\` (Input Field, Button Group), \`small\` (Stat), \`large\` (Tooltip), and \`xlarge\` (Modal) are all now confirmed via named Figma variables on real components — only \`medium\` and \`xxlarge\` remain unconfirmed against a live component.
+
+A 7th token, \`focus-ring\`, is a 4px solid-color ring (\`#E1E1FE\`) rather than a blurred shadow — it appears on focused/typing text inputs, confirmed on both the standalone Input Field and one embedded inside a Table cell.
 
 ## Shapes
 
-Radius is a proposed scale, not a ratified one — no Figma foundation page for border-radius existed anywhere in the audit that produced this file, so these values are inferred from the arbitrary \`rounded-[Npx]\` values already scattered across the 5 codebases. Treat this section as a starting proposal for a design decision, not a settled fact. Suggested usage once ratified: \`sm\` for inputs and small controls, \`lg\`/\`xl\` for cards and modals, \`full\` for pills, avatars, and badges.
+\`sm\` (6px) and \`md\` (8px) are now confirmed directly against real components — \`sm\` on Button, Input Field, Modal, File Upload, Tab/Pill, and Side Nav Item; \`md\` on Button Group, Stat, and Tooltip. \`lg\`/\`xl\`/\`2xl\` remain inferred from arbitrary \`rounded-[Npx]\` values in the 5 codebases and still need an explicit design decision. \`full\` is confirmed via Avatar, Badge, and Form Control Switch.
 
 ## Components
 
 Not an exhaustive catalog — a shared vocabulary. Figma's real component library (audited directly) already documents a working set: Accordion, Avatar, Badge, Breadcrumb, Button, Button Group, Data Display, Date Picker, File Upload, Form Control, Inline Alert, Sticky Alert, Input Field, List Field, Loader, Modal, Pagination, Progress Bar, Progress Step, Side Navigation, Stat, Tab, Table, Title, and Tooltip. Those names are the shared vocabulary for what a "Button" or "Badge" means across the org, even though each app is free to implement its own.
 
-The composite tokens in this file's frontmatter (\`button-*\`, \`badge\`, \`input-field\`, \`modal\`, and their state variants) are reference points for the handful of primitives every app already reimplements independently — not a mandate to build a shared component package. Use them as a starting shape; diverge where a specific app's needs require it, as long as the underlying color/type/spacing/radius tokens are still the ones referenced above.
+The composite tokens in this file's frontmatter (\`button-*\`, \`badge-filled-primary\`, \`input-field-*\`, \`modal-*\`, \`accordion\`, \`avatar\`, \`breadcrumb\`, \`alert-inline-primary\`, \`tab-line\`, \`tab-pill\`, \`table-header\`, \`progress-bar-track\`, \`tooltip\`, \`title\`, \`stat\`) are reference points for the primitives every app already reimplements independently — not a mandate to build a shared component package. Use them as a starting shape; diverge where a specific app's needs require it, as long as the underlying color/type/spacing/radius tokens are still the ones referenced above.
 
 ### Button — confirmed directly from Figma
 
@@ -244,6 +291,29 @@ Two visual styles, \`Box\` (bordered) and \`Line\` (bottom-border only), each ac
 - A circular leading icon container (\`primary-50\` background, \`48px\`, fully rounded) is optional, as is the description and the top-right close icon.
 - **⚠️ A real inconsistency in Figma itself, not a placeholder or an error on this side**: the Vertical modal's action buttons combine Large button padding (\`20px 12px\`) with a hardcoded \`40px\` height — Medium's height paired with Large's padding, mixed together. The Horizontal modal's buttons don't have this issue (Medium padding, Medium implied height). Worth a design decision on which is correct rather than silently picking one.
 
+### Badge — corrected from an earlier wrong guess
+
+The Large/Primary/Filled/Default variant is \`primary-500\` background with **white** text — not the \`primary-50\`/\`primary-700\` light-tint pairing this file guessed at in an earlier pass, before Badge itself had been audited directly. Padding is \`6px 16px\`, radius is fully rounded (\`24px\` on a \`32px\`-tall pill — deliberately over-rounded rather than exactly half the height), and the label uses \`paragraph-small-medium\`. Badge also has \`Accent\` and \`Outlined\` styles and a full Neutral/Primary/Success/Warning/Destructive type range not captured in the single frontmatter entry here.
+
+### Accordion, Avatar, Breadcrumb — confirmed directly from Figma
+
+- **Accordion**: white background, border-bottom only (\`neutral-200\`), an unusual asymmetric padding (\`26px\` vertical, \`16px\` horizontal — real, not a typo), \`16px\` gap. Title uses the newly-confirmed \`paragraph-large-semibold\` (neutral-800); description uses \`paragraph-small\` (\`neutral-750\`).
+- **Avatar**: fully circular at every size (24px–128px), with a 1.5px white border for stacking (see Avatar Group's overlapping \`-12px\` negative margin). The Initials variant is \`primary-50\` background with \`primary-500\` text and \`paragraph-medium-medium\` — the same light-tint pairing seen on Secondary buttons and Alert Inline.
+- **Breadcrumb**: \`paragraph-small\` in \`neutral-750\` for each crumb, with a \`neutral-300\` slash separator between them.
+
+### Alert Inline, Tab, Table — confirmed directly from Figma
+
+- **Alert Inline** (Primary type): \`primary-50\` background, \`primary-200\` border, title in \`primary-800\`, description in \`primary-700\` — a consistent "bg-50 / border-200 / text-800" pattern for the Primary semantic type. Not yet confirmed whether Neutral/Success/Warning/Destructive types follow the same offset pattern against their own ramps.
+- **Tab**: both \`Line\` (bottom-border only, \`56px\` tall) and \`Pill\` (fully contained, \`rounded.sm\`, \`40px\` tall) styles use \`neutral-750\` text at \`paragraph-small-medium\` — another confirmation of the undocumented gray's ubiquity.
+- **Table**: the Header cell uses the \`overline\` style (uppercase, \`neutral-750\`) that this same audit corrected. Leading and Content cells both run \`72px\` tall with \`24px\`/\`16px\` padding, and Content Cell's oddly-named \`State4\` variant turns out to be a fully populated row (avatars, badge, progress bar, rating, actions) — not a distinct visual state, just an unclear internal name worth renaming.
+
+### Progress Bar, Tooltip, Title, Stat — confirmed directly from Figma
+
+- **Progress Bar** is built from individual 1-unit-wide \`.Progress Bar / Block\` segments in a flex row on a \`neutral-100\` fully-rounded track, not a single scaling fill — filled segments are \`primary-500\`, unfilled ones render as a separate gray asset. Three sizes (Large/Medium/Small: \`88px\`/\`80px\`/\`72px\` tall) each carry a \`paragraph-medium-medium\` label and \`paragraph-small\` caption.
+- **Tooltip**: white background, \`rounded.md\`, \`16px\` padding, the confirmed \`elevation.large\` shadow, title in \`paragraph-xsmall-medium\`-shaped text (12/15, matching \`label-xsmall\`) and description in the newly-corrected \`paragraph-xsmall\` (12/16, \`neutral-750\`).
+- **Title**: the page-heading component, not a token — \`heading-h2\` for the title text (inheriting that token's H2 weight conflict directly), \`paragraph-small\` overline/description in \`neutral-500\`, a circular \`primary-50\` icon container, and an optional action pair (Secondary + Primary button, Medium size).
+- **Stat**: white background, \`rounded.md\`, \`24px\` padding, the confirmed \`elevation.small\` shadow. The big number uses \`heading-h3\` (the style this audit corrected to Semibold/600), with an optional \`success-50\`/\`success-500\` percentage badge — the same bg-50/text-500 semantic pairing used elsewhere, now confirmed for the Success ramp specifically, not just Primary.
+
 ## Do's and Don'ts
 
 These are drawn directly from patterns found across all 5 production apps during the audit that produced this file — each one caused a real, shipped inconsistency.
@@ -255,6 +325,8 @@ These are drawn directly from patterns found across all 5 production apps during
 - **Do** type a component's \`variant\` prop as a string-literal union. **Don't** leave it as a loose \`string\` once more than a couple of variants exist — it's how a 25-variant button with no compile-time safety happens.
 - **Do** delete a superseded component version once its replacement has shipped and been verified. **Don't** leave "V1"/"V2" trees or "_Old"/"Legacy" files live in production indefinitely — several apps in this audit still had both.
 - **Do** build components however best fits the app. **Don't** skip pulling from the shared token package even when building something fully bespoke — that's the one rule this file exists to support.
+- **Do** check a component's real Figma design context before assuming a token's value. **Don't** trust a "reasonable-looking" inferred value once a real one is available — this file's own Badge entry was wrong (guessed \`primary-50\`/\`primary-700\`, real value is \`primary-500\`/white) until Badge itself was actually audited.
+- **Do** treat a disagreement between two parts of Figma (like \`heading-h2\`'s Extrabold-vs-Bold conflict) as a flag for a design decision. **Don't** silently pick whichever value seems more "official" and move on as if it were resolved.
 `.trim();
 
 const output = `---\n${yamlStr}---\n\n${body}\n`;

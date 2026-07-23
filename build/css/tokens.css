@@ -36,6 +36,7 @@
   --color-neutral-500: #b3b4b8;
   --color-neutral-600: #737375;
   --color-neutral-700: #4f4f4f;
+  --color-neutral-750: #3f3f3f; /** New — a real, heavily-used gray that was completely undocumented until this audit. Confirmed via live Figma design context as the actual secondary/body text color in Breadcrumb, Tab, Table Header, Table Content Cell, Pagination, Side Nav Item, Tooltip description, Button Group, Button Tertiary, Accordion description, and more (13+ distinct components) — used more often than neutral-700 itself. Sits between neutral-700 (#4F4F4F) and neutral-800 (#2E2E2E); named '750' to reflect that position, not an official Figma variable name (none existed for it). */
   --color-neutral-800: #2e2e2e;
   --color-neutral-900: #141414;
   --color-success-50: #f0fdf4;
@@ -70,20 +71,20 @@
   --color-destructive-900: #7f1d1d;
   --color-brand-blue: #2232d7; /** 'Tahche Blue' per the brand guide. Kept distinct from color.primary.500 (#353DD7) by design — see decisions log. */
   --color-brand-gold: #fbd24d; /** 'Tahche Gold' per the brand guide. */
-  --elevation-xsmall: 0px 1px 2px rgba(16, 24, 40, 0.05); /** Confirmed again via the Input Field/Box component's named 'Drop shadow/XSmall' variable (removed entirely in the Disabled state). */
-  --elevation-focus-ring: 0px 0px 0px 4px #E1E1FE; /** New token, confirmed via Input Field/Box's Focused and Typing states — a 4px solid-color ring, not a blurred shadow. Color (#E1E1FE) is close to but not identical to primary-100 (#E0E2FF), a small drift in the same shape as the brand-gold one. Only appears on the Box input style; the Line style changes only its border color on focus, no ring. */
-  --elevation-small: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px -1px rgba(16, 24, 40, 0.1);
+  --elevation-xsmall: 0px 1px 2px rgba(16, 24, 40, 0.05); /** Confirmed repeatedly via named 'Drop shadow/XSmall' variables: Input Field/Box (removed entirely in the Disabled state), and Button Group. */
+  --elevation-focus-ring: 0px 0px 0px 4px #E1E1FE; /** Confirmed twice — Input Field/Box's Focused/Typing states, and again inside Table Content Cell's embedded input. A 4px solid-color ring, not a blurred shadow. Color (#E1E1FE) is close to but not identical to primary-100 (#E0E2FF), a small drift in the same shape as the brand-gold one. Only appears on the Box input style; the Line style changes only its border color on focus, no ring. */
+  --elevation-small: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px -1px rgba(16, 24, 40, 0.1); /** Confirmed via the Stat component's named 'Drop shadow/Small' variable. */
   --elevation-medium: 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1);
-  --elevation-large: 0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1);
+  --elevation-large: 0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1); /** Confirmed via the Tooltip component's named 'Drop shadow/Large' variable. */
   --elevation-xlarge: 0px 20px 25px -5px rgba(16, 24, 40, 0.1), 0px 8px 10px -6px rgba(16, 24, 40, 0.1); /** Confirmed twice — once via a named Figma variable, again via live design context on the Modal component (both Horizontal and Vertical alignment). */
   --elevation-xxlarge: 0px 25px 50px -12px rgba(16, 24, 40, 0.25);
   --radius-none: 0px;
-  --radius-sm: 6px; /** Confirmed three times over — every Button variant (Primary/Secondary/Outlined/Tertiary × Large/Medium/Small), Input Field/Box, and Modal (both alignments) all use this exact value. The strongest-evidenced token in this file. */
-  --radius-md: 8px;
+  --radius-sm: 6px; /** Confirmed across Button (all variants/sizes), Input Field/Box, Modal, Accordion (implicit, no radius), File Upload Prompt, Tab/Pill, Side Nav Item, List Field Right Content button, and Table Leading Cell's icon container. The single most-evidenced token in this file. */
+  --radius-md: 8px; /** Confirmed via Button Group (the rounded corners of a segmented control), Stat, and Tooltip — all three independently use exactly 8px. */
   --radius-lg: 10px;
   --radius-xl: 12px;
   --radius-2xl: 16px;
-  --radius-full: 9999px;
+  --radius-full: 9999px; /** Confirmed via Avatar (circular, literal Figma value 100px which renders identically to 9999px at any realistic size), Badge (24px on a 32px-tall pill — over-rounded to guarantee a full pill regardless of height), and Form Control Switch. */
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 12px;
@@ -105,18 +106,19 @@
   --typography-display-large: 700 52px/56px var(--typography-font-family-sans); /** Source: Figma Typography page. Weight (700) is proposed, not confirmed by a Figma variable — flag for design sign-off. */
   --typography-display-small: 700 44px/48px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
   --typography-heading-h1: 800 40px/48px var(--typography-font-family-sans); /** Weight proposed by extrapolation from the confirmed H2 weight, not itself confirmed. */
-  --typography-heading-h2: 800 36px/44px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Heading/H2/Extrabold/Desktop'. */
-  --typography-heading-h3: 700 32px/40px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
+  --typography-heading-h2: 800 36px/44px var(--typography-font-family-sans); /** ⚠️ REAL CONFLICT, not yet resolved: the Typography foundation page's own named Figma variable says 'Heading/H2/Extrabold/Desktop' (800, used here), but the Title component's live design context shows the same 36/44 size rendered as Inter Bold — weight 700, not 800. Two parts of the same Figma file disagree with each other. Kept at 800 (the foundation page's stated value) since it's the more canonical source, but this needs an explicit design decision, not a silent pick. */
+  --typography-heading-h3: 600 32px/40px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Stat component ('Heading/H3/Semibold/Desktop', weight 600) — corrected from an earlier proposed guess of 700. */
   --typography-heading-h4: 500 28px/36px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Heading/H4/Medium/Desktop'. */
   --typography-heading-h5: 600 24px/32px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
   --typography-heading-h6: 600 20px/28px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
   --typography-paragraph-large-regular: 400 18px/28px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Paragraph/Large/Regular'. */
   --typography-paragraph-large-medium: 500 18px/28px var(--typography-font-family-sans); /** Confirmed twice — a named Figma variable ('Paragraph/Large/Medium'), and again via live design context on the Modal component's heading text. */
+  --typography-paragraph-large-semibold: 600 18px/28px var(--typography-font-family-sans); /** New — confirmed via live Figma design context on the Accordion component's title text (Inter Semibold 18/28). Same size as paragraph-large-regular/medium, a third weight in the same size family. */
   --typography-paragraph-medium: 400 16px/24px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
   --typography-paragraph-medium-medium: 500 16px/24px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Button component (Size=Large label uses Inter Medium 16/24) — same size as paragraph-medium, Medium weight instead of Regular, same pairing pattern as paragraph-large-regular/medium. */
   --typography-paragraph-small: 400 14px/20px var(--typography-font-family-sans); /** Confirmed twice via live Figma design context: Input Field (Box and Line variants, value/placeholder/helper text) and Modal (description text). */
   --typography-paragraph-small-medium: 500 14px/20px var(--typography-font-family-sans); /** Confirmed twice via live Figma design context: Button (Size=Medium label) and Input Field (label text) both use Inter Medium 14/20. */
-  --typography-paragraph-xsmall: 400 12px/20px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
-  --typography-label-xsmall: 500 12px/15px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Button component (Size=Small label). Distinct from paragraph-xsmall: same fontSize but a tighter 15px line-height and Medium weight — genuinely a different style, not a variant of it. */
-  --typography-overline: 600 12px/16px var(--typography-font-family-sans); /** Proposed — Figma had a 14px/12px overline pairing but no bound variable to confirm weight/tracking; uppercase usage assumed at consumption time, not baked into the token. */
+  --typography-paragraph-xsmall: 400 12px/16px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Tooltip component's description text ('Paragraph/XSmall/Regular'). Corrected lineHeight from an earlier proposed guess of 20px to the real 16px. */
+  --typography-label-xsmall: 500 12px/15px var(--typography-font-family-sans); /** Confirmed repeatedly via live Figma design context: Button (Size=Small label), Avatar Group overflow badge, Side Nav Item badge, Tab badge, and Table Content Cell's avatar-group overflow badge all use this exact 12/15 Medium style. Distinct from paragraph-xsmall: same fontSize but a tighter 15px line-height and Medium weight. */
+  --typography-overline: 600 12px/20px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Table Header component ('Paragraph/Overline/Small', uppercase in usage) — corrected fontSize/lineHeight/letterSpacing/weight from an earlier proposed guess. */
 }

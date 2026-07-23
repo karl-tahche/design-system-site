@@ -36,6 +36,7 @@
       "500": { "$value": "#B3B4B8", "$type": "color" },
       "600": { "$value": "#737375", "$type": "color" },
       "700": { "$value": "#4F4F4F", "$type": "color" },
+      "750": { "$value": "#3F3F3F", "$type": "color", "$description": "New — a real, heavily-used gray that was completely undocumented until this audit. Confirmed via live Figma design context as the actual secondary/body text color in Breadcrumb, Tab, Table Header, Table Content Cell, Pagination, Side Nav Item, Tooltip description, Button Group, Button Tertiary, Accordion description, and more (13+ distinct components) — used more often than neutral-700 itself. Sits between neutral-700 (#4F4F4F) and neutral-800 (#2E2E2E); named '750' to reflect that position, not an official Figma variable name (none existed for it)." },
       "800": { "$value": "#2E2E2E", "$type": "color" },
       "900": { "$value": "#141414", "$type": "color" }
     },
