@@ -351,7 +351,7 @@ The Large/Primary/Filled/Default variant is \`primary-500\` background with **wh
 
 ## Do's and Don'ts
 
-These are drawn directly from patterns found across all 5 production apps during the audit that produced this file — each one caused a real, shipped inconsistency.
+These are drawn directly from patterns found across all 5 production apps during the audit that produced this file — each one caused a real, shipped inconsistency. One exception, marked where it appears: an item surfaced by checking this file itself against general product-UI best practice, not the 5-app audit — used only where it identifies a concrete, checkable gap in this file, not as an excuse to import generic advice wholesale.
 
 - **Do** reference a token (\`bg-primary-500\`, \`text-neutral-700\`) for any color, spacing, or radius value. **Don't** hand-type a hex or pixel value that happens to match one — that's exactly how \`destructive-800\` and \`destructive-900\` ended up identical in every app.
 - **Do** use the shared spacing scale. **Don't** reach for an arbitrary bracket value (\`px-[0.938rem]\`) when a token already covers that exact pixel amount.
@@ -368,6 +368,7 @@ These are drawn directly from patterns found across all 5 production apps during
 - **Do** apply a text style as one composite class (\`.text-heading-h2\`). **Don't** hand-pair a size utility with a separate weight utility (\`text-2xl font-medium\`) — the two can be edited independently and drift apart, which is exactly how the \`heading-h2\` Extrabold-vs-Bold conflict happened in the first place.
 - **Do** use a ramp's \`-foreground\` token whenever that ramp's 500 tone becomes a solid background. **Don't** assume white text always works — it fails outright on \`secondary\`/\`success\`/\`warning\`/\`neutral\` (all light or bright colors) and only marginally fails on \`destructive\` (3.76:1, just under the 4.5:1 minimum), the kind of near-miss this file's per-ramp contrast check exists to catch.
 - **Do** check whether WCAG's inactive-component exception genuinely applies before treating a low-contrast disabled state as a compliance bug. **Don't** conflate "looks low-contrast" with "fails a real requirement" — \`button-primary-disabled\` has zero 1.4.3 obligation since disabled controls are exempt, though bumping it for perceptual clarity anyway (as done here) is still worth doing on its own merits.
+- **Do** define every real interactive state for a component — default, hover, focus, active, disabled, loading, error, selected, as applicable. **Don't** stop at whichever states happened to get checked first — checked 2026-07-25 against general product-UI state-coverage practice (not the 5-app audit): this file's own Button entry has no documented Focus or Loading state, and Tab has no documented Selected state despite being a component that obviously needs one. Both are open gaps, not yet resolved.
 `.trim();
 
 const output = `---\n${yamlStr}---\n\n${body}\n`;
