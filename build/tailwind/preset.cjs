@@ -282,7 +282,7 @@ module.exports = {
       },
       "boxShadow": {
         "xsmall": "0px 1px 2px rgba(16, 24, 40, 0.05)",
-        "focus-ring": "0px 0px 0px 4px #E1E1FE",
+        "focus-ring": "0px 0px 0px 3px rgba(53, 61, 215, 0.12)",
         "small": "0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px -1px rgba(16, 24, 40, 0.1)",
         "medium": "0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1)",
         "large": "0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1)",

@@ -167,6 +167,29 @@ const components = {
     rounded: '{rounded.full}',
     padding: '6px 16px',
   },
+  // badge-filled-{success,warning,destructive,neutral}: confirmed 2026-07-25 via a real-code
+  // audit of a shared Badge.vue, byte-identical across 4 of 5 apps. Success/warning use the
+  // named ramps directly; destructive's real class is Tailwind's stock `bg-red-500`, not a
+  // `destructive-*` class — but red-500 (#EF4444) and destructive-500 are the exact same
+  // value, so this is the same "ghost usage" pattern already documented for primary-500's
+  // hardcoded hex elsewhere in this file, just via a stock Tailwind class instead of a raw
+  // hex. Neutral has no true solid-fill variant in real code — the closest real pattern is
+  // `.badge-light` (bg-neutral-100/text-neutral-900), used for "Inactive"/draft states.
+  'badge-filled-success': { backgroundColor: '{colors.success-500}', textColor: '{colors.success-foreground}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-filled-warning': { backgroundColor: '{colors.warning-500}', textColor: '{colors.warning-foreground}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-filled-destructive': { backgroundColor: '{colors.destructive-500}', textColor: '{colors.destructive-foreground}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-filled-neutral': { backgroundColor: '{colors.neutral-100}', textColor: '{colors.neutral-900}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
+  // badge-outlined-{primary,success,destructive}: confirmed 2026-07-25, real and load-bearing
+  // (CandidatesByJob.vue, TicketsReport.vue) — border-200/text-500 per ramp. Warning/neutral
+  // have no real outlined styling defined anywhere; not included here rather than guessed.
+  'badge-outlined-primary': { backgroundColor: 'transparent', textColor: '{colors.primary-500}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-outlined-success': { backgroundColor: 'transparent', textColor: '{colors.success-500}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-outlined-destructive': { backgroundColor: 'transparent', textColor: '{colors.destructive-500}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
+  // badge-accent: NOT copied from real code — real "accent/tint" usage (`.badge-light-blue`)
+  // is inconsistently named and has no dedicated success/warning/destructive equivalent
+  // anywhere in real markup. Modeled instead on shadcn-vue's `secondary` badge convention
+  // (tinted bg + darker text), per this repo's own rule for when real evidence is too thin.
+  'badge-accent': { backgroundColor: '{colors.primary-100}', textColor: '{colors.primary-700}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
   accordion: {
     backgroundColor: '#FFFFFF',
     textColor: '{colors.neutral-800}',
@@ -186,6 +209,20 @@ const components = {
     rounded: '{rounded.sm}',
     padding: '12px 20px',
   },
+  // alert-inline-{success,warning,destructive}: confirmed 2026-07-25 via a real-code audit
+  // of SnackBar.vue, identical across 4 of 5 apps (client-web, client-dashboard,
+  // recruitment-portal, dashboard) — the bg-50/border-200/text-800(title) pattern already
+  // established for Primary holds consistently for these three too. textColor here is the
+  // title color per the components schema's single-textColor limit; each ramp's body text
+  // actually runs one step lighter (700, not 800) — see this file's Alert Inline prose section.
+  'alert-inline-success': { backgroundColor: '{colors.success-50}', textColor: '{colors.success-800}', rounded: '{rounded.sm}', padding: '12px 20px' },
+  'alert-inline-warning': { backgroundColor: '{colors.warning-50}', textColor: '{colors.warning-800}', rounded: '{rounded.sm}', padding: '12px 20px' },
+  'alert-inline-destructive': { backgroundColor: '{colors.destructive-50}', textColor: '{colors.destructive-800}', rounded: '{rounded.sm}', padding: '12px 20px' },
+  // alert-inline-neutral: NOT copied from real code — the real "information" type found in
+  // the audit is a fallback onto the success ramp (bg-success-50 etc.), not a genuine neutral
+  // treatment. This extrapolates the same confirmed offset pattern onto the neutral ramp
+  // instead, since no real distinct neutral implementation exists to copy.
+  'alert-inline-neutral': { backgroundColor: '{colors.neutral-50}', textColor: '{colors.neutral-800}', rounded: '{rounded.sm}', padding: '12px 20px' },
   'tab-line': { textColor: '{colors.neutral-750}', typography: '{typography.paragraph-small-medium}', padding: '16px' },
   'tab-pill': {
     textColor: '{colors.neutral-750}',
@@ -193,6 +230,12 @@ const components = {
     rounded: '{rounded.sm}',
     padding: '8px 12px',
   },
+  // tab-active: confirmed 2026-07-25 via a real-code audit of the shared Tabs.vue used in
+  // 4 of 5 apps — a solid bg-primary-500/white-text fill swap on the selected tab, no
+  // border or underline anywhere. ⚠️ This applies to BOTH tab-line and tab-pill above: no
+  // real evidence of a distinct bottom-border-only "line" active style was found in any
+  // app's actual Tab code — see this file's Tab prose section for the full discrepancy.
+  'tab-active': { backgroundColor: '{colors.primary-500}', textColor: '#FFFFFF', typography: '{typography.paragraph-small-medium}' },
   'table-header': {
     backgroundColor: '#FFFFFF',
     textColor: '{colors.neutral-750}',
@@ -316,7 +359,7 @@ The spacing scale (4px→192px) matches Tailwind's own default scale exactly at 
 
 A 6-step shadow scale, already identical across Figma and all 5 apps (a rare case with no conflict to resolve) — built on a single neutral shadow color (\`rgba(16,24,40,*)\`) at increasing offset/blur/spread. Use \`xsmall\` for subtle separation between adjacent surfaces (a card against its page background), \`small\`/\`medium\` for dropdowns and popovers, \`large\`/\`xlarge\` for modals and sheets, and reserve \`xxlarge\` for the single heaviest overlay in a given view. \`xsmall\` (Input Field, Button Group), \`small\` (Stat), \`large\` (Tooltip), and \`xlarge\` (Modal) are all now confirmed via named Figma variables on real components — only \`medium\` and \`xxlarge\` remain unconfirmed against a live component, and a real-usage audit found \`xxlarge\` dead as a class in every one of the 5 apps.
 
-A 7th token, \`focus-ring\`, is a 4px solid-color ring (\`#E1E1FE\`) rather than a blurred shadow — it appears on focused/typing text inputs, confirmed on both the standalone Input Field and one embedded inside a Table cell. One app (recruitment-portal) has its own recurring focus-ring effect in raw CSS using a different color (a translucent primary-500) — worth reconciling into this one definition rather than carrying two.
+A 7th token, \`focus-ring\`, is now \`rgba(53, 61, 215, 0.12)\` at 3px with no blur — **replaced 2026-07-25**, real code over Figma: the previous value (\`#E1E1FE\`, a 4px solid ring, originally Figma-sourced) turned out to have zero real usage anywhere across all 5 apps, while this translucent primary-500 ring is a real, repeated, consistent implementation across 2 live apps (recruitment-portal: 4 files; client-web: 3 identical instances sharing the same Jobs feature) plus a near-variant in career-web using a different color at the same shape. Per this repo's own strategy, the never-shipped Figma value lost to the real one. Not every focused input gets a ring at all, either — a plain border-color-only focus swap, no shadow, is actually the single most-repeated focus treatment by file count (recruitment-portal's whole shared Form component library, 14 files) — a valid lighter-weight alternative, not a competing definition to reconcile.
 
 **Every app also reaches for Tailwind's stock shadow classes (\`shadow-sm/md/lg/xl/2xl\`) alongside this named scale** — in some apps more than the named tokens are used at all. A CI lint blocking the stock classes in favor of these named ones would close a real, consistently observed gap.
 
@@ -332,7 +375,7 @@ A 7th token, \`focus-ring\`, is a 4px solid-color ring (\`#E1E1FE\`) rather than
 
 Not an exhaustive catalog — a shared vocabulary. Figma's real component library (audited directly) already documents a working set: Accordion, Avatar, Badge, Breadcrumb, Button, Button Group, Data Display, Date Picker, File Upload, Form Control, Inline Alert, Sticky Alert, Input Field, List Field, Loader, Modal, Pagination, Progress Bar, Progress Step, Side Navigation, Stat, Tab, Table, Title, and Tooltip. Those names are the shared vocabulary for what a "Button" or "Badge" means across the org, even though each app is free to implement its own.
 
-The composite tokens in this file's frontmatter (\`button-*\`, \`badge-filled-primary\`, \`input-field-*\`, \`modal-*\`, \`accordion\`, \`avatar\`, \`breadcrumb\`, \`alert-inline-primary\`, \`tab-line\`, \`tab-pill\`, \`table-header\`, \`progress-bar-track\`, \`tooltip\`, \`title\`, \`stat\`) are reference points for the primitives every app already reimplements independently — not a mandate to build a shared component package. Use them as a starting shape; diverge where a specific app's needs require it, as long as the underlying color/type/spacing/radius tokens are still the ones referenced above.
+The composite tokens in this file's frontmatter (\`button-*\`, \`badge-filled-*\`, \`badge-outlined-*\`, \`badge-accent\`, \`input-field-*\`, \`modal-*\`, \`accordion\`, \`avatar\`, \`breadcrumb\`, \`alert-inline-*\`, \`tab-line\`, \`tab-pill\`, \`tab-active\`, \`table-header\`, \`progress-bar-track\`, \`tooltip\`, \`title\`, \`stat\`) are reference points for the primitives every app already reimplements independently — not a mandate to build a shared component package. Use them as a starting shape; diverge where a specific app's needs require it, as long as the underlying color/type/spacing/radius tokens are still the ones referenced above.
 
 ### Button — confirmed directly from Figma
 
@@ -342,9 +385,11 @@ Unlike the other components below, Button's tokens are pulled from live Figma de
 - **Size drives height and padding**, consistently across every type: Large is \`48px\` height / \`12px 20px\` padding, Medium is \`40px\` / \`10px 16px\`, Small is \`28px\` / \`6px 12px\`. Icon size scales with it too: \`20px\` at Large/Medium, \`16px\` at Small.
 - **State changes color only, never size**: Primary's Default (\`primary-500\` bg, white text) → Hover (\`primary-600\` bg) → Pressed (also \`primary-600\` bg, but text shifts to \`primary-200\` — a real, distinct state, not a duplicate of Hover) → Disabled (\`primary-400\` bg, white text — bumped up from Figma's literal \`primary-300\`, see below).
 - **Disabled's Figma value is not actually a WCAG failure — it's exempt, and the earlier framing here overstated it**: white text on \`primary-300\` (\`#8D92EB\`) measures 2.82:1, below the 4.5:1 AA minimum, but WCAG 1.4.3 (Contrast Minimum) has a normative exception for text belonging to an *inactive* UI component — a disabled control has no contrast obligation at all, regardless of size or weight. Bumped anyway, 2026-07-25, purely for perceptual clarity (so "disabled" reads as legible-but-muted rather than washed-out), not compliance: \`primary-400\` (\`#555DE0\`) lands at 5.21:1, comfortably AA-passing as a side effect, not the goal. A deliberate, documented departure from Figma's literal value rather than a silent "fix."
+- **Focus is a real, confirmed gap, not documentation lag**: a 2026-07-25 code audit found zero focus-visible styling anywhere on any of the 5 apps' shared Button components (0 matches for \`focus\`/\`focus-visible\`/\`focus:ring\` across all 6 real Button.vue files). The only \`focus:ring-*\` usage anywhere in the suite is on an unrelated notification-dismiss icon button. Recommendation: apply \`elevation.focus-ring\` (the same ring now used on Input Field) to Button's focus state going forward — reusing the just-reconciled real ring rather than inventing a second one.
+- **Loading reuses Disabled's appearance, plus a spinner — it's not a fourth distinct color state**: real code across 4 of the 5 apps composes loading externally (consumer passes \`:disabled="isLoading"\` to Button, then renders a separate \`Loader\`/spinner alongside the label — label stays visible, no dimming or resizing). Only career-web's Button has a built-in \`loading\` prop doing the same thing internally (spinner + label both shown, \`disabled\` set). Recommendation: codify the real cross-app visual (spinner beside label, Disabled's color state, nothing dims or resizes) as canonical, and promote career-web's single-prop shape as the target API — not the 4-app pattern of every consumer wiring up its own external spinner.
 - **Outlined and Tertiary both have a border** (\`primary-500\` and \`neutral-200\` respectively) that isn't representable in the frontmatter — checked 2026-07-25: \`component_sub_tokens\` (\`backgroundColor\`/\`textColor\`/\`typography\`/\`rounded\`/\`padding\`/\`size\`/\`height\`/\`width\`) is fixed by the \`@google/design.md\` spec itself, not something this repo's generator controls, and adding an unrecognized field (tested directly against the real lint CLI) produces a permanent "not a recognized component sub-token" warning on every future lint run rather than a clean pass. This is a durable spec limitation, not an unfinished gap in this file — border specs are correct and complete here in prose, just not machine-readable from the YAML. If you're implementing these types, add the border yourself from the values stated here.
 - **Link has no background, border, or horizontal padding** — text and icons only, vertical padding matching the other types at its size.
-- The lint warnings on \`button-outlined\`/\`button-link\`/\`input-field-line\` about low contrast against a "transparent" background are a known linter limitation (it can't evaluate contrast with nothing behind it) — all three sit on a white page in practice, where their text colors pass comfortably (confirmed by \`button-secondary\`'s identical primary-500 text passing against its primary-50 background, and neutral-900 being the standard body-text color used everywhere else in this file against white).
+- The lint warnings on \`button-outlined\`/\`button-link\`/\`input-field-line\`/\`badge-outlined-*\` about low contrast against a "transparent" background are a known linter limitation (it can't evaluate contrast with nothing behind it) — all of these sit on a white page in practice, where their text colors pass comfortably (confirmed by \`button-secondary\`'s identical primary-500 text passing against its primary-50 background, and neutral-900 being the standard body-text color used everywhere else in this file against white).
 
 ### Input Field — confirmed directly from Figma
 
@@ -352,7 +397,7 @@ Two visual styles, \`Box\` (bordered) and \`Line\` (bottom-border only), each ac
 
 - **Both styles share the same type ramp**: label is \`paragraph-small-medium\` (14/20, Medium), value/placeholder/helper text is \`paragraph-small\` (14/20, Regular) — both now confirmed twice over (once via Button, once here).
 - **\`Box\`**: white background, \`6px\` radius (\`rounded.sm\` — a third confirmation), \`8px 12px\` padding, 1px border that changes color by state (\`neutral-200\` default/active/disabled, \`primary-300\` focused/typing, \`destructive-300\` error) — border color isn't representable in the frontmatter, the same permanent spec limitation as Button's Outlined/Tertiary (see Button above). Carries the \`elevation.xsmall\` shadow at rest, which is **removed entirely when disabled**.
-- **A focused or typing \`Box\` gets a 4px focus ring** (\`elevation.focus-ring\`, \`#E1E1FE\`) — a new token this audit surfaced, not previously in this file.
+- **A focused or typing \`Box\` gets a focus ring** (\`elevation.focus-ring\`, now \`rgba(53, 61, 215, 0.12)\` at 3px — see Elevation & Depth above for why this replaced the original Figma-sourced value).
 - **\`Line\` never gets that ring** — focus only changes its bottom-border color, same state-to-color mapping as \`Box\`. This is a real, deliberate difference between the two styles, not an inconsistency to fix.
 - **Destructive state**: border shifts to \`destructive-300\`, and helper text shifts to \`destructive-500\` — the one part of the error state representable in the \`components\` schema (\`input-field-box-error\`).
 
@@ -364,9 +409,16 @@ Two visual styles, \`Box\` (bordered) and \`Line\` (bottom-border only), each ac
 - A circular leading icon container (\`primary-50\` background, \`48px\`, fully rounded) is optional, as is the description and the top-right close icon.
 - **Vertical modal's button-padding mismatch is resolved, 2026-07-25**: its action buttons combined Large button padding (\`20px 12px\`) with a hardcoded \`40px\` height — Medium's height paired with Large's padding, mixed together. Ratified fix: snap to Medium consistently (\`40px\` height / \`10px 16px\` padding, matching \`button-primary-medium\` exactly), since the height was already Medium's and Horizontal's buttons don't have this issue in the first place (Medium padding, Medium implied height) — Horizontal is the internally-consistent baseline, Vertical's padding is what needs correcting to match it, not the other way around.
 
-### Badge — corrected from an earlier wrong guess
+### Badge — corrected from an earlier wrong guess, now with its full range confirmed by real code
 
-The Large/Primary/Filled/Default variant is \`primary-500\` background with **white** text — not the \`primary-50\`/\`primary-700\` light-tint pairing this file guessed at in an earlier pass, before Badge itself had been audited directly. Padding is \`6px 16px\`, radius is fully rounded (\`24px\` on a \`32px\`-tall pill — deliberately over-rounded rather than exactly half the height), and the label uses \`paragraph-small-medium\`. Badge also has \`Accent\` and \`Outlined\` styles and a full Neutral/Primary/Success/Warning/Destructive type range not captured in the single frontmatter entry here.
+The Large/Primary/Filled/Default variant is \`primary-500\` background with **white** text — not the \`primary-50\`/\`primary-700\` light-tint pairing this file guessed at in an earlier pass, before Badge itself had been audited directly. Padding is \`6px 16px\`, radius is fully rounded (\`24px\` on a \`32px\`-tall pill — deliberately over-rounded rather than exactly half the height), and the label uses \`paragraph-small-medium\`.
+
+**The full type/variant range is now filled in, 2026-07-25, from a real-code audit** of a shared \`Badge.vue\` found byte-identical across 4 of the 5 apps (career-web has no Badge at all):
+- **Filled Success/Warning** use their named ramps directly (\`success-500\`/\`warning-500\`, white text) — real and confirmed.
+- **Filled Destructive** is real too, but its actual class in code is Tailwind's stock \`bg-red-500\`, not a \`destructive-*\` class — the same "ghost usage" pattern already documented for \`primary-500\`'s hardcoded hex elsewhere in this file, just via an unnamed stock class instead of a raw hex. Harmless here only because \`red-500\` (\`#EF4444\`) and \`destructive-500\` happen to be the exact same value — a coincidence, not a guarantee.
+- **Filled Neutral** has no true solid-fill equivalent in real code. The closest real pattern, \`.badge-light\` (\`neutral-100\` background, \`neutral-900\` text), used for "Inactive"/draft states, is what \`badge-filled-neutral\` is modeled on.
+- **Outlined** is real and load-bearing (\`CandidatesByJob.vue\`, \`TicketsReport.vue\`) for Primary, Success, and Destructive — a consistent \`border-200\`/\`text-500\` pattern per ramp. Warning and Neutral have **no real outlined styling anywhere** — not extrapolated here rather than guessed.
+- **Accent** has no consistent real implementation — the closest real thing (\`.badge-light-blue\`) is inconsistently named with no success/warning/destructive equivalent anywhere in real markup. \`badge-accent\` is modeled instead on shadcn-vue's \`secondary\` badge convention (tinted \`*-100\` background, darker \`*-700\` text) — the fallback this repo uses when real evidence is too thin to extrapolate from directly.
 
 ### Accordion, Avatar, Breadcrumb — confirmed directly from Figma
 
@@ -374,10 +426,10 @@ The Large/Primary/Filled/Default variant is \`primary-500\` background with **wh
 - **Avatar**: fully circular at every size (24px–128px), with a 1.5px white border for stacking (see Avatar Group's overlapping \`-12px\` negative margin). The Initials variant is \`primary-50\` background with \`primary-500\` text and \`paragraph-medium-medium\` — the same light-tint pairing seen on Secondary buttons and Alert Inline.
 - **Breadcrumb**: \`paragraph-small\` in \`neutral-750\` for each crumb, with a \`neutral-300\` slash separator between them.
 
-### Alert Inline, Tab, Table — confirmed directly from Figma
+### Alert Inline, Tab, Table
 
-- **Alert Inline** (Primary type): \`primary-50\` background, \`primary-200\` border, title in \`primary-800\`, description in \`primary-700\` — a consistent "bg-50 / border-200 / text-800" pattern for the Primary semantic type. Not yet confirmed whether Neutral/Success/Warning/Destructive types follow the same offset pattern against their own ramps.
-- **Tab**: both \`Line\` (bottom-border only, \`56px\` tall) and \`Pill\` (fully contained, \`rounded.sm\`, \`40px\` tall) styles use \`neutral-750\` text at \`paragraph-small-medium\` — another confirmation of the undocumented gray's ubiquity.
+- **Alert Inline** (originally Figma-confirmed for Primary only; the other 3 types confirmed 2026-07-25 by real code): \`primary-50\` background, \`primary-200\` border, title in \`primary-800\`, description in \`primary-700\` — a "bg-50 / border-200 / text-800(title)/text-700(body)" pattern. A real-code audit of \`SnackBar.vue\` (byte-identical across 4 of 5 apps) confirmed this same offset pattern holds for Success, Warning, and Destructive too — real, repeated, consistent evidence, not an assumption. **Neutral is the one exception**: the real "information" type in code is a fallback onto the Success ramp entirely (same bg/border/text classes, only the icon color differs) rather than a genuine neutral treatment — \`alert-inline-neutral\` in this file's frontmatter is therefore extrapolated onto the neutral ramp using the same confirmed offset logic, not copied from what's actually shipped, since nothing real exists to copy for that one case.
+- **Tab**: real code (a shared \`Tabs.vue\` in 4 of 5 apps — career-web has no Tab component) shows the selected/active tab as a solid \`primary-500\` background with white text, swapping from inactive's \`neutral-750\` text at \`paragraph-small-medium\` — no border or underline anywhere. **⚠️ A real, unresolved discrepancy, not silently picked**: this file's \`Line\` style was originally documented (from Figma) as bottom-border-only, \`56px\` tall — but the 2026-07-25 code audit found zero evidence of any bottom-border/underline Tab treatment anywhere in real code; every real implementation uses the same solid-fill swap regardless of which named style it's meant to be. Either the bottom-border \`Line\` style genuinely isn't built anywhere yet (a real Figma-vs-code gap, not a conflict to resolve away), or it lives in a component these audits didn't find. \`tab-active\` in the frontmatter captures the one pattern that IS confirmed; the \`Line\`/\`Pill\` distinction stays as originally documented pending an actual look at whether \`Line\` exists anywhere. Also flagged: \`aria-selected\` is absent from every real Tab implementation — a real accessibility gap, not a token question (see Do's and Don'ts).
 - **Table**: the Header cell uses the \`overline\` style (uppercase, \`neutral-750\`) that this same audit corrected. Leading and Content cells both run \`72px\` tall with \`24px\`/\`16px\` padding, and Content Cell's oddly-named \`State4\` variant turns out to be a fully populated row (avatars, badge, progress bar, rating, actions) — not a distinct visual state, just an unclear internal name worth renaming.
 
 ### Progress Bar, Tooltip, Title, Stat — confirmed directly from Figma
@@ -406,8 +458,10 @@ These are drawn directly from patterns found across all 5 production apps during
 - **Do** apply a text style as one composite class (\`.text-heading-h2\`). **Don't** hand-pair a size utility with a separate weight utility (\`text-2xl font-medium\`) — the two can be edited independently and drift apart, which is exactly how the \`heading-h2\` Extrabold-vs-Bold conflict happened in the first place.
 - **Do** use a ramp's \`-foreground\` token whenever that ramp's 500 tone becomes a solid background. **Don't** assume white text always works — it fails outright on \`secondary\`/\`success\`/\`warning\`/\`neutral\` (all light or bright colors) and only marginally fails on \`destructive\` (3.76:1, just under the 4.5:1 minimum), the kind of near-miss this file's per-ramp contrast check exists to catch.
 - **Do** check whether WCAG's inactive-component exception genuinely applies before treating a low-contrast disabled state as a compliance bug. **Don't** conflate "looks low-contrast" with "fails a real requirement" — \`button-primary-disabled\` has zero 1.4.3 obligation since disabled controls are exempt, though bumping it for perceptual clarity anyway (as done here) is still worth doing on its own merits.
-- **Do** define every real interactive state for a component — default, hover, focus, active, disabled, loading, error, selected, as applicable. **Don't** stop at whichever states happened to get checked first — checked 2026-07-25 against general product-UI state-coverage practice (not the 5-app audit): this file's own Button entry has no documented Focus or Loading state, and Tab has no documented Selected state despite being a component that obviously needs one. Both are open gaps, not yet resolved.
+- **Do** define every real interactive state for a component — default, hover, focus, active, disabled, loading, error, selected, as applicable. **Don't** stop at whichever states happened to get checked first — flagged 2026-07-25 against general product-UI state-coverage practice, then closed the same day by a real-code audit (not Figma): Button's missing Focus state was a genuine gap (zero real implementation anywhere), now resolved by reusing \`elevation.focus-ring\`; Loading was resolved as "Disabled's appearance plus a spinner," not a fourth color state; Tab's Selected state is now confirmed (\`tab-active\`) — though it surfaced a separate, still-open discrepancy between this file's Figma-sourced \`Line\` style and what real code actually builds (see the Tab section above).
 - **Do** pair every real transition/animation with a \`prefers-reduced-motion\` fallback. **Don't** assume it's handled somewhere else in the app just because one app in the suite does it well — career-web handles it consistently across 11 files, but client-web, client-dashboard, recruitment-portal, and dashboard have zero handling between them, a real, current gap found by the 2026-07-25 motion audit, not a hypothetical.
+- **Do** treat a matching *value* as a real token-drift signal even when the *class name* looks unrelated. **Don't** assume "it's not hardcoded, it's just a class" is automatically safe — Badge's real Destructive-filled variant uses Tailwind's stock \`bg-red-500\`, not a \`destructive-*\` class; it's only harmless because \`red-500\` and \`destructive-500\` happen to be the exact same hex today, a coincidence this file's audit had to verify, not something the class name itself guaranteed.
+- **Do** add \`aria-selected\` (or the equivalent state attribute) to every real Tab implementation. **Don't** assume a working visual active-state means the interaction is accessible — the 2026-07-25 code audit found the selected/active tab is styled correctly and consistently everywhere it's built, but \`aria-selected\` is absent from every real Tab implementation across all 5 apps.
 `.trim();
 
 const output = `---\n${yamlStr}---\n\n${body}\n`;
