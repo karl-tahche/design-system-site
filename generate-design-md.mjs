@@ -23,12 +23,29 @@ const motionTokens = JSON.parse(motion).motion;
 // ── Colors: DESIGN.md's schema is a flat map<string, Color> — ramps become
 // dash-suffixed flat keys (primary-500), with a bare semantic alias
 // (primary) pointing at the base tone, per the spec's own convention.
+//
+// tokens/color.json uses its own internal reference syntax ({color.group.step})
+// so a handful of tokens (the -foreground pairs, request.coe) can point at
+// another token's value instead of duplicating its hex literally — verified
+// against Style Dictionary's own reference resolution in build.mjs. This
+// script does its own flat remapping rather than going through Style
+// Dictionary, so those references must be resolved to literal hex here too,
+// or they'd leak into DESIGN.md's frontmatter as a raw unresolved string
+// (`{color.neutral.900}`) instead of a color value.
+const REF_RE = /^\{color\.([\w-]+)\.([\w-]+)\}$/;
+function resolveColorValue(value) {
+  const match = REF_RE.exec(value);
+  if (!match) return value;
+  const [, group, step] = match;
+  return resolveColorValue(colorTokens[group][step].$value);
+}
+
 const colors = {};
 for (const [group, ramp] of Object.entries(colorTokens)) {
   if (group.startsWith('$')) continue;
   for (const [step, token] of Object.entries(ramp)) {
     if (step.startsWith('$')) continue;
-    colors[`${group}-${step}`] = token.$value;
+    colors[`${group}-${step}`] = resolveColorValue(token.$value);
   }
 }
 colors.primary = '{colors.primary-500}';

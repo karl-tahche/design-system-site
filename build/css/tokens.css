@@ -29,7 +29,6 @@
   --color-secondary-700: #d1a81f;
   --color-secondary-800: #b58d09;
   --color-secondary-900: #997500;
-  --color-secondary-foreground: #141414; /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on secondary-500 fails badly (1.46:1 — gold is a light, bright color, not a dark one like primary/destructive), so this pairs with neutral-900 instead, which passes at 12.65:1. A background this bright always needs dark text, never white — worth remembering when this ramp gets used as a solid fill anywhere. */
   --color-neutral-50: #f7f9ff;
   --color-neutral-100: #f5f6fc;
   --color-neutral-200: #edeef2;
@@ -41,7 +40,6 @@
   --color-neutral-750: #3f3f3f; /** New — a real, heavily-used gray that was completely undocumented until this audit. Confirmed via live Figma design context as the actual secondary/body text color in Breadcrumb, Tab, Table Header, Table Content Cell, Pagination, Side Nav Item, Tooltip description, Button Group, Button Tertiary, Accordion description, and more (13+ distinct components) — used more often than neutral-700 itself. Sits between neutral-700 (#4F4F4F) and neutral-800 (#2E2E2E); named '750' to reflect that position, not an official Figma variable name (none existed for it). */
   --color-neutral-800: #2e2e2e;
   --color-neutral-900: #141414;
-  --color-neutral-foreground: #141414; /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern, for when neutral-500 is used as a solid fill (e.g. a neutral badge/tag). Verified via real WCAG contrast math: white on neutral-500 fails (2.07:1), neutral-900 passes at 8.89:1. Same value as neutral-900 itself, kept as a separate semantic entry so 'what text goes on a neutral-500 background' has one clear answer rather than requiring the reader to independently work out the pairing. */
   --color-success-50: #f0fdf4;
   --color-success-100: #dcfce7;
   --color-success-200: #bbf7d0;
@@ -52,7 +50,6 @@
   --color-success-700: #15803d;
   --color-success-800: #166534;
   --color-success-900: #14532d;
-  --color-success-foreground: #141414; /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on success-500 fails (2.28:1 — this green is too light/saturated for white text), neutral-900 passes at 8.08:1. */
   --color-warning-50: #fffbeb;
   --color-warning-100: #fef3c7;
   --color-warning-200: #fde68a;
@@ -63,7 +60,6 @@
   --color-warning-700: #b45309;
   --color-warning-800: #92400e;
   --color-warning-900: #78350f;
-  --color-warning-foreground: #141414; /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on warning-500 fails (2.15:1 — amber is too light for white text), neutral-900 passes at 8.58:1. */
   --color-destructive-50: #fef2f2;
   --color-destructive-100: #fee2e2;
   --color-destructive-200: #fecaca;
@@ -74,7 +70,6 @@
   --color-destructive-700: #b91c1c;
   --color-destructive-800: #991b1b; /** Fixed from #7F1D1D (was a duplicate of 900). */
   --color-destructive-900: #7f1d1d;
-  --color-destructive-foreground: #141414; /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. ⚠️ Genuine tension found while computing this one, not silently resolved: white on destructive-500 measures 3.76:1 — it clears the 3:1 'large/bold text' AA exception but FAILS the 4.5:1 normal-text AA minimum that applies to typical 14-16px Medium-weight button/badge labels. neutral-900 passes fully at 4.90:1, so it's the value used here. But white is almost certainly what's already shipped on Button/Badge's Destructive-filled variants today, matching the white-text pattern used everywhere else (Primary, etc.) — meaning real components likely need a look, not just this token. This is a second, independently-discovered contrast risk alongside button-primary-disabled's confirmed failure, found simply by doing the same math for every ramp rather than assuming white always works. */
   --color-brand-blue: #2232d7; /** 'Tahche Blue' per the brand guide. Kept distinct from color.primary.500 (#353DD7) by design — see decisions log. */
   --color-brand-gold: #fbd24d; /** 'Tahche Gold' per the brand guide. */
   --color-request-facilities: #ef9a49;
@@ -83,7 +78,6 @@
   --color-request-petty-cash: #e255ac;
   --color-request-procurement: #8277bb; /** RESOLVED (2026-07-25): kept, same precedent as primary-800 elsewhere in this file — a ramp step with zero current real usage, retained for scale completeness within a category that's otherwise genuinely load-bearing, rather than dropped outright. Revisit if it's still unused at the next audit. */
   --color-request-business-trip: #6bbfaf; /** RESOLVED (2026-07-25): same call as procurement — dead even in dashboard today, kept for scale completeness rather than dropped, since the category as a whole is genuinely load-bearing. */
-  --color-request-coe: #d1a81f; /** RESOLVED (2026-07-25): confirmed intentional, not a duplicate bug — 'COE requests styled in the brand gold' is a coherent, sensible design choice (COE = Certificate of Employment, a formal/official document type, plausibly meant to stand out via the brand accent rather than an arbitrary request-category hue). Kept as an explicit alias-by-value of secondary-700 rather than merged away. */
   --color-extended-muted-blue-gray: #667085; /** Found in career-web (60×), client-web (38×), recruitment-portal (6×). No canonical match. */
   --color-extended-dark-slate: #101828; /** Found in career-web (36×), client-dashboard (5×), recruitment-portal (5×). Coincidentally shares its RGB base (16,24,40) with the elevation shadow color, but used here as a solid text/background color, unrelated to shadows. */
   --color-extended-charcoal: #2f3537; /** Found in client-dashboard (6×), dashboard (part of a larger cluster), recruitment-portal (25×). */
@@ -126,6 +120,12 @@
   --spacing-48: 192px;
   --typography-font-family-sans: Inter, Arial, Helvetica, sans-serif; /** The font actually rendered in all 5 apps today, applied via a global CSS override rather than Tailwind config. This token is what fixes that — register it as the Tailwind 'sans' default. */
   --typography-font-family-mono: 'SF Mono', 'Cascadia Code', Consolas, monospace; /** New token — no app currently defines a mono stack. Proposed for code/data display. */
+  --color-secondary-foreground: var(--color-neutral-900); /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on secondary-500 fails badly (1.46:1 — gold is a light, bright color, not a dark one like primary/destructive), so this pairs with neutral-900 instead, which passes at 12.65:1. A background this bright always needs dark text, never white — worth remembering when this ramp gets used as a solid fill anywhere. Referenced (2026-07-25 cleanup), not re-hardcoded — was a duplicate literal #141414 before. */
+  --color-neutral-foreground: var(--color-neutral-900); /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern, for when neutral-500 is used as a solid fill (e.g. a neutral badge/tag). Verified via real WCAG contrast math: white on neutral-500 fails (2.07:1), neutral-900 passes at 8.89:1. Same value as neutral-900 itself, kept as a separate semantic entry so 'what text goes on a neutral-500 background' has one clear answer rather than requiring the reader to independently work out the pairing. Referenced (2026-07-25 cleanup) rather than a duplicate literal, so the two can never silently drift apart. */
+  --color-success-foreground: var(--color-neutral-900); /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on success-500 fails (2.28:1 — this green is too light/saturated for white text), neutral-900 passes at 8.08:1. Referenced (2026-07-25 cleanup), not re-hardcoded. */
+  --color-warning-foreground: var(--color-neutral-900); /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on warning-500 fails (2.15:1 — amber is too light for white text), neutral-900 passes at 8.58:1. Referenced (2026-07-25 cleanup), not re-hardcoded. */
+  --color-destructive-foreground: var(--color-neutral-900); /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. ⚠️ Genuine tension found while computing this one, not silently resolved: white on destructive-500 measures 3.76:1 — it clears the 3:1 'large/bold text' AA exception but FAILS the 4.5:1 normal-text AA minimum that applies to typical 14-16px Medium-weight button/badge labels. neutral-900 passes fully at 4.90:1, so it's the value used here. But white is almost certainly what's already shipped on Button/Badge's Destructive-filled variants today, matching the white-text pattern used everywhere else (Primary, etc.) — meaning real components likely need a look, not just this token. This is a second, independently-discovered contrast risk alongside button-primary-disabled's confirmed failure, found simply by doing the same math for every ramp rather than assuming white always works. Referenced (2026-07-25 cleanup), not re-hardcoded. */
+  --color-request-coe: var(--color-secondary-700); /** RESOLVED (2026-07-25): confirmed intentional, not a duplicate bug — 'COE requests styled in the brand gold' is a coherent, sensible design choice (COE = Certificate of Employment, a formal/official document type, plausibly meant to stand out via the brand accent rather than an arbitrary request-category hue). Kept as an explicit alias of secondary-700, referenced rather than a duplicate literal (2026-07-25 cleanup) — if secondary-700 ever moves, coe tracks it intentionally instead of silently drifting into an unexplained mismatch. */
   --typography-display-large: 800 52px/56px var(--typography-font-family-sans); /** Weight changed 2026-07-25 from Bold(700) to Extrabold(800), following directly from heading-h2's conflict resolution: Bold(700) was never confirmed by an actual Figma variable anywhere in this file, and the one real Figma instance that rendered as Bold (the Title component, at heading-h2's size) turned out to be the drifted value, not the canonical one — the ratified foundation-page weight was Extrabold. Matching display-large to its now-resolved neighbors (heading-h1/h2, both 800) removes Bold as a separate, never-confirmed tier. Still a proposed default for this specific size, not itself confirmed. Real-usage audit (2026-07-23): rare but real — dead in 3 of 5 apps, used in the other 2 at low volume (4-8 instances each). */
   --typography-display-small: 700 44px/48px var(--typography-font-family-sans); /** ⚠️ DEPRECATED (2026-07-25) in favor of heading-h1 (40px). Real-usage audit (2026-07-23): this was the weakest size in the entire type scale — dead in 3 of 5 apps, and only 1 real usage each in the other 2 (a single arbitrary instance apiece). Sitting 4px from heading-h1 (solidly used in 4 of 5 apps) with no evidence anyone needs the distinction, this token is kept only so nothing that already references it breaks — new work should use heading-h1 directly. Remove entirely once nothing points to it. */
   --typography-heading-h1: 800 40px/48px var(--typography-font-family-sans); /** Weight proposed by extrapolation from the confirmed H2 weight, not itself confirmed. Real-usage audit (2026-07-23): solidly used in 4 of 5 apps (only career-web has zero real usage) — a real, load-bearing size, unlike its close neighbor display-small (44px). */

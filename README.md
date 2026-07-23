@@ -1,6 +1,6 @@
 # tahche-design-tokens
 
-The canonical source of truth for Tahche's design tokens — colors, typography, spacing, elevation, radius, and breakpoints. This repo exists so Figma and code stop editing each other directly (which is how three different "primary blue" values ended up live at once). Both sides now read from, and propose changes to, this repo instead.
+The canonical source of truth for Tahche's design tokens — colors, typography, spacing, elevation, radius, breakpoints, and motion. This repo exists so Figma and code stop editing each other directly (which is how three different "primary blue" values ended up live at once). Both sides now read from, and propose changes to, this repo instead.
 
 Component structure is intentionally **not** covered here — each app keeps building components however it likes. The one rule this repo exists to support: pull colors, spacing, and type from these tokens instead of hand-typing a value.
 
@@ -9,23 +9,23 @@ This repo also generates [`DESIGN.md`](./DESIGN.md) — a spec-compliant [design
 ## What's in here
 
 ```
-tokens/            source of truth — hand-edited, DTCG-format JSON
-  color.json        primary, secondary, neutral, success, warning, destructive, brand
-  typography.json    font family + the full type scale (display/heading/paragraph/overline)
-  spacing.json       4–192px scale
-  elevation.json      6-step shadow scale
-  radius.json         PARTIAL — see Status below
-  breakpoints.json    RATIFIED 2026-07-25 — see Status below
-  motion.json         RATIFIED 2026-07-25 — duration scale + easing, see Status below
+tokens/                  source of truth — hand-edited, DTCG-format JSON
+  color.json             primary, secondary, neutral, success, warning, destructive, brand
+  typography.json        font family + the full type scale (display/heading/paragraph/overline)
+  spacing.json           4–192px scale
+  elevation.json         6-step shadow scale
+  radius.json            PARTIAL — see Status below
+  breakpoints.json       RATIFIED 2026-07-25 — see Status below
+  motion.json            RATIFIED 2026-07-25 — duration scale + easing, see Status below
 
-build/              generated — do not hand-edit, run `npm run build`
-  tailwind/preset.cjs   drop-in Tailwind preset
-  css/tokens.css        CSS custom properties
-  json/tokens.json      flattened token tree (for tooling / Tokens Studio import)
+build/                   generated — do not hand-edit, run `npm run build`
+  tailwind/preset.cjs     drop-in Tailwind preset
+  css/tokens.css          CSS custom properties
+  json/tokens.json        flattened token tree (for tooling / Tokens Studio import)
 
-DESIGN.md            generated — do not hand-edit, run `npm run design-md`
-build.mjs             Style Dictionary config that produces everything in build/
-generate-design-md.mjs   assembles DESIGN.md from the same tokens/*.json
+DESIGN.md                generated — do not hand-edit, run `npm run design-md`
+build.mjs                 Style Dictionary config that produces everything in build/
+generate-design-md.mjs    assembles DESIGN.md from the same tokens/*.json
 ```
 
 ## DESIGN.md
