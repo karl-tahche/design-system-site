@@ -70,14 +70,15 @@
   --color-destructive-900: #7f1d1d;
   --color-brand-blue: #2232d7; /** 'Tahche Blue' per the brand guide. Kept distinct from color.primary.500 (#353DD7) by design — see decisions log. */
   --color-brand-gold: #fbd24d; /** 'Tahche Gold' per the brand guide. */
-  --elevation-xsmall: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  --elevation-xsmall: 0px 1px 2px rgba(16, 24, 40, 0.05); /** Confirmed again via the Input Field/Box component's named 'Drop shadow/XSmall' variable (removed entirely in the Disabled state). */
+  --elevation-focus-ring: 0px 0px 0px 4px #E1E1FE; /** New token, confirmed via Input Field/Box's Focused and Typing states — a 4px solid-color ring, not a blurred shadow. Color (#E1E1FE) is close to but not identical to primary-100 (#E0E2FF), a small drift in the same shape as the brand-gold one. Only appears on the Box input style; the Line style changes only its border color on focus, no ring. */
   --elevation-small: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px -1px rgba(16, 24, 40, 0.1);
   --elevation-medium: 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1);
   --elevation-large: 0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1);
   --elevation-xlarge: 0px 20px 25px -5px rgba(16, 24, 40, 0.1), 0px 8px 10px -6px rgba(16, 24, 40, 0.1);
   --elevation-xxlarge: 0px 25px 50px -12px rgba(16, 24, 40, 0.25);
   --radius-none: 0px;
-  --radius-sm: 6px; /** Confirmed — every Button variant checked (Primary/Secondary/Outlined/Tertiary × Large/Medium/Small) uses this exact value. */
+  --radius-sm: 6px; /** Confirmed twice — every Button variant (Primary/Secondary/Outlined/Tertiary × Large/Medium/Small) and the Input Field/Box component all use this exact value. */
   --radius-md: 8px;
   --radius-lg: 10px;
   --radius-xl: 12px;
@@ -113,8 +114,8 @@
   --typography-paragraph-large-medium: 500 18px/28px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Paragraph/Large/Medium'. */
   --typography-paragraph-medium: 400 16px/24px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
   --typography-paragraph-medium-medium: 500 16px/24px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Button component (Size=Large label uses Inter Medium 16/24) — same size as paragraph-medium, Medium weight instead of Regular, same pairing pattern as paragraph-large-regular/medium. */
-  --typography-paragraph-small: 400 14px/20px var(--typography-font-family-sans); /** Weight proposed, not confirmed. Also confirmed present as 'Paragraph/Small/Regular' in Figma variables. */
-  --typography-paragraph-small-medium: 500 14px/20px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Button component (Size=Medium label uses Inter Medium 14/20). */
+  --typography-paragraph-small: 400 14px/20px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Input Field component (Box and Line variants both use Inter Regular 14/20 for value/placeholder/helper text). */
+  --typography-paragraph-small-medium: 500 14px/20px var(--typography-font-family-sans); /** Confirmed twice via live Figma design context: Button (Size=Medium label) and Input Field (label text) both use Inter Medium 14/20. */
   --typography-paragraph-xsmall: 400 12px/20px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
   --typography-label-xsmall: 500 12px/15px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Button component (Size=Small label). Distinct from paragraph-xsmall: same fontSize but a tighter 15px line-height and Medium weight — genuinely a different style, not a variant of it. */
   --typography-overline: 600 12px/16px var(--typography-font-family-sans); /** Proposed — Figma had a 14px/12px overline pairing but no bound variable to confirm weight/tracking; uppercase usage assumed at consumption time, not baked into the token. */

@@ -49,7 +49,7 @@
   },
   "paragraph-small": {
     "fontWeight": 400,
-    "confirmed": false
+    "confirmed": true
   },
   "paragraph-small-medium": {
     "fontWeight": 500,

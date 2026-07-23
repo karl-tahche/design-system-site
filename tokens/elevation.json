@@ -1,7 +1,8 @@
 {
   "elevation": {
     "$description": "Confirmed via Figma variables (Drop shadow/*) and cross-checked against all 5 apps' Tailwind boxShadow config — already identical everywhere, no ratification conflict. Just needed one shared home.",
-    "xsmall": { "$value": "0px 1px 2px rgba(16, 24, 40, 0.05)", "$type": "shadow" },
+    "xsmall": { "$value": "0px 1px 2px rgba(16, 24, 40, 0.05)", "$type": "shadow", "$description": "Confirmed again via the Input Field/Box component's named 'Drop shadow/XSmall' variable (removed entirely in the Disabled state)." },
+    "focus-ring": { "$value": "0px 0px 0px 4px #E1E1FE", "$type": "shadow", "$description": "New token, confirmed via Input Field/Box's Focused and Typing states — a 4px solid-color ring, not a blurred shadow. Color (#E1E1FE) is close to but not identical to primary-100 (#E0E2FF), a small drift in the same shape as the brand-gold one. Only appears on the Box input style; the Line style changes only its border color on focus, no ring." },
     "small": { "$value": "0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px -1px rgba(16, 24, 40, 0.1)", "$type": "shadow" },
     "medium": { "$value": "0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1)", "$type": "shadow" },
     "large": { "$value": "0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1)", "$type": "shadow" },

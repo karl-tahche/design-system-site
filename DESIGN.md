@@ -247,15 +247,23 @@ components:
     typography: "{typography.paragraph-xsmall}"
     rounded: "{rounded.full}"
     padding: 2px 8px
-  input-field:
+  input-field-box:
     backgroundColor: "#FFFFFF"
     textColor: "{colors.neutral-900}"
-    typography: "{typography.paragraph-medium}"
-    rounded: "{rounded.md}"
-    height: 40px
-    padding: 0 12px
-  input-field-error:
+    typography: "{typography.paragraph-small}"
+    rounded: "{rounded.sm}"
+    padding: 8px 12px
+  input-field-box-disabled:
+    textColor: "{colors.neutral-400}"
+  input-field-box-error:
     textColor: "{colors.destructive-500}"
+  input-field-line:
+    backgroundColor: transparent
+    textColor: "{colors.neutral-900}"
+    typography: "{typography.paragraph-small}"
+    padding: 10px 0
+  input-field-line-disabled:
+    textColor: "{colors.neutral-400}"
   modal:
     backgroundColor: "#FFFFFF"
     rounded: "{rounded.xl}"
@@ -315,7 +323,17 @@ Unlike the other components below, Button's tokens are pulled from live Figma de
 - **⚠️ The Disabled state is a confirmed WCAG failure, not a placeholder**: white text on `primary-300` (`#8D92EB`) measures 2.82:1, below the 4.5:1 AA minimum. This is what's actually in Figma today — flagged here for a design decision, not silently corrected to something that "looks right."
 - **Outlined and Tertiary both have a border** (`primary-500` and `neutral-200` respectively) that isn't representable in this file's `components` schema — it only supports `backgroundColor`/`textColor`/`typography`/`rounded`/`padding`/`size`/`height`/`width`, no border token. If you're implementing these types, add the border yourself; it's real, just not encodable here.
 - **Link has no background, border, or horizontal padding** — text and icons only, vertical padding matching the other types at its size.
-- The lint warnings on `button-outlined`/`button-link` about low contrast against a "transparent" background are a known linter limitation (it can't evaluate contrast with nothing behind it) — both sit on a white page in practice, where `primary-500` text passes comfortably (confirmed by `button-secondary`'s identical text color passing against its `primary-50` background).
+- The lint warnings on `button-outlined`/`button-link`/`input-field-line` about low contrast against a "transparent" background are a known linter limitation (it can't evaluate contrast with nothing behind it) — all three sit on a white page in practice, where their text colors pass comfortably (confirmed by `button-secondary`'s identical primary-500 text passing against its primary-50 background, and neutral-900 being the standard body-text color used everywhere else in this file against white).
+
+### Input Field — confirmed directly from Figma
+
+Two visual styles, `Box` (bordered) and `Line` (bottom-border only), each across Default/Focused/Typing/Active/Disabled/Destructive states:
+
+- **Both styles share the same type ramp**: label is `paragraph-small-medium` (14/20, Medium), value/placeholder/helper text is `paragraph-small` (14/20, Regular) — both now confirmed twice over (once via Button, once here).
+- **`Box`**: white background, `6px` radius (`rounded.sm` — a third confirmation), `8px 12px` padding, 1px border that changes color by state (`neutral-200` default/active/disabled, `primary-300` focused/typing, `destructive-300` error) — border color isn't representable in this schema, same limitation as Button's Outlined/Tertiary. Carries the `elevation.xsmall` shadow at rest, which is **removed entirely when disabled**.
+- **A focused or typing `Box` gets a 4px focus ring** (`elevation.focus-ring`, `#E1E1FE`) — a new token this audit surfaced, not previously in this file.
+- **`Line` never gets that ring** — focus only changes its bottom-border color, same state-to-color mapping as `Box`. This is a real, deliberate difference between the two styles, not an inconsistency to fix.
+- **Destructive state**: border shifts to `destructive-300`, and helper text shifts to `destructive-500` — the one part of the error state representable in the `components` schema (`input-field-box-error`).
 
 ## Do's and Don'ts
 
