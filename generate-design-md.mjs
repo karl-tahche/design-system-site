@@ -240,6 +240,19 @@ Each semantic ramp (\`success\`/\`warning\`/\`destructive\`) runs 50→900 and s
 
 **A structural gap, not just a discipline problem**: every app hardcodes token-matching hex values — most heavily \`primary-500\`, which in one app (client-web) is hardcoded *more often* (157×) than the actual Tailwind class is used (117×). Almost all of this "ghost usage" is inside inline SVG icon \`fill\`/\`stroke\` attributes, which can't take Tailwind classes directly. The fix is a token-aware icon component (a \`color\` prop that maps to the token set), not a reminder to "just use the class."
 
+**Every semantic ramp now has a \`{ramp}-foreground\` pair** (\`primary-foreground\`, \`secondary-foreground\`, etc.) — following shadcn-vue's foreground-pairing convention: the guaranteed-accessible text color for when that ramp's 500 tone is used as a solid background (a filled button, a solid badge). Each was verified with real WCAG contrast math, not assumed:
+
+| Ramp | Foreground | Contrast on {ramp}-500 |
+|---|---|---|
+| \`primary\` | white | 7.50:1 ✅ |
+| \`secondary\` | neutral-900 | 12.65:1 ✅ (white fails at 1.46:1 — gold is too bright for white text) |
+| \`neutral\` | neutral-900 | 8.89:1 ✅ (white fails at 2.07:1) |
+| \`success\` | neutral-900 | 8.08:1 ✅ (white fails at 2.28:1) |
+| \`warning\` | neutral-900 | 8.58:1 ✅ (white fails at 2.15:1) |
+| \`destructive\` | neutral-900 | 4.90:1 ✅ |
+
+**⚠️ That last row surfaced a second, independent contrast finding**: white on \`destructive-500\` measures 3.76:1 — it clears the 3:1 large/bold-text AA exception but fails the 4.5:1 normal-text minimum that applies to typical 14–16px Medium-weight button labels. \`destructive-foreground\` is set to \`neutral-900\` (the fully-compliant choice) here, but white is almost certainly what Button/Badge's Destructive-filled variants already ship, matching the white-text convention used everywhere else. That's a real components-level question, not just a token one — found simply by computing the same contrast check for every ramp instead of assuming white always works, the same way \`button-primary-disabled\`'s confirmed failure was found earlier.
+
 ## Typography
 
 **Inter** is the typeface actually rendering across all 5 apps today — but historically it was applied only via a global CSS override (\`* { font-family: Inter !important }\`), never registered in Tailwind's own \`fontFamily\` config. That's fixed at the token level here: \`typography.fontFamily\` resolves to Inter with system fallbacks, and should be wired as Tailwind's \`fontFamily.sans\`, not a separate custom key.
@@ -350,6 +363,7 @@ These are drawn directly from patterns found across all 5 production apps during
 - **Do** give icons a token-aware \`color\` prop that maps to this file's color tokens. **Don't** accept that SVG \`fill\`/\`stroke\` attributes "just can't use Tailwind classes" as a reason to hardcode hex — it's the single biggest source of token drift found in this audit (one app hardcodes \`primary-500\`'s hex more often than it uses the actual class).
 - **Do** wire this file's radius and font-size scales into each app's actual Tailwind config. **Don't** leave them as documentation-only — none of the 5 apps currently configure a custom \`borderRadius\` or \`fontSize\` at all, which is exactly why arbitrary \`rounded-[10px]\`/\`text-[13px]\`-style values are everywhere.
 - **Do** apply a text style as one composite class (\`.text-heading-h2\`). **Don't** hand-pair a size utility with a separate weight utility (\`text-2xl font-medium\`) — the two can be edited independently and drift apart, which is exactly how the \`heading-h2\` Extrabold-vs-Bold conflict happened in the first place.
+- **Do** use a ramp's \`-foreground\` token whenever that ramp's 500 tone becomes a solid background. **Don't** assume white text always works — it fails outright on \`secondary\`/\`success\`/\`warning\`/\`neutral\` (all light or bright colors) and only marginally passes on \`destructive\`, which is exactly how \`button-primary-disabled\`'s WCAG failure went unnoticed until this file's own lint caught it.
 `.trim();
 
 const output = `---\n${yamlStr}---\n\n${body}\n`;

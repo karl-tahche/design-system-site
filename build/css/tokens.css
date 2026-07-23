@@ -18,6 +18,7 @@
   --color-primary-700: #1e248f;
   --color-primary-800: #0c1166;
   --color-primary-900: #060945;
+  --color-primary-foreground: #ffffff; /** NEW (2026-07-25), added following the shadcn-vue foreground-pairing pattern: the safe text color when primary-500 is used as a solid background (e.g. a filled button). Verified via real WCAG contrast math: white on primary-500 is 7.50:1, well clear of the 4.5:1 AA minimum. This is a general-purpose pairing recommendation, not a retroactive edit of any already-audited component — see button-primary-disabled elsewhere in this file for a real, confirmed contrast failure this pattern would have caught if it had existed sooner. */
   --color-secondary-50: #fffaeb;
   --color-secondary-100: #fff4d1;
   --color-secondary-200: #ffeba8;
@@ -28,6 +29,7 @@
   --color-secondary-700: #d1a81f;
   --color-secondary-800: #b58d09;
   --color-secondary-900: #997500;
+  --color-secondary-foreground: #141414; /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on secondary-500 fails badly (1.46:1 — gold is a light, bright color, not a dark one like primary/destructive), so this pairs with neutral-900 instead, which passes at 12.65:1. A background this bright always needs dark text, never white — worth remembering when this ramp gets used as a solid fill anywhere. */
   --color-neutral-50: #f7f9ff;
   --color-neutral-100: #f5f6fc;
   --color-neutral-200: #edeef2;
@@ -39,6 +41,7 @@
   --color-neutral-750: #3f3f3f; /** New — a real, heavily-used gray that was completely undocumented until this audit. Confirmed via live Figma design context as the actual secondary/body text color in Breadcrumb, Tab, Table Header, Table Content Cell, Pagination, Side Nav Item, Tooltip description, Button Group, Button Tertiary, Accordion description, and more (13+ distinct components) — used more often than neutral-700 itself. Sits between neutral-700 (#4F4F4F) and neutral-800 (#2E2E2E); named '750' to reflect that position, not an official Figma variable name (none existed for it). */
   --color-neutral-800: #2e2e2e;
   --color-neutral-900: #141414;
+  --color-neutral-foreground: #141414; /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern, for when neutral-500 is used as a solid fill (e.g. a neutral badge/tag). Verified via real WCAG contrast math: white on neutral-500 fails (2.07:1), neutral-900 passes at 8.89:1. Same value as neutral-900 itself, kept as a separate semantic entry so 'what text goes on a neutral-500 background' has one clear answer rather than requiring the reader to independently work out the pairing. */
   --color-success-50: #f0fdf4;
   --color-success-100: #dcfce7;
   --color-success-200: #bbf7d0;
@@ -49,6 +52,7 @@
   --color-success-700: #15803d;
   --color-success-800: #166534;
   --color-success-900: #14532d;
+  --color-success-foreground: #141414; /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on success-500 fails (2.28:1 — this green is too light/saturated for white text), neutral-900 passes at 8.08:1. */
   --color-warning-50: #fffbeb;
   --color-warning-100: #fef3c7;
   --color-warning-200: #fde68a;
@@ -59,6 +63,7 @@
   --color-warning-700: #b45309;
   --color-warning-800: #92400e;
   --color-warning-900: #78350f;
+  --color-warning-foreground: #141414; /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on warning-500 fails (2.15:1 — amber is too light for white text), neutral-900 passes at 8.58:1. */
   --color-destructive-50: #fef2f2;
   --color-destructive-100: #fee2e2;
   --color-destructive-200: #fecaca;
@@ -69,6 +74,7 @@
   --color-destructive-700: #b91c1c;
   --color-destructive-800: #991b1b; /** Fixed from #7F1D1D (was a duplicate of 900). */
   --color-destructive-900: #7f1d1d;
+  --color-destructive-foreground: #141414; /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. ⚠️ Genuine tension found while computing this one, not silently resolved: white on destructive-500 measures 3.76:1 — it clears the 3:1 'large/bold text' AA exception but FAILS the 4.5:1 normal-text AA minimum that applies to typical 14-16px Medium-weight button/badge labels. neutral-900 passes fully at 4.90:1, so it's the value used here. But white is almost certainly what's already shipped on Button/Badge's Destructive-filled variants today, matching the white-text pattern used everywhere else (Primary, etc.) — meaning real components likely need a look, not just this token. This is a second, independently-discovered contrast risk alongside button-primary-disabled's confirmed failure, found simply by doing the same math for every ramp rather than assuming white always works. */
   --color-brand-blue: #2232d7; /** 'Tahche Blue' per the brand guide. Kept distinct from color.primary.500 (#353DD7) by design — see decisions log. */
   --color-brand-gold: #fbd24d; /** 'Tahche Gold' per the brand guide. */
   --color-request-facilities: #ef9a49;
