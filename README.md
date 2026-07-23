@@ -76,13 +76,14 @@ Ratified 2026-07-23, from the Figma + 5-codebase + brand-guide audit (updated 20
 
 ## The round-trip (how this stays in sync)
 
-A closed loop that starts and ends in code — not a symmetric "either side can propose a change" relationship. Component-level decisions (new states, variants, specs) flow through all three steps in order; only raw token *values* get a lighter-weight, either-direction sync via Tokens Studio (see below).
+A loop that can start on **either side** — Figma or Claude Code — but always resolves through both, with code as the final source of truth once something is being ratified into this repo.
 
-1. **Build/decide in Claude Code first.** New components, states, or unconfirmed token values get resolved from real usage — grep the 5 apps' actual code, check shadcn-vue's own conventions where real evidence is thin — before anything touches Figma. Figma is not where new decisions originate.
-2. **Bring it into Figma to actually refine the Design System.** Once a shape exists in code, a designer takes it into Figma to improve on it — spacing, motion, detail work a code-first pass won't catch. This is a real, active design step, not a mechanical sync; Figma's job here is refinement, not record-keeping.
-3. **Feed the refined result back** into `tokens/*.json`, regenerate `build/` and `DESIGN.md`, and from there back into the 5 apps.
+1. **A change starts somewhere.** Either a designer refines something in Figma, or a component/feature gets built or adjusted in Claude Code from real usage evidence. Neither side is the mandatory starting point.
+2. **It crosses to the other side.** Code-originated work gets ported into Figma (e.g. via MCP) so a designer can actively refine it further — spacing, motion, detail work a code-first pass won't catch. Figma-originated work gets implemented and validated in code.
+3. **Code is the final arbiter.** When Figma and code disagree about what's actually true — a stated value, a variant, a state — the real, shipped code behavior wins here, not Figma's stated intent. This file's own history is full of exactly these resolutions: `heading-h2`'s weight conflict, the `focus-ring` value, Badge's full type range, Tab's still-open `Line`-style discrepancy — all settled by checking real code, not by trusting Figma's word for it.
+4. **The refined result feeds back into the Design System** — `tokens/*.json` updated, `build/` and `DESIGN.md` regenerated — and the loop continues from there, in either direction, indefinitely.
 
-- **Token values specifically** still sync in either direction via the Tokens Studio plugin (a value tweak in Figma opens a PR here; a value tweak here pushes back to Figma Variables) — reviewed by one designer + one dev, merged, then `npm run build` regenerates `build/`.
+- **Token values** specifically get a lighter-weight either-direction sync within this loop via the Tokens Studio plugin (a value tweak in Figma opens a PR here; a value tweak here pushes back to Figma Variables) — reviewed by one designer + one dev, merged, then `npm run build` regenerates `build/`.
 - **Drift check**: a quarterly re-crawl of Figma's actual Variable values against this repo (same method used for the original audit), plus a CI lint in each app that flags hardcoded hex/px values matching a token 1:1.
 
 ## Versioning
