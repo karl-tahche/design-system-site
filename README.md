@@ -76,9 +76,13 @@ Ratified 2026-07-23, from the Figma + 5-codebase + brand-guide audit (updated 20
 
 ## The round-trip (how this stays in sync)
 
-- **Design changes a token** → edits it in Figma via the Tokens Studio plugin, which opens a PR here instead of just saving locally.
-- **Dev changes a token** → opens a PR here directly.
-- Either way: reviewed by one designer + one dev, merged, then `npm run build` regenerates `build/`. Tokens Studio pulls the merged result back into Figma Variables; apps bump their `tahche-design-tokens` dependency to pick up the change.
+A closed loop that starts and ends in code — not a symmetric "either side can propose a change" relationship. Component-level decisions (new states, variants, specs) flow through all three steps in order; only raw token *values* get a lighter-weight, either-direction sync via Tokens Studio (see below).
+
+1. **Build/decide in Claude Code first.** New components, states, or unconfirmed token values get resolved from real usage — grep the 5 apps' actual code, check shadcn-vue's own conventions where real evidence is thin — before anything touches Figma. Figma is not where new decisions originate.
+2. **Bring it into Figma to actually refine the Design System.** Once a shape exists in code, a designer takes it into Figma to improve on it — spacing, motion, detail work a code-first pass won't catch. This is a real, active design step, not a mechanical sync; Figma's job here is refinement, not record-keeping.
+3. **Feed the refined result back** into `tokens/*.json`, regenerate `build/` and `DESIGN.md`, and from there back into the 5 apps.
+
+- **Token values specifically** still sync in either direction via the Tokens Studio plugin (a value tweak in Figma opens a PR here; a value tweak here pushes back to Figma Variables) — reviewed by one designer + one dev, merged, then `npm run build` regenerates `build/`.
 - **Drift check**: a quarterly re-crawl of Figma's actual Variable values against this repo (same method used for the original audit), plus a CI lint in each app that flags hardcoded hex/px values matching a token 1:1.
 
 ## Versioning
