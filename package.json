@@ -1,0 +1,21 @@
+{
+  "name": "design-system-site",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A documentation website for the Tahche Design System — tokens, components, and guidelines from tahche-design-tokens.",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "dependencies": {
+    "tahche-design-tokens": "file:../tahche-design-tokens",
+    "vue": "^3.5.40"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.22",
+    "tailwindcss": "^3.4.19",
+    "vitepress": "^1.6.4"
+  }
+}

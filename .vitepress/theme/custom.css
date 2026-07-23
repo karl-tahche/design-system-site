@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* tahche-design-tokens has no dark-mode tokens at all — every reference component here
+   assumes a light page background (e.g. neutral-900 text, white surfaces). Every live demo
+   is wrapped in .ds-demo (see each components/*.md page) so it renders correctly regardless
+   of this SITE's own dark/light toggle, which is a VitePress feature, not a Tahche one. */
+.ds-demo {
+  font-family: theme('fontFamily.sans');
+  background-color: #ffffff;
+  border: 1px solid theme('colors.neutral.200');
+  border-radius: theme('borderRadius.md');
+  padding: theme('spacing.6');
+}
