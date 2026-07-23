@@ -6,7 +6,7 @@
       "100": { "$value": "#E0E2FF", "$type": "color" },
       "200": { "$value": "#BCBFF5", "$type": "color" },
       "300": { "$value": "#8D92EB", "$type": "color" },
-      "400": { "$value": "#555DE0", "$type": "color" },
+      "400": { "$value": "#555DE0", "$type": "color", "$description": "Also used (2026-07-25) as button-primary-disabled's background, bumped up from Figma's literal primary-300 — see DESIGN.md's Button section. White text at 5.21:1 (AA-passing as a side effect, not the reason for the change — disabled controls are WCAG-1.4.3-exempt regardless)." },
       "500": { "$value": "#353DD7", "$type": "color", "$description": "Base primary. Confirmed identical across all 5 apps." },
       "600": { "$value": "#272EB8", "$type": "color" },
       "700": { "$value": "#1E248F", "$type": "color" },

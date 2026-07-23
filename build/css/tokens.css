@@ -12,7 +12,7 @@
   --color-primary-100: #e0e2ff;
   --color-primary-200: #bcbff5;
   --color-primary-300: #8d92eb;
-  --color-primary-400: #555de0;
+  --color-primary-400: #555de0; /** Also used (2026-07-25) as button-primary-disabled's background, bumped up from Figma's literal primary-300 — see DESIGN.md's Button section. White text at 5.21:1 (AA-passing as a side effect, not the reason for the change — disabled controls are WCAG-1.4.3-exempt regardless). */
   --color-primary-500: #353dd7; /** Base primary. Confirmed identical across all 5 apps. */
   --color-primary-600: #272eb8;
   --color-primary-700: #1e248f;
