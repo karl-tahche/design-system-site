@@ -1,0 +1,21 @@
+{
+  "spacing": {
+    "$description": "Confirmed from the Figma Spacing page. Every value here already exists at the same pixel value in Tailwind's default spacing scale (see the generated Tailwind preset) — so adopting this scale requires zero Tailwind config changes, only the discipline to stop using arbitrary bracket values (px-[0.938rem] etc.) found throughout all 5 apps.",
+    "1": { "$value": "4px", "$type": "dimension" },
+    "2": { "$value": "8px", "$type": "dimension" },
+    "3": { "$value": "12px", "$type": "dimension" },
+    "4": { "$value": "16px", "$type": "dimension" },
+    "5": { "$value": "20px", "$type": "dimension" },
+    "6": { "$value": "24px", "$type": "dimension" },
+    "7": { "$value": "28px", "$type": "dimension" },
+    "8": { "$value": "32px", "$type": "dimension" },
+    "10": { "$value": "40px", "$type": "dimension" },
+    "12": { "$value": "48px", "$type": "dimension" },
+    "16": { "$value": "64px", "$type": "dimension" },
+    "20": { "$value": "80px", "$type": "dimension" },
+    "24": { "$value": "96px", "$type": "dimension" },
+    "32": { "$value": "128px", "$type": "dimension" },
+    "40": { "$value": "160px", "$type": "dimension" },
+    "48": { "$value": "192px", "$type": "dimension" }
+  }
+}

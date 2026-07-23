@@ -1,0 +1,85 @@
+{
+  "color": {
+    "primary": {
+      "$description": "Canonical product blue. Ratified 2026-07-23: kept at the value already live in all 5 apps rather than migrating to the brand guide's value — see color.brand.blue for that.",
+      "50": { "$value": "#F2F3FF", "$type": "color" },
+      "100": { "$value": "#E0E2FF", "$type": "color" },
+      "200": { "$value": "#BCBFF5", "$type": "color" },
+      "300": { "$value": "#8D92EB", "$type": "color" },
+      "400": { "$value": "#555DE0", "$type": "color" },
+      "500": { "$value": "#353DD7", "$type": "color", "$description": "Base primary. Confirmed identical across all 5 apps." },
+      "600": { "$value": "#272EB8", "$type": "color" },
+      "700": { "$value": "#1E248F", "$type": "color" },
+      "800": { "$value": "#0C1166", "$type": "color" },
+      "900": { "$value": "#060945", "$type": "color" }
+    },
+    "secondary": {
+      "$description": "Product gold/amber accent. Note: differs slightly from color.brand.gold (#FBD24D vs #FBD249) — a pre-existing 2-value drift between brand guide and code, kept separate rather than silently merged.",
+      "50": { "$value": "#FFFAEB", "$type": "color" },
+      "100": { "$value": "#FFF4D1", "$type": "color" },
+      "200": { "$value": "#FFEBA8", "$type": "color" },
+      "300": { "$value": "#FFE07A", "$type": "color" },
+      "400": { "$value": "#FFD857", "$type": "color" },
+      "500": { "$value": "#FBD249", "$type": "color", "$description": "Base secondary. Confirmed identical across all 5 apps." },
+      "600": { "$value": "#E8BF35", "$type": "color" },
+      "700": { "$value": "#D1A81F", "$type": "color" },
+      "800": { "$value": "#B58D09", "$type": "color" },
+      "900": { "$value": "#997500", "$type": "color" }
+    },
+    "neutral": {
+      "$description": "Renamed from the code's 'pneutral' — no known reason for the 'p' prefix, dropped during ratification.",
+      "50": { "$value": "#F7F9FF", "$type": "color" },
+      "100": { "$value": "#F5F6FC", "$type": "color" },
+      "200": { "$value": "#EDEEF2", "$type": "color" },
+      "300": { "$value": "#DDDEE3", "$type": "color" },
+      "400": { "$value": "#CCCDD1", "$type": "color" },
+      "500": { "$value": "#B3B4B8", "$type": "color" },
+      "600": { "$value": "#737375", "$type": "color" },
+      "700": { "$value": "#4F4F4F", "$type": "color" },
+      "800": { "$value": "#2E2E2E", "$type": "color" },
+      "900": { "$value": "#141414", "$type": "color" }
+    },
+    "success": {
+      "50": { "$value": "#F0FDF4", "$type": "color" },
+      "100": { "$value": "#DCFCE7", "$type": "color" },
+      "200": { "$value": "#BBF7D0", "$type": "color" },
+      "300": { "$value": "#86EFAC", "$type": "color" },
+      "400": { "$value": "#4ADE80", "$type": "color" },
+      "500": { "$value": "#22C55E", "$type": "color" },
+      "600": { "$value": "#16A34A", "$type": "color" },
+      "700": { "$value": "#15803D", "$type": "color" },
+      "800": { "$value": "#166534", "$type": "color" },
+      "900": { "$value": "#14532D", "$type": "color" }
+    },
+    "warning": {
+      "50": { "$value": "#FFFBEB", "$type": "color" },
+      "100": { "$value": "#FEF3C7", "$type": "color" },
+      "200": { "$value": "#FDE68A", "$type": "color" },
+      "300": { "$value": "#FCD34D", "$type": "color" },
+      "400": { "$value": "#FBBF24", "$type": "color" },
+      "500": { "$value": "#F59E0B", "$type": "color" },
+      "600": { "$value": "#D97706", "$type": "color" },
+      "700": { "$value": "#B45309", "$type": "color" },
+      "800": { "$value": "#92400E", "$type": "color" },
+      "900": { "$value": "#78350F", "$type": "color" }
+    },
+    "destructive": {
+      "$description": "800 fixed to the standard Tailwind red-800 value. All 5 apps had 800 and 900 set to the identical value (#7F1D1D) — a copy-paste bug, not an intentional shade.",
+      "50": { "$value": "#FEF2F2", "$type": "color" },
+      "100": { "$value": "#FEE2E2", "$type": "color" },
+      "200": { "$value": "#FECACA", "$type": "color" },
+      "300": { "$value": "#FCA5A5", "$type": "color" },
+      "400": { "$value": "#F87171", "$type": "color" },
+      "500": { "$value": "#EF4444", "$type": "color" },
+      "600": { "$value": "#DC2626", "$type": "color" },
+      "700": { "$value": "#B91C1C", "$type": "color" },
+      "800": { "$value": "#991B1B", "$type": "color", "$description": "Fixed from #7F1D1D (was a duplicate of 900)." },
+      "900": { "$value": "#7F1D1D", "$type": "color" }
+    },
+    "brand": {
+      "$description": "Brand-identity colors, for marketing/document contexts (matches tahche-brand.skill). Not for product UI — use color.primary / color.secondary there.",
+      "blue": { "$value": "#2232D7", "$type": "color", "$description": "'Tahche Blue' per the brand guide. Kept distinct from color.primary.500 (#353DD7) by design — see decisions log." },
+      "gold": { "$value": "#FBD24D", "$type": "color", "$description": "'Tahche Gold' per the brand guide." }
+    }
+  }
+}

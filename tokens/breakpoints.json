@@ -1,0 +1,10 @@
+{
+  "breakpoint": {
+    "$description": "PROPOSED CHANGE — every app today carries 3 separate, conflicting breakpoint systems at once (custom Tailwind screens, SCSS $breakpoint-* vars, CSS custom properties), plus mixes the custom prefixes with Tailwind's own defaults in the same class strings. Recommendation: drop the custom mobile375/mobile/mobilesmall/tablet/desktop names entirely and standardize on Tailwind's own defaults below — tablet:768 already equals md:768 exactly, so nothing is lost. This is a breaking change to existing markup (any tablet:/desktop:/mobile: class needs updating) and needs explicit sign-off before Phase 3 migration, given the PWA direction makes responsive behavior more load-bearing than before.",
+    "sm": { "$value": "640px", "$type": "dimension" },
+    "md": { "$value": "768px", "$type": "dimension" },
+    "lg": { "$value": "1024px", "$type": "dimension" },
+    "xl": { "$value": "1280px", "$type": "dimension" },
+    "2xl": { "$value": "1536px", "$type": "dimension" }
+  }
+}

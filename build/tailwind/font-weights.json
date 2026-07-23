@@ -1,0 +1,58 @@
+{
+  "display-large": {
+    "fontWeight": 700,
+    "confirmed": false
+  },
+  "display-small": {
+    "fontWeight": 700,
+    "confirmed": false
+  },
+  "heading-h1": {
+    "fontWeight": 800,
+    "confirmed": false
+  },
+  "heading-h2": {
+    "fontWeight": 800,
+    "confirmed": true
+  },
+  "heading-h3": {
+    "fontWeight": 700,
+    "confirmed": false
+  },
+  "heading-h4": {
+    "fontWeight": 500,
+    "confirmed": true
+  },
+  "heading-h5": {
+    "fontWeight": 600,
+    "confirmed": false
+  },
+  "heading-h6": {
+    "fontWeight": 600,
+    "confirmed": false
+  },
+  "paragraph-large-regular": {
+    "fontWeight": 400,
+    "confirmed": true
+  },
+  "paragraph-large-medium": {
+    "fontWeight": 500,
+    "confirmed": true
+  },
+  "paragraph-medium": {
+    "fontWeight": 400,
+    "confirmed": false
+  },
+  "paragraph-small": {
+    "fontWeight": 400,
+    "confirmed": false
+  },
+  "paragraph-xsmall": {
+    "fontWeight": 400,
+    "confirmed": false
+  },
+  "overline": {
+    "fontWeight": 600,
+    "confirmed": false
+  }
+}

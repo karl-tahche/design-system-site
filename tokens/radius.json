@@ -1,0 +1,12 @@
+{
+  "radius": {
+    "$description": "PROPOSED — no Figma foundation page for border-radius was found in this audit (unlike colors/type/spacing/shadow, which all had one). These values are inferred from the arbitrary rounded-[Npx] values seen repeatedly across the 5 codebases. Needs an explicit design decision before Phase 1 is considered ratified for this token category.",
+    "none": { "$value": "0px", "$type": "dimension" },
+    "sm": { "$value": "6px", "$type": "dimension" },
+    "md": { "$value": "8px", "$type": "dimension" },
+    "lg": { "$value": "10px", "$type": "dimension" },
+    "xl": { "$value": "12px", "$type": "dimension" },
+    "2xl": { "$value": "16px", "$type": "dimension" },
+    "full": { "$value": "9999px", "$type": "dimension" }
+  }
+}

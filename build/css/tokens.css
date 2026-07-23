@@ -1,0 +1,118 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --color-primary-50: #f2f3ff;
+  --color-primary-100: #e0e2ff;
+  --color-primary-200: #bcbff5;
+  --color-primary-300: #8d92eb;
+  --color-primary-400: #555de0;
+  --color-primary-500: #353dd7; /** Base primary. Confirmed identical across all 5 apps. */
+  --color-primary-600: #272eb8;
+  --color-primary-700: #1e248f;
+  --color-primary-800: #0c1166;
+  --color-primary-900: #060945;
+  --color-secondary-50: #fffaeb;
+  --color-secondary-100: #fff4d1;
+  --color-secondary-200: #ffeba8;
+  --color-secondary-300: #ffe07a;
+  --color-secondary-400: #ffd857;
+  --color-secondary-500: #fbd249; /** Base secondary. Confirmed identical across all 5 apps. */
+  --color-secondary-600: #e8bf35;
+  --color-secondary-700: #d1a81f;
+  --color-secondary-800: #b58d09;
+  --color-secondary-900: #997500;
+  --color-neutral-50: #f7f9ff;
+  --color-neutral-100: #f5f6fc;
+  --color-neutral-200: #edeef2;
+  --color-neutral-300: #dddee3;
+  --color-neutral-400: #cccdd1;
+  --color-neutral-500: #b3b4b8;
+  --color-neutral-600: #737375;
+  --color-neutral-700: #4f4f4f;
+  --color-neutral-800: #2e2e2e;
+  --color-neutral-900: #141414;
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-200: #bbf7d0;
+  --color-success-300: #86efac;
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+  --color-success-800: #166534;
+  --color-success-900: #14532d;
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+  --color-destructive-50: #fef2f2;
+  --color-destructive-100: #fee2e2;
+  --color-destructive-200: #fecaca;
+  --color-destructive-300: #fca5a5;
+  --color-destructive-400: #f87171;
+  --color-destructive-500: #ef4444;
+  --color-destructive-600: #dc2626;
+  --color-destructive-700: #b91c1c;
+  --color-destructive-800: #991b1b; /** Fixed from #7F1D1D (was a duplicate of 900). */
+  --color-destructive-900: #7f1d1d;
+  --color-brand-blue: #2232d7; /** 'Tahche Blue' per the brand guide. Kept distinct from color.primary.500 (#353DD7) by design — see decisions log. */
+  --color-brand-gold: #fbd24d; /** 'Tahche Gold' per the brand guide. */
+  --elevation-xsmall: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  --elevation-small: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px -1px rgba(16, 24, 40, 0.1);
+  --elevation-medium: 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1);
+  --elevation-large: 0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1);
+  --elevation-xlarge: 0px 20px 25px -5px rgba(16, 24, 40, 0.1), 0px 8px 10px -6px rgba(16, 24, 40, 0.1);
+  --elevation-xxlarge: 0px 25px 50px -12px rgba(16, 24, 40, 0.25);
+  --radius-none: 0px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-32: 128px;
+  --spacing-40: 160px;
+  --spacing-48: 192px;
+  --typography-font-family-sans: Inter, Arial, Helvetica, sans-serif; /** The font actually rendered in all 5 apps today, applied via a global CSS override rather than Tailwind config. This token is what fixes that — register it as the Tailwind 'sans' default. */
+  --typography-font-family-mono: 'SF Mono', 'Cascadia Code', Consolas, monospace; /** New token — no app currently defines a mono stack. Proposed for code/data display. */
+  --typography-display-large: 700 52px/56px var(--typography-font-family-sans); /** Source: Figma Typography page. Weight (700) is proposed, not confirmed by a Figma variable — flag for design sign-off. */
+  --typography-display-small: 700 44px/48px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
+  --typography-heading-h1: 800 40px/48px var(--typography-font-family-sans); /** Weight proposed by extrapolation from the confirmed H2 weight, not itself confirmed. */
+  --typography-heading-h2: 800 36px/44px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Heading/H2/Extrabold/Desktop'. */
+  --typography-heading-h3: 700 32px/40px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
+  --typography-heading-h4: 500 28px/36px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Heading/H4/Medium/Desktop'. */
+  --typography-heading-h5: 600 24px/32px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
+  --typography-heading-h6: 600 20px/28px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
+  --typography-paragraph-large-regular: 400 18px/28px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Paragraph/Large/Regular'. */
+  --typography-paragraph-large-medium: 500 18px/28px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Paragraph/Large/Medium'. */
+  --typography-paragraph-medium: 400 16px/24px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
+  --typography-paragraph-small: 400 14px/20px var(--typography-font-family-sans); /** Weight proposed, not confirmed. Also confirmed present as 'Paragraph/Small/Regular' in Figma variables. */
+  --typography-paragraph-xsmall: 400 12px/20px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
+  --typography-overline: 600 12px/16px var(--typography-font-family-sans); /** Proposed — Figma had a 14px/12px overline pairing but no bound variable to confirm weight/tracking; uppercase usage assumed at consumption time, not baked into the token. */
+}
