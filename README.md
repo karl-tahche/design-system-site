@@ -14,8 +14,9 @@ tokens/            source of truth — hand-edited, DTCG-format JSON
   typography.json    font family + the full type scale (display/heading/paragraph/overline)
   spacing.json       4–192px scale
   elevation.json      6-step shadow scale
-  radius.json         PROPOSED — see Status below
-  breakpoints.json    PROPOSED CHANGE — see Status below
+  radius.json         PARTIAL — see Status below
+  breakpoints.json    RATIFIED 2026-07-25 — see Status below
+  motion.json         RATIFIED 2026-07-25 — duration scale + easing, see Status below
 
 build/              generated — do not hand-edit, run `npm run build`
   tailwind/preset.cjs   drop-in Tailwind preset
@@ -71,6 +72,7 @@ Ratified 2026-07-23, from the Figma + 5-codebase + brand-guide audit (updated 20
 | Typography weights | ⚠️ Partial — `heading-h2`/`display-large` (Extrabold/800, resolved 2026-07-25 — see below), `heading-h4` (Medium/500), and `paragraph-large` (Regular/400, Medium/500) are confirmed via bound Figma variables. Every other weight in `typography.json` is a proposed default (`$description` says so on each token) and needs design sign-off before Phase 3 rollout. |
 | Radius | ⚠️ Partial — `sm`/`md`/`full` confirmed directly against real components (Button, Input Field, Modal, Button Group, Stat, Tooltip, Avatar, Badge). `lg`/`xl`/`2xl`/`3xl` are inferred from arbitrary `rounded-[Npx]` values in the codebases, not from an approved Figma spec — no dedicated border-radius foundation page exists. `xl`'s bordering 14px gap is resolved (2026-07-25): snap to `2xl` (16px), not a new 7th step — see radius.json. |
 | Breakpoints | ✅ Ratified 2026-07-25 — every app already overwhelmingly uses standard Tailwind `sm/md/lg/xl/2xl` in real markup (217–2,844 instances/app) over the custom `mobile375`/`mobile`/`mobilesmall`/`tablet`/`desktop` scheme (0–46 instances/app, almost entirely legacy Auth screens). `tablet:768` already equals `md:768`, so nothing is lost. Remaining work (updating legacy Auth-screen classes, wiring into each app's Tailwind config) is mechanical, not a design question. |
+| Motion | ✅ Ratified 2026-07-25 — from a real-usage audit of all 5 apps' CSS transitions (no Figma source exists for motion at all). No app uses an animation library. `duration` (150/250/500ms) and `easing.standard` (`ease-in-out`) are backed by real cross-app clustering; `easing.linear` is reserved for spinners/marquees only. Also surfaced a real accessibility gap: `prefers-reduced-motion` is handled in only 1 of 5 apps — not a token question, but worth fixing app-side. |
 
 ## The round-trip (how this stays in sync)
 

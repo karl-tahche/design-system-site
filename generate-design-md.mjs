@@ -11,12 +11,14 @@ const typography = readFileSync('./tokens/typography.json', 'utf8');
 const spacing = readFileSync('./tokens/spacing.json', 'utf8');
 const elevation = readFileSync('./tokens/elevation.json', 'utf8');
 const radius = readFileSync('./tokens/radius.json', 'utf8');
+const motion = readFileSync('./tokens/motion.json', 'utf8');
 
 const colorTokens = JSON.parse(color).color;
 const typographyTokens = JSON.parse(typography).typography;
 const spacingTokens = JSON.parse(spacing).spacing;
 const elevationTokens = JSON.parse(elevation).elevation;
 const radiusTokens = JSON.parse(radius).radius;
+const motionTokens = JSON.parse(motion).motion;
 
 // ── Colors: DESIGN.md's schema is a flat map<string, Color> — ramps become
 // dash-suffixed flat keys (primary-500), with a bare semantic alias
@@ -63,6 +65,22 @@ const roundedOut = {};
 for (const [level, token] of Object.entries(radiusTokens)) {
   if (level.startsWith('$')) continue;
   roundedOut[level] = token.$value;
+}
+
+// ── Motion: not one of the spec's own frontmatter groups (colors/typography/
+// rounded/spacing/components) — tested directly against the real design.md
+// lint CLI (2026-07-25): an unrecognized top-level key produces zero new
+// warnings and zero errors, unlike an unrecognized *component* sub-token
+// (which IS validated against a fixed allowlist — see the Button section's
+// borderColor note). Included as a best-effort extension, not a guarantee
+// about Stitch's own separate ingestion pipeline.
+const motionOut = { duration: {}, easing: {} };
+for (const [group, tokens] of Object.entries(motionTokens)) {
+  if (group.startsWith('$')) continue;
+  for (const [name, token] of Object.entries(tokens)) {
+    if (name.startsWith('$')) continue;
+    motionOut[group][name] = token.$value;
+  }
 }
 
 // ── Components: a representative set, not an exhaustive catalog — component
@@ -209,6 +227,7 @@ const frontmatter = {
   typography: typographyOut,
   rounded: roundedOut,
   spacing: spacingOut,
+  motion: motionOut,
   components,
 };
 
@@ -283,6 +302,8 @@ A 6-step shadow scale, already identical across Figma and all 5 apps (a rare cas
 A 7th token, \`focus-ring\`, is a 4px solid-color ring (\`#E1E1FE\`) rather than a blurred shadow — it appears on focused/typing text inputs, confirmed on both the standalone Input Field and one embedded inside a Table cell. One app (recruitment-portal) has its own recurring focus-ring effect in raw CSS using a different color (a translucent primary-500) — worth reconciling into this one definition rather than carrying two.
 
 **Every app also reaches for Tailwind's stock shadow classes (\`shadow-sm/md/lg/xl/2xl\`) alongside this named scale** — in some apps more than the named tokens are used at all. A CI lint blocking the stock classes in favor of these named ones would close a real, consistently observed gap.
+
+**Motion is ratified too, as of 2026-07-25**, from the same kind of real-usage audit as everything else in this file — this time run against all 5 apps' actual CSS transitions rather than Figma, since motion has no Figma source at all. No app uses an animation library: no GSAP, Framer Motion, Lenis, or \`@vueuse/motion\` anywhere. \`motion.duration\` is a 3-step scale (\`fast\` 150ms, \`base\` 250ms, \`slow\` 500ms) — each value independently lands as a top-3 real value in all 5 codebases, despite the apps sharing no code. \`motion.easing.standard\` is \`ease-in-out\`: the real data splits roughly 3-to-2 across apps between plain \`ease\` and \`ease-in-out\` as each app's own top pick, so this was settled by explicit decision, not vote count. \`motion.easing.linear\` is reserved for continuous/looping motion only (spinners, marquees) — confirmed as a distinct, consistent real pattern, never used as a general transition easing anywhere in the data. **⚠️ A real, severe accessibility gap surfaced by the same audit**: \`prefers-reduced-motion\` is handled in only 1 of the 5 apps (career-web, 11 files) — client-web, client-dashboard, recruitment-portal, and dashboard have zero handling whatsoever. This is the motion equivalent of the contrast findings elsewhere in this file: a real, current, cross-app gap, not a token to define but a fix every app needs to ship.
 
 ## Shapes
 
@@ -369,6 +390,7 @@ These are drawn directly from patterns found across all 5 production apps during
 - **Do** use a ramp's \`-foreground\` token whenever that ramp's 500 tone becomes a solid background. **Don't** assume white text always works — it fails outright on \`secondary\`/\`success\`/\`warning\`/\`neutral\` (all light or bright colors) and only marginally fails on \`destructive\` (3.76:1, just under the 4.5:1 minimum), the kind of near-miss this file's per-ramp contrast check exists to catch.
 - **Do** check whether WCAG's inactive-component exception genuinely applies before treating a low-contrast disabled state as a compliance bug. **Don't** conflate "looks low-contrast" with "fails a real requirement" — \`button-primary-disabled\` has zero 1.4.3 obligation since disabled controls are exempt, though bumping it for perceptual clarity anyway (as done here) is still worth doing on its own merits.
 - **Do** define every real interactive state for a component — default, hover, focus, active, disabled, loading, error, selected, as applicable. **Don't** stop at whichever states happened to get checked first — checked 2026-07-25 against general product-UI state-coverage practice (not the 5-app audit): this file's own Button entry has no documented Focus or Loading state, and Tab has no documented Selected state despite being a component that obviously needs one. Both are open gaps, not yet resolved.
+- **Do** pair every real transition/animation with a \`prefers-reduced-motion\` fallback. **Don't** assume it's handled somewhere else in the app just because one app in the suite does it well — career-web handles it consistently across 11 files, but client-web, client-dashboard, recruitment-portal, and dashboard have zero handling between them, a real, current gap found by the 2026-07-25 motion audit, not a hypothetical.
 `.trim();
 
 const output = `---\n${yamlStr}---\n\n${body}\n`;

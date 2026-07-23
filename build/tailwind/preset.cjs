@@ -288,6 +288,15 @@ module.exports = {
         "large": "0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1)",
         "xlarge": "0px 20px 25px -5px rgba(16, 24, 40, 0.1), 0px 8px 10px -6px rgba(16, 24, 40, 0.1)",
         "xxlarge": "0px 25px 50px -12px rgba(16, 24, 40, 0.25)"
+      },
+      "transitionDuration": {
+        "fast": "150ms",
+        "base": "250ms",
+        "slow": "500ms"
+      },
+      "transitionTimingFunction": {
+        "standard": "ease-in-out",
+        "linear": "linear"
       }
     }
   }

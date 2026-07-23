@@ -13,6 +13,8 @@ StyleDictionary.registerFormat({
     const spacing = {};
     const borderRadius = {};
     const boxShadow = {};
+    const transitionDuration = {};
+    const transitionTimingFunction = {};
     // name -> { fontSize, lineHeight, letterSpacing, fontWeight, alias } — used below
     // to build composite .text-{name} classes, not just the fontSize theme key.
     const textStylesRaw = {};
@@ -61,6 +63,12 @@ StyleDictionary.registerFormat({
       if (category === 'elevation') {
         boxShadow[rest[0]] = token.$value ?? token.value;
       }
+
+      if (category === 'motion') {
+        // rest = ['duration', 'fast'] or ['easing', 'standard']
+        if (rest[0] === 'duration') transitionDuration[rest[1]] = token.$value ?? token.value;
+        if (rest[0] === 'easing') transitionTimingFunction[rest[1]] = token.$value ?? token.value;
+      }
     }
 
     // ── Best practice: composite text-style classes ─────────────────────
@@ -96,7 +104,7 @@ StyleDictionary.registerFormat({
 
     const body = {
       theme: {
-        extend: { colors, fontFamily, fontSize, spacing, borderRadius, boxShadow },
+        extend: { colors, fontFamily, fontSize, spacing, borderRadius, boxShadow, transitionDuration, transitionTimingFunction },
       },
     };
     // JSON.stringify can't serialize a function, so the plugin is spliced in as
