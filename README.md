@@ -4,6 +4,8 @@ The canonical source of truth for Tahche's design tokens — colors, typography,
 
 Component structure is intentionally **not** covered here — each app keeps building components however it likes. The one rule this repo exists to support: pull colors, spacing, and type from these tokens instead of hand-typing a value.
 
+This repo also generates [`DESIGN.md`](./DESIGN.md) — a spec-compliant [design.md](https://github.com/google-labs-code/design.md) file, meant to be read directly by AI coding agents and human developers alike. It's a build output, not a second source of truth: same tokens, same ratification status, just packaged into the format the design.md spec expects (YAML frontmatter + 8-section prose).
+
 ## What's in here
 
 ```
@@ -20,8 +22,21 @@ build/              generated — do not hand-edit, run `npm run build`
   css/tokens.css        CSS custom properties
   json/tokens.json      flattened token tree (for tooling / Tokens Studio import)
 
-build.mjs           Style Dictionary config that produces everything in build/
+DESIGN.md            generated — do not hand-edit, run `npm run design-md`
+build.mjs             Style Dictionary config that produces everything in build/
+generate-design-md.mjs   assembles DESIGN.md from the same tokens/*.json
 ```
+
+## DESIGN.md
+
+Validated against the real [`@google/design.md`](https://www.npmjs.com/package/@google/design.md) lint CLI (a devDependency here) — 0 errors. The only warnings are expected: most ramp steps (e.g. `primary-200`, `success-700`) aren't referenced by the small representative component set in the frontmatter, since components stay intentionally uncatalogued here — see the file's own "Components" section for why.
+
+```bash
+npm run design-md        # regenerate DESIGN.md from tokens/*.json
+npm run lint:design-md    # validate it against the spec
+```
+
+Regenerate it any time a token changes — never hand-edit `DESIGN.md`'s frontmatter directly, or it'll drift from `tokens/*.json` the same way Figma and code drifted from each other.
 
 ## Using it in an app
 

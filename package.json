@@ -6,11 +6,14 @@
   "main": "build/tailwind/preset.cjs",
   "files": [
     "tokens",
-    "build"
+    "build",
+    "DESIGN.md"
   ],
   "scripts": {
     "build": "node build.mjs",
-    "prepare": "npm run build"
+    "design-md": "node generate-design-md.mjs",
+    "lint:design-md": "design.md lint DESIGN.md",
+    "prepare": "npm run build && npm run design-md"
   },
   "keywords": [
     "design-tokens",
@@ -19,6 +22,8 @@
   "author": "Tahche",
   "license": "UNLICENSED",
   "devDependencies": {
-    "style-dictionary": "^5.5.0"
+    "@google/design.md": "^0.3.0",
+    "style-dictionary": "^5.5.0",
+    "yaml": "^2.9.0"
   }
 }
