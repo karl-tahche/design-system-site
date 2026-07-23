@@ -19,11 +19,11 @@
         "fontSize": "52px",
         "lineHeight": "56px",
         "letterSpacing": "-0.02em",
-        "fontWeight": 700
+        "fontWeight": 800
       },
       "$type": "typography",
       "$confirmed": false,
-      "$description": "Source: Figma Typography page. Weight (700/Bold) is proposed, not confirmed by a Figma variable. Real-usage audit (2026-07-23): rare but real — dead in 3 of 5 apps, used in the other 2 at low volume (4-8 instances each). Possible alternative worth a design decision: Bold(700) is the least-evidenced weight in this whole file — it never appears in a confirmed instance anywhere, and the one time 'Bold' rendering showed up in real Figma data (the Title component) it was actually supposed to be Extrabold(800) per a conflicting foundation-page variable (see heading-h2). Consider Extrabold(800) instead, matching the confirmed weight of its neighbors heading-h1/h2, rather than carrying Bold as a separate, unproven tier."
+      "$description": "Weight changed 2026-07-25 from Bold(700) to Extrabold(800), following directly from heading-h2's conflict resolution: Bold(700) was never confirmed by an actual Figma variable anywhere in this file, and the one real Figma instance that rendered as Bold (the Title component, at heading-h2's size) turned out to be the drifted value, not the canonical one — the ratified foundation-page weight was Extrabold. Matching display-large to its now-resolved neighbors (heading-h1/h2, both 800) removes Bold as a separate, never-confirmed tier. Still a proposed default for this specific size, not itself confirmed. Real-usage audit (2026-07-23): rare but real — dead in 3 of 5 apps, used in the other 2 at low volume (4-8 instances each)."
     },
     "display-small": {
       "$value": {
@@ -61,7 +61,7 @@
       },
       "$type": "typography",
       "$confirmed": true,
-      "$description": "⚠️ REAL CONFLICT, not yet resolved: the Typography foundation page's own named Figma variable says 'Heading/H2/Extrabold/Desktop' (800, used here), but the Title component's live design context shows the same 36/44 size rendered as Inter Bold — weight 700, not 800. Two parts of the same Figma file disagree with each other. Kept at 800 (the foundation page's stated value) since it's the more canonical source, but this needs an explicit design decision, not a silent pick."
+      "$description": "RESOLVED (2026-07-25), by explicit design decision: the Typography foundation page's own named Figma variable says 'Heading/H2/Extrabold/Desktop' (800, used here), but the Title component's live design context showed the same 36/44 size rendered as Inter Bold — weight 700, not 800. The foundation page is ratified as canonical; the Title component's Bold rendering is the thing that drifted and should be corrected in Figma/components to match this token, not the other way around."
     },
     "heading-h3": {
       "$value": {

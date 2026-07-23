@@ -299,7 +299,7 @@ module.exports = {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "52px",
     "lineHeight": "56px",
-    "fontWeight": "700",
+    "fontWeight": "800",
     "letterSpacing": "-0.02em"
   },
   ".text-display-small": {

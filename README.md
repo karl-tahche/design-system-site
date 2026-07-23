@@ -60,7 +60,7 @@ Typography tokens carry `fontSize`, `lineHeight`, and `letterSpacing` (Tailwind'
 
 ## Status: what's ratified vs. proposed
 
-Ratified 2026-07-23, from the Figma + 5-codebase + brand-guide audit:
+Ratified 2026-07-23, from the Figma + 5-codebase + brand-guide audit (updated 2026-07-25 with contrast-decision and breakpoint sign-off):
 
 | Category | Status |
 |---|---|
@@ -68,9 +68,9 @@ Ratified 2026-07-23, from the Figma + 5-codebase + brand-guide audit:
 | Elevation | ✅ Ratified — already identical across Figma and all 5 apps |
 | Spacing | ✅ Ratified — matches Tailwind's own default scale exactly, zero app-side migration needed beyond dropping arbitrary values |
 | Typography sizes | ✅ Ratified — from the Figma Typography page |
-| Typography weights | ⚠️ Partial — only `heading-h2` (Extrabold/800) and `heading-h4` (Medium/500) and `paragraph-large` (Regular/400, Medium/500) were confirmed via bound Figma variables. Every other weight in `typography.json` is a proposed default (`$description` says so on each token) and needs design sign-off before Phase 3 rollout. |
-| Radius | ❌ Proposed only — no Figma foundation page for border-radius was found anywhere in the audit. Values here are inferred from arbitrary `rounded-[Npx]` values seen in the codebases, not sourced from an approved spec. |
-| Breakpoints | ❌ Proposed change — recommends dropping the custom `mobile375`/`mobile`/`mobilesmall`/`tablet`/`desktop` names (three conflicting versions of these exist per app today) in favor of Tailwind's own defaults. This is a breaking change to existing markup and needs explicit sign-off — especially given the PWA direction makes responsive behavior more load-bearing going forward. |
+| Typography weights | ⚠️ Partial — `heading-h2`/`display-large` (Extrabold/800, resolved 2026-07-25 — see below), `heading-h4` (Medium/500), and `paragraph-large` (Regular/400, Medium/500) are confirmed via bound Figma variables. Every other weight in `typography.json` is a proposed default (`$description` says so on each token) and needs design sign-off before Phase 3 rollout. |
+| Radius | ⚠️ Partial — `sm`/`md`/`full` confirmed directly against real components (Button, Input Field, Modal, Button Group, Stat, Tooltip, Avatar, Badge). `lg`/`xl`/`2xl`/`3xl` are inferred from arbitrary `rounded-[Npx]` values in the codebases, not from an approved Figma spec — no dedicated border-radius foundation page exists. `xl`'s bordering 14px gap is resolved (2026-07-25): snap to `2xl` (16px), not a new 7th step — see radius.json. |
+| Breakpoints | ✅ Ratified 2026-07-25 — every app already overwhelmingly uses standard Tailwind `sm/md/lg/xl/2xl` in real markup (217–2,844 instances/app) over the custom `mobile375`/`mobile`/`mobilesmall`/`tablet`/`desktop` scheme (0–46 instances/app, almost entirely legacy Auth screens). `tablet:768` already equals `md:768`, so nothing is lost. Remaining work (updating legacy Auth-screen classes, wiring into each app's Tailwind config) is mechanical, not a design question. |
 
 ## The round-trip (how this stays in sync)
 
