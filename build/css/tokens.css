@@ -71,19 +71,31 @@
   --color-destructive-900: #7f1d1d;
   --color-brand-blue: #2232d7; /** 'Tahche Blue' per the brand guide. Kept distinct from color.primary.500 (#353DD7) by design — see decisions log. */
   --color-brand-gold: #fbd24d; /** 'Tahche Gold' per the brand guide. */
-  --elevation-xsmall: 0px 1px 2px rgba(16, 24, 40, 0.05); /** Confirmed repeatedly via named 'Drop shadow/XSmall' variables: Input Field/Box (removed entirely in the Disabled state), and Button Group. */
-  --elevation-focus-ring: 0px 0px 0px 4px #E1E1FE; /** Confirmed twice — Input Field/Box's Focused/Typing states, and again inside Table Content Cell's embedded input. A 4px solid-color ring, not a blurred shadow. Color (#E1E1FE) is close to but not identical to primary-100 (#E0E2FF), a small drift in the same shape as the brand-gold one. Only appears on the Box input style; the Line style changes only its border color on focus, no ring. */
+  --color-request-facilities: #ef9a49;
+  --color-request-cash-advance: #a954b7;
+  --color-request-room: #ef7d7c;
+  --color-request-petty-cash: #e255ac;
+  --color-request-procurement: #8277bb; /** Dead even in dashboard, the one app that otherwise uses this whole category for real. Confirm it's still needed before carrying it forward. */
+  --color-request-business-trip: #6bbfaf;
+  --color-request-coe: #d1a81f; /** Identical hex to secondary-700 — confirm this is an intentional 'COE requests use the brand gold' choice, not an accidental duplicate. */
+  --color-extended-muted-blue-gray: #667085; /** Found in career-web (60×), client-web (38×), recruitment-portal (6×). No canonical match. */
+  --color-extended-dark-slate: #101828; /** Found in career-web (36×), client-dashboard (5×), recruitment-portal (5×). Coincidentally shares its RGB base (16,24,40) with the elevation shadow color, but used here as a solid text/background color, unrelated to shadows. */
+  --color-extended-charcoal: #2f3537; /** Found in client-dashboard (6×), dashboard (part of a larger cluster), recruitment-portal (25×). */
+  --color-extended-indigo-navy: #393960; /** Found in client-web (8×), dashboard (~14×), recruitment-portal (10×). */
+  --elevation-xsmall: 0px 1px 2px rgba(16, 24, 40, 0.05); /** Confirmed repeatedly via named 'Drop shadow/XSmall' variables: Input Field/Box (removed entirely in the Disabled state), and Button Group. Real-usage audit: the most consistently-used named shadow token across all 5 apps. */
+  --elevation-focus-ring: 0px 0px 0px 4px #E1E1FE; /** Confirmed twice — Input Field/Box's Focused/Typing states, and again inside Table Content Cell's embedded input. A 4px solid-color ring, not a blurred shadow. Color (#E1E1FE) is close to but not identical to primary-100 (#E0E2FF), a small drift in the same shape as the brand-gold one. Only appears on the Box input style; the Line style changes only its border color on focus, no ring. See this token group's top-level note re: a second, differently-colored focus-ring pattern found in code. */
   --elevation-small: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px -1px rgba(16, 24, 40, 0.1); /** Confirmed via the Stat component's named 'Drop shadow/Small' variable. */
-  --elevation-medium: 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1);
+  --elevation-medium: 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1); /** Real-usage audit: weak-to-moderate — near-zero in most apps but a healthy 85 uses in dashboard specifically. Not dead, just unevenly adopted. */
   --elevation-large: 0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1); /** Confirmed via the Tooltip component's named 'Drop shadow/Large' variable. */
   --elevation-xlarge: 0px 20px 25px -5px rgba(16, 24, 40, 0.1), 0px 8px 10px -6px rgba(16, 24, 40, 0.1); /** Confirmed twice — once via a named Figma variable, again via live design context on the Modal component (both Horizontal and Vertical alignment). */
-  --elevation-xxlarge: 0px 25px 50px -12px rgba(16, 24, 40, 0.25);
+  --elevation-xxlarge: 0px 25px 50px -12px rgba(16, 24, 40, 0.25); /** Real-usage audit: dead as a named class in every one of the 5 apps checked — the least-evidenced token in this file. Kept for scale completeness; confirm it's still wanted before Phase 3. */
   --radius-none: 0px;
-  --radius-sm: 6px; /** Confirmed across Button (all variants/sizes), Input Field/Box, Modal, Accordion (implicit, no radius), File Upload Prompt, Tab/Pill, Side Nav Item, List Field Right Content button, and Table Leading Cell's icon container. The single most-evidenced token in this file. */
+  --radius-sm: 6px; /** Confirmed across Button (all variants/sizes), Input Field/Box, Modal, Accordion (implicit, no radius), File Upload Prompt, Tab/Pill, Side Nav Item, List Field Right Content button, and Table Leading Cell's icon container — the single most-evidenced Figma token in this file. Also the single most-evidenced CODE gap: recruitment-portal alone hand-rolls rounded-[6px] 30 times because its actual rounded-sm class only renders 2px (Tailwind's stock value) instead of this 6px design value. */
   --radius-md: 8px; /** Confirmed via Button Group (the rounded corners of a segmented control), Stat, and Tooltip — all three independently use exactly 8px. */
-  --radius-lg: 10px;
-  --radius-xl: 12px;
+  --radius-lg: 10px; /** The single most-evidenced arbitrary value in real code: 100+ combined rounded-[10px]/rounded-[0.625rem] instances across 4 of the 5 apps (dashboard alone has 97+), because none of them have this value configured as a named class. */
+  --radius-xl: 12px; /** A borderline, weaker-evidence gap sits just above this value: 14px appears in 3 of 5 apps (client-web's single most-common arbitrary radius value, 14 uses; also present at lower volume in career-web and dashboard). Less consistent evidence than the confirmed 3xl(20px) addition — recommend snapping 14px usages to xl(12) or 2xl(16) rather than adding a 7th named step, but flagged here for an explicit design call rather than silently dropped. */
   --radius-2xl: 16px;
+  --radius-3xl: 20px; /** NEW — added from the 2026-07-23 real-usage audit, not from Figma. 20px recurs as a hand-rolled arbitrary rounded-[20px]/rounded-[1.25rem] value across 4 of the 5 apps (80+ combined instances) with no existing token covering it — strong enough, consistent enough evidence to formalize as a real scale step. Needs a design decision to ratify, same as the rest of this scale beyond sm/md. */
   --radius-full: 9999px; /** Confirmed via Avatar (circular, literal Figma value 100px which renders identically to 9999px at any realistic size), Badge (24px on a 32px-tall pill — over-rounded to guarantee a full pill regardless of height), and Form Control Switch. */
   --spacing-1: 4px;
   --spacing-2: 8px;
@@ -103,9 +115,9 @@
   --spacing-48: 192px;
   --typography-font-family-sans: Inter, Arial, Helvetica, sans-serif; /** The font actually rendered in all 5 apps today, applied via a global CSS override rather than Tailwind config. This token is what fixes that — register it as the Tailwind 'sans' default. */
   --typography-font-family-mono: 'SF Mono', 'Cascadia Code', Consolas, monospace; /** New token — no app currently defines a mono stack. Proposed for code/data display. */
-  --typography-display-large: 700 52px/56px var(--typography-font-family-sans); /** Source: Figma Typography page. Weight (700) is proposed, not confirmed by a Figma variable — flag for design sign-off. */
-  --typography-display-small: 700 44px/48px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
-  --typography-heading-h1: 800 40px/48px var(--typography-font-family-sans); /** Weight proposed by extrapolation from the confirmed H2 weight, not itself confirmed. */
+  --typography-display-large: 700 52px/56px var(--typography-font-family-sans); /** Source: Figma Typography page. Weight (700) is proposed, not confirmed by a Figma variable — flag for design sign-off. Real-usage audit (2026-07-23): rare but real — dead in 3 of 5 apps (career-web, client-web, recruitment-portal), used in the other 2 at low volume (4-8 arbitrary-value instances each, e.g. client-dashboard/dashboard). Keep, but it's a genuinely uncommon size in practice. */
+  --typography-display-small: 700 44px/48px var(--typography-font-family-sans); /** ⚠️ Weight proposed, not confirmed. Real-usage audit (2026-07-23): this is the weakest size in the entire type scale — dead in 3 of 5 apps, and only 1 real usage each in the other 2 (a single arbitrary text-[44px]/[2.75rem] instance apiece). Sitting this close to heading-h1 (40px, solidly used in 4 of 5 apps) makes it look redundant in practice — worth a design decision on whether this size is actually needed at all, rather than assuming it is because Figma has a slot for it. */
+  --typography-heading-h1: 800 40px/48px var(--typography-font-family-sans); /** Weight proposed by extrapolation from the confirmed H2 weight, not itself confirmed. Real-usage audit (2026-07-23): solidly used in 4 of 5 apps (only career-web has zero real usage) — a real, load-bearing size, unlike its close neighbor display-small (44px). */
   --typography-heading-h2: 800 36px/44px var(--typography-font-family-sans); /** ⚠️ REAL CONFLICT, not yet resolved: the Typography foundation page's own named Figma variable says 'Heading/H2/Extrabold/Desktop' (800, used here), but the Title component's live design context shows the same 36/44 size rendered as Inter Bold — weight 700, not 800. Two parts of the same Figma file disagree with each other. Kept at 800 (the foundation page's stated value) since it's the more canonical source, but this needs an explicit design decision, not a silent pick. */
   --typography-heading-h3: 600 32px/40px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Stat component ('Heading/H3/Semibold/Desktop', weight 600) — corrected from an earlier proposed guess of 700. */
   --typography-heading-h4: 500 28px/36px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Heading/H4/Medium/Desktop'. */

@@ -66,6 +66,17 @@ colors:
   destructive-900: "#7F1D1D"
   brand-blue: "#2232D7"
   brand-gold: "#FBD24D"
+  request-facilities: "#EF9A49"
+  request-cashAdvance: "#A954B7"
+  request-room: "#EF7D7C"
+  request-pettyCash: "#E255AC"
+  request-procurement: "#8277BB"
+  request-businessTrip: "#6BBFAF"
+  request-coe: "#D1A81F"
+  extended-muted-blue-gray: "#667085"
+  extended-dark-slate: "#101828"
+  extended-charcoal: "#2F3537"
+  extended-indigo-navy: "#393960"
   primary: "{colors.primary-500}"
   secondary: "{colors.secondary-500}"
   neutral: "{colors.neutral-500}"
@@ -179,6 +190,7 @@ rounded:
   lg: 10px
   xl: 12px
   2xl: 16px
+  3xl: 20px
   full: 9999px
 spacing:
   "1": 4px
@@ -339,6 +351,8 @@ This file is **generated** from [`tahche-design-tokens`](https://github.com/karl
 
 Component *structure* is deliberately not standardized here. Each of the 5 apps builds its own components in whatever shape suits it — that flexibility is intentional, confirmed with the dev team directly. What this file (and the token package behind it) exists to make consistent is the token layer: color, type, spacing, elevation, shape. A component can be built any way a developer likes, as long as its values come from these tokens rather than a hand-typed hex or pixel value.
 
+Figma is a design reference here, not the final source of truth — the strategy is to find the token set that actually fits this Vue 3 + Tailwind codebase, evolve components in code first, and round-trip proven changes back to Figma afterward. A 2026-07-23 audit grepped real class usage across all 5 apps (not just what's in `tailwind.config.js`) specifically to check this file's tokens against what's genuinely load-bearing versus what only exists in Figma or config. Findings from that pass are noted inline below wherever they changed or reinforced something.
+
 ## Colors
 
 Two tiers, deliberately kept separate:
@@ -350,6 +364,13 @@ Each semantic ramp (`success`/`warning`/`destructive`) runs 50→900 and should 
 
 **`neutral-750` (`#3F3F3F`) is new** — not a Figma foundation-page color, but a real, heavily-used gray discovered by auditing live components directly. It's the actual secondary/body text color in Breadcrumb, Tab, Table Header, Table Content Cell, Pagination, Side Nav Item, Tooltip, Button Group, Button Tertiary, and Accordion — used in more places than `neutral-700` itself, despite never having been documented anywhere before this.
 
+**Two new categories, promoted from a real-usage audit of all 5 codebases, not from Figma:**
+
+- **`request`** (facilities/cashAdvance/room/pettyCash/procurement/businessTrip/coe) — real, needed design vocabulary for request-type status badges, previously defined identically in 4 of 5 apps' Tailwind configs but wired inconsistently: one app uses it correctly via real classes, two need the exact same colors but hardcode the hex instead, and one never needs it in practice. Promoted here so the class-based path becomes the actual path of least resistance instead of copy-pasting hex.
+- **`extended`** (muted-blue-gray, dark-slate, charcoal, indigo-navy) — provisional, not ratified. Four hardcoded hex values that recur across 3+ of the 5 apps at real volume (dozens of instances each) serving a genuine, currently-untokenized need, mostly muted icon/chrome colors. Listed here so the pattern is visible and trackable, not as a design decision already made.
+
+**A structural gap, not just a discipline problem**: every app hardcodes token-matching hex values — most heavily `primary-500`, which in one app (client-web) is hardcoded *more often* (157×) than the actual Tailwind class is used (117×). Almost all of this "ghost usage" is inside inline SVG icon `fill`/`stroke` attributes, which can't take Tailwind classes directly. The fix is a token-aware icon component (a `color` prop that maps to the token set), not a reminder to "just use the class."
+
 ## Typography
 
 **Inter** is the typeface actually rendering across all 5 apps today — but historically it was applied only via a global CSS override (`* { font-family: Inter !important }`), never registered in Tailwind's own `fontFamily` config. That's fixed at the token level here: `typography.fontFamily` resolves to Inter with system fallbacks, and should be wired as Tailwind's `fontFamily.sans`, not a separate custom key.
@@ -358,21 +379,27 @@ The type scale below covers display sizes down to overline. Confirmed weights, s
 
 **⚠️ `heading-h2` has a real, unresolved conflict**: the Typography foundation page's own named Figma variable says Extrabold (800), but the Title component renders the same 36/44 size as Bold (700) instead. Two parts of the same Figma file disagree. This file keeps 800 (the foundation page's stated value) as the default, but that's a tiebreaker, not a resolution — it needs an explicit design decision.
 
+**A real-usage audit of all 5 apps found two more things worth a design decision**: `display-small` (44px) is the weakest size in the entire scale — dead in 3 of 5 apps, and only a single low-volume use in each of the other 2 — sitting so close to the solidly-used `heading-h1` (40px, live in 4 of 5 apps) that it looks redundant rather than necessary. And **13px is a real gap this scale doesn't cover**: it recurs 116+ times across 3 of the 5 apps, sitting right between `paragraph-xsmall` (12px) and `paragraph-small` (14px) — not formalized as a token here since the audit only surfaced the size, not a complete confirmed style (weight/line-height), but flagged for a decision rather than left as silent drift.
+
 ## Layout
 
 The spacing scale (4px→192px) matches Tailwind's own default scale exactly at every step — adopting it requires no Tailwind config changes, only the discipline to stop reaching for arbitrary bracket values (`px-[0.938rem]`, `w-[6.25rem]`) that show up throughout all 5 codebases today.
 
-Breakpoints are a proposed change, not yet ratified: every app currently carries three parallel, conflicting breakpoint definitions (custom Tailwind `screens`, SCSS `$breakpoint-*` variables, and CSS custom properties), often mixed in the same file. The recommendation is to drop the custom names entirely and standardize on Tailwind's own `sm/md/lg/xl/2xl` — nothing is lost (`tablet:768` already equals `md:768`) but it is a breaking change to existing markup, and needs explicit design+dev sign-off given the shift toward a PWA makes responsive behavior more load-bearing, not less.
+**Breakpoints are now confirmed by real usage, not just proposed.** Every app currently carries three parallel, conflicting breakpoint definitions (custom Tailwind `screens`, SCSS `$breakpoint-*` variables, and CSS custom properties) — but a 2026-07-23 audit found that regardless of what's configured, every single app already overwhelmingly uses standard Tailwind `sm/md/lg/xl/2xl` in real markup (217 to 2,844 instances per app), while the custom scheme sees only 0-46 instances per app, almost entirely confined to legacy Auth screens. Consolidating onto the standard scale isn't a risky migration into unfamiliar territory — it's formalizing what's already the dominant pattern in every codebase. `tablet:768` already equals `md:768`, so nothing is lost; the remaining work is updating the small number of legacy Auth-screen classes, not a wholesale rewrite.
 
 ## Elevation & Depth
 
-A 6-step shadow scale, already identical across Figma and all 5 apps (a rare case with no conflict to resolve) — built on a single neutral shadow color (`rgba(16,24,40,*)`) at increasing offset/blur/spread. Use `xsmall` for subtle separation between adjacent surfaces (a card against its page background), `small`/`medium` for dropdowns and popovers, `large`/`xlarge` for modals and sheets, and reserve `xxlarge` for the single heaviest overlay in a given view. `xsmall` (Input Field, Button Group), `small` (Stat), `large` (Tooltip), and `xlarge` (Modal) are all now confirmed via named Figma variables on real components — only `medium` and `xxlarge` remain unconfirmed against a live component.
+A 6-step shadow scale, already identical across Figma and all 5 apps (a rare case with no conflict to resolve) — built on a single neutral shadow color (`rgba(16,24,40,*)`) at increasing offset/blur/spread. Use `xsmall` for subtle separation between adjacent surfaces (a card against its page background), `small`/`medium` for dropdowns and popovers, `large`/`xlarge` for modals and sheets, and reserve `xxlarge` for the single heaviest overlay in a given view. `xsmall` (Input Field, Button Group), `small` (Stat), `large` (Tooltip), and `xlarge` (Modal) are all now confirmed via named Figma variables on real components — only `medium` and `xxlarge` remain unconfirmed against a live component, and a real-usage audit found `xxlarge` dead as a class in every one of the 5 apps.
 
-A 7th token, `focus-ring`, is a 4px solid-color ring (`#E1E1FE`) rather than a blurred shadow — it appears on focused/typing text inputs, confirmed on both the standalone Input Field and one embedded inside a Table cell.
+A 7th token, `focus-ring`, is a 4px solid-color ring (`#E1E1FE`) rather than a blurred shadow — it appears on focused/typing text inputs, confirmed on both the standalone Input Field and one embedded inside a Table cell. One app (recruitment-portal) has its own recurring focus-ring effect in raw CSS using a different color (a translucent primary-500) — worth reconciling into this one definition rather than carrying two.
+
+**Every app also reaches for Tailwind's stock shadow classes (`shadow-sm/md/lg/xl/2xl`) alongside this named scale** — in some apps more than the named tokens are used at all. A CI lint blocking the stock classes in favor of these named ones would close a real, consistently observed gap.
 
 ## Shapes
 
-`sm` (6px) and `md` (8px) are now confirmed directly against real components — `sm` on Button, Input Field, Modal, File Upload, Tab/Pill, and Side Nav Item; `md` on Button Group, Stat, and Tooltip. `lg`/`xl`/`2xl` remain inferred from arbitrary `rounded-[Npx]` values in the 5 codebases and still need an explicit design decision. `full` is confirmed via Avatar, Badge, and Form Control Switch.
+`sm` (6px) and `md` (8px) are now confirmed directly against real components — `sm` on Button, Input Field, Modal, File Upload, Tab/Pill, and Side Nav Item; `md` on Button Group, Stat, and Tooltip. `full` is confirmed via Avatar, Badge, and Form Control Switch.
+
+**⚠️ None of the 5 apps' Tailwind configs actually define a custom `borderRadius` at all** — this whole scale exists only in Figma and this tokens repo today. Every app relies on Tailwind's stock radius values (which don't match this scale at `sm`/`md`/`lg`) plus hand-rolled arbitrary `rounded-[Npx]` values to compensate — most heavily at `10px` (100+ combined instances across 4 apps, confirming `lg`) and, newly, at `20px` (80+ combined instances across 4 apps) — real, consistent enough evidence to add a **new `3xl` (20px) step** to this scale, on top of what Figma alone had shown. `14px` shows up too (strongest in client-web) but with weaker, less consistent evidence — recommended to snap to `xl`/`2xl` rather than adding an 7th step, pending a design call. Wiring this scale into each app's actual Tailwind config is a Phase 3 prerequisite, not just documentation.
 
 ## Components
 
@@ -446,3 +473,6 @@ These are drawn directly from patterns found across all 5 production apps during
 - **Do** build components however best fits the app. **Don't** skip pulling from the shared token package even when building something fully bespoke — that's the one rule this file exists to support.
 - **Do** check a component's real Figma design context before assuming a token's value. **Don't** trust a "reasonable-looking" inferred value once a real one is available — this file's own Badge entry was wrong (guessed `primary-50`/`primary-700`, real value is `primary-500`/white) until Badge itself was actually audited.
 - **Do** treat a disagreement between two parts of Figma (like `heading-h2`'s Extrabold-vs-Bold conflict) as a flag for a design decision. **Don't** silently pick whichever value seems more "official" and move on as if it were resolved.
+- **Do** check real class usage across all 5 apps before trusting what a Tailwind config file merely defines. **Don't** assume a color/radius/shadow is load-bearing just because it's configured — every app has ramp steps, breakpoints, and shadow tokens that are 100% dead in practice, and config alone can't tell you that.
+- **Do** give icons a token-aware `color` prop that maps to this file's color tokens. **Don't** accept that SVG `fill`/`stroke` attributes "just can't use Tailwind classes" as a reason to hardcode hex — it's the single biggest source of token drift found in this audit (one app hardcodes `primary-500`'s hex more often than it uses the actual class).
+- **Do** wire this file's radius and font-size scales into each app's actual Tailwind config. **Don't** leave them as documentation-only — none of the 5 apps currently configure a custom `borderRadius` or `fontSize` at all, which is exactly why arbitrary `rounded-[10px]`/`text-[13px]`-style values are everywhere.

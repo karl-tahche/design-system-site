@@ -1,7 +1,7 @@
 {
   "color": {
     "primary": {
-      "$description": "Canonical product blue. Ratified 2026-07-23: kept at the value already live in all 5 apps rather than migrating to the brand guide's value — see color.brand.blue for that.",
+      "$description": "Canonical product blue. Ratified 2026-07-23: kept at the value already live in all 5 apps rather than migrating to the brand guide's value — see color.brand.blue for that. Real-usage audit (2026-07-23) across all 5 apps: primary-800 is dead or near-dead everywhere (0 uses in 4 of 5 apps, 4 uses in the 5th) — the weakest step in this ramp, kept for scale completeness rather than proven need. Also widespread 'ghost usage': primary-500's hex (#353DD7) is hardcoded raw in every app, in one app (client-web) literally more often (157×) than the actual Tailwind class is used (117×) — almost entirely inside inline SVG icon fill/stroke attributes, which can't take Tailwind classes directly. This is a tooling gap (icons need a token-aware color prop), not just a discipline problem.",
       "50": { "$value": "#F2F3FF", "$type": "color" },
       "100": { "$value": "#E0E2FF", "$type": "color" },
       "200": { "$value": "#BCBFF5", "$type": "color" },
@@ -14,7 +14,7 @@
       "900": { "$value": "#060945", "$type": "color" }
     },
     "secondary": {
-      "$description": "Product gold/amber accent. Note: differs slightly from color.brand.gold (#FBD24D vs #FBD249) — a pre-existing 2-value drift between brand guide and code, kept separate rather than silently merged.",
+      "$description": "Product gold/amber accent. Note: differs slightly from color.brand.gold (#FBD24D vs #FBD249) — a pre-existing 2-value drift between brand guide and code, kept separate rather than silently merged. Real-usage audit (2026-07-23): secondary-700/800/900 are dead or near-dead across all 5 apps (0 uses in most, 1-8 in the rest) — the upper half of this ramp is essentially never needed in practice, since gold is used as a bright highlight/accent, not for text-on-light patterns the way primary/neutral are. Worth a design decision on whether to keep the full 50-900 scale or trim it.",
       "50": { "$value": "#FFFAEB", "$type": "color" },
       "100": { "$value": "#FFF4D1", "$type": "color" },
       "200": { "$value": "#FFEBA8", "$type": "color" },
@@ -27,7 +27,7 @@
       "900": { "$value": "#997500", "$type": "color" }
     },
     "neutral": {
-      "$description": "Renamed from the code's 'pneutral' — no known reason for the 'p' prefix, dropped during ratification.",
+      "$description": "Renamed from the code's 'pneutral' — no known reason for the 'p' prefix, dropped during ratification. Real-usage audit (2026-07-23): this is the ONLY ramp with 100% step usage in all 5 apps — every one of its 10 steps (11 counting neutral-750) is genuinely used somewhere in every app. It's also the ramp most apps accidentally bypass: all 5 apps have stray instances of bare Tailwind-default `neutral-*`/`gray-*` classes (not `pneutral-*`) that resolve to Tailwind's stock gray palette instead of this ramp — a real, recurring bug (e.g. `text-neutral-800` rendering Tailwind's default gray instead of this ramp's #2E2E2E), not just naming confusion.",
       "50": { "$value": "#F7F9FF", "$type": "color" },
       "100": { "$value": "#F5F6FC", "$type": "color" },
       "200": { "$value": "#EDEEF2", "$type": "color" },
@@ -41,6 +41,7 @@
       "900": { "$value": "#141414", "$type": "color" }
     },
     "success": {
+      "$description": "Real-usage audit (2026-07-23): fully dead as Tailwind classes in career-web specifically (0 uses at every step) — yet the app still visually needs these colors and hardcodes them as raw hex instead (success-700/#15803D 14×, success-100/#DCFCE7 9×). The other 4 apps use the class-based ramp normally. A clean example of 'ghost usage': the design need is real, only the token discipline is missing.",
       "50": { "$value": "#F0FDF4", "$type": "color" },
       "100": { "$value": "#DCFCE7", "$type": "color" },
       "200": { "$value": "#BBF7D0", "$type": "color" },
@@ -53,6 +54,7 @@
       "900": { "$value": "#14532D", "$type": "color" }
     },
     "warning": {
+      "$description": "Real-usage audit (2026-07-23): warning-900 is dead across all 5 apps with zero exceptions — the single most consistently-unused step of any ramp in this file. In career-web the entire ramp is dead (no class usage, and unlike success, no raw-hex equivalent either — this app's UI genuinely has no warning-type surfaces).",
       "50": { "$value": "#FFFBEB", "$type": "color" },
       "100": { "$value": "#FEF3C7", "$type": "color" },
       "200": { "$value": "#FDE68A", "$type": "color" },
@@ -65,7 +67,7 @@
       "900": { "$value": "#78350F", "$type": "color" }
     },
     "destructive": {
-      "$description": "800 fixed to the standard Tailwind red-800 value. All 5 apps had 800 and 900 set to the identical value (#7F1D1D) — a copy-paste bug, not an intentional shade.",
+      "$description": "800 fixed to the standard Tailwind red-800 value. All 5 apps had 800 and 900 set to the identical value (#7F1D1D) — a copy-paste bug, not an intentional shade. Real-usage audit (2026-07-23): even after that fix, destructive-900 has zero real usage in all 5 apps — it may simply be a 'reserve' shade for future dark-surface/dark-mode work rather than a currently load-bearing token.",
       "50": { "$value": "#FEF2F2", "$type": "color" },
       "100": { "$value": "#FEE2E2", "$type": "color" },
       "200": { "$value": "#FECACA", "$type": "color" },
@@ -81,6 +83,23 @@
       "$description": "Brand-identity colors, for marketing/document contexts (matches tahche-brand.skill). Not for product UI — use color.primary / color.secondary there.",
       "blue": { "$value": "#2232D7", "$type": "color", "$description": "'Tahche Blue' per the brand guide. Kept distinct from color.primary.500 (#353DD7) by design — see decisions log." },
       "gold": { "$value": "#FBD24D", "$type": "color", "$description": "'Tahche Gold' per the brand guide." }
+    },
+    "request": {
+      "$description": "PROMOTED from code-only to canonical (2026-07-23) — this is real, needed design vocabulary (candidate/request status badges), not dead weight. It was defined identically in 4 of 5 apps' Tailwind configs but wired inconsistently: dashboard uses it correctly via real Tailwind classes; client-web and recruitment-portal need the exact same colors but hardcode the hex instead of the class (14-22 raw occurrences each); client-dashboard defines it but never needs it in practice; career-web (the public job-seeker site) doesn't have the concept at all. Two keys (procurement, businessTrip) are dead even in dashboard, the one app that uses the rest — worth confirming those are still needed. Note: coe (#D1A81F) is an exact hex duplicate of secondary-700 — likely intentional (COE requests styled in the brand gold), not a bug, but worth a design confirmation. A separate legacy 'custom' color object (brilliantRose/amethyst/purpureus) found in some apps' configs is a redundant alias for pettyCash/procurement/cashAdvance's same hex values — recommend dropping it during Phase 3 rather than carrying two names for one set of colors.",
+      "facilities": { "$value": "#EF9A49", "$type": "color" },
+      "cashAdvance": { "$value": "#A954B7", "$type": "color" },
+      "room": { "$value": "#EF7D7C", "$type": "color" },
+      "pettyCash": { "$value": "#E255AC", "$type": "color" },
+      "procurement": { "$value": "#8277BB", "$type": "color", "$description": "Dead even in dashboard, the one app that otherwise uses this whole category for real. Confirm it's still needed before carrying it forward." },
+      "businessTrip": { "$value": "#6BBFAF", "$type": "color" },
+      "coe": { "$value": "#D1A81F", "$type": "color", "$description": "Identical hex to secondary-700 — confirm this is an intentional 'COE requests use the brand gold' choice, not an accidental duplicate." }
+    },
+    "extended": {
+      "$description": "PROVISIONAL — not from Figma or any deliberate design decision. These are hardcoded hex values that recur across 3+ of the 5 apps at meaningful volume, clearly serving a real, currently-untokenized need (mostly muted icon/UI-chrome colors darker than neutral-500 but distinct from neutral-700/750/800). Added here so the pattern is visible and trackable, not as a ratified addition — needs design review to decide whether each should be folded into an existing ramp, become its own token, or be replaced with an existing token where visually close enough.",
+      "muted-blue-gray": { "$value": "#667085", "$type": "color", "$description": "Found in career-web (60×), client-web (38×), recruitment-portal (6×). No canonical match." },
+      "dark-slate": { "$value": "#101828", "$type": "color", "$description": "Found in career-web (36×), client-dashboard (5×), recruitment-portal (5×). Coincidentally shares its RGB base (16,24,40) with the elevation shadow color, but used here as a solid text/background color, unrelated to shadows." },
+      "charcoal": { "$value": "#2F3537", "$type": "color", "$description": "Found in client-dashboard (6×), dashboard (part of a larger cluster), recruitment-portal (25×)." },
+      "indigo-navy": { "$value": "#393960", "$type": "color", "$description": "Found in client-web (8×), dashboard (~14×), recruitment-portal (10×)." }
     }
   }
 }
