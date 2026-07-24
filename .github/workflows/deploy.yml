@@ -20,13 +20,15 @@ jobs:
     steps:
       - name: Checkout design-system-site
         uses: actions/checkout@v4
+        with:
+          path: design-system-site
 
-      - name: Checkout tahche-design-tokens (private, sibling path)
+      - name: Checkout tahche-design-tokens (private, sibling checkout)
         uses: actions/checkout@v4
         with:
           repository: karl-tahche/tahche-design-tokens
           token: ${{ secrets.TOKENS_REPO_TOKEN }}
-          path: ../tahche-design-tokens
+          path: tahche-design-tokens
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -34,15 +36,17 @@ jobs:
           node-version: 20
 
       - name: Build tahche-design-tokens
-        working-directory: ../tahche-design-tokens
+        working-directory: tahche-design-tokens
         run: |
           npm ci
           npm run build
 
       - name: Install site dependencies
+        working-directory: design-system-site
         run: npm ci
 
       - name: Build site
+        working-directory: design-system-site
         run: npm run docs:build
 
       - name: Setup Pages
@@ -51,7 +55,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .vitepress/dist
+          path: design-system-site/.vitepress/dist
 
   deploy:
     environment:
