@@ -5,10 +5,11 @@ defineProps({
 });
 defineEmits(['update:modelValue']);
 
-// The real, shared FormToggle.vue (4 of 5 apps) uses an un-themed stock `bg-blue-600`
-// for the "on" state — a copy-pasted Flowbite snippet never wired to this design
-// system. This reference component uses the RECOMMENDED fix (primary-500) rather
-// than reproducing that gap — see the Storybook docs block for the real finding.
+// The real, shared form-toggle implementation (used across most of the suite) uses an
+// un-themed stock `bg-blue-600` for the "on" state — a copy-pasted Flowbite snippet
+// never wired to this design system. This reference component uses the RECOMMENDED
+// fix (primary-500) rather than reproducing that gap — see this component's docs page
+// for the real finding.
 </script>
 
 <template>

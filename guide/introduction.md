@@ -2,8 +2,7 @@
 
 This is a documentation website for
 [`tahche-design-tokens`](https://github.com/karl-tahche/tahche-design-tokens) — the canonical
-token package for Tahche's 5 production apps (career-web, client-web, client-dashboard,
-recruitment-portal, dashboard).
+token package for Tahche's 5 production apps.
 
 **What this is**: a live, browsable version of the tokens and the composite component specs
 already documented in that repo's `DESIGN.md`. Every color, type style, spacing step, shadow,

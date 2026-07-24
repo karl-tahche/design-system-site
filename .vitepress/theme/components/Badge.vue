@@ -15,7 +15,7 @@ defineProps({
 
 // filled-neutral, outlined-warning, and outlined-neutral have no real evidence
 // anywhere in the 5 apps (see DESIGN.md's Badge section) — shown here anyway for
-// completeness, but flagged in the Storybook docs block, not silently presented
+// completeness, but flagged on this component's docs page, not silently presented
 // as equally confirmed.
 const filled = {
   primary: 'bg-primary-500 text-white',

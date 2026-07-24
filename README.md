@@ -6,8 +6,8 @@ A documentation website for
 embedded directly inline, in the spirit of [ui.nuxt.com/docs](https://ui.nuxt.com/docs).
 
 **This is a reference-implementation site, not any of the 5 apps' real code.**
-`tahche-design-tokens` deliberately does not standardize component structure — each app
-(career-web, client-web, client-dashboard, recruitment-portal, dashboard) builds its own. The
+`tahche-design-tokens` deliberately does not standardize component structure — each app in the
+product suite builds its own. The
 Vue components under `.vitepress/theme/components/` are small, fresh implementations built
 specifically for this site, styled purely from the tokens package's Tailwind preset, so there's
 something real and interactive to demonstrate each token against. They are explicitly **not** a
@@ -32,10 +32,10 @@ Opens at `http://localhost:5173` (or the next free port).
   theme/
     index.ts          registers every component globally (usable in any .md with no import)
     custom.css          @tailwind base/components/utilities
-    components/         reference Vue components, copied from the earlier Storybook attempt
-                         (design-system-docs) — Button, Badge, InputField, AlertInline, Tab,
-                         Modal, Accordion, Avatar, Switch, plus ColorPalette/TypeScale/MotionDemo
-                         for rendering token values live
+    components/         reference Vue components, copied from an earlier Storybook attempt
+                         (design-system-docs, since archived — see Related below) — Button,
+                         Badge, InputField, AlertInline, Tab, Modal, Accordion, Avatar, Switch,
+                         plus ColorPalette/TypeScale/MotionDemo for rendering token values live
 guide/               Introduction
 tokens/              Colors, Typography, Spacing, Elevation, Radius, Motion — each renders real
                      values imported directly from tahche-design-tokens/tokens/*.json
@@ -46,36 +46,26 @@ guidelines/          Do's and Don'ts, transcribed from DESIGN.md
 
 ## Keeping this in sync with `tahche-design-tokens`
 
-This repo depends on `tahche-design-tokens` as `file:../tahche-design-tokens` for local
-development (matching the sibling-folder layout in `Tahche Design System/`). When tokens change:
+This repo depends on `tahche-design-tokens` as a local package path for development. When tokens
+change:
 
 ```bash
 npm install   # picks up the linked package's latest build/ output
 ```
 
-For a real deployment, switch the dependency to the same GitHub-install pattern the 5 apps
-already use (see that repo's own README), and bump it deliberately like any other dependency.
+For production, pin this to a versioned release of `tahche-design-tokens` instead of a local
+path, and bump it deliberately like any other dependency.
 
 **Important**: the token *values* rendered on the Foundations pages are pulled live from
 `tahche-design-tokens/tokens/*.json` — they can't drift, by construction. The **prose** in each
 component page and in `guidelines/dos-and-donts.md`, however, is hand-authored from `DESIGN.md`
-as of 2026-07-25 and *can* drift if `DESIGN.md` changes without updating this repo. Automating
-that generation (a `DESIGN.md` → Markdown script, mirroring how
-`tahche-design-tokens/generate-design-md.mjs` itself works) is the natural next phase.
-
-## What's deferred from this MVP
-
-- Auto-generating pages directly from `DESIGN.md` instead of hand-authoring them.
-- Components with thin/no real spec yet in the tokens repo: Progress Step, Date Picker (a real
-  theming gap, not a component to demo), Sticky Alert, List Field, Pagination, Side Navigation,
-  Loader, Data Display, File Upload, Button Group.
-- Deployment/hosting (`npm run docs:build` produces a static site ready for any static host),
-  visual regression testing.
-- Pulling in any of the 5 apps' actual component code.
+and *can* drift if `DESIGN.md` changes without updating this repo.
 
 ## Related
 
 - [`tahche-design-tokens`](https://github.com/karl-tahche/tahche-design-tokens) — the token
   package this site documents.
-- `design-system-docs` (sibling repo) — an earlier Storybook-based attempt at this same goal,
-  left as-is; this VitePress site replaced it as the primary docs site.
+- `design-system-docs` — an earlier Storybook-based attempt at this same goal. This VitePress
+  site replaced it as the primary docs site; it has since been archived/moved out of the
+  `Tahche Design System/` folder and is not required by this site (no runtime or build
+  dependency on it — the components above were a one-time copy).

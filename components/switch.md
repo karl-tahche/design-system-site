@@ -1,7 +1,7 @@
 # Switch (Form Control)
 
-Confirmed 2026-07-25 via a real-code audit of a shared `FormToggle.vue`, present in 4 of the 5
-apps.
+Confirmed 2026-07-25 via a real-code audit of a shared form-toggle implementation, present across
+most of the product suite.
 
 ## Usage
 
@@ -31,5 +31,5 @@ Every real copy of this component uses Tailwind's stock `bg-blue-600` for its "o
 copy-pasted third-party (Flowbite-style) snippet that was **never re-themed** to this design
 system's `primary-500`. **This reference component uses the recommended fix (`primary-500`),
 not what's actually shipped today** — click the switch above to see the intended, corrected
-behavior, and treat this as an open migration item for the 4 real apps, not an already-resolved
-gap.
+behavior, and treat this as a real gap still to be fixed across the product suite, not an
+already-resolved one.

@@ -18,7 +18,7 @@ a real-code audit found every real copy actually uses `3xl` (20px). Side Navigat
 was claimed at `sm` — real code uses `md` (8px).
 
 None of the 5 apps' Tailwind configs define a custom `borderRadius` today — wiring this scale in
-is a real Phase 3 prerequisite, not just documentation.
+is a real prerequisite for adoption, not just documentation.
 
 Values rendered directly from `tahche-design-tokens/tokens/radius.json`.
 

@@ -1,6 +1,7 @@
 # Tab
 
-Confirmed 2026-07-25 via a real-code audit of a shared `Tabs.vue` used in 4 of 5 apps.
+Confirmed 2026-07-25 via a real-code audit of a shared Tab implementation used across most of the
+product suite.
 
 ## Usage
 

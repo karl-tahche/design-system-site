@@ -15,7 +15,7 @@ for modals and sheets, and reserve `xxlarge` for the single heaviest overlay in 
 
 `focus-ring` was **replaced 2026-07-25**, real code over Figma: the original `#E1E1FE` solid
 ring had zero real usage anywhere; the translucent `primary-500`-at-12%-alpha ring shown here is
-a real, repeated pattern across recruitment-portal and client-web.
+a real, repeated pattern across multiple apps in the product suite.
 
 Values rendered directly from `tahche-design-tokens/tokens/elevation.json`.
 

@@ -40,5 +40,5 @@ code.
 ## Known findings
 
 - The bg-50/border-200/text-800(title)/text-700(body) pattern holds consistently for Success,
-  Warning, and Destructive — real, repeated evidence via `SnackBar.vue`, identical across 4
-  independent codebases.
+  Warning, and Destructive — real, repeated evidence from a shared alert implementation,
+  identical across most of the product suite.

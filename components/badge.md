@@ -1,6 +1,7 @@
 # Badge
 
-Confirmed via a shared `Badge.vue` found byte-identical across 4 of the 5 apps.
+Confirmed via real code — a shared Badge implementation found byte-identical across most of the
+product suite.
 
 ## Usage
 

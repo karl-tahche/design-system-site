@@ -4,6 +4,7 @@ export default defineConfig({
   title: 'Tahche Design System',
   description: 'Tokens, components, and guidelines for Tahche’s product suite.',
   cleanUrls: true,
+  head: [['meta', { name: 'robots', content: 'noindex, nofollow' }]],
 
   themeConfig: {
     nav: [

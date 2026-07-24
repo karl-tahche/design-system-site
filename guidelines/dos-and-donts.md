@@ -73,8 +73,8 @@ an excuse to import generic advice wholesale.
   Figma-sourced `Line` style and what real code actually builds.
 - **Do** pair every real transition/animation with a `prefers-reduced-motion` fallback. **Don't**
   assume it's handled somewhere else in the app just because one app in the suite does it well —
-  career-web handles it consistently across 11 files, but client-web, client-dashboard,
-  recruitment-portal, and dashboard have zero handling between them.
+  one app in the suite handles it consistently across a double-digit number of files, but the
+  rest of the suite has zero handling between them.
 - **Do** treat a matching *value* as a real token-drift signal even when the *class name* looks
   unrelated. **Don't** assume "it's not hardcoded, it's just a class" is automatically safe —
   Badge's real Destructive-filled variant uses Tailwind's stock `bg-red-500`, not a
