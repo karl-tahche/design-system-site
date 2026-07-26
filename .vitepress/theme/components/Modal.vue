@@ -28,7 +28,7 @@ defineEmits(['close']);
             ●
           </div>
           <div>
-            <h2 class="text-paragraph-large-medium text-neutral-900">{{ heading }}</h2>
+            <h2 class="text-paragraph-large-500 text-neutral-900">{{ heading }}</h2>
             <p class="text-paragraph-small text-neutral-700">{{ description }}</p>
           </div>
         </div>

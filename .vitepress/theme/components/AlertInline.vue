@@ -24,7 +24,7 @@ const styles = {
 
 <template>
   <div :class="['w-96 rounded-sm border px-5 py-3', styles[type].bg, styles[type].border]">
-    <p :class="['text-paragraph-small-medium', styles[type].title]">{{ title }}</p>
+    <p :class="['text-paragraph-small-500', styles[type].title]">{{ title }}</p>
     <p :class="['text-paragraph-small mt-1', styles[type].body]">{{ description }}</p>
   </div>
 </template>

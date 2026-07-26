@@ -25,7 +25,7 @@ Values rendered directly from `tahche-design-tokens/tokens/radius.json`.
 <div class="flex flex-wrap gap-6">
   <div v-for="step in steps" :key="step.key" class="text-center">
     <div class="h-20 w-20 bg-primary-100" :style="{ borderRadius: step.value }" />
-    <p class="text-paragraph-small-medium mt-2 text-neutral-900 dark:text-neutral-100">{{ step.key }}</p>
+    <p class="text-paragraph-small-500 mt-2 text-neutral-900 dark:text-neutral-100">{{ step.key }}</p>
     <p class="text-paragraph-xsmall text-neutral-500">{{ step.value }}</p>
   </div>
 </div>

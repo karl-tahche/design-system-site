@@ -16,5 +16,5 @@ module.exports = {
   // hand-listing each one — Tailwind's content scanner can't see a template
   // literal, so the composite .text-{name} classes (shipped via a plugin in
   // tahche-design-tokens' preset) need an explicit safelist to survive purging.
-  safelist: [{ pattern: /^text-(display|heading|paragraph|label|overline)/ }],
+  safelist: [{ pattern: /^text-(display|h[1-6]|paragraph|label|overline)/ }],
 };

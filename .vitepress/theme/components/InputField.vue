@@ -23,7 +23,7 @@ defineEmits(['update:modelValue']);
 
 <template>
   <label class="flex w-64 flex-col gap-1.5">
-    <span class="text-paragraph-small-medium text-neutral-900">{{ label }}</span>
+    <span class="text-paragraph-small-500 text-neutral-900">{{ label }}</span>
     <input
       :value="modelValue"
       :placeholder="placeholder"

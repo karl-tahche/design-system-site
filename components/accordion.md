@@ -20,6 +20,6 @@ Confirmed directly from live Figma design context.
 
 - Padding is a real, unusual asymmetry — `26px` vertical, `16px` horizontal — confirmed as real,
   not a typo.
-- Title uses `paragraph-large-semibold` (`neutral-800`); description uses `paragraph-small`
+- Title uses `paragraph-large-600` (`neutral-800`); description uses `paragraph-small`
   (`neutral-750`) — the same undocumented gray this whole audit surfaced, used more often than
   `neutral-700` itself.

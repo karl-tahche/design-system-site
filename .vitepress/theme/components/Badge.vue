@@ -43,7 +43,7 @@ const accent = {
 <template>
   <span
     :class="[
-      'inline-flex items-center rounded-full px-4 py-1.5 text-paragraph-small-medium',
+      'inline-flex items-center rounded-full px-4 py-1.5 text-paragraph-small-500',
       variant === 'filled' && filled[type],
       variant === 'outlined' && outlined[type],
       variant === 'accent' && accent[type],

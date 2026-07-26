@@ -13,6 +13,6 @@ defineProps({
     :class="initials || !src ? 'bg-primary-50 text-primary-500' : 'bg-neutral-100'"
   >
     <img v-if="src" :src="src" class="h-full w-full object-cover" alt="" />
-    <span v-else-if="initials" class="text-paragraph-medium-medium">{{ initials }}</span>
+    <span v-else-if="initials" class="text-paragraph-medium-500">{{ initials }}</span>
   </div>
 </template>

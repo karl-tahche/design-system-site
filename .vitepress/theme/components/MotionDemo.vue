@@ -21,12 +21,12 @@ function replay() {
 <template>
   <div class="flex flex-col gap-8">
     <div>
-      <p class="text-paragraph-small-medium mb-3 text-neutral-900">
+      <p class="text-paragraph-small-500 mb-3 text-neutral-900">
         Duration + easing — click Replay, watch the dot cross the track
       </p>
       <button
         type="button"
-        class="text-paragraph-small-medium mb-4 rounded-sm bg-primary-500 px-4 py-2 text-white"
+        class="text-paragraph-small-500 mb-4 rounded-sm bg-primary-500 px-4 py-2 text-white"
         @click="replay"
       >
         Replay
@@ -55,7 +55,7 @@ function replay() {
     </div>
 
     <div>
-      <p class="text-paragraph-small-medium mb-3 text-neutral-900">
+      <p class="text-paragraph-small-500 mb-3 text-neutral-900">
         Loader rotation — 1s, {{ easings.linear.$value }} (a duration deliberately
         outside the fast/base/slow scale above)
       </p>

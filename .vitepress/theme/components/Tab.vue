@@ -27,7 +27,7 @@ const active = ref(0);
       type="button"
       @click="active = i"
       :class="[
-        'text-paragraph-small-medium transition-colors duration-fast ease-standard',
+        'text-paragraph-small-500 transition-colors duration-fast ease-standard',
         variant === 'line' && 'border-b-2 px-4 py-2',
         variant === 'line' && (active === i ? 'border-primary-500' : 'border-transparent'),
         variant === 'pill' && 'rounded-sm px-3 py-2',

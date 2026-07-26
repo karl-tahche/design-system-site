@@ -22,8 +22,8 @@ defineProps({
     :disabled="disabled || loading"
     :class="[
       'inline-flex items-center justify-center gap-2 rounded-sm transition-colors duration-fast ease-standard focus-visible:outline-none focus-visible:shadow-focus-ring',
-      size === 'large' && 'h-12 px-5 py-3 text-paragraph-medium-medium',
-      size === 'medium' && 'h-10 px-4 py-2.5 text-paragraph-small-medium',
+      size === 'large' && 'h-12 px-5 py-3 text-paragraph-medium-500',
+      size === 'medium' && 'h-10 px-4 py-2.5 text-paragraph-small-500',
       size === 'small' && 'h-7 px-3 py-1.5 text-label-xsmall',
       variant === 'link' && 'h-auto py-3 px-0',
       variant === 'primary' && !disabled && !loading && 'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-600 active:text-primary-200',

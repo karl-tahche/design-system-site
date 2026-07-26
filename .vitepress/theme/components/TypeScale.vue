@@ -15,10 +15,10 @@ const styles = Object.entries(typographyTokens.typography)
   <div class="flex flex-col gap-5">
     <div v-for="style in styles" :key="style.key" class="flex items-baseline gap-4 border-b border-neutral-100 pb-4">
       <div class="w-48 shrink-0">
-        <p class="text-paragraph-small-medium text-neutral-900">{{ style.key }}</p>
-        <p class="text-paragraph-xsmall text-neutral-500">
+        <div class="text-paragraph-small-500 text-neutral-900">{{ style.key }}</div>
+        <div class="text-paragraph-xsmall text-neutral-500">
           {{ style.value.fontSize }} / {{ style.value.fontWeight }}
-        </p>
+        </div>
         <span
           :class="[
             'text-paragraph-xsmall mt-1 inline-block rounded-full px-2 py-0.5',
@@ -28,7 +28,7 @@ const styles = Object.entries(typographyTokens.typography)
           {{ style.deprecated ? 'deprecated' : style.confirmed ? 'confirmed' : 'proposed' }}
         </span>
       </div>
-      <p :class="`text-${style.key} text-neutral-900`">Tahche Design System</p>
+      <div :class="`text-${style.key} text-neutral-900`">Tahche Design System</div>
     </div>
   </div>
 </template>

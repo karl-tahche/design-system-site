@@ -35,7 +35,7 @@ an excuse to import generic advice wholesale.
   Badge entry was wrong (guessed `primary-50`/`primary-700`, real value is `primary-500`/white)
   until Badge itself was actually audited.
 - **Do** treat a disagreement between two parts of Figma as a flag for an explicit design
-  decision, not a silent pick — `heading-h2`'s Extrabold-vs-Bold conflict sat flagged for exactly
+  decision, not a silent pick — `h2`'s Extrabold-vs-Bold conflict sat flagged for exactly
   that reason until it got one (resolved 2026-07-25: Extrabold). **Don't** move on as if a
   tiebreaker were the same thing as a resolution.
 - **Do** check real class usage across all 5 apps before trusting what a Tailwind config file
@@ -50,9 +50,9 @@ an excuse to import generic advice wholesale.
   leave them as documentation-only — none of the 5 apps currently configure a custom
   `borderRadius` or `fontSize` at all, which is exactly why arbitrary
   `rounded-[10px]`/`text-[13px]`-style values are everywhere.
-- **Do** apply a text style as one composite class (`.text-heading-h2`). **Don't** hand-pair a
+- **Do** apply a text style as one composite class (`.text-h2`). **Don't** hand-pair a
   size utility with a separate weight utility (`text-2xl font-medium`) — the two can be edited
-  independently and drift apart, which is exactly how the `heading-h2` Extrabold-vs-Bold
+  independently and drift apart, which is exactly how the `h2` Extrabold-vs-Bold
   conflict happened in the first place.
 - **Do** use a ramp's `-foreground` token whenever that ramp's 500 tone becomes a solid
   background. **Don't** assume white text always works — it fails outright on

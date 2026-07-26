@@ -1,7 +1,7 @@
 # Input Field
 
 Confirmed directly from live Figma design context. Both `Box` and `Line` styles share the same
-type ramp: label is `paragraph-small-medium`, value/placeholder/helper is `paragraph-small`.
+type ramp: label is `paragraph-small-500`, value/placeholder/helper is `paragraph-small`.
 
 ## Usage
 

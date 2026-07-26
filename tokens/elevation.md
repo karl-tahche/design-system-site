@@ -22,6 +22,6 @@ Values rendered directly from `tahche-design-tokens/tokens/elevation.json`.
 <div class="flex flex-wrap gap-8 p-4">
   <div v-for="step in steps" :key="step.key" class="text-center">
     <div class="h-20 w-32 rounded-sm bg-white" :style="{ boxShadow: step.value }" />
-    <p class="text-paragraph-small-medium mt-3 text-neutral-900 dark:text-neutral-100">{{ step.key }}</p>
+    <p class="text-paragraph-small-500 mt-3 text-neutral-900 dark:text-neutral-100">{{ step.key }}</p>
   </div>
 </div>
