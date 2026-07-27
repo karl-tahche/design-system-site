@@ -55,9 +55,9 @@ module.exports = {
 };
 ```
 
-That gives every app `bg-primary-500`, `text-neutral-700`, `shadow-medium`, `text-[length:--tw-...]`-free `text-heading-h2`, `rounded-lg`, `p-6`, etc. — all resolving to the same values everywhere.
+That gives every app `bg-primary-500`, `text-neutral-700`, `shadow-medium`, `text-[length:--tw-...]`-free `text-h2`, `rounded-lg`, `p-6`, etc. — all resolving to the same values everywhere.
 
-Typography tokens carry `fontSize`, `lineHeight`, and `letterSpacing` (Tailwind's `fontSize` tuple format), but **not** `fontWeight` — Tailwind doesn't support weight in that tuple, so pair a heading utility with a weight utility explicitly, e.g. `text-heading-h2 font-extrabold`. Use `build/tailwind/font-weights.json` to look up which weight goes with which style, and whether it's confirmed or proposed.
+Typography tokens carry `fontSize`, `lineHeight`, and `letterSpacing` (Tailwind's `fontSize` tuple format), but **not** `fontWeight` — Tailwind doesn't support weight in that tuple, so pair a heading utility with a weight utility explicitly, e.g. `text-h2 font-extrabold`. Use `build/tailwind/font-weights.json` to look up which weight goes with which style, and whether it's confirmed or proposed.
 
 ## Status: what's ratified vs. proposed
 
@@ -65,11 +65,11 @@ Ratified 2026-07-23, from the Figma + 5-codebase + brand-guide audit (updated 20
 
 | Category | Status |
 |---|---|
-| Colors | ✅ Ratified — primary stays `#353DD7` (code), brand blue kept separately as `#2232D7` |
+| Colors | ✅ Ratified — primary stays `#353DD7` (code); CORRECTED 2026-07-24, per Marketing's real brand guideline: Brand Royal Blue/Yellow are confirmed identical to primary/secondary-500, not distinct values as previously assumed. Brand Light Grey/Red/Dark Grey added as new brand-only colors. |
 | Elevation | ✅ Ratified — already identical across Figma and all 5 apps |
 | Spacing | ✅ Ratified — matches Tailwind's own default scale exactly, zero app-side migration needed beyond dropping arbitrary values |
 | Typography sizes | ✅ Ratified — from the Figma Typography page |
-| Typography weights | ⚠️ Partial — `heading-h2`/`display-large` (Extrabold/800, resolved 2026-07-25 — see below), `heading-h4` (Medium/500), and `paragraph-large` (Regular/400, Medium/500) are confirmed via bound Figma variables. Every other weight in `typography.json` is a proposed default (`$description` says so on each token) and needs design sign-off before Phase 3 rollout. |
+| Typography weights | ⚠️ Partial — `h2`/`display-large` (Extrabold/800, resolved 2026-07-25 — see below), `h4` (Medium/500), and `paragraph-large` (Regular/400, Medium/500) are confirmed via bound Figma variables. Every other weight in `typography.json` is a proposed default (`$description` says so on each token) and needs design sign-off before Phase 3 rollout. |
 | Radius | ⚠️ Partial — `sm`/`md`/`full` confirmed directly against real components (Button, Input Field, Modal, Button Group, Stat, Tooltip, Avatar, Badge). `lg`/`xl`/`2xl`/`3xl` are inferred from arbitrary `rounded-[Npx]` values in the codebases, not from an approved Figma spec — no dedicated border-radius foundation page exists. `xl`'s bordering 14px gap is resolved (2026-07-25): snap to `2xl` (16px), not a new 7th step — see radius.json. |
 | Breakpoints | ✅ Ratified 2026-07-25 — every app already overwhelmingly uses standard Tailwind `sm/md/lg/xl/2xl` in real markup (217–2,844 instances/app) over the custom `mobile375`/`mobile`/`mobilesmall`/`tablet`/`desktop` scheme (0–46 instances/app, almost entirely legacy Auth screens). `tablet:768` already equals `md:768`, so nothing is lost. Remaining work (updating legacy Auth-screen classes, wiring into each app's Tailwind config) is mechanical, not a design question. |
 | Motion | ✅ Ratified 2026-07-25 — from a real-usage audit of all 5 apps' CSS transitions (no Figma source exists for motion at all). No app uses an animation library. `duration` (150/250/500ms) and `easing.standard` (`ease-in-out`) are backed by real cross-app clustering; `easing.linear` is reserved for spinners/marquees only. Also surfaced a real accessibility gap: `prefers-reduced-motion` is handled in only 1 of 5 apps — not a token question, but worth fixing app-side. |
@@ -80,7 +80,7 @@ A loop that can start on **either side** — Figma or Claude Code — but always
 
 1. **A change starts somewhere.** Either a designer refines something in Figma, or a component/feature gets built or adjusted in Claude Code from real usage evidence. Neither side is the mandatory starting point.
 2. **It crosses to the other side.** Code-originated work gets ported into Figma (e.g. via MCP) so a designer can actively refine it further — spacing, motion, detail work a code-first pass won't catch. Figma-originated work gets implemented and validated in code.
-3. **Code is the final arbiter.** When Figma and code disagree about what's actually true — a stated value, a variant, a state — the real, shipped code behavior wins here, not Figma's stated intent. This file's own history is full of exactly these resolutions: `heading-h2`'s weight conflict, the `focus-ring` value, Badge's full type range, Tab's still-open `Line`-style discrepancy — all settled by checking real code, not by trusting Figma's word for it.
+3. **Code is the final arbiter.** When Figma and code disagree about what's actually true — a stated value, a variant, a state — the real, shipped code behavior wins here, not Figma's stated intent. This file's own history is full of exactly these resolutions: `h2`'s weight conflict, the `focus-ring` value, Badge's full type range, Tab's still-open `Line`-style discrepancy — all settled by checking real code, not by trusting Figma's word for it.
 4. **The refined result feeds back into the Design System** — `tokens/*.json` updated, `build/` and `DESIGN.md` regenerated — and the loop continues from there, in either direction, indefinitely.
 
 - **Token values** specifically get a lighter-weight either-direction sync within this loop via the Tokens Studio plugin (a value tweak in Figma opens a PR here; a value tweak here pushes back to Figma Variables) — reviewed by one designer + one dev, merged, then `npm run build` regenerates `build/`.

@@ -76,7 +76,7 @@ StyleDictionary.registerFormat({
     // into one value, but NOT font-weight — so a design-system text style built
     // from two separately-applied utilities (text-2xl + font-medium) can drift
     // apart the moment either one changes independently. That's exactly how
-    // this file's own heading-h2 conflict and the general Figma-vs-code weight
+    // this file's own h2 conflict and the general Figma-vs-code weight
     // mismatches happened. One `.text-{name}` class per named style, shipped as
     // a Tailwind plugin, removes that failure mode: size and weight can no
     // longer be applied (or omitted) independently.
@@ -118,7 +118,7 @@ StyleDictionary.registerFormat({
 // Rebuilds on every merge to main via Style Dictionary (see build.mjs).
 //
 // Ships one composite ".text-{style}" class per named typography style
-// (e.g. .text-heading-h2 { font-size: 36px; line-height: 44px; font-weight: 800; ... })
+// (e.g. .text-h2 { font-size: 36px; line-height: 44px; font-weight: 800; ... })
 // via a Tailwind plugin, alongside the usual theme.extend values. Prefer these
 // over separately combining text-{size} + font-{weight} utilities, which can
 // drift apart independently — see build.mjs for why.

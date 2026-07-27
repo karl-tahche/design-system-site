@@ -8,49 +8,49 @@
     "fontWeight": 700,
     "confirmed": false,
     "deprecated": true,
-    "alias": "heading-h1"
+    "alias": "h1"
   },
-  "heading-h1": {
+  "h1": {
     "fontWeight": 800,
     "confirmed": false,
     "deprecated": false
   },
-  "heading-h2": {
+  "h2": {
     "fontWeight": 800,
     "confirmed": true,
     "deprecated": false
   },
-  "heading-h3": {
+  "h3": {
     "fontWeight": 600,
     "confirmed": true,
     "deprecated": false
   },
-  "heading-h4": {
+  "h4": {
     "fontWeight": 500,
     "confirmed": true,
     "deprecated": false
   },
-  "heading-h5": {
+  "h5": {
     "fontWeight": 500,
     "confirmed": false,
     "deprecated": false
   },
-  "heading-h6": {
+  "h6": {
     "fontWeight": 500,
     "confirmed": false,
     "deprecated": false
   },
-  "paragraph-large-regular": {
+  "paragraph-large-400": {
     "fontWeight": 400,
     "confirmed": true,
     "deprecated": false
   },
-  "paragraph-large-medium": {
+  "paragraph-large-500": {
     "fontWeight": 500,
     "confirmed": true,
     "deprecated": false
   },
-  "paragraph-large-semibold": {
+  "paragraph-large-600": {
     "fontWeight": 600,
     "confirmed": true,
     "deprecated": false
@@ -60,7 +60,7 @@
     "confirmed": false,
     "deprecated": false
   },
-  "paragraph-medium-medium": {
+  "paragraph-medium-500": {
     "fontWeight": 500,
     "confirmed": true,
     "deprecated": false
@@ -70,7 +70,7 @@
     "confirmed": true,
     "deprecated": false
   },
-  "paragraph-small-medium": {
+  "paragraph-small-500": {
     "fontWeight": 500,
     "confirmed": true,
     "deprecated": false

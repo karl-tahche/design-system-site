@@ -54,6 +54,7 @@ colors.neutral = '{colors.neutral-500}';
 colors.success = '{colors.success-500}';
 colors.warning = '{colors.warning-500}';
 colors.destructive = '{colors.destructive-500}';
+colors.progress = '{colors.progress-500}';
 
 // ── Typography: fontFamily is inlined per style (the spec's own examples do
 // the same) rather than referenced, since a bare string primitive doesn't
@@ -114,7 +115,7 @@ const components = {
   'button-primary': {
     backgroundColor: '{colors.primary-500}',
     textColor: '#FFFFFF',
-    typography: '{typography.paragraph-medium-medium}',
+    typography: '{typography.paragraph-medium-500}',
     rounded: '{rounded.sm}',
     height: '48px',
     padding: '12px 20px',
@@ -128,12 +129,12 @@ const components = {
     backgroundColor: '{colors.primary-400}',
     textColor: '#FFFFFF',
   },
-  'button-primary-medium': { height: '40px', padding: '10px 16px', typography: '{typography.paragraph-small-medium}' },
+  'button-primary-medium': { height: '40px', padding: '10px 16px', typography: '{typography.paragraph-small-500}' },
   'button-primary-small': { height: '28px', padding: '6px 12px', typography: '{typography.label-xsmall}' },
   'button-secondary': {
     backgroundColor: '{colors.primary-50}',
     textColor: '{colors.primary-500}',
-    typography: '{typography.paragraph-medium-medium}',
+    typography: '{typography.paragraph-medium-500}',
     rounded: '{rounded.sm}',
     height: '48px',
     padding: '12px 20px',
@@ -141,7 +142,7 @@ const components = {
   'button-outlined': {
     backgroundColor: 'transparent',
     textColor: '{colors.primary-500}',
-    typography: '{typography.paragraph-medium-medium}',
+    typography: '{typography.paragraph-medium-500}',
     rounded: '{rounded.sm}',
     height: '48px',
     padding: '12px 20px',
@@ -149,7 +150,7 @@ const components = {
   'button-tertiary': {
     backgroundColor: '#FFFFFF',
     textColor: '{colors.neutral-700}',
-    typography: '{typography.paragraph-medium-medium}',
+    typography: '{typography.paragraph-medium-500}',
     rounded: '{rounded.sm}',
     height: '48px',
     padding: '12px 20px',
@@ -157,13 +158,13 @@ const components = {
   'button-link': {
     backgroundColor: 'transparent',
     textColor: '{colors.primary-500}',
-    typography: '{typography.paragraph-medium-medium}',
+    typography: '{typography.paragraph-medium-500}',
     padding: '12px 0',
   },
   'badge-filled-primary': {
     backgroundColor: '{colors.primary-500}',
     textColor: '#FFFFFF',
-    typography: '{typography.paragraph-small-medium}',
+    typography: '{typography.paragraph-small-500}',
     rounded: '{rounded.full}',
     padding: '6px 16px',
   },
@@ -175,25 +176,25 @@ const components = {
   // hardcoded hex elsewhere in this file, just via a stock Tailwind class instead of a raw
   // hex. Neutral has no true solid-fill variant in real code — the closest real pattern is
   // `.badge-light` (bg-neutral-100/text-neutral-900), used for "Inactive"/draft states.
-  'badge-filled-success': { backgroundColor: '{colors.success-500}', textColor: '{colors.success-foreground}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
-  'badge-filled-warning': { backgroundColor: '{colors.warning-500}', textColor: '{colors.warning-foreground}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
-  'badge-filled-destructive': { backgroundColor: '{colors.destructive-500}', textColor: '{colors.destructive-foreground}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
-  'badge-filled-neutral': { backgroundColor: '{colors.neutral-100}', textColor: '{colors.neutral-900}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-filled-success': { backgroundColor: '{colors.success-500}', textColor: '{colors.success-foreground}', typography: '{typography.paragraph-small-500}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-filled-warning': { backgroundColor: '{colors.warning-500}', textColor: '{colors.warning-foreground}', typography: '{typography.paragraph-small-500}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-filled-destructive': { backgroundColor: '{colors.destructive-500}', textColor: '{colors.destructive-foreground}', typography: '{typography.paragraph-small-500}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-filled-neutral': { backgroundColor: '{colors.neutral-100}', textColor: '{colors.neutral-900}', typography: '{typography.paragraph-small-500}', rounded: '{rounded.full}', padding: '6px 16px' },
   // badge-outlined-{primary,success,destructive}: confirmed 2026-07-25, real and load-bearing
   // (CandidatesByJob.vue, TicketsReport.vue) — border-200/text-500 per ramp. Warning/neutral
   // have no real outlined styling defined anywhere; not included here rather than guessed.
-  'badge-outlined-primary': { backgroundColor: 'transparent', textColor: '{colors.primary-500}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
-  'badge-outlined-success': { backgroundColor: 'transparent', textColor: '{colors.success-500}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
-  'badge-outlined-destructive': { backgroundColor: 'transparent', textColor: '{colors.destructive-500}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-outlined-primary': { backgroundColor: 'transparent', textColor: '{colors.primary-500}', typography: '{typography.paragraph-small-500}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-outlined-success': { backgroundColor: 'transparent', textColor: '{colors.success-500}', typography: '{typography.paragraph-small-500}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-outlined-destructive': { backgroundColor: 'transparent', textColor: '{colors.destructive-500}', typography: '{typography.paragraph-small-500}', rounded: '{rounded.full}', padding: '6px 16px' },
   // badge-accent: NOT copied from real code — real "accent/tint" usage (`.badge-light-blue`)
   // is inconsistently named and has no dedicated success/warning/destructive equivalent
   // anywhere in real markup. Modeled instead on shadcn-vue's `secondary` badge convention
   // (tinted bg + darker text), per this repo's own rule for when real evidence is too thin.
-  'badge-accent': { backgroundColor: '{colors.primary-100}', textColor: '{colors.primary-700}', typography: '{typography.paragraph-small-medium}', rounded: '{rounded.full}', padding: '6px 16px' },
+  'badge-accent': { backgroundColor: '{colors.primary-100}', textColor: '{colors.primary-700}', typography: '{typography.paragraph-small-500}', rounded: '{rounded.full}', padding: '6px 16px' },
   accordion: {
     backgroundColor: '#FFFFFF',
     textColor: '{colors.neutral-800}',
-    typography: '{typography.paragraph-large-semibold}',
+    typography: '{typography.paragraph-large-600}',
     padding: '26px 16px',
   },
   avatar: {
@@ -223,10 +224,10 @@ const components = {
   // treatment. This extrapolates the same confirmed offset pattern onto the neutral ramp
   // instead, since no real distinct neutral implementation exists to copy.
   'alert-inline-neutral': { backgroundColor: '{colors.neutral-50}', textColor: '{colors.neutral-800}', rounded: '{rounded.sm}', padding: '12px 20px' },
-  'tab-line': { textColor: '{colors.neutral-750}', typography: '{typography.paragraph-small-medium}', padding: '16px' },
+  'tab-line': { textColor: '{colors.neutral-750}', typography: '{typography.paragraph-small-500}', padding: '16px' },
   'tab-pill': {
     textColor: '{colors.neutral-750}',
-    typography: '{typography.paragraph-small-medium}',
+    typography: '{typography.paragraph-small-500}',
     rounded: '{rounded.sm}',
     padding: '8px 12px',
   },
@@ -235,7 +236,7 @@ const components = {
   // border or underline anywhere. ⚠️ This applies to BOTH tab-line and tab-pill above: no
   // real evidence of a distinct bottom-border-only "line" active style was found in any
   // app's actual Tab code — see this file's Tab prose section for the full discrepancy.
-  'tab-active': { backgroundColor: '{colors.primary-500}', textColor: '#FFFFFF', typography: '{typography.paragraph-small-medium}' },
+  'tab-active': { backgroundColor: '{colors.primary-500}', textColor: '#FFFFFF', typography: '{typography.paragraph-small-500}' },
   'table-header': {
     backgroundColor: '#FFFFFF',
     textColor: '{colors.neutral-750}',
@@ -247,7 +248,7 @@ const components = {
   title: {
     backgroundColor: '#FFFFFF',
     textColor: '{colors.neutral-900}',
-    typography: '{typography.heading-h2}',
+    typography: '{typography.h2}',
     padding: '24px 0',
   },
   stat: { backgroundColor: '#FFFFFF', rounded: '{rounded.md}', padding: '24px' },
@@ -316,7 +317,7 @@ const components = {
   // color, differentiated only by font-weight (regular vs. semibold) — not a lighter "muted
   // label" convention some design systems default to.
   'data-display-label': { textColor: '{colors.neutral-800}', typography: '{typography.paragraph-small}' },
-  'data-display-value': { textColor: '{colors.neutral-800}', typography: '{typography.paragraph-small-medium}' },
+  'data-display-value': { textColor: '{colors.neutral-800}', typography: '{typography.paragraph-small-500}' },
 };
 
 const frontmatter = {
@@ -350,7 +351,7 @@ Figma is a design reference here, not the final source of truth — the strategy
 Two tiers, deliberately kept separate:
 
 - **Product colors** (\`primary\`, \`secondary\`, \`neutral\`, \`success\`, \`warning\`, \`destructive\`) — for UI. \`primary\` is \`#353DD7\`, the value already live across all 5 apps; kept as-is rather than migrated, since re-theming five production apps for a color that was only ever a brand-guide value, never a shipped one, wasn't worth the churn.
-- **Brand colors** (\`brand-blue\` \`#2232D7\`, \`brand-gold\` \`#FBD24D\`) — for marketing/document contexts only (matches the brand guide exactly). Do not use these in product UI; that's what \`primary\`/\`secondary\` are for, even though they're visually close.
+- **Brand colors** (\`brand-royalBlue\` \`#353DD7\`, \`brand-yellow\` \`#FBD249\`, \`brand-lightGrey\` \`#F9F9F9\`, \`brand-red\` \`#ED4342\`, \`brand-darkGrey\` \`#A8A9AD\`) — for marketing/document contexts only, per the real Brand Guideline from Marketing (2026-07-24). Royal Blue and Yellow are confirmed identical to \`primary\`/\`secondary\` — do not use these in product UI, that's what \`primary\`/\`secondary\` are for. Light Grey, Red, and Dark Grey are genuinely new brand-only colors with no product-ramp equivalent.
 
 Each semantic ramp (\`success\`/\`warning\`/\`destructive\`) runs 50→900 and should only be used for state communication — a destructive action, a warning banner, a success toast — never as a decorative accent. Within any ramp: 50/100 for tinted backgrounds and hover fills, 500 for the primary interactive tone, 700–900 for high-contrast text or dark-surface contexts.
 
@@ -380,13 +381,13 @@ Each semantic ramp (\`success\`/\`warning\`/\`destructive\`) runs 50→900 and s
 
 **Inter** is the typeface actually rendering across all 5 apps today — but historically it was applied only via a global CSS override (\`* { font-family: Inter !important }\`), never registered in Tailwind's own \`fontFamily\` config. That's fixed at the token level here: \`typography.fontFamily\` resolves to Inter with system fallbacks, and should be wired as Tailwind's \`fontFamily.sans\`, not a separate custom key.
 
-The type scale below covers display sizes down to overline. Confirmed weights, sourced from either bound Figma variables or live design-context pulls against real components: \`heading-h2\` (Extrabold/800), \`heading-h3\` (Semibold/600, via Stat), \`heading-h4\` (Medium/500), \`paragraph-large\` (Regular/400, Medium/500, and Semibold/600 via Accordion), \`paragraph-medium\` (Medium/500, via Button), \`paragraph-small\` (Regular/400 and Medium/500, via Input Field and Button), \`paragraph-xsmall\` (Regular/400, via Tooltip — note its line-height is 16px, not the more common 20px), \`label-xsmall\` (Medium/500, a distinct 12/15 style used for small badges), and \`overline\` (Semibold/600, uppercase, 1px tracking, via Table Header). Every other weight is a proposed default — check \`build/tailwind/font-weights.json\` in the tokens repo for the live confirmed/proposed status before treating one as final.
+The type scale below covers display sizes down to overline. Confirmed weights, sourced from either bound Figma variables or live design-context pulls against real components: \`h2\` (Extrabold/800), \`h3\` (Semibold/600, via Stat), \`h4\` (Medium/500), \`paragraph-large\` (Regular/400, Medium/500, and Semibold/600 via Accordion), \`paragraph-medium\` (Medium/500, via Button), \`paragraph-small\` (Regular/400 and Medium/500, via Input Field and Button), \`paragraph-xsmall\` (Regular/400, via Tooltip — note its line-height is 16px, not the more common 20px), \`label-xsmall\` (Medium/500, a distinct 12/15 style used for small badges), and \`overline\` (Semibold/600, uppercase, 1px tracking, via Table Header). Every other weight is a proposed default — check \`build/tailwind/font-weights.json\` in the tokens repo for the live confirmed/proposed status before treating one as final.
 
-**\`heading-h2\`'s Figma conflict is now resolved, 2026-07-25**: the Typography foundation page's own named Figma variable said Extrabold (800), while the Title component's live design context rendered the same 36/44 size as Bold (700) instead. Ratified: Extrabold (800), the foundation page's stated value — the Title component's Bold rendering is the thing that drifted and needs correcting in Figma/components, not this token. \`display-large\` (52px), previously an unconfirmed Bold/700 guess with zero confirmed instances anywhere in this file, was bumped to match at Extrabold (800) too, for the same reason — matching its now-resolved neighbors \`heading-h1\`/\`heading-h2\` rather than carrying a separate, never-proven weight tier.
+**\`h2\`'s Figma conflict is now resolved, 2026-07-25**: the Typography foundation page's own named Figma variable said Extrabold (800), while the Title component's live design context rendered the same 36/44 size as Bold (700) instead. Ratified: Extrabold (800), the foundation page's stated value — the Title component's Bold rendering is the thing that drifted and needs correcting in Figma/components, not this token. \`display-large\` (52px), previously an unconfirmed Bold/700 guess with zero confirmed instances anywhere in this file, was bumped to match at Extrabold (800) too, for the same reason — matching its now-resolved neighbors \`h1\`/\`h2\` rather than carrying a separate, never-proven weight tier.
 
-**Every style is now emitted as a composite \`.text-{name}\` Tailwind class** (\`.text-heading-h2\`, \`.text-paragraph-small\`, etc.), bundling font-size, line-height, letter-spacing, and font-weight into one class, shipped via a plugin in the Tailwind preset — see \`build.mjs\` in the tokens repo. This is the fix for the \`heading-h2\`-style conflict above and for Figma-vs-code weight mismatches generally: Tailwind's own \`fontSize\` theme key can't carry font-weight, so a text style built from two separately-applied utilities (\`text-2xl\` + \`font-medium\`) can drift apart the moment either one changes independently. One class removes that failure mode.
+**Every style is now emitted as a composite \`.text-{name}\` Tailwind class** (\`.text-h2\`, \`.text-paragraph-small\`, etc.), bundling font-size, line-height, letter-spacing, and font-weight into one class, shipped via a plugin in the Tailwind preset — see \`build.mjs\` in the tokens repo. This is the fix for the \`h2\`-style conflict above and for Figma-vs-code weight mismatches generally: Tailwind's own \`fontSize\` theme key can't carry font-weight, so a text style built from two separately-applied utilities (\`text-2xl\` + \`font-medium\`) can drift apart the moment either one changes independently. One class removes that failure mode.
 
-**Two consolidations applied from real usage, following the same logic as the tokens themselves** (prefer the value with the most evidence): \`heading-h5\`/\`heading-h6\` moved from an unconfirmed Semibold(600) guess to Medium(500) — Medium is confirmed 5/5 times everywhere else it appears in this scale, the strongest evidence of any weight tier, versus Semibold's weaker 3/5. And \`display-small\` (44px) is **deprecated** in favor of \`heading-h1\` (40px): it was the weakest size in the entire scale (dead in 3 of 5 apps, a single low-volume use in the other 2) sitting close enough to the solidly-used \`heading-h1\` that the distinction looks accidental, not intentional. Its \`.text-display-small\` class still exists — rendering identically to \`.text-heading-h1\` via an explicit alias — so nothing already pointing at it breaks, but new work should reference \`heading-h1\` directly.
+**Two consolidations applied from real usage, following the same logic as the tokens themselves** (prefer the value with the most evidence): \`h5\`/\`h6\` moved from an unconfirmed Semibold(600) guess to Medium(500) — Medium is confirmed 5/5 times everywhere else it appears in this scale, the strongest evidence of any weight tier, versus Semibold's weaker 3/5. And \`display-small\` (44px) is **deprecated** in favor of \`h1\` (40px): it was the weakest size in the entire scale (dead in 3 of 5 apps, a single low-volume use in the other 2) sitting close enough to the solidly-used \`h1\` that the distinction looks accidental, not intentional. Its \`.text-display-small\` class still exists — rendering identically to \`.text-h1\` via an explicit alias — so nothing already pointing at it breaks, but new work should reference \`h1\` directly.
 
 **13px is a real gap this scale doesn't cover, resolved rather than left open**: it recurs 116+ times across 3 of the 5 apps, sitting right between \`paragraph-xsmall\` (12px) and \`paragraph-small\` (14px). Not formalized as its own token — it's almost certainly Figma/rem-rounding drift (\`0.8125rem\` is an unusually precise, non-round value for a deliberate design choice), not an intentional size. Recommended fix at the code level: snap any \`text-[13px]\` usage to \`paragraph-small\` (14px), the single most dominant body size in every app, rather than manufacturing a permanent token to match an accident.
 
@@ -436,7 +437,7 @@ Unlike the other components below, Button's tokens are pulled from live Figma de
 
 Two visual styles, \`Box\` (bordered) and \`Line\` (bottom-border only), each across Default/Focused/Typing/Active/Disabled/Destructive states:
 
-- **Both styles share the same type ramp**: label is \`paragraph-small-medium\` (14/20, Medium), value/placeholder/helper text is \`paragraph-small\` (14/20, Regular) — both now confirmed twice over (once via Button, once here).
+- **Both styles share the same type ramp**: label is \`paragraph-small-500\` (14/20, Medium), value/placeholder/helper text is \`paragraph-small\` (14/20, Regular) — both now confirmed twice over (once via Button, once here).
 - **\`Box\`**: white background, \`6px\` radius (\`rounded.sm\` — a third confirmation), \`8px 12px\` padding, 1px border that changes color by state (\`neutral-200\` default/active/disabled, \`primary-300\` focused/typing, \`destructive-300\` error) — border color isn't representable in the frontmatter, the same permanent spec limitation as Button's Outlined/Tertiary (see Button above). Carries the \`elevation.xsmall\` shadow at rest, which is **removed entirely when disabled**.
 - **A focused or typing \`Box\` gets a focus ring** (\`elevation.focus-ring\`, now \`rgba(53, 61, 215, 0.12)\` at 3px — see Elevation & Depth above for why this replaced the original Figma-sourced value).
 - **\`Line\` never gets that ring** — focus only changes its bottom-border color, same state-to-color mapping as \`Box\`. This is a real, deliberate difference between the two styles, not an inconsistency to fix.
@@ -446,13 +447,13 @@ Two visual styles, \`Box\` (bordered) and \`Line\` (bottom-border only), each ac
 
 - Shared across both alignment variants: white background, \`6px\` radius (\`rounded.sm\` — a third component now confirming this token, alongside Button and Input Field), \`24px\` padding all around, and the \`elevation.xlarge\` shadow — independently confirmed twice, once from a named Figma variable and once from this live design context pull.
 - **Fixed width per alignment, not a token — a real content-driven size**: \`modal-horizontal\` is \`512px\`, \`modal-vertical\` is \`384px\`. \`32px\` gap separates the content block from the actions row.
-- **Heading** uses \`paragraph-large-medium\` (18/28, Medium — now confirmed twice), **description** uses \`paragraph-small\` (14/20, Regular — now confirmed three times over across Button, Input, and Modal).
+- **Heading** uses \`paragraph-large-500\` (18/28, Medium — now confirmed twice), **description** uses \`paragraph-small\` (14/20, Regular — now confirmed three times over across Button, Input, and Modal).
 - A circular leading icon container (\`primary-50\` background, \`48px\`, fully rounded) is optional, as is the description and the top-right close icon.
 - **Vertical modal's button-padding mismatch is resolved, 2026-07-25**: its action buttons combined Large button padding (\`20px 12px\`) with a hardcoded \`40px\` height — Medium's height paired with Large's padding, mixed together. Ratified fix: snap to Medium consistently (\`40px\` height / \`10px 16px\` padding, matching \`button-primary-medium\` exactly), since the height was already Medium's and Horizontal's buttons don't have this issue in the first place (Medium padding, Medium implied height) — Horizontal is the internally-consistent baseline, Vertical's padding is what needs correcting to match it, not the other way around.
 
 ### Badge — corrected from an earlier wrong guess, now with its full range confirmed by real code
 
-The Large/Primary/Filled/Default variant is \`primary-500\` background with **white** text — not the \`primary-50\`/\`primary-700\` light-tint pairing this file guessed at in an earlier pass, before Badge itself had been audited directly. Padding is \`6px 16px\`, radius is fully rounded (\`24px\` on a \`32px\`-tall pill — deliberately over-rounded rather than exactly half the height), and the label uses \`paragraph-small-medium\`.
+The Large/Primary/Filled/Default variant is \`primary-500\` background with **white** text — not the \`primary-50\`/\`primary-700\` light-tint pairing this file guessed at in an earlier pass, before Badge itself had been audited directly. Padding is \`6px 16px\`, radius is fully rounded (\`24px\` on a \`32px\`-tall pill — deliberately over-rounded rather than exactly half the height), and the label uses \`paragraph-small-500\`.
 
 **The full type/variant range is now filled in, 2026-07-25, from a real-code audit** of a shared \`Badge.vue\` found byte-identical across 4 of the 5 apps (career-web has no Badge at all):
 - **Filled Success/Warning** use their named ramps directly (\`success-500\`/\`warning-500\`, white text) — real and confirmed.
@@ -463,22 +464,22 @@ The Large/Primary/Filled/Default variant is \`primary-500\` background with **wh
 
 ### Accordion, Avatar, Breadcrumb — confirmed directly from Figma
 
-- **Accordion**: white background, border-bottom only (\`neutral-200\`), an unusual asymmetric padding (\`26px\` vertical, \`16px\` horizontal — real, not a typo), \`16px\` gap. Title uses the newly-confirmed \`paragraph-large-semibold\` (neutral-800); description uses \`paragraph-small\` (\`neutral-750\`).
-- **Avatar**: fully circular at every size (24px–128px), with a 1.5px white border for stacking (see Avatar Group's overlapping \`-12px\` negative margin). The Initials variant is \`primary-50\` background with \`primary-500\` text and \`paragraph-medium-medium\` — the same light-tint pairing seen on Secondary buttons and Alert Inline.
+- **Accordion**: white background, border-bottom only (\`neutral-200\`), an unusual asymmetric padding (\`26px\` vertical, \`16px\` horizontal — real, not a typo), \`16px\` gap. Title uses the newly-confirmed \`paragraph-large-600\` (neutral-800); description uses \`paragraph-small\` (\`neutral-750\`).
+- **Avatar**: fully circular at every size (24px–128px), with a 1.5px white border for stacking (see Avatar Group's overlapping \`-12px\` negative margin). The Initials variant is \`primary-50\` background with \`primary-500\` text and \`paragraph-medium-500\` — the same light-tint pairing seen on Secondary buttons and Alert Inline.
 - **Breadcrumb**: \`paragraph-small\` in \`neutral-750\` for each crumb, with a \`neutral-300\` slash separator between them.
 
 ### Alert Inline, Tab, Table
 
 - **Alert Inline** (originally Figma-confirmed for Primary only; the other 3 types confirmed 2026-07-25 by real code): \`primary-50\` background, \`primary-200\` border, title in \`primary-800\`, description in \`primary-700\` — a "bg-50 / border-200 / text-800(title)/text-700(body)" pattern. A real-code audit of \`SnackBar.vue\` (byte-identical across 4 of 5 apps) confirmed this same offset pattern holds for Success, Warning, and Destructive too — real, repeated, consistent evidence, not an assumption. **Neutral is the one exception**: the real "information" type in code is a fallback onto the Success ramp entirely (same bg/border/text classes, only the icon color differs) rather than a genuine neutral treatment — \`alert-inline-neutral\` in this file's frontmatter is therefore extrapolated onto the neutral ramp using the same confirmed offset logic, not copied from what's actually shipped, since nothing real exists to copy for that one case.
-- **Tab**: real code (a shared \`Tabs.vue\` in 4 of 5 apps — career-web has no Tab component) shows the selected/active tab as a solid \`primary-500\` background with white text, swapping from inactive's \`neutral-750\` text at \`paragraph-small-medium\` — no border or underline anywhere. **⚠️ A real, unresolved discrepancy, not silently picked**: this file's \`Line\` style was originally documented (from Figma) as bottom-border-only, \`56px\` tall — but the 2026-07-25 code audit found zero evidence of any bottom-border/underline Tab treatment anywhere in real code; every real implementation uses the same solid-fill swap regardless of which named style it's meant to be. Either the bottom-border \`Line\` style genuinely isn't built anywhere yet (a real Figma-vs-code gap, not a conflict to resolve away), or it lives in a component these audits didn't find. \`tab-active\` in the frontmatter captures the one pattern that IS confirmed; the \`Line\`/\`Pill\` distinction stays as originally documented pending an actual look at whether \`Line\` exists anywhere. Also flagged: \`aria-selected\` is absent from every real Tab implementation — a real accessibility gap, not a token question (see Do's and Don'ts).
+- **Tab**: real code (a shared \`Tabs.vue\` in 4 of 5 apps — career-web has no Tab component) shows the selected/active tab as a solid \`primary-500\` background with white text, swapping from inactive's \`neutral-750\` text at \`paragraph-small-500\` — no border or underline anywhere. **⚠️ A real, unresolved discrepancy, not silently picked**: this file's \`Line\` style was originally documented (from Figma) as bottom-border-only, \`56px\` tall — but the 2026-07-25 code audit found zero evidence of any bottom-border/underline Tab treatment anywhere in real code; every real implementation uses the same solid-fill swap regardless of which named style it's meant to be. Either the bottom-border \`Line\` style genuinely isn't built anywhere yet (a real Figma-vs-code gap, not a conflict to resolve away), or it lives in a component these audits didn't find. \`tab-active\` in the frontmatter captures the one pattern that IS confirmed; the \`Line\`/\`Pill\` distinction stays as originally documented pending an actual look at whether \`Line\` exists anywhere. Also flagged: \`aria-selected\` is absent from every real Tab implementation — a real accessibility gap, not a token question (see Do's and Don'ts).
 - **Table**: the Header cell uses the \`overline\` style (uppercase, \`neutral-750\`) that this same audit corrected. Leading and Content cells both run \`72px\` tall with \`24px\`/\`16px\` padding, and Content Cell's oddly-named \`State4\` variant turns out to be a fully populated row (avatars, badge, progress bar, rating, actions) — not a distinct visual state, just an unclear internal name worth renaming.
 
 ### Progress Bar, Tooltip, Title, Stat — confirmed directly from Figma
 
-- **Progress Bar** is built from individual 1-unit-wide \`.Progress Bar / Block\` segments in a flex row on a \`neutral-100\` fully-rounded track, not a single scaling fill — filled segments are \`primary-500\`, unfilled ones render as a separate gray asset. Three sizes (Large/Medium/Small: \`88px\`/\`80px\`/\`72px\` tall) each carry a \`paragraph-medium-medium\` label and \`paragraph-small\` caption.
+- **Progress Bar** is built from individual 1-unit-wide \`.Progress Bar / Block\` segments in a flex row on a \`neutral-100\` fully-rounded track, not a single scaling fill — filled segments are \`primary-500\`, unfilled ones render as a separate gray asset. Three sizes (Large/Medium/Small: \`88px\`/\`80px\`/\`72px\` tall) each carry a \`paragraph-medium-500\` label and \`paragraph-small\` caption.
 - **Tooltip**: white background, \`rounded.md\`, \`16px\` padding, the confirmed \`elevation.large\` shadow, title in \`paragraph-xsmall-medium\`-shaped text (12/15, matching \`label-xsmall\`) and description in the newly-corrected \`paragraph-xsmall\` (12/16, \`neutral-750\`).
-- **Title**: the page-heading component, not a token — \`heading-h2\` for the title text (inheriting that token's H2 weight conflict directly), \`paragraph-small\` overline/description in \`neutral-500\`, a circular \`primary-50\` icon container, and an optional action pair (Secondary + Primary button, Medium size).
-- **Stat**: white background, \`rounded.md\`, \`24px\` padding, the confirmed \`elevation.small\` shadow. The big number uses \`heading-h3\` (the style this audit corrected to Semibold/600), with an optional \`success-50\`/\`success-500\` percentage badge — the same bg-50/text-500 semantic pairing used elsewhere, now confirmed for the Success ramp specifically, not just Primary.
+- **Title**: the page-heading component, not a token — \`h2\` for the title text (inheriting that token's H2 weight conflict directly), \`paragraph-small\` overline/description in \`neutral-500\`, a circular \`primary-50\` icon container, and an optional action pair (Secondary + Primary button, Medium size).
+- **Stat**: white background, \`rounded.md\`, \`24px\` padding, the confirmed \`elevation.small\` shadow. The big number uses \`h3\` (the style this audit corrected to Semibold/600), with an optional \`success-50\`/\`success-500\` percentage badge — the same bg-50/text-500 semantic pairing used elsewhere, now confirmed for the Success ramp specifically, not just Primary.
 
 ### Button Group, Switch — confirmed and corrected via real code, 2026-07-25
 
@@ -509,7 +510,7 @@ Two real, shared component families exist across the suite (evidence of parallel
 
 ### Data Display — new, real but thin evidence
 
-A real label/value display pattern exists in \`EmployeeDetails.vue\` (client-dashboard, 3 real usage sites) — the only clean match found across all 5 apps for a genuinely read-only (not editable, not tabular) field-display pattern. Label and value share the exact same text color (\`neutral-800\`), differentiated only by font-weight — regular for the label, **semibold** for the value, not this file's existing \`paragraph-small-medium\` (Medium/500) token, which is the closest real match but one weight-tier lighter than what's actually shipped. \`data-display-value\` uses \`paragraph-small-medium\` as the nearest existing token rather than inventing a new semibold-14px style for one source file's evidence — revisit if a second real usage of the exact semibold weight surfaces. Rows are separated by margin only (\`32px\`, no divider rule), with an empty-state fallback in \`neutral-500\`.
+A real label/value display pattern exists in \`EmployeeDetails.vue\` (client-dashboard, 3 real usage sites) — the only clean match found across all 5 apps for a genuinely read-only (not editable, not tabular) field-display pattern. Label and value share the exact same text color (\`neutral-800\`), differentiated only by font-weight — regular for the label, **semibold** for the value, not this file's existing \`paragraph-small-500\` (Medium/500) token, which is the closest real match but one weight-tier lighter than what's actually shipped. \`data-display-value\` uses \`paragraph-small-500\` as the nearest existing token rather than inventing a new semibold-14px style for one source file's evidence — revisit if a second real usage of the exact semibold weight surfaces. Rows are separated by margin only (\`32px\`, no divider rule), with an empty-state fallback in \`neutral-500\`.
 
 ### Not yet real: List Field, Progress Step, Date Picker, Sticky Alert
 
@@ -532,11 +533,11 @@ These are drawn directly from patterns found across all 5 production apps during
 - **Do** delete a superseded component version once its replacement has shipped and been verified. **Don't** leave "V1"/"V2" trees or "_Old"/"Legacy" files live in production indefinitely — several apps in this audit still had both.
 - **Do** build components however best fits the app. **Don't** skip pulling from the shared token package even when building something fully bespoke — that's the one rule this file exists to support.
 - **Do** check a component's real Figma design context before assuming a token's value. **Don't** trust a "reasonable-looking" inferred value once a real one is available — this file's own Badge entry was wrong (guessed \`primary-50\`/\`primary-700\`, real value is \`primary-500\`/white) until Badge itself was actually audited.
-- **Do** treat a disagreement between two parts of Figma as a flag for an explicit design decision, not a silent pick — \`heading-h2\`'s Extrabold-vs-Bold conflict sat flagged for exactly that reason until it got one (resolved 2026-07-25: Extrabold, see Typography above). **Don't** move on as if a tiebreaker were the same thing as a resolution.
+- **Do** treat a disagreement between two parts of Figma as a flag for an explicit design decision, not a silent pick — \`h2\`'s Extrabold-vs-Bold conflict sat flagged for exactly that reason until it got one (resolved 2026-07-25: Extrabold, see Typography above). **Don't** move on as if a tiebreaker were the same thing as a resolution.
 - **Do** check real class usage across all 5 apps before trusting what a Tailwind config file merely defines. **Don't** assume a color/radius/shadow is load-bearing just because it's configured — every app has ramp steps, breakpoints, and shadow tokens that are 100% dead in practice, and config alone can't tell you that.
 - **Do** give icons a token-aware \`color\` prop that maps to this file's color tokens. **Don't** accept that SVG \`fill\`/\`stroke\` attributes "just can't use Tailwind classes" as a reason to hardcode hex — it's the single biggest source of token drift found in this audit (one app hardcodes \`primary-500\`'s hex more often than it uses the actual class).
 - **Do** wire this file's radius and font-size scales into each app's actual Tailwind config. **Don't** leave them as documentation-only — none of the 5 apps currently configure a custom \`borderRadius\` or \`fontSize\` at all, which is exactly why arbitrary \`rounded-[10px]\`/\`text-[13px]\`-style values are everywhere.
-- **Do** apply a text style as one composite class (\`.text-heading-h2\`). **Don't** hand-pair a size utility with a separate weight utility (\`text-2xl font-medium\`) — the two can be edited independently and drift apart, which is exactly how the \`heading-h2\` Extrabold-vs-Bold conflict happened in the first place.
+- **Do** apply a text style as one composite class (\`.text-h2\`). **Don't** hand-pair a size utility with a separate weight utility (\`text-2xl font-medium\`) — the two can be edited independently and drift apart, which is exactly how the \`h2\` Extrabold-vs-Bold conflict happened in the first place.
 - **Do** use a ramp's \`-foreground\` token whenever that ramp's 500 tone becomes a solid background. **Don't** assume white text always works — it fails outright on \`secondary\`/\`success\`/\`warning\`/\`neutral\` (all light or bright colors) and only marginally fails on \`destructive\` (3.76:1, just under the 4.5:1 minimum), the kind of near-miss this file's per-ramp contrast check exists to catch.
 - **Do** check whether WCAG's inactive-component exception genuinely applies before treating a low-contrast disabled state as a compliance bug. **Don't** conflate "looks low-contrast" with "fails a real requirement" — \`button-primary-disabled\` has zero 1.4.3 obligation since disabled controls are exempt, though bumping it for perceptual clarity anyway (as done here) is still worth doing on its own merits.
 - **Do** define every real interactive state for a component — default, hover, focus, active, disabled, loading, error, selected, as applicable. **Don't** stop at whichever states happened to get checked first — flagged 2026-07-25 against general product-UI state-coverage practice, then closed the same day by a real-code audit (not Figma): Button's missing Focus state was a genuine gap (zero real implementation anywhere), now resolved by reusing \`elevation.focus-ring\`; Loading was resolved as "Disabled's appearance plus a spinner," not a fourth color state; Tab's Selected state is now confirmed (\`tab-active\`) — though it surfaced a separate, still-open discrepancy between this file's Figma-sourced \`Line\` style and what real code actually builds (see the Tab section above).

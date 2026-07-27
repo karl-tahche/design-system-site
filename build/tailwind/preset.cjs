@@ -3,7 +3,7 @@
 // Rebuilds on every merge to main via Style Dictionary (see build.mjs).
 //
 // Ships one composite ".text-{style}" class per named typography style
-// (e.g. .text-heading-h2 { font-size: 36px; line-height: 44px; font-weight: 800; ... })
+// (e.g. .text-h2 { font-size: 36px; line-height: 44px; font-weight: 800; ... })
 // via a Tailwind plugin, alongside the usual theme.extend values. Prefer these
 // over separately combining text-{size} + font-{weight} utilities, which can
 // drift apart independently — see build.mjs for why.
@@ -90,9 +90,25 @@ module.exports = {
           "900": "#7f1d1d",
           "foreground": "#141414"
         },
+        "progress": {
+          "50": "#eff6ff",
+          "100": "#dbeafe",
+          "200": "#bfdbfe",
+          "300": "#93c5fd",
+          "400": "#60a5fa",
+          "500": "#3b82f6",
+          "600": "#2563eb",
+          "700": "#1d4ed8",
+          "800": "#1e40af",
+          "900": "#1e3a8a",
+          "foreground": "#141414"
+        },
         "brand": {
-          "blue": "#2232d7",
-          "gold": "#fbd24d"
+          "royalBlue": "#353dd7",
+          "yellow": "#fbd249",
+          "lightGrey": "#f9f9f9",
+          "red": "#ed4342",
+          "darkGrey": "#a8a9ad"
         },
         "request": {
           "facilities": "#ef9a49",
@@ -140,63 +156,63 @@ module.exports = {
             "letterSpacing": "-0.02em"
           }
         ],
-        "heading-h1": [
+        "h1": [
           "40px",
           {
             "lineHeight": "48px",
             "letterSpacing": "-0.02em"
           }
         ],
-        "heading-h2": [
+        "h2": [
           "36px",
           {
             "lineHeight": "44px",
             "letterSpacing": "-0.02em"
           }
         ],
-        "heading-h3": [
+        "h3": [
           "32px",
           {
             "lineHeight": "40px",
             "letterSpacing": "-0.02em"
           }
         ],
-        "heading-h4": [
+        "h4": [
           "28px",
           {
             "lineHeight": "36px",
             "letterSpacing": "-0.02em"
           }
         ],
-        "heading-h5": [
+        "h5": [
           "24px",
           {
             "lineHeight": "32px",
             "letterSpacing": "-0.02em"
           }
         ],
-        "heading-h6": [
+        "h6": [
           "20px",
           {
             "lineHeight": "28px",
             "letterSpacing": "-0.02em"
           }
         ],
-        "paragraph-large-regular": [
+        "paragraph-large-400": [
           "18px",
           {
             "lineHeight": "28px",
             "letterSpacing": "0"
           }
         ],
-        "paragraph-large-medium": [
+        "paragraph-large-500": [
           "18px",
           {
             "lineHeight": "28px",
             "letterSpacing": "0"
           }
         ],
-        "paragraph-large-semibold": [
+        "paragraph-large-600": [
           "18px",
           {
             "lineHeight": "28px",
@@ -210,7 +226,7 @@ module.exports = {
             "letterSpacing": "0"
           }
         ],
-        "paragraph-medium-medium": [
+        "paragraph-medium-500": [
           "16px",
           {
             "lineHeight": "24px",
@@ -224,7 +240,7 @@ module.exports = {
             "letterSpacing": "0"
           }
         ],
-        "paragraph-small-medium": [
+        "paragraph-small-500": [
           "14px",
           {
             "lineHeight": "20px",
@@ -319,61 +335,61 @@ module.exports = {
     "fontWeight": "800",
     "letterSpacing": "-0.02em"
   },
-  ".text-heading-h1": {
+  ".text-h1": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "40px",
     "lineHeight": "48px",
     "fontWeight": "800",
     "letterSpacing": "-0.02em"
   },
-  ".text-heading-h2": {
+  ".text-h2": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "36px",
     "lineHeight": "44px",
     "fontWeight": "800",
     "letterSpacing": "-0.02em"
   },
-  ".text-heading-h3": {
+  ".text-h3": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "32px",
     "lineHeight": "40px",
     "fontWeight": "600",
     "letterSpacing": "-0.02em"
   },
-  ".text-heading-h4": {
+  ".text-h4": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "28px",
     "lineHeight": "36px",
     "fontWeight": "500",
     "letterSpacing": "-0.02em"
   },
-  ".text-heading-h5": {
+  ".text-h5": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "24px",
     "lineHeight": "32px",
     "fontWeight": "500",
     "letterSpacing": "-0.02em"
   },
-  ".text-heading-h6": {
+  ".text-h6": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "20px",
     "lineHeight": "28px",
     "fontWeight": "500",
     "letterSpacing": "-0.02em"
   },
-  ".text-paragraph-large-regular": {
+  ".text-paragraph-large-400": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "18px",
     "lineHeight": "28px",
     "fontWeight": "400"
   },
-  ".text-paragraph-large-medium": {
+  ".text-paragraph-large-500": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "18px",
     "lineHeight": "28px",
     "fontWeight": "500"
   },
-  ".text-paragraph-large-semibold": {
+  ".text-paragraph-large-600": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "18px",
     "lineHeight": "28px",
@@ -385,7 +401,7 @@ module.exports = {
     "lineHeight": "24px",
     "fontWeight": "400"
   },
-  ".text-paragraph-medium-medium": {
+  ".text-paragraph-medium-500": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "16px",
     "lineHeight": "24px",
@@ -397,7 +413,7 @@ module.exports = {
     "lineHeight": "20px",
     "fontWeight": "400"
   },
-  ".text-paragraph-small-medium": {
+  ".text-paragraph-small-500": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "14px",
     "lineHeight": "20px",
