@@ -28,8 +28,8 @@ defineEmits(['close']);
             ●
           </div>
           <div>
-            <h2 class="text-paragraph-large-500 text-neutral-900">{{ heading }}</h2>
-            <p class="text-paragraph-small text-neutral-700">{{ description }}</p>
+            <div role="heading" aria-level="2" class="text-paragraph-large-500 text-neutral-900">{{ heading }}</div>
+            <span class="block text-paragraph-small text-neutral-700">{{ description }}</span>
           </div>
         </div>
         <button type="button" class="text-neutral-500" @click="$emit('close')" aria-label="Close">✕</button>
