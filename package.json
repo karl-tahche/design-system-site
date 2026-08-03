@@ -4,9 +4,13 @@
   "description": "Canonical design tokens for all Tahche apps — colors, typography, spacing, elevation, radius, breakpoints. Source of truth for both the Tailwind preset consumed by code and the Figma Variables consumed by design (via Tokens Studio).",
   "private": true,
   "main": "build/tailwind/preset.cjs",
+  "bin": {
+    "tahche-tokens-lint": "bin/check-token-usage.mjs"
+  },
   "files": [
     "tokens",
     "build",
+    "bin",
     "DESIGN.md"
   ],
   "scripts": {

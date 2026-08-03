@@ -377,6 +377,10 @@ Each semantic ramp (\`success\`/\`warning\`/\`destructive\`) runs 50→900 and s
 
 **⚠️ That last row surfaced a second, independent contrast finding — now resolved as a decision, with a follow-up action item, not left open**: white on \`destructive-500\` measures 3.76:1 — it clears the 3:1 large/bold-text AA exception but fails the 4.5:1 normal-text minimum that applies to typical 14–16px Medium-weight button labels. Unlike \`button-primary-disabled\` (see Button below), which turns out to be WCAG-*exempt* rather than a real failure, this ramp's 500 tone is used on *active* components, where 1.4.3 genuinely applies — so \`destructive-foreground\` stays \`neutral-900\`, the fully-compliant choice, confirmed 2026-07-23. **Action item, not yet done**: audit Button/Badge's Destructive-filled variants across all 5 apps — white text is almost certainly what's actually shipped today, matching the white-text convention used everywhere else, and needs migrating to \`neutral-900\` wherever found.
 
+**⚠️ Scope check, flagged directly in response to a real question about this table**: every pairing above is guaranteed *only* for a ramp's own \`500\` tone as the background — \`{ramp}-foreground\` is not a general "safe text color for this ramp," and using it against a different step in the same ramp is not covered by the math above. \`neutral-foreground\` (\`#141414\`, identical to \`neutral-900\`) passes at 8.89:1 against \`neutral-500\` (a mid-tone light enough for dark text to work) — but the same pairing measures roughly 2.25:1 against \`neutral-700\`, 1.36:1 against \`neutral-800\`, and 1:1 (fully invisible) against \`neutral-900\` itself, since text and background become the same color. This isn't a broken token; it's a pairing the token was never claimed to support. If a real component ever needs a \`700\`–\`900\` step used as a *background* (a dark surface, not body text — no confirmed real case exists yet), that's an independent contrast decision this system doesn't have a dedicated token for: verify it directly rather than reaching for \`-foreground\` a second time. Plain white is the common answer for a genuinely dark fill, but confirm per case — this file's own destructive-500/white near-miss above (3.76:1) is the standing reminder that "probably white" still needs checking, not assuming.
+
+**Dark mode — Recommended, not shipped anywhere yet.** None of the 5 apps have a dark mode today. The proposal below reuses the exact hex values already in each ramp — no new colors — just flips which step plays which role. Neutral: light mode reads low→high as background→text; dark mode uses the same steps in reverse (page bg \`neutral-900\`, card bg \`neutral-800\`, border \`neutral-700\`, primary text \`neutral-100\`, secondary text \`neutral-300\`–\`400\`). Semantic/brand ramps: the solid 500-tone fill (Button, filled Badge) is unchanged — a saturated color reads fine on either theme — but the near-white 50/100 tint (Alert Inline, badge tint) flips to that same ramp's own 900/800 step, with 200/300 for text on top, mirroring the light-mode 50-bg/800-text pairing at the opposite end of the same ramp. \`{ramp}-foreground\` needs no dark variant — it's paired with the 500 fill, identical in both themes. **One real, computed exception**: \`primary-500\` used as *text* (not a fill) directly on \`neutral-900\` measures 2.46:1, a real failure — every other ramp's 500 clears 4.5:1 as text on \`neutral-900\` unchanged (success 8.09:1, warning 8.58:1, destructive 4.90:1), so \`primary\` alone substitutes \`primary-300\` (6.54:1) for text-only dark-mode roles (Link, Outlined border/text, icon color). Not yet extended to \`brand\`/\`request\`/\`extended\` — no real surface needs it yet.
+
 ## Typography
 
 **Inter** is the typeface actually rendering across all 5 apps today — but historically it was applied only via a global CSS override (\`* { font-family: Inter !important }\`), never registered in Tailwind's own \`fontFamily\` config. That's fixed at the token level here: \`typography.fontFamily\` resolves to Inter with system fallbacks, and should be wired as Tailwind's \`fontFamily.sans\`, not a separate custom key.
@@ -391,11 +395,16 @@ The type scale below covers display sizes down to overline. Confirmed weights, s
 
 **13px is a real gap this scale doesn't cover, resolved rather than left open**: it recurs 116+ times across 3 of the 5 apps, sitting right between \`paragraph-xsmall\` (12px) and \`paragraph-small\` (14px). Not formalized as its own token — it's almost certainly Figma/rem-rounding drift (\`0.8125rem\` is an unusually precise, non-round value for a deliberate design choice), not an intentional size. Recommended fix at the code level: snap any \`text-[13px]\` usage to \`paragraph-small\` (14px), the single most dominant body size in every app, rather than manufacturing a permanent token to match an accident.
 
+**Theme-agnostic**: font-size, weight, line-height, and letter-spacing don't need a dark-mode
+variant — only the text *color* paired with a style changes by theme (see Colors above).
+
 ## Layout
 
 The spacing scale (4px→192px) matches Tailwind's own default scale exactly at every step — adopting it requires no Tailwind config changes, only the discipline to stop reaching for arbitrary bracket values (\`px-[0.938rem]\`, \`w-[6.25rem]\`) that show up throughout all 5 codebases today.
 
 **Breakpoints are ratified (2026-07-25), not just proposed.** Every app currently carries three parallel, conflicting breakpoint definitions (custom Tailwind \`screens\`, SCSS \`$breakpoint-*\` variables, and CSS custom properties) — but a 2026-07-23 audit found that regardless of what's configured, every single app already overwhelmingly uses standard Tailwind \`sm/md/lg/xl/2xl\` in real markup (217 to 2,844 instances per app), while the custom scheme sees only 0-46 instances per app, almost entirely confined to legacy Auth screens. Consolidating onto the standard scale isn't a risky migration into unfamiliar territory — it's formalizing what's already the dominant pattern in every codebase. \`tablet:768\` already equals \`md:768\`, so nothing is lost; the remaining work (updating the small number of legacy Auth-screen classes, wiring this scale into each app's actual Tailwind config) is mechanical, not a design question anymore.
+
+**Theme-agnostic**: spacing doesn't change by theme; no dark-mode variant needed here.
 
 ## Elevation & Depth
 
@@ -405,13 +414,19 @@ A 7th token, \`focus-ring\`, is now \`rgba(53, 61, 215, 0.12)\` at 3px with no b
 
 **Every app also reaches for Tailwind's stock shadow classes (\`shadow-sm/md/lg/xl/2xl\`) alongside this named scale** — in some apps more than the named tokens are used at all. A CI lint blocking the stock classes in favor of these named ones would close a real, consistently observed gap.
 
+**Dark mode needs a different fix than a color swap, not yet needed anywhere since no app has dark mode.** Every value in this scale is a fixed, low-opacity black (\`rgba(16,24,40,*)\`) regardless of theme — tuned to separate a white surface from a light page, so it barely registers against a \`neutral-900\` page (too little luminance headroom left to darken further). Recommended: don't raise shadow opacity — that reads harsh on light backgrounds once it's strong enough to read on dark ones. Communicate elevation on dark surfaces with a lighter surface step (\`neutral-800\` card on a \`neutral-900\` page) plus a 1px \`neutral-700\` border, keeping the named shadow token secondary rather than primary — the same pattern most dark-UI systems converge on for the same physical reason.
+
 **Motion is ratified too, as of 2026-07-25**, from the same kind of real-usage audit as everything else in this file — this time run against all 5 apps' actual CSS transitions rather than Figma, since motion has no Figma source at all. No app uses an animation library: no GSAP, Framer Motion, Lenis, or \`@vueuse/motion\` anywhere. \`motion.duration\` is a 3-step scale (\`fast\` 150ms, \`base\` 250ms, \`slow\` 500ms) — each value independently lands as a top-3 real value in all 5 codebases, despite the apps sharing no code. \`motion.easing.standard\` is \`ease-in-out\`: the real data splits roughly 3-to-2 across apps between plain \`ease\` and \`ease-in-out\` as each app's own top pick, so this was settled by explicit decision, not vote count. \`motion.easing.linear\` is reserved for continuous/looping motion only (spinners, marquees) — confirmed as a distinct, consistent real pattern, never used as a general transition easing anywhere in the data. **⚠️ A real, severe accessibility gap surfaced by the same audit**: \`prefers-reduced-motion\` is handled in only 1 of the 5 apps (career-web, 11 files) — client-web, client-dashboard, recruitment-portal, and dashboard have zero handling whatsoever. This is the motion equivalent of the contrast findings elsewhere in this file: a real, current, cross-app gap, not a token to define but a fix every app needs to ship.
+
+**Theme-agnostic**: duration and easing don't change by theme; no dark-mode variant needed here.
 
 ## Shapes
 
 \`sm\` (6px) and \`md\` (8px) are now confirmed directly against real components — \`sm\` on Button, Input Field, Modal, File Upload, Tab/Pill, and Side Nav Item; \`md\` on Button Group, Stat, and Tooltip. \`full\` is confirmed via Avatar, Badge, and Form Control Switch.
 
 **⚠️ None of the 5 apps' Tailwind configs actually define a custom \`borderRadius\` at all** — this whole scale exists only in Figma and this tokens repo today. Every app relies on Tailwind's stock radius values (which don't match this scale at \`sm\`/\`md\`/\`lg\`) plus hand-rolled arbitrary \`rounded-[Npx]\` values to compensate — most heavily at \`10px\` (100+ combined instances across 4 apps, confirming \`lg\`) and, newly, at \`20px\` (80+ combined instances across 4 apps) — real, consistent enough evidence to add a **new \`3xl\` (20px) step** to this scale, on top of what Figma alone had shown. \`14px\` shows up too (strongest in client-web) with weaker, less consistent evidence — **resolved 2026-07-25**: snap to \`2xl\` (16px) rather than adding a 7th step, since client-web's own independent need for the larger \`3xl\` (20px) suggests that app trends toward more generous rounding overall. Wiring this scale into each app's actual Tailwind config is a Phase 3 prerequisite, not just documentation.
+
+**Theme-agnostic**: a corner radius doesn't change by theme; no dark-mode variant needed here.
 
 ## Components
 
@@ -546,6 +561,51 @@ These are drawn directly from patterns found across all 5 production apps during
 - **Do** add \`aria-selected\` (or the equivalent state attribute) to every real Tab implementation. **Don't** assume a working visual active-state means the interaction is accessible — the 2026-07-25 code audit found the selected/active tab is styled correctly and consistently everywhere it's built, but \`aria-selected\` is absent from every real Tab implementation across all 5 apps.
 - **Do** treat an old Figma-sourced claim as provisional until real code actually confirms it. **Don't** assume a value survives just because it's already written down here — a single 2026-07-25 audit pass found three separate claims (File Upload's radius, Pagination's and Side Navigation's use of \`neutral-750\`, Side Navigation's badge text style) that were Figma-only and didn't survive contact with real code. Being written into this file once isn't the same as being confirmed; re-check when you touch a component that hasn't had a real-code pass yet.
 - **Do** flag a copy-pasted, never-re-themed third-party snippet as a real gap, not a style choice. **Don't** assume every real, repeated pattern is intentional — Form Control Switch's "on" state is \`bg-blue-600\` (Tailwind stock blue) identically across all 4 real copies, but that's a Flowbite snippet that was never wired to \`primary-500\`, not a deliberate decision to use a second blue.
+- **Do** treat a \`{ramp}-foreground\` token as scoped to that ramp's own \`500\` tone as the background. **Don't** reuse it against a different step in the same ramp and assume the guarantee carries over — \`neutral-foreground\` passes against \`neutral-500\` (8.89:1) but is functionally invisible against \`neutral-900\` (1:1, the same color twice) and fails badly against \`neutral-700\`/\`800\` too. A step being in the same ramp doesn't make a foreground pairing safe; only the specific 500 pairing is confirmed.
+
+## Agentic Use
+
+This system is meant to be usable by an AI agent working inside any of the 5 app repos, not just
+read by a person on the docs site — the same real-evidence discipline in this file applies to
+whatever an agent generates from it.
+
+- **Claude Code subagent**: \`.claude/agents/tahche-design-engineer.md\` — an expert-in-this-system,
+  Design Engineer persona (UX + UI + Vue/Tailwind implementation) that reads this file, the
+  \`design-system-site\` docs, and the live token package before touching any component. The
+  canonical copy lives in \`Tahche Design System/.claude/agents/\`; a copy is placed in each of the
+  5 app repos so it's available wherever a developer is actually working.
+- **Cowork/Claude.ai skill**: the same persona, packaged as a skill, for design or PM work that
+  happens outside a code editor (reviewing a Figma handoff, drafting a component spec, checking a
+  screenshot against this file's Do's and Don'ts).
+- **The standing instruction for either surface**: check this file and the docs site's status
+  labels (Existing / Not yet built / Recommended — new) before proposing a value — an agent
+  guessing a "reasonable-looking" token is the same failure mode this file's own Badge mistake
+  already demonstrated once, just committed by a model instead of a person. Prefer a real grep of
+  the 5 apps over an assumption, exactly as this file's own generation process does.
+
+## Adoption
+
+Documenting a rule and enforcing it are different things. Before this section existed, this
+package had exactly one real consumer — the docs site itself; all 5 product apps hand-copied their
+own version of the same ramps into their own \`tailwind.config.js\`, with nothing stopping that copy
+from drifting.
+
+- **career-web is the pilot.** Chosen by evidence (smallest codebase, lowest hardcoded-hex count of
+  the 5 apps), its \`tailwind.config.js\` now uses \`presets: [require('tahche-design-tokens')]\`
+  instead of a hand-copied ramp. This surfaced a real naming disagreement — the app's ramp is
+  called \`pneutral\`, not \`neutral\` — kept as a direct alias to the real ramp (not a second
+  hardcoded copy) rather than silently renamed across ~53 call sites. It also fixed a real bug: the
+  app's hand-copied \`destructive\` ramp had \`800\` and \`900\` set to the identical hex, a
+  copy-paste error; the token package's real \`800\` value is a distinct step.
+- **A CI lint closes the loop.** \`bin/check-token-usage.mjs\` (exposed as \`tahche-tokens-lint\`)
+  scans an app's source for hardcoded hex values that duplicate a real token and fails on anything
+  **new**. It's a ratchet, not a rewrite — career-web already had 334 pre-existing hits, tracked in
+  a checked-in \`.token-lint-baseline.json\`, left alone rather than mass-rewritten in the same pass
+  as turning the lint on. \`yarn lint:tokens\` now runs in career-web's CI alongside its existing
+  lint step.
+- **The other 4 apps are unchanged.** This is a pilot, not a rollout — see
+  [Adoption](/philosophies/adoption) on the docs site for the full before/after and what's still
+  open.
 `.trim();
 
 const output = `---\n${yamlStr}---\n\n${body}\n`;
