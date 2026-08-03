@@ -14,4 +14,8 @@ components (Button, Input Field, Modal, Tooltip, Stat, Accordion, Table Header);
 (`display-large`, `h1`, `h5`, `h6`, `paragraph-medium`) remain genuinely
 proposed defaults pending further confirmation.
 
+**Theme-agnostic**: font-size, weight, line-height, and letter-spacing don't need a dark-mode
+variant — only the *text color* applied alongside a style changes by theme (see
+[Colors → Dark mode](/tokens/colors#dark-mode-recommended-not-shipped-anywhere-yet)).
+
 <TypeScale />

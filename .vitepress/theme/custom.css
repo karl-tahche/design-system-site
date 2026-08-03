@@ -2,14 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* tahche-design-tokens has no dark-mode tokens at all — every reference component here
-   assumes a light page background (e.g. neutral-900 text, white surfaces). Every live demo
-   is wrapped in .ds-demo (see each components/*.md page) so it renders correctly regardless
-   of this SITE's own dark/light toggle, which is a VitePress feature, not a Tahche one. */
+/* tahche-design-tokens has no real, shipped dark-mode tokens — none of the 5 apps have a dark
+   mode today. This site's reference components now implement the Recommended dark-mode mapping
+   documented on Foundations -> Colors (reuse existing ramp steps, flip which one plays which
+   role) via Tailwind `dark:` variants, so every live demo responds correctly to this SITE's own
+   dark/light toggle. See tokens/colors.md's "Dark mode" section for the mapping this follows. */
 .ds-demo {
   font-family: theme('fontFamily.sans');
   background-color: #ffffff;
   border: 1px solid theme('colors.neutral.200');
   border-radius: theme('borderRadius.md');
   padding: theme('spacing.6');
+}
+.dark .ds-demo {
+  background-color: theme('colors.neutral.900');
+  border-color: theme('colors.neutral.700');
 }

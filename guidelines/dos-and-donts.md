@@ -95,3 +95,9 @@ an excuse to import generic advice wholesale.
   "on" state is `bg-blue-600` (Tailwind stock blue) identically across all 4 real copies, but
   that's a Flowbite snippet that was never wired to `primary-500`, not a deliberate decision to
   use a second blue.
+- **Do** treat a `{ramp}-foreground` token as scoped to that ramp's own `500` tone as the
+  background. **Don't** reuse it against a different step in the same ramp and assume the
+  guarantee carries over — `neutral-foreground` passes against `neutral-500` (8.89:1) but is
+  functionally invisible against `neutral-900` (1:1, the same color twice) and fails badly
+  against `neutral-700`/`800` too. A step being in the same ramp doesn't make a foreground
+  pairing safe; only the specific 500 pairing is confirmed.

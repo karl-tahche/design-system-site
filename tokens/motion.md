@@ -14,4 +14,6 @@ for continuous/looping motion only (spinners, marquees).
 of the 5 apps — not shown in the demo below since this page is about the token values
 themselves, but worth remembering every time one of these is used.
 
+**Theme-agnostic** — duration and easing don't change by theme; no dark-mode variant needed here.
+
 <MotionDemo />

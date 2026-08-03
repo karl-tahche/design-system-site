@@ -22,6 +22,8 @@ is a real prerequisite for adoption, not just documentation.
 
 Values rendered directly from `tahche-design-tokens/tokens/radius.json`.
 
+**Theme-agnostic** — a corner radius doesn't change by theme; no dark-mode variant needed here.
+
 <div class="flex flex-wrap gap-6">
   <div v-for="step in steps" :key="step.key" class="text-center">
     <div class="h-20 w-20 bg-primary-100" :style="{ borderRadius: step.value }" />

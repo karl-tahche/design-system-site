@@ -31,7 +31,7 @@ const active = ref(0);
         variant === 'line' && 'border-b-2 px-4 py-2',
         variant === 'line' && (active === i ? 'border-primary-500' : 'border-transparent'),
         variant === 'pill' && 'rounded-sm px-3 py-2',
-        active === i ? 'bg-primary-500 text-white' : 'text-neutral-750 hover:bg-primary-50',
+        active === i ? 'bg-primary-500 text-white' : 'text-neutral-750 hover:bg-primary-50 dark:text-neutral-300 dark:hover:bg-primary-900',
       ]"
     >
       {{ tab }}

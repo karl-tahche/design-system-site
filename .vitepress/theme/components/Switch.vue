@@ -21,12 +21,12 @@ defineEmits(['update:modelValue']);
     @click="$emit('update:modelValue', !modelValue)"
     :class="[
       'relative h-6 w-11 rounded-full transition-colors duration-fast ease-standard disabled:cursor-not-allowed disabled:opacity-50',
-      modelValue ? 'bg-primary-500' : 'bg-neutral-200',
+      modelValue ? 'bg-primary-500' : 'bg-neutral-200 dark:bg-neutral-700',
     ]"
   >
     <span
       :class="[
-        'absolute top-0.5 h-5 w-5 rounded-full border border-neutral-300 bg-white transition-transform duration-fast ease-standard',
+        'absolute top-0.5 h-5 w-5 rounded-full border border-neutral-300 bg-white transition-transform duration-fast ease-standard dark:border-neutral-600',
         modelValue ? 'translate-x-[22px]' : 'translate-x-0.5',
       ]"
     />

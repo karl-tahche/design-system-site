@@ -23,25 +23,25 @@ defineEmits(['update:modelValue']);
 
 <template>
   <label class="flex w-64 flex-col gap-1.5">
-    <span class="text-paragraph-small-500 text-neutral-900">{{ label }}</span>
+    <span class="text-paragraph-small-500 text-neutral-900 dark:text-neutral-100">{{ label }}</span>
     <input
       :value="modelValue"
       :placeholder="placeholder"
       :disabled="disabled"
       @input="$emit('update:modelValue', $event.target.value)"
       :class="[
-        'text-paragraph-small text-neutral-900 outline-none transition-colors duration-fast ease-standard placeholder:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-400',
-        variant === 'box' && 'rounded-sm border bg-white px-3 py-2 shadow-xsmall disabled:shadow-none focus:shadow-focus-ring',
-        variant === 'box' && !error && 'border-neutral-200 focus:border-primary-300',
-        variant === 'box' && error && 'border-destructive-300',
+        'text-paragraph-small text-neutral-900 outline-none transition-colors duration-fast ease-standard placeholder:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-400 dark:text-neutral-100 dark:placeholder:text-neutral-600 dark:disabled:text-neutral-600',
+        variant === 'box' && 'rounded-sm border bg-white px-3 py-2 shadow-xsmall disabled:shadow-none focus:shadow-focus-ring dark:bg-neutral-800 dark:shadow-none',
+        variant === 'box' && !error && 'border-neutral-200 focus:border-primary-300 dark:border-neutral-700 dark:focus:border-primary-400',
+        variant === 'box' && error && 'border-destructive-300 dark:border-destructive-700',
         variant === 'line' && 'border-b bg-transparent px-0 py-2.5',
-        variant === 'line' && !error && 'border-neutral-200 focus:border-primary-300',
-        variant === 'line' && error && 'border-destructive-300',
+        variant === 'line' && !error && 'border-neutral-200 focus:border-primary-300 dark:border-neutral-700 dark:focus:border-primary-400',
+        variant === 'line' && error && 'border-destructive-300 dark:border-destructive-700',
       ]"
     />
     <span
       v-if="helperText"
-      :class="['text-paragraph-small', error ? 'text-destructive-500' : 'text-neutral-500']"
+      :class="['text-paragraph-small', error ? 'text-destructive-500 dark:text-destructive-400' : 'text-neutral-500 dark:text-neutral-400']"
     >
       {{ helperText }}
     </span>

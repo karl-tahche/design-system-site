@@ -28,14 +28,14 @@ defineProps({
       variant === 'link' && 'h-auto py-3 px-0',
       variant === 'primary' && !disabled && !loading && 'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-600 active:text-primary-200',
       variant === 'primary' && (disabled || loading) && 'bg-primary-400 text-white cursor-not-allowed',
-      variant === 'secondary' && !disabled && !loading && 'bg-primary-50 text-primary-500',
-      variant === 'secondary' && (disabled || loading) && 'bg-primary-50 text-primary-400 cursor-not-allowed',
-      variant === 'outlined' && !disabled && !loading && 'border border-solid border-primary-500 bg-transparent text-primary-500',
-      variant === 'outlined' && (disabled || loading) && 'border border-solid border-primary-400 bg-transparent text-primary-400 cursor-not-allowed',
-      variant === 'tertiary' && !disabled && !loading && 'border border-solid border-neutral-200 bg-white text-neutral-700',
-      variant === 'tertiary' && (disabled || loading) && 'border border-solid border-neutral-200 bg-white text-neutral-400 cursor-not-allowed',
-      variant === 'link' && !disabled && !loading && 'bg-transparent text-primary-500',
-      variant === 'link' && (disabled || loading) && 'bg-transparent text-primary-400 cursor-not-allowed',
+      variant === 'secondary' && !disabled && !loading && 'bg-primary-50 text-primary-500 dark:bg-primary-900 dark:text-primary-300',
+      variant === 'secondary' && (disabled || loading) && 'bg-primary-50 text-primary-400 cursor-not-allowed dark:bg-primary-900 dark:text-primary-700',
+      variant === 'outlined' && !disabled && !loading && 'border border-solid border-primary-500 bg-transparent text-primary-500 dark:border-primary-300 dark:text-primary-300',
+      variant === 'outlined' && (disabled || loading) && 'border border-solid border-primary-400 bg-transparent text-primary-400 cursor-not-allowed dark:border-primary-700 dark:text-primary-700',
+      variant === 'tertiary' && !disabled && !loading && 'border border-solid border-neutral-200 bg-white text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300',
+      variant === 'tertiary' && (disabled || loading) && 'border border-solid border-neutral-200 bg-white text-neutral-400 cursor-not-allowed dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-600',
+      variant === 'link' && !disabled && !loading && 'bg-transparent text-primary-500 dark:text-primary-300',
+      variant === 'link' && (disabled || loading) && 'bg-transparent text-primary-400 cursor-not-allowed dark:text-primary-700',
     ]"
   >
     <span

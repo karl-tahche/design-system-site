@@ -14,6 +14,8 @@ Tailwind config changes, only the discipline to stop reaching for arbitrary brac
 
 Values rendered directly from `tahche-design-tokens/tokens/spacing.json`.
 
+**Theme-agnostic** — spacing doesn't change by theme; no dark-mode variant needed here.
+
 <div class="flex flex-col gap-2">
   <div v-for="step in steps" :key="step.key" class="flex items-center gap-4">
     <span class="text-paragraph-small-500 w-10 text-neutral-900 dark:text-neutral-100">{{ step.key }}</span>
