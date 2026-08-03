@@ -22,11 +22,19 @@ progression), a real Progress Step primitive is a reasonable near-term addition:
 exist as tokens — only the connecting-line layout is new.
 
 ```vue
-<!-- illustrative only — not yet implemented anywhere -->
+<!-- illustrative only — not yet implemented in any of the 5 real apps -->
 <ProgressStep :steps="['Details', 'Requirements', 'Review', 'Publish']" :current="2" />
 ```
 
 ## Status
 
-Open. Prototype against the job-posting wizard first, since it's the clearest real candidate use
-case, then promote to a shared component if it proves out.
+Prototyped — not yet in any of the 5 real apps. The first real, working implementation lives in
+`tahche-interview-prep-demo` (`src/components/ProgressStep.vue`), a standalone test app built to
+exercise the design system end to end (see [Adoption](/philosophies/adoption)), using the exact
+shape recommended above. `current` there is 0-based, matching typical JS convention — worth
+carrying that convention forward if this gets promoted into any of the 5 real apps, to avoid the
+1-based-vs-0-based ambiguity the original illustrative example above left open.
+
+Still open: promoting this from "prototyped in a test app" to "Existing" needs a real candidate
+inside one of the 5 apps — the job-posting wizard remains the clearest fit, since it's a genuine
+multi-step flow with no visual step indicator today.

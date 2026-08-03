@@ -49,7 +49,7 @@ Documented as open gaps, not invented around — see each page for the recommend
 | Component | Status |
 |---|---|
 | [List Field](/components/list-field) | Closest real pattern: ad hoc repeater rows built from Button |
-| [Progress Step](/components/progress-step) | Step-index logic exists; no visual step indicator anywhere |
+| [Progress Step](/components/progress-step) | Step-index logic exists; no visual step indicator in any of the 5 real apps — but now prototyped once, in `tahche-interview-prep-demo` |
 | [Date Picker](/components/date-picker) | Two libraries wrapped, neither themed past the trigger input |
 | [Sticky Alert](/components/sticky-alert) | No persistent, viewport-anchored banner exists anywhere |
 

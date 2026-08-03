@@ -63,6 +63,16 @@ career-web's `package.json` now has:
 all three jobs (PR checks, staging deploy, production deploy) — so it gates the same PRs the
 existing lint already gates.
 
+## A second consumer: tahche-interview-prep-demo
+
+Not one of the 5 production apps — a standalone testbed built specifically to exercise this
+system with a real user flow (upload a resume, describe a role, get a tailored interview script
+back), rather than a docs-site swatch. It surfaced a genuine need for a step indicator, which is
+how [Progress Step](/components/progress-step) — documented here as "Not yet built" — got its
+first real prototype, built against the shape already recommended on that page. It also exercises
+the dark-mode strategy (a light/dark toggle in its header) and runs `tahche-tokens-lint` clean
+from day one.
+
 ## What this doesn't do yet
 
 - The other 4 apps (recruitment-portal, client-web, client-dashboard, dashboard) still hand-copy
