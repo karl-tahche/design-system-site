@@ -735,3 +735,27 @@ whatever an agent generates from it.
   guessing a "reasonable-looking" token is the same failure mode this file's own Badge mistake
   already demonstrated once, just committed by a model instead of a person. Prefer a real grep of
   the 5 apps over an assumption, exactly as this file's own generation process does.
+
+## Adoption
+
+Documenting a rule and enforcing it are different things. Before this section existed, this
+package had exactly one real consumer — the docs site itself; all 5 product apps hand-copied their
+own version of the same ramps into their own `tailwind.config.js`, with nothing stopping that copy
+from drifting.
+
+- **career-web is the pilot.** Chosen by evidence (smallest codebase, lowest hardcoded-hex count of
+  the 5 apps), its `tailwind.config.js` now uses `presets: [require('tahche-design-tokens')]`
+  instead of a hand-copied ramp. This surfaced a real naming disagreement — the app's ramp is
+  called `pneutral`, not `neutral` — kept as a direct alias to the real ramp (not a second
+  hardcoded copy) rather than silently renamed across ~53 call sites. It also fixed a real bug: the
+  app's hand-copied `destructive` ramp had `800` and `900` set to the identical hex, a
+  copy-paste error; the token package's real `800` value is a distinct step.
+- **A CI lint closes the loop.** `bin/check-token-usage.mjs` (exposed as `tahche-tokens-lint`)
+  scans an app's source for hardcoded hex values that duplicate a real token and fails on anything
+  **new**. It's a ratchet, not a rewrite — career-web already had 334 pre-existing hits, tracked in
+  a checked-in `.token-lint-baseline.json`, left alone rather than mass-rewritten in the same pass
+  as turning the lint on. `yarn lint:tokens` now runs in career-web's CI alongside its existing
+  lint step.
+- **The other 4 apps are unchanged.** This is a pilot, not a rollout — see
+  [Adoption](/philosophies/adoption) on the docs site for the full before/after and what's still
+  open.
