@@ -9,7 +9,7 @@
     "docs:preview": "vitepress preview"
   },
   "dependencies": {
-    "tahche-design-tokens": "file:../tahche-design-tokens",
+    "tahche-design-tokens": "file:./tahche-design-tokens",
     "vue": "^3.5.40"
   },
   "devDependencies": {
