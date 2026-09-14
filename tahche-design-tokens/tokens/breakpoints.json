@@ -1,0 +1,10 @@
+{
+  "breakpoint": {
+    "$description": "RATIFIED (2026-07-25) — sign-off given, no longer a proposal. Every app today carries 3 separate, conflicting breakpoint systems at once (custom Tailwind screens, SCSS $breakpoint-* vars, CSS custom properties), but a real-usage audit found that regardless of what's configured, developers overwhelmingly already reach for standard Tailwind sm/md/lg/xl/2xl in practice: 217-2,844 real responsive-prefix instances per app (xl: alone hit 2,533 uses in one app), versus just 0-46 instances of the custom mobile375/mobile/mobilesmall/tablet/desktop scheme per app — and those few instances are almost entirely confined to legacy Auth screens, not the current app. Consolidating onto the standard scale isn't a risky migration into unfamiliar territory; it's formalizing what's already the dominant real pattern. tablet:768 already equals md:768 exactly, so nothing is lost. Remaining work is mechanical, not a design question: updating the handful of legacy Auth-screen classes in each app to the standard scale, and wiring these values into each app's actual Tailwind config (none currently define a custom screens key matching this scale) — tracked as a Phase 3 prerequisite, same as radius.",
+    "sm": { "$value": "640px", "$type": "dimension" },
+    "md": { "$value": "768px", "$type": "dimension" },
+    "lg": { "$value": "1024px", "$type": "dimension" },
+    "xl": { "$value": "1280px", "$type": "dimension" },
+    "2xl": { "$value": "1536px", "$type": "dimension" }
+  }
+}

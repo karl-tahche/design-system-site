@@ -1,0 +1,162 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --color-primary-50: #f2f3ff;
+  --color-primary-100: #e0e2ff;
+  --color-primary-200: #bcbff5;
+  --color-primary-300: #8d92eb;
+  --color-primary-400: #555de0; /** Also used (2026-07-25) as button-primary-disabled's background, bumped up from Figma's literal primary-300 — see DESIGN.md's Button section. White text at 5.21:1 (AA-passing as a side effect, not the reason for the change — disabled controls are WCAG-1.4.3-exempt regardless). */
+  --color-primary-500: #353dd7; /** Base primary. Confirmed identical across all 5 apps. */
+  --color-primary-600: #272eb8;
+  --color-primary-700: #1e248f;
+  --color-primary-800: #0c1166;
+  --color-primary-900: #060945;
+  --color-primary-foreground: #ffffff; /** NEW (2026-07-25), added following the shadcn-vue foreground-pairing pattern: the safe text color when primary-500 is used as a solid background (e.g. a filled button). Verified via real WCAG contrast math: white on primary-500 is 7.50:1, well clear of the 4.5:1 AA minimum. This is a general-purpose pairing recommendation, not a retroactive edit of any already-audited component — see button-primary-disabled elsewhere in this file for a real, confirmed contrast failure this pattern would have caught if it had existed sooner. */
+  --color-secondary-50: #fffaeb;
+  --color-secondary-100: #fff4d1;
+  --color-secondary-200: #ffeba8;
+  --color-secondary-300: #ffe07a;
+  --color-secondary-400: #ffd857;
+  --color-secondary-500: #fbd249; /** Base secondary. Confirmed identical across all 5 apps. */
+  --color-secondary-600: #e8bf35;
+  --color-secondary-700: #d1a81f;
+  --color-secondary-800: #b58d09;
+  --color-secondary-900: #997500;
+  --color-neutral-50: #f7f9ff;
+  --color-neutral-100: #f5f6fc;
+  --color-neutral-200: #edeef2;
+  --color-neutral-300: #dddee3;
+  --color-neutral-400: #cccdd1;
+  --color-neutral-500: #b3b4b8;
+  --color-neutral-600: #737375;
+  --color-neutral-700: #4f4f4f;
+  --color-neutral-750: #3f3f3f; /** New — a real, heavily-used gray that was completely undocumented until this audit. Confirmed via live Figma design context as the actual secondary/body text color in Breadcrumb, Tab, Table Header, Table Content Cell, Tooltip description, Button Tertiary, Accordion description, and more distinct components — used more often than neutral-700 itself. Sits between neutral-700 (#4F4F4F) and neutral-800 (#2E2E2E); named '750' to reflect that position, not an official Figma variable name (none existed for it). CORRECTED 2026-07-25: 'Pagination', 'Side Nav Item', and 'Button Group' were removed from this list — a real-code audit found none of the three actually uses neutral-750: Pagination's real inactive text is neutral-700 (#4F4F4F) or neutral-500; Side Navigation's real active/inactive text is text-white/text-primary-500, not any neutral step; and the literal `ButtonGroup.vue` component turned out to be a bare layout wrapper with no text color of its own at all. All three were Figma-only claims that didn't survive contact with real code — see this file's Pagination, Side Navigation, and Button Group prose sections. */
+  --color-neutral-800: #2e2e2e;
+  --color-neutral-900: #141414;
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-200: #bbf7d0;
+  --color-success-300: #86efac;
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+  --color-success-800: #166534;
+  --color-success-900: #14532d;
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+  --color-destructive-50: #fef2f2;
+  --color-destructive-100: #fee2e2;
+  --color-destructive-200: #fecaca;
+  --color-destructive-300: #fca5a5;
+  --color-destructive-400: #f87171;
+  --color-destructive-500: #ef4444;
+  --color-destructive-600: #dc2626;
+  --color-destructive-700: #b91c1c;
+  --color-destructive-800: #991b1b; /** Fixed from #7F1D1D (was a duplicate of 900). */
+  --color-destructive-900: #7f1d1d;
+  --color-progress-50: #eff6ff;
+  --color-progress-100: #dbeafe;
+  --color-progress-200: #bfdbfe;
+  --color-progress-300: #93c5fd;
+  --color-progress-400: #60a5fa;
+  --color-progress-500: #3b82f6; /** Base progress/in-progress blue — Tailwind's stock blue-500. Not yet used anywhere in the 5 apps' real code (see extended.loader-blue for what IS currently real). */
+  --color-progress-600: #2563eb;
+  --color-progress-700: #1d4ed8;
+  --color-progress-800: #1e40af;
+  --color-progress-900: #1e3a8a;
+  --color-brand-royal-blue: #353dd7; /** 'Brand Royal Blue' per Marketing's real brand guideline (2026-07-24) — currently identical to primary-500, kept as its own literal rather than a reference since the two are independently-owned values that could diverge later (see the brand-level $description above). Previously carried as a different literal (#2232D7) under the old key 'blue', on the incorrect assumption that they were deliberately distinct; the real guideline corrects the value, not the independence. */
+  --color-brand-yellow: #fbd249; /** 'Brand Yellow' per Marketing's real brand guideline (2026-07-24) — currently identical to secondary-500, kept as its own literal for the same reason as Brand Royal Blue above. Previously carried as a different literal (#FBD24D) under the old key 'gold', a single-hex-digit drift now known to be simply wrong. */
+  --color-brand-light-grey: #f9f9f9; /** 'Brand Light Grey' — NEW (2026-07-24), from Marketing's real brand guideline. No equivalent elsewhere in this file (lighter than neutral-50's #F7F9FF and a different hue entirely — this is a true neutral gray, not neutral's slightly-blue-tinted one). */
+  --color-brand-red: #ed4342; /** 'Brand Red' — NEW (2026-07-24), from Marketing's real brand guideline. Distinct from destructive-500 (#EF4444) despite the visual similarity — not merged, since the brand guideline and the product destructive-state ramp are different, independently-owned concerns that happen to land near each other. */
+  --color-brand-dark-grey: #a8a9ad; /** 'Brand Dark Grey' — NEW (2026-07-24), from Marketing's real brand guideline. Distinct from neutral-500 (#B3B4B8) despite sitting close on the value scale — kept separate rather than merged, same reasoning as Brand Red above. */
+  --color-request-facilities: #ef9a49;
+  --color-request-cash-advance: #a954b7;
+  --color-request-room: #ef7d7c;
+  --color-request-petty-cash: #e255ac;
+  --color-request-procurement: #8277bb; /** RESOLVED (2026-07-25): kept, same precedent as primary-800 elsewhere in this file — a ramp step with zero current real usage, retained for scale completeness within a category that's otherwise genuinely load-bearing, rather than dropped outright. Revisit if it's still unused at the next audit. */
+  --color-request-business-trip: #6bbfaf; /** RESOLVED (2026-07-25): same call as procurement — dead even in dashboard today, kept for scale completeness rather than dropped, since the category as a whole is genuinely load-bearing. */
+  --color-extended-muted-blue-gray: #667085; /** Found in career-web (60×), client-web (38×), recruitment-portal (6×). No canonical match. */
+  --color-extended-dark-slate: #101828; /** Found in career-web (36×), client-dashboard (5×), recruitment-portal (5×). Coincidentally shares its RGB base (16,24,40) with the elevation shadow color, but used here as a solid text/background color, unrelated to shadows. */
+  --color-extended-charcoal: #2f3537; /** Found in client-dashboard (6×), dashboard (part of a larger cluster), recruitment-portal (25×). */
+  --color-extended-indigo-navy: #393960; /** Found in client-web (8×), dashboard (~14×), recruitment-portal (10×). */
+  --color-extended-loader-blue: #30699d; /** NEW (2026-07-25), found auditing the real Loader component: this teal-blue is the default spinner color in a shared Loader.vue/LoaderScreen.vue pair present in 4 of the 5 apps (client-web, client-dashboard, recruitment-portal, dashboard) — real, convergent, cross-app evidence at the same bar as the other extended colors, distinct from primary-500 (#353DD7), likely a pre-tokenization legacy choice rather than an intentional brand color. career-web's own independent Loader instead uses primary-500/primary-100 directly (already tokenized) — worth a design decision on whether to migrate the other 4 apps' loaders to primary-500 or keep this as its own real, named color. */
+  --elevation-xsmall: 0px 1px 2px rgba(16, 24, 40, 0.05); /** Confirmed repeatedly via named 'Drop shadow/XSmall' variables: Input Field/Box (removed entirely in the Disabled state), and Button Group. Real-usage audit: the most consistently-used named shadow token across all 5 apps. */
+  --elevation-focus-ring: 0px 0px 0px 3px rgba(53, 61, 215, 0.12); /** REPLACED (2026-07-25), by real code evidence over the earlier Figma-sourced value: a 2026-07-25 audit of all 5 apps found the previous #E1E1FE solid 4px ring has ZERO real usage anywhere in any codebase (`grep -rni E1E1FE` across all 5 apps' src/ returns nothing). Meanwhile a translucent primary-500-at-12%-alpha, 3px, no-blur ring (`rgba(53,61,215,0.12)`) is a real, repeated, consistent implementation across 2 live apps (recruitment-portal: 4 files: TagInput, SalaryRangeSection, PillSelect, JobGeneratedContent; client-web: 3 identical instances sharing the same Jobs feature code) plus a near-variant in career-web's LoginForm (same shape/alpha/spread, indigo-600 instead of primary-500 — likely pre-tokenization drift, not a separate intentional pattern). Per this repo's own strategy (code over Figma — Figma gets updated to match code, not the reverse), this real, cross-app pattern replaces the never-shipped Figma value as the canonical token. Not every input actually uses a ring at all — a plain border-color-only focus swap (no box-shadow) is actually the single most-repeated focus treatment by file count (recruitment-portal's entire shared Form component library, 14 files) — that lighter-weight treatment remains valid too, this token is for where a ring specifically is warranted. */
+  --elevation-small: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px -1px rgba(16, 24, 40, 0.1); /** Confirmed via the Stat component's named 'Drop shadow/Small' variable. */
+  --elevation-medium: 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1); /** Real-usage audit: weak-to-moderate — near-zero in most apps but a healthy 85 uses in dashboard specifically. Not dead, just unevenly adopted. */
+  --elevation-large: 0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1); /** Confirmed via the Tooltip component's named 'Drop shadow/Large' variable. */
+  --elevation-xlarge: 0px 20px 25px -5px rgba(16, 24, 40, 0.1), 0px 8px 10px -6px rgba(16, 24, 40, 0.1); /** Confirmed twice — once via a named Figma variable, again via live design context on the Modal component (both Horizontal and Vertical alignment). */
+  --elevation-xxlarge: 0px 25px 50px -12px rgba(16, 24, 40, 0.25); /** Real-usage audit: dead as a named class in every one of the 5 apps checked — the least-evidenced token in this file. Kept for scale completeness; confirm it's still wanted before Phase 3. */
+  --motion-duration-fast: 150ms; /** Micro-interactions: hover/focus color or shadow changes, button state changes. The single most common value in client-web (61 uses) and recruitment-portal (51 uses). */
+  --motion-duration-base: 250ms; /** The default for most transitions — dashboard's single most common value (85 uses) and client-dashboard's (28 uses). Use this when in doubt. */
+  --motion-duration-slow: 500ms; /** Larger surface changes: modal/drawer open-close, page-level transitions. career-web's single most common value (14 uses), also present at real volume in every other app (17-23 uses each). */
+  --motion-easing-standard: ease-in-out; /** Canonical general-purpose easing, chosen 2026-07-25. Use for the vast majority of transitions (color, shadow, transform, opacity). */
+  --motion-easing-linear: linear; /** Reserved for continuous/looping motion only — spinners, marquees, indeterminate progress. Confirmed as the real, consistent choice for these specific cases across all 5 apps; never used as a general transition easing anywhere in the real data. */
+  --radius-none: 0px;
+  --radius-sm: 6px; /** Confirmed across Button (all variants/sizes), Input Field/Box, Modal, Accordion (implicit, no radius), Tab/Pill, Table Leading Cell's icon container, and — confirmed 2026-07-25 via real code — the shared Button component's remove/add controls inside List Field row-repeaters (explicit `border-radius: 6px` in recruitment-portal's Button.vue; dashboard-main's equivalent drifts to Tailwind's stock 4px instead, a real, unresolved inconsistency). CORRECTED 2026-07-25: 'File Upload Prompt' and 'Side Nav Item' were removed from this list — a real-code audit found File Upload actually uses 20px (`3xl`, see its entry) and Side Nav's active item uses 8px (`md`) in every real implementation, not 6px. Both were Figma-only claims that didn't survive contact with real code. */
+  --radius-md: 8px; /** Confirmed via Stat and Tooltip — both independently use exactly 8px. Also confirmed 2026-07-25 via real code: Side Navigation's active item (`rounded-lg`), and the outer track of the one real segmented-control pattern found (`ListViewToggle.vue` in recruitment-portal, `rounded-lg p-1`) — the literal `ButtonGroup.vue` component that this token was originally attributed to turned out to be a bare, unstyled layout wrapper with no radius of its own; see this file's Components section for the full story. */
+  --radius-lg: 10px; /** The single most-evidenced arbitrary value in real code: 100+ combined rounded-[10px]/rounded-[0.625rem] instances across 4 of the 5 apps (dashboard alone has 97+), because none of them have this value configured as a named class. */
+  --radius-xl: 12px; /** A borderline, weaker-evidence gap sits just above this value: 14px appears in 3 of 5 apps (client-web's single most-common arbitrary radius value, 14 uses; also present at lower volume in career-web and dashboard). RESOLVED (2026-07-25): not a new 7th step — 14px snaps to 2xl(16px) rather than xl(12px). Numerically it's equidistant (2px either way), but client-web (its strongest source) also independently validated 3xl(20px) as a real, needed step, suggesting that app trends toward more generous rounding overall — 16px fits that pattern better than rounding down to 12px would. */
+  --radius-2xl: 16px; /** Also the resolved snap target for the real-but-unformalized 14px gap seen in 3 of 5 apps — see xl's entry for reasoning. */
+  --radius-3xl: 20px; /** Added from the 2026-07-23 real-usage audit, not from Figma. 20px recurs as a hand-rolled arbitrary rounded-[20px]/rounded-[1.25rem] value across 4 of the 5 apps (80+ combined instances) with no existing token covering it — strong enough, consistent enough evidence to formalize as a real scale step. STRENGTHENED 2026-07-25: File Upload's real component (`FormUploadBox.vue`, present in 4 of 5 apps) uses an explicit `border-radius: 20px` in every real copy, overriding Tailwind's own `rounded-lg` class also present in the markup — a fifth, direct confirmation, and a correction of this file's earlier claim that File Upload confirmed `sm` (6px) instead. */
+  --radius-full: 9999px; /** Confirmed via Avatar (circular, literal Figma value 100px which renders identically to 9999px at any realistic size), Badge (24px on a 32px-tall pill — over-rounded to guarantee a full pill regardless of height), and Form Control Switch — confirmed 2026-07-25 via real code: the shared `FormToggle.vue` uses `rounded-full` on both its track and thumb, present in 4 of 5 apps. */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-32: 128px;
+  --spacing-40: 160px;
+  --spacing-48: 192px;
+  --typography-font-family-sans: Inter, Arial, Helvetica, sans-serif; /** The font actually rendered in all 5 apps today, applied via a global CSS override rather than Tailwind config. This token is what fixes that — register it as the Tailwind 'sans' default. */
+  --typography-font-family-mono: 'SF Mono', 'Cascadia Code', Consolas, monospace; /** New token — no app currently defines a mono stack. Proposed for code/data display. */
+  --color-secondary-foreground: var(--color-neutral-900); /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on secondary-500 fails badly (1.46:1 — gold is a light, bright color, not a dark one like primary/destructive), so this pairs with neutral-900 instead, which passes at 12.65:1. A background this bright always needs dark text, never white — worth remembering when this ramp gets used as a solid fill anywhere. Referenced (2026-07-25 cleanup), not re-hardcoded — was a duplicate literal #141414 before. */
+  --color-neutral-foreground: var(--color-neutral-900); /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern, for when neutral-500 is used as a solid fill (e.g. a neutral badge/tag). Verified via real WCAG contrast math: white on neutral-500 fails (2.07:1), neutral-900 passes at 8.89:1. Same value as neutral-900 itself, kept as a separate semantic entry so 'what text goes on a neutral-500 background' has one clear answer rather than requiring the reader to independently work out the pairing. Referenced (2026-07-25 cleanup) rather than a duplicate literal, so the two can never silently drift apart. */
+  --color-success-foreground: var(--color-neutral-900); /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on success-500 fails (2.28:1 — this green is too light/saturated for white text), neutral-900 passes at 8.08:1. Referenced (2026-07-25 cleanup), not re-hardcoded. */
+  --color-warning-foreground: var(--color-neutral-900); /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on warning-500 fails (2.15:1 — amber is too light for white text), neutral-900 passes at 8.58:1. Referenced (2026-07-25 cleanup), not re-hardcoded. */
+  --color-destructive-foreground: var(--color-neutral-900); /** NEW (2026-07-25), shadcn-vue foreground-pairing pattern. ⚠️ Genuine tension found while computing this one, not silently resolved: white on destructive-500 measures 3.76:1 — it clears the 3:1 'large/bold text' AA exception but FAILS the 4.5:1 normal-text AA minimum that applies to typical 14-16px Medium-weight button/badge labels. neutral-900 passes fully at 4.90:1, so it's the value used here. But white is almost certainly what's already shipped on Button/Badge's Destructive-filled variants today, matching the white-text pattern used everywhere else (Primary, etc.) — meaning real components likely need a look, not just this token. This is a second, independently-discovered contrast risk alongside button-primary-disabled's confirmed failure, found simply by doing the same math for every ramp rather than assuming white always works. Referenced (2026-07-25 cleanup), not re-hardcoded. */
+  --color-progress-foreground: var(--color-neutral-900); /** Verified via real WCAG contrast math: white on progress-500 measures 3.68:1 — clears the 3:1 large-text/UI-component AA exception but fails the 4.5:1 normal-text minimum, the same situation destructive-500 is in. neutral-900 passes cleanly at 5.01:1, so it's the value used here. */
+  --color-request-coe: var(--color-secondary-700); /** RESOLVED (2026-07-25): confirmed intentional, not a duplicate bug — 'COE requests styled in the brand gold' is a coherent, sensible design choice (COE = Certificate of Employment, a formal/official document type, plausibly meant to stand out via the brand accent rather than an arbitrary request-category hue). Kept as an explicit alias of secondary-700, referenced rather than a duplicate literal (2026-07-25 cleanup) — if secondary-700 ever moves, coe tracks it intentionally instead of silently drifting into an unexplained mismatch. */
+  --typography-display-large: 800 52px/56px var(--typography-font-family-sans); /** Weight changed 2026-07-25 from Bold(700) to Extrabold(800), following directly from h2's conflict resolution: Bold(700) was never confirmed by an actual Figma variable anywhere in this file, and the one real Figma instance that rendered as Bold (the Title component, at h2's size) turned out to be the drifted value, not the canonical one — the ratified foundation-page weight was Extrabold. Matching display-large to its now-resolved neighbors (h1/h2, both 800) removes Bold as a separate, never-confirmed tier. Still a proposed default for this specific size, not itself confirmed. Real-usage audit (2026-07-23): rare but real — dead in 3 of 5 apps, used in the other 2 at low volume (4-8 instances each). */
+  --typography-display-small: 700 44px/48px var(--typography-font-family-sans); /** ⚠️ DEPRECATED (2026-07-25) in favor of h1 (40px). Real-usage audit (2026-07-23): this was the weakest size in the entire type scale — dead in 3 of 5 apps, and only 1 real usage each in the other 2 (a single arbitrary instance apiece). Sitting 4px from h1 (solidly used in 4 of 5 apps) with no evidence anyone needs the distinction, this token is kept only so nothing that already references it breaks — new work should use h1 directly. Remove entirely once nothing points to it. */
+  --typography-h1: 800 40px/48px var(--typography-font-family-sans); /** Weight proposed by extrapolation from the confirmed H2 weight, not itself confirmed. Real-usage audit (2026-07-23): solidly used in 4 of 5 apps (only career-web has zero real usage) — a real, load-bearing size, unlike its close neighbor display-small (44px). */
+  --typography-h2: 800 36px/44px var(--typography-font-family-sans); /** RESOLVED (2026-07-25), by explicit design decision: the Typography foundation page's own named Figma variable says 'Heading/H2/Extrabold/Desktop' (800, used here), but the Title component's live design context showed the same 36/44 size rendered as Inter Bold — weight 700, not 800. The foundation page is ratified as canonical; the Title component's Bold rendering is the thing that drifted and should be corrected in Figma/components to match this token, not the other way around. */
+  --typography-h3: 600 32px/40px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Stat component ('Heading/H3/Semibold/Desktop', weight 600) — corrected from an earlier proposed guess of 700. */
+  --typography-h4: 500 28px/36px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Heading/H4/Medium/Desktop'. */
+  --typography-h5: 500 24px/32px var(--typography-font-family-sans); /** Weight changed 2026-07-25 from an unconfirmed Semibold(600) guess to Medium(500) — Medium is confirmed 5/5 times everywhere it appears in this file (the strongest weight-evidence of any tier), versus Semibold's weaker 3/5 confirmation rate. Still a default, not a confirmed value for this specific size, but the safer one. */
+  --typography-h6: 500 20px/28px var(--typography-font-family-sans); /** Weight changed 2026-07-25 from an unconfirmed Semibold(600) guess to Medium(500), same reasoning as h5 — Medium is the most reliably-confirmed weight in this file. */
+  --typography-paragraph-large-400: 400 18px/28px var(--typography-font-family-sans); /** Confirmed via Figma variable 'Paragraph/Large/Regular'. */
+  --typography-paragraph-large-500: 500 18px/28px var(--typography-font-family-sans); /** Confirmed twice — a named Figma variable ('Paragraph/Large/Medium'), and again via live design context on the Modal component's heading text. */
+  --typography-paragraph-large-600: 600 18px/28px var(--typography-font-family-sans); /** New — confirmed via live Figma design context on the Accordion component's title text (Inter Semibold 18/28). Same size as paragraph-large-400/500, a third weight in the same size family. */
+  --typography-paragraph-medium: 400 16px/24px var(--typography-font-family-sans); /** Weight proposed, not confirmed. */
+  --typography-paragraph-medium-500: 500 16px/24px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Button component (Size=Large label uses Inter Medium 16/24) — same size as paragraph-medium, Medium weight instead of Regular, same pairing pattern as paragraph-large-400/500. */
+  --typography-paragraph-small: 400 14px/20px var(--typography-font-family-sans); /** Confirmed twice via live Figma design context: Input Field (Box and Line variants, value/placeholder/helper text) and Modal (description text). */
+  --typography-paragraph-small-500: 500 14px/20px var(--typography-font-family-sans); /** Confirmed twice via live Figma design context: Button (Size=Medium label) and Input Field (label text) both use Inter Medium 14/20. */
+  --typography-paragraph-xsmall: 400 12px/16px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Tooltip component's description text ('Paragraph/XSmall/Regular'). Corrected lineHeight from an earlier proposed guess of 20px to the real 16px. */
+  --typography-label-xsmall: 500 12px/15px var(--typography-font-family-sans); /** Confirmed repeatedly via live Figma design context: Button (Size=Small label), Avatar Group overflow badge, Tab badge, and Table Content Cell's avatar-group overflow badge all use this exact 12/15 Medium style. Distinct from paragraph-xsmall: same fontSize but a tighter 15px line-height and Medium weight. CORRECTED 2026-07-25: 'Side Nav Item badge' was removed from this list — a real-code audit of all 5 apps found no badge/count-indicator element anywhere in any real Side Navigation implementation; this was a Figma-only claim that didn't survive contact with real code. */
+  --typography-overline: 600 12px/20px var(--typography-font-family-sans); /** Confirmed via live Figma design context on the Table Header component ('Paragraph/Overline/Small', uppercase in usage) — corrected fontSize/lineHeight/letterSpacing/weight from an earlier proposed guess. */
+}

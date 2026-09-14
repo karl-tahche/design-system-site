@@ -1,0 +1,235 @@
+{
+  "typography": {
+    "$description": "Real-usage audit (2026-07-23) found a genuine gap this scale doesn't cover: 13px recurs heavily across 3 of the 5 apps (career-web, client-web, recruitment-portal — 116+ combined instances) sitting right between paragraph-xsmall (12px) and paragraph-small (14px). RESOLUTION (2026-07-25): not formalized as its own token — 13px is almost certainly Figma/rem-rounding drift (0.8125rem is an unusually precise, non-round rem value for a deliberate design choice) rather than an intentional size. Recommended fix at the code level: snap any text-[13px] usage to paragraph-small (14px), the single most dominant body size in every app, rather than inventing a permanent token to match an accident. Two related weight consolidations applied in this pass: h5/h6 moved from an unconfirmed Semibold(600) guess to Medium(500), since Medium is the single most-evidenced weight in this entire file (5/5 confirmed wherever it appears) versus Semibold's weaker 3/5 confirmation rate — the safer default until real data says otherwise. display-small (44px) is deprecated in favor of h1 (40px) — see its entry below. Typography is also now emitted as composite Tailwind component classes (e.g. .text-h2 bundling size+line-height+weight+tracking in one class) rather than relying on separately-applied text-size + font-weight utilities that can drift apart — see the tokens repo's build.mjs. Naming convention (2026-07-25): heading styles dropped the redundant \"heading-\" prefix (h1-h6 is already unambiguous on its own), and every weight-bearing suffix now uses the numeral (e.g. paragraph-medium-500, not paragraph-medium-medium) — \"medium\" meant two different things (a size tier and a font-weight) in the same name, which numerals resolve outright.",
+    "fontFamily": {
+      "sans": {
+        "$value": "Inter, Arial, Helvetica, sans-serif",
+        "$type": "fontFamily",
+        "$description": "The font actually rendered in all 5 apps today, applied via a global CSS override rather than Tailwind config. This token is what fixes that — register it as the Tailwind 'sans' default."
+      },
+      "mono": {
+        "$value": "'SF Mono', 'Cascadia Code', Consolas, monospace",
+        "$type": "fontFamily",
+        "$description": "New token — no app currently defines a mono stack. Proposed for code/data display."
+      }
+    },
+    "display-large": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "52px",
+        "lineHeight": "56px",
+        "letterSpacing": "-0.02em",
+        "fontWeight": 800
+      },
+      "$type": "typography",
+      "$confirmed": false,
+      "$description": "Weight changed 2026-07-25 from Bold(700) to Extrabold(800), following directly from h2's conflict resolution: Bold(700) was never confirmed by an actual Figma variable anywhere in this file, and the one real Figma instance that rendered as Bold (the Title component, at h2's size) turned out to be the drifted value, not the canonical one — the ratified foundation-page weight was Extrabold. Matching display-large to its now-resolved neighbors (h1/h2, both 800) removes Bold as a separate, never-confirmed tier. Still a proposed default for this specific size, not itself confirmed. Real-usage audit (2026-07-23): rare but real — dead in 3 of 5 apps, used in the other 2 at low volume (4-8 instances each)."
+    },
+    "display-small": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "44px",
+        "lineHeight": "48px",
+        "letterSpacing": "-0.02em",
+        "fontWeight": 700
+      },
+      "$type": "typography",
+      "$confirmed": false,
+      "$deprecated": true,
+      "$alias": "h1",
+      "$description": "⚠️ DEPRECATED (2026-07-25) in favor of h1 (40px). Real-usage audit (2026-07-23): this was the weakest size in the entire type scale — dead in 3 of 5 apps, and only 1 real usage each in the other 2 (a single arbitrary instance apiece). Sitting 4px from h1 (solidly used in 4 of 5 apps) with no evidence anyone needs the distinction, this token is kept only so nothing that already references it breaks — new work should use h1 directly. Remove entirely once nothing points to it."
+    },
+    "h1": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "40px",
+        "lineHeight": "48px",
+        "letterSpacing": "-0.02em",
+        "fontWeight": 800
+      },
+      "$type": "typography",
+      "$confirmed": false,
+      "$description": "Weight proposed by extrapolation from the confirmed H2 weight, not itself confirmed. Real-usage audit (2026-07-23): solidly used in 4 of 5 apps (only career-web has zero real usage) — a real, load-bearing size, unlike its close neighbor display-small (44px)."
+    },
+    "h2": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "36px",
+        "lineHeight": "44px",
+        "letterSpacing": "-0.02em",
+        "fontWeight": 800
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "RESOLVED (2026-07-25), by explicit design decision: the Typography foundation page's own named Figma variable says 'Heading/H2/Extrabold/Desktop' (800, used here), but the Title component's live design context showed the same 36/44 size rendered as Inter Bold — weight 700, not 800. The foundation page is ratified as canonical; the Title component's Bold rendering is the thing that drifted and should be corrected in Figma/components to match this token, not the other way around."
+    },
+    "h3": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "32px",
+        "lineHeight": "40px",
+        "letterSpacing": "-0.02em",
+        "fontWeight": 600
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "Confirmed via live Figma design context on the Stat component ('Heading/H3/Semibold/Desktop', weight 600) — corrected from an earlier proposed guess of 700."
+    },
+    "h4": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "28px",
+        "lineHeight": "36px",
+        "letterSpacing": "-0.02em",
+        "fontWeight": 500
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "Confirmed via Figma variable 'Heading/H4/Medium/Desktop'."
+    },
+    "h5": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "24px",
+        "lineHeight": "32px",
+        "letterSpacing": "-0.02em",
+        "fontWeight": 500
+      },
+      "$type": "typography",
+      "$confirmed": false,
+      "$description": "Weight changed 2026-07-25 from an unconfirmed Semibold(600) guess to Medium(500) — Medium is confirmed 5/5 times everywhere it appears in this file (the strongest weight-evidence of any tier), versus Semibold's weaker 3/5 confirmation rate. Still a default, not a confirmed value for this specific size, but the safer one."
+    },
+    "h6": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "20px",
+        "lineHeight": "28px",
+        "letterSpacing": "-0.02em",
+        "fontWeight": 500
+      },
+      "$type": "typography",
+      "$confirmed": false,
+      "$description": "Weight changed 2026-07-25 from an unconfirmed Semibold(600) guess to Medium(500), same reasoning as h5 — Medium is the most reliably-confirmed weight in this file."
+    },
+    "paragraph-large-400": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "18px",
+        "lineHeight": "28px",
+        "letterSpacing": "0",
+        "fontWeight": 400
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "Confirmed via Figma variable 'Paragraph/Large/Regular'."
+    },
+    "paragraph-large-500": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "18px",
+        "lineHeight": "28px",
+        "letterSpacing": "0",
+        "fontWeight": 500
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "Confirmed twice — a named Figma variable ('Paragraph/Large/Medium'), and again via live design context on the Modal component's heading text."
+    },
+    "paragraph-large-600": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "18px",
+        "lineHeight": "28px",
+        "letterSpacing": "0",
+        "fontWeight": 600
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "New — confirmed via live Figma design context on the Accordion component's title text (Inter Semibold 18/28). Same size as paragraph-large-400/500, a third weight in the same size family."
+    },
+    "paragraph-medium": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "letterSpacing": "0",
+        "fontWeight": 400
+      },
+      "$type": "typography",
+      "$confirmed": false,
+      "$description": "Weight proposed, not confirmed."
+    },
+    "paragraph-medium-500": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "letterSpacing": "0",
+        "fontWeight": 500
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "Confirmed via live Figma design context on the Button component (Size=Large label uses Inter Medium 16/24) — same size as paragraph-medium, Medium weight instead of Regular, same pairing pattern as paragraph-large-400/500."
+    },
+    "paragraph-small": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "letterSpacing": "0",
+        "fontWeight": 400
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "Confirmed twice via live Figma design context: Input Field (Box and Line variants, value/placeholder/helper text) and Modal (description text)."
+    },
+    "paragraph-small-500": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "letterSpacing": "0",
+        "fontWeight": 500
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "Confirmed twice via live Figma design context: Button (Size=Medium label) and Input Field (label text) both use Inter Medium 14/20."
+    },
+    "paragraph-xsmall": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "letterSpacing": "0",
+        "fontWeight": 400
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "Confirmed via live Figma design context on the Tooltip component's description text ('Paragraph/XSmall/Regular'). Corrected lineHeight from an earlier proposed guess of 20px to the real 16px."
+    },
+    "label-xsmall": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "12px",
+        "lineHeight": "15px",
+        "letterSpacing": "0",
+        "fontWeight": 500
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "Confirmed repeatedly via live Figma design context: Button (Size=Small label), Avatar Group overflow badge, Tab badge, and Table Content Cell's avatar-group overflow badge all use this exact 12/15 Medium style. Distinct from paragraph-xsmall: same fontSize but a tighter 15px line-height and Medium weight. CORRECTED 2026-07-25: 'Side Nav Item badge' was removed from this list — a real-code audit of all 5 apps found no badge/count-indicator element anywhere in any real Side Navigation implementation; this was a Figma-only claim that didn't survive contact with real code."
+    },
+    "overline": {
+      "$value": {
+        "fontFamily": "{typography.fontFamily.sans}",
+        "fontSize": "12px",
+        "lineHeight": "20px",
+        "letterSpacing": "1px",
+        "fontWeight": 600
+      },
+      "$type": "typography",
+      "$confirmed": true,
+      "$description": "Confirmed via live Figma design context on the Table Header component ('Paragraph/Overline/Small', uppercase in usage) — corrected fontSize/lineHeight/letterSpacing/weight from an earlier proposed guess."
+    }
+  }
+}

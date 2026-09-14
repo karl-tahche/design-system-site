@@ -1,0 +1,129 @@
+{
+  "color": {
+    "primary": {
+      "$description": "Canonical product blue. Ratified 2026-07-23, and CORRECTED 2026-07-24: this file previously assumed primary-500 differed from the brand guide's blue (color.brand.blue was carried as a separate #2232D7) — the actual brand guideline from Marketing confirms primary-500 (#353DD7) currently matches 'Brand Royal Blue' exactly. See color.brand.royalBlue — kept as its own independent literal rather than a reference, since brand identity and product color are separately-owned decisions that happen to coincide today, not one value with two names. Real-usage audit (2026-07-23) across all 5 apps: primary-800 is dead or near-dead everywhere (0 uses in 4 of 5 apps, 4 uses in the 5th) — the weakest step in this ramp, kept for scale completeness rather than proven need. Also widespread 'ghost usage': primary-500's hex (#353DD7) is hardcoded raw in every app, in one app (client-web) literally more often (157×) than the actual Tailwind class is used (117×) — almost entirely inside inline SVG icon fill/stroke attributes, which can't take Tailwind classes directly. This is a tooling gap (icons need a token-aware color prop), not just a discipline problem.",
+      "50": { "$value": "#F2F3FF", "$type": "color" },
+      "100": { "$value": "#E0E2FF", "$type": "color" },
+      "200": { "$value": "#BCBFF5", "$type": "color" },
+      "300": { "$value": "#8D92EB", "$type": "color" },
+      "400": { "$value": "#555DE0", "$type": "color", "$description": "Also used (2026-07-25) as button-primary-disabled's background, bumped up from Figma's literal primary-300 — see DESIGN.md's Button section. White text at 5.21:1 (AA-passing as a side effect, not the reason for the change — disabled controls are WCAG-1.4.3-exempt regardless)." },
+      "500": { "$value": "#353DD7", "$type": "color", "$description": "Base primary. Confirmed identical across all 5 apps." },
+      "600": { "$value": "#272EB8", "$type": "color" },
+      "700": { "$value": "#1E248F", "$type": "color" },
+      "800": { "$value": "#0C1166", "$type": "color" },
+      "900": { "$value": "#060945", "$type": "color" },
+      "foreground": { "$value": "#FFFFFF", "$type": "color", "$description": "NEW (2026-07-25), added following the shadcn-vue foreground-pairing pattern: the safe text color when primary-500 is used as a solid background (e.g. a filled button). Verified via real WCAG contrast math: white on primary-500 is 7.50:1, well clear of the 4.5:1 AA minimum. This is a general-purpose pairing recommendation, not a retroactive edit of any already-audited component — see button-primary-disabled elsewhere in this file for a real, confirmed contrast failure this pattern would have caught if it had existed sooner." }
+    },
+    "secondary": {
+      "$description": "Product gold/amber accent. CORRECTED 2026-07-24: this file previously assumed a 1-value drift from the brand guide (color.brand.gold carried as its own #FBD24D literal, one hex digit off from secondary-500's #FBD249) — the actual brand guideline from Marketing confirms secondary-500 (#FBD249) currently matches 'Brand Yellow' exactly; the old #FBD24D was simply wrong. See color.brand.yellow — kept as its own independent literal rather than a reference, same reasoning as color.brand.royalBlue. Real-usage audit (2026-07-23): secondary-700/800/900 are dead or near-dead across all 5 apps (0 uses in most, 1-8 in the rest) — the upper half of this ramp is essentially never needed in practice, since gold is used as a bright highlight/accent, not for text-on-light patterns the way primary/neutral are. RESOLVED (2026-07-25): kept, not trimmed — the same precedent already applied to primary-800 and request.procurement/businessTrip elsewhere in this file (a near-dead step within an otherwise load-bearing scale is retained for completeness, not dropped on usage count alone). Leaving this open while its siblings were already closed was an inconsistency in this file, not a real difference in the underlying question.",
+      "50": { "$value": "#FFFAEB", "$type": "color" },
+      "100": { "$value": "#FFF4D1", "$type": "color" },
+      "200": { "$value": "#FFEBA8", "$type": "color" },
+      "300": { "$value": "#FFE07A", "$type": "color" },
+      "400": { "$value": "#FFD857", "$type": "color" },
+      "500": { "$value": "#FBD249", "$type": "color", "$description": "Base secondary. Confirmed identical across all 5 apps." },
+      "600": { "$value": "#E8BF35", "$type": "color" },
+      "700": { "$value": "#D1A81F", "$type": "color" },
+      "800": { "$value": "#B58D09", "$type": "color" },
+      "900": { "$value": "#997500", "$type": "color" },
+      "foreground": { "$value": "{color.neutral.900}", "$type": "color", "$description": "NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on secondary-500 fails badly (1.46:1 — gold is a light, bright color, not a dark one like primary/destructive), so this pairs with neutral-900 instead, which passes at 12.65:1. A background this bright always needs dark text, never white — worth remembering when this ramp gets used as a solid fill anywhere. Referenced (2026-07-25 cleanup), not re-hardcoded — was a duplicate literal #141414 before." }
+    },
+    "neutral": {
+      "$description": "Renamed from the code's 'pneutral' — no known reason for the 'p' prefix, dropped during ratification. Real-usage audit (2026-07-23): this is the ONLY ramp with 100% step usage in all 5 apps — every one of its 10 steps (11 counting neutral-750) is genuinely used somewhere in every app. It's also the ramp most apps accidentally bypass: all 5 apps have stray instances of bare Tailwind-default `neutral-*`/`gray-*` classes (not `pneutral-*`) that resolve to Tailwind's stock gray palette instead of this ramp — a real, recurring bug (e.g. `text-neutral-800` rendering Tailwind's default gray instead of this ramp's #2E2E2E), not just naming confusion.",
+      "50": { "$value": "#F7F9FF", "$type": "color" },
+      "100": { "$value": "#F5F6FC", "$type": "color" },
+      "200": { "$value": "#EDEEF2", "$type": "color" },
+      "300": { "$value": "#DDDEE3", "$type": "color" },
+      "400": { "$value": "#CCCDD1", "$type": "color" },
+      "500": { "$value": "#B3B4B8", "$type": "color" },
+      "600": { "$value": "#737375", "$type": "color" },
+      "700": { "$value": "#4F4F4F", "$type": "color" },
+      "750": { "$value": "#3F3F3F", "$type": "color", "$description": "New — a real, heavily-used gray that was completely undocumented until this audit. Confirmed via live Figma design context as the actual secondary/body text color in Breadcrumb, Tab, Table Header, Table Content Cell, Tooltip description, Button Tertiary, Accordion description, and more distinct components — used more often than neutral-700 itself. Sits between neutral-700 (#4F4F4F) and neutral-800 (#2E2E2E); named '750' to reflect that position, not an official Figma variable name (none existed for it). CORRECTED 2026-07-25: 'Pagination', 'Side Nav Item', and 'Button Group' were removed from this list — a real-code audit found none of the three actually uses neutral-750: Pagination's real inactive text is neutral-700 (#4F4F4F) or neutral-500; Side Navigation's real active/inactive text is text-white/text-primary-500, not any neutral step; and the literal `ButtonGroup.vue` component turned out to be a bare layout wrapper with no text color of its own at all. All three were Figma-only claims that didn't survive contact with real code — see this file's Pagination, Side Navigation, and Button Group prose sections." },
+      "800": { "$value": "#2E2E2E", "$type": "color" },
+      "900": { "$value": "#141414", "$type": "color" },
+      "foreground": { "$value": "{color.neutral.900}", "$type": "color", "$description": "NEW (2026-07-25), shadcn-vue foreground-pairing pattern, for when neutral-500 is used as a solid fill (e.g. a neutral badge/tag). Verified via real WCAG contrast math: white on neutral-500 fails (2.07:1), neutral-900 passes at 8.89:1. Same value as neutral-900 itself, kept as a separate semantic entry so 'what text goes on a neutral-500 background' has one clear answer rather than requiring the reader to independently work out the pairing. Referenced (2026-07-25 cleanup) rather than a duplicate literal, so the two can never silently drift apart." }
+    },
+    "success": {
+      "$description": "Real-usage audit (2026-07-23): fully dead as Tailwind classes in career-web specifically (0 uses at every step) — yet the app still visually needs these colors and hardcodes them as raw hex instead (success-700/#15803D 14×, success-100/#DCFCE7 9×). The other 4 apps use the class-based ramp normally. A clean example of 'ghost usage': the design need is real, only the token discipline is missing.",
+      "50": { "$value": "#F0FDF4", "$type": "color" },
+      "100": { "$value": "#DCFCE7", "$type": "color" },
+      "200": { "$value": "#BBF7D0", "$type": "color" },
+      "300": { "$value": "#86EFAC", "$type": "color" },
+      "400": { "$value": "#4ADE80", "$type": "color" },
+      "500": { "$value": "#22C55E", "$type": "color" },
+      "600": { "$value": "#16A34A", "$type": "color" },
+      "700": { "$value": "#15803D", "$type": "color" },
+      "800": { "$value": "#166534", "$type": "color" },
+      "900": { "$value": "#14532D", "$type": "color" },
+      "foreground": { "$value": "{color.neutral.900}", "$type": "color", "$description": "NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on success-500 fails (2.28:1 — this green is too light/saturated for white text), neutral-900 passes at 8.08:1. Referenced (2026-07-25 cleanup), not re-hardcoded." }
+    },
+    "warning": {
+      "$description": "Real-usage audit (2026-07-23): warning-900 is dead across all 5 apps with zero exceptions — the single most consistently-unused step of any ramp in this file. In career-web the entire ramp is dead (no class usage, and unlike success, no raw-hex equivalent either — this app's UI genuinely has no warning-type surfaces).",
+      "50": { "$value": "#FFFBEB", "$type": "color" },
+      "100": { "$value": "#FEF3C7", "$type": "color" },
+      "200": { "$value": "#FDE68A", "$type": "color" },
+      "300": { "$value": "#FCD34D", "$type": "color" },
+      "400": { "$value": "#FBBF24", "$type": "color" },
+      "500": { "$value": "#F59E0B", "$type": "color" },
+      "600": { "$value": "#D97706", "$type": "color" },
+      "700": { "$value": "#B45309", "$type": "color" },
+      "800": { "$value": "#92400E", "$type": "color" },
+      "900": { "$value": "#78350F", "$type": "color" },
+      "foreground": { "$value": "{color.neutral.900}", "$type": "color", "$description": "NEW (2026-07-25), shadcn-vue foreground-pairing pattern. Verified via real WCAG contrast math: white on warning-500 fails (2.15:1 — amber is too light for white text), neutral-900 passes at 8.58:1. Referenced (2026-07-25 cleanup), not re-hardcoded." }
+    },
+    "destructive": {
+      "$description": "800 fixed to the standard Tailwind red-800 value. All 5 apps had 800 and 900 set to the identical value (#7F1D1D) — a copy-paste bug, not an intentional shade. Real-usage audit (2026-07-23): even after that fix, destructive-900 has zero real usage in all 5 apps — it may simply be a 'reserve' shade for future dark-surface/dark-mode work rather than a currently load-bearing token.",
+      "50": { "$value": "#FEF2F2", "$type": "color" },
+      "100": { "$value": "#FEE2E2", "$type": "color" },
+      "200": { "$value": "#FECACA", "$type": "color" },
+      "300": { "$value": "#FCA5A5", "$type": "color" },
+      "400": { "$value": "#F87171", "$type": "color" },
+      "500": { "$value": "#EF4444", "$type": "color" },
+      "600": { "$value": "#DC2626", "$type": "color" },
+      "700": { "$value": "#B91C1C", "$type": "color" },
+      "800": { "$value": "#991B1B", "$type": "color", "$description": "Fixed from #7F1D1D (was a duplicate of 900)." },
+      "900": { "$value": "#7F1D1D", "$type": "color" },
+      "foreground": { "$value": "{color.neutral.900}", "$type": "color", "$description": "NEW (2026-07-25), shadcn-vue foreground-pairing pattern. ⚠️ Genuine tension found while computing this one, not silently resolved: white on destructive-500 measures 3.76:1 — it clears the 3:1 'large/bold text' AA exception but FAILS the 4.5:1 normal-text AA minimum that applies to typical 14-16px Medium-weight button/badge labels. neutral-900 passes fully at 4.90:1, so it's the value used here. But white is almost certainly what's already shipped on Button/Badge's Destructive-filled variants today, matching the white-text pattern used everywhere else (Primary, etc.) — meaning real components likely need a look, not just this token. This is a second, independently-discovered contrast risk alongside button-primary-disabled's confirmed failure, found simply by doing the same math for every ramp rather than assuming white always works. Referenced (2026-07-25 cleanup), not re-hardcoded." }
+    },
+    "progress": {
+      "$description": "NEW (2026-07-24), proposed rather than real-usage-confirmed — added for loading/in-progress states (spinners, progress bars, in-progress status badges), using Tailwind's stock 'blue' palette as the foundation at the user's explicit direction. This follows the same precedent already set by success/warning/destructive, which are themselves Tailwind's own stock green/amber/red scales rather than custom brand hex — a Tailwind blue is the consistent choice for a fourth generic-semantic state ramp. Related real evidence worth knowing, not silently ignored: `extended.loader-blue` (#30699D) is a DIFFERENT blue, found via real-code audit as the actual default spinner color in 4 of the 5 apps' shared Loader component — that token's own description already flagged an open question (migrate those apps' loaders to primary-500, or keep loader-blue as its own real color). This new ramp adds a third option — migrate to progress-500 instead — but doesn't resolve it here; that's a design decision, not a token question.",
+      "50": { "$value": "#EFF6FF", "$type": "color" },
+      "100": { "$value": "#DBEAFE", "$type": "color" },
+      "200": { "$value": "#BFDBFE", "$type": "color" },
+      "300": { "$value": "#93C5FD", "$type": "color" },
+      "400": { "$value": "#60A5FA", "$type": "color" },
+      "500": { "$value": "#3B82F6", "$type": "color", "$description": "Base progress/in-progress blue — Tailwind's stock blue-500. Not yet used anywhere in the 5 apps' real code (see extended.loader-blue for what IS currently real)." },
+      "600": { "$value": "#2563EB", "$type": "color" },
+      "700": { "$value": "#1D4ED8", "$type": "color" },
+      "800": { "$value": "#1E40AF", "$type": "color" },
+      "900": { "$value": "#1E3A8A", "$type": "color" },
+      "foreground": { "$value": "{color.neutral.900}", "$type": "color", "$description": "Verified via real WCAG contrast math: white on progress-500 measures 3.68:1 — clears the 3:1 large-text/UI-component AA exception but fails the 4.5:1 normal-text minimum, the same situation destructive-500 is in. neutral-900 passes cleanly at 5.01:1, so it's the value used here." }
+    },
+    "brand": {
+      "$description": "Brand-identity colors, for marketing/document contexts (matches tahche-brand.skill). Not for product UI — use color.primary / color.secondary there. UPDATED 2026-07-24 from the real Brand Guideline supplied by Marketing: Brand Royal Blue and Brand Yellow currently match primary-500/secondary-500 exactly, and three new colors join from the same guideline (Brand Light Grey, Brand Red, Brand Dark Grey). Every value here is kept as its own independent literal, not a reference to a product token, even where the current hex is identical — brand identity (Marketing-owned, tied to the guideline/logo/print collateral) and product UI colors (Product/Design-owned, free to change for a redesign or an accessibility fix) are two separately-controlled decisions that happen to coincide today, not one value with two names. A reference would wrongly encode 'these must always move together.'",
+      "royalBlue": { "$value": "#353DD7", "$type": "color", "$description": "'Brand Royal Blue' per Marketing's real brand guideline (2026-07-24) — currently identical to primary-500, kept as its own literal rather than a reference since the two are independently-owned values that could diverge later (see the brand-level $description above). Previously carried as a different literal (#2232D7) under the old key 'blue', on the incorrect assumption that they were deliberately distinct; the real guideline corrects the value, not the independence." },
+      "yellow": { "$value": "#FBD249", "$type": "color", "$description": "'Brand Yellow' per Marketing's real brand guideline (2026-07-24) — currently identical to secondary-500, kept as its own literal for the same reason as Brand Royal Blue above. Previously carried as a different literal (#FBD24D) under the old key 'gold', a single-hex-digit drift now known to be simply wrong." },
+      "lightGrey": { "$value": "#F9F9F9", "$type": "color", "$description": "'Brand Light Grey' — NEW (2026-07-24), from Marketing's real brand guideline. No equivalent elsewhere in this file (lighter than neutral-50's #F7F9FF and a different hue entirely — this is a true neutral gray, not neutral's slightly-blue-tinted one)." },
+      "red": { "$value": "#ED4342", "$type": "color", "$description": "'Brand Red' — NEW (2026-07-24), from Marketing's real brand guideline. Distinct from destructive-500 (#EF4444) despite the visual similarity — not merged, since the brand guideline and the product destructive-state ramp are different, independently-owned concerns that happen to land near each other." },
+      "darkGrey": { "$value": "#A8A9AD", "$type": "color", "$description": "'Brand Dark Grey' — NEW (2026-07-24), from Marketing's real brand guideline. Distinct from neutral-500 (#B3B4B8) despite sitting close on the value scale — kept separate rather than merged, same reasoning as Brand Red above." }
+    },
+    "request": {
+      "$description": "PROMOTED from code-only to canonical (2026-07-23) — this is real, needed design vocabulary (candidate/request status badges), not dead weight. It was defined identically in 4 of 5 apps' Tailwind configs but wired inconsistently: dashboard uses it correctly via real Tailwind classes; client-web and recruitment-portal need the exact same colors but hardcode the hex instead of the class (14-22 raw occurrences each); client-dashboard defines it but never needs it in practice; career-web (the public job-seeker site) doesn't have the concept at all. `procurement` and `coe` were flagged for a design decision and resolved 2026-07-25 — see their own entries. A separate legacy 'custom' color object (brilliantRose/amethyst/purpureus) found in some apps' configs is a redundant alias for pettyCash/procurement/cashAdvance's same hex values — recommend dropping it during Phase 3 rather than carrying two names for one set of colors.",
+      "facilities": { "$value": "#EF9A49", "$type": "color" },
+      "cashAdvance": { "$value": "#A954B7", "$type": "color" },
+      "room": { "$value": "#EF7D7C", "$type": "color" },
+      "pettyCash": { "$value": "#E255AC", "$type": "color" },
+      "procurement": { "$value": "#8277BB", "$type": "color", "$description": "RESOLVED (2026-07-25): kept, same precedent as primary-800 elsewhere in this file — a ramp step with zero current real usage, retained for scale completeness within a category that's otherwise genuinely load-bearing, rather than dropped outright. Revisit if it's still unused at the next audit." },
+      "businessTrip": { "$value": "#6BBFAF", "$type": "color", "$description": "RESOLVED (2026-07-25): same call as procurement — dead even in dashboard today, kept for scale completeness rather than dropped, since the category as a whole is genuinely load-bearing." },
+      "coe": { "$value": "{color.secondary.700}", "$type": "color", "$description": "RESOLVED (2026-07-25): confirmed intentional, not a duplicate bug — 'COE requests styled in the brand gold' is a coherent, sensible design choice (COE = Certificate of Employment, a formal/official document type, plausibly meant to stand out via the brand accent rather than an arbitrary request-category hue). Kept as an explicit alias of secondary-700, referenced rather than a duplicate literal (2026-07-25 cleanup) — if secondary-700 ever moves, coe tracks it intentionally instead of silently drifting into an unexplained mismatch." }
+    },
+    "extended": {
+      "$description": "RATIFIED (2026-07-25), by the same real-usage-evidence logic already applied to `neutral-750` and `request`: each of these 4 hex values recurs across 3+ of the 5 apps at meaningful volume (6–60 instances per app), serving a genuine, currently-untokenized need (muted icon/UI-chrome colors darker than neutral-500 but distinct from neutral-700/750/800) with no close enough existing token to fold into instead — confirmed by checking each against the full neutral ramp during review, not assumed. Kept as their own named tier rather than merged into `neutral`, since none sit close enough on that ramp to substitute without a visible color shift.",
+      "muted-blue-gray": { "$value": "#667085", "$type": "color", "$description": "Found in career-web (60×), client-web (38×), recruitment-portal (6×). No canonical match." },
+      "dark-slate": { "$value": "#101828", "$type": "color", "$description": "Found in career-web (36×), client-dashboard (5×), recruitment-portal (5×). Coincidentally shares its RGB base (16,24,40) with the elevation shadow color, but used here as a solid text/background color, unrelated to shadows." },
+      "charcoal": { "$value": "#2F3537", "$type": "color", "$description": "Found in client-dashboard (6×), dashboard (part of a larger cluster), recruitment-portal (25×)." },
+      "indigo-navy": { "$value": "#393960", "$type": "color", "$description": "Found in client-web (8×), dashboard (~14×), recruitment-portal (10×)." },
+      "loader-blue": { "$value": "#30699D", "$type": "color", "$description": "NEW (2026-07-25), found auditing the real Loader component: this teal-blue is the default spinner color in a shared Loader.vue/LoaderScreen.vue pair present in 4 of the 5 apps (client-web, client-dashboard, recruitment-portal, dashboard) — real, convergent, cross-app evidence at the same bar as the other extended colors, distinct from primary-500 (#353DD7), likely a pre-tokenization legacy choice rather than an intentional brand color. career-web's own independent Loader instead uses primary-500/primary-100 directly (already tokenized) — worth a design decision on whether to migrate the other 4 apps' loaders to primary-500 or keep this as its own real, named color." }
+    }
+  }
+}

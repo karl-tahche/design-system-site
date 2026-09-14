@@ -1,0 +1,93 @@
+{
+  "display-large": {
+    "fontWeight": 800,
+    "confirmed": false,
+    "deprecated": false
+  },
+  "display-small": {
+    "fontWeight": 700,
+    "confirmed": false,
+    "deprecated": true,
+    "alias": "h1"
+  },
+  "h1": {
+    "fontWeight": 800,
+    "confirmed": false,
+    "deprecated": false
+  },
+  "h2": {
+    "fontWeight": 800,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h3": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h4": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h5": {
+    "fontWeight": 500,
+    "confirmed": false,
+    "deprecated": false
+  },
+  "h6": {
+    "fontWeight": 500,
+    "confirmed": false,
+    "deprecated": false
+  },
+  "paragraph-large-400": {
+    "fontWeight": 400,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "paragraph-large-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "paragraph-large-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "paragraph-medium": {
+    "fontWeight": 400,
+    "confirmed": false,
+    "deprecated": false
+  },
+  "paragraph-medium-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "paragraph-small": {
+    "fontWeight": 400,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "paragraph-small-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "paragraph-xsmall": {
+    "fontWeight": 400,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "label-xsmall": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "overline": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  }
+}
