@@ -2,10 +2,10 @@
   "name": "design-system-site",
   "private": true,
   "version": "0.0.0",
-  "description": "A documentation website for the Tahche Design System — tokens, components, and guidelines from tahche-design-tokens.",
+  "description": "A documentation website for the Tahche Design System \u2014 tokens, components, and guidelines from tahche-design-tokens.",
   "scripts": {
-    "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
+    "docs:dev": "cp tahche-design-tokens/DESIGN.md public/DESIGN.md && vitepress dev",
+    "docs:build": "cp tahche-design-tokens/DESIGN.md public/DESIGN.md && vitepress build",
     "docs:preview": "vitepress preview"
   },
   "dependencies": {

@@ -12,6 +12,10 @@ hero:
     - theme: alt
       text: Browse Components
       link: /components/button
+    - theme: alt
+      text: Download DESIGN.md
+      link: /DESIGN.md
+      target: _blank
 
 features:
   - title: Real, not guessed
