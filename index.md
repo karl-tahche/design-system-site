@@ -12,10 +12,6 @@ hero:
     - theme: alt
       text: Browse Components
       link: /components/button
-    - theme: alt
-      text: Download DESIGN.md
-      link: /DESIGN.md
-      target: _blank
 
 features:
   - title: Real, not guessed
@@ -25,3 +21,9 @@ features:
   - title: Never drifts
     details: Token pages render values imported directly from tahche-design-tokens' own JSON files, so this site can't silently go stale.
 ---
+
+<div class="ds-demo flex justify-center py-4">
+  <a href="./DESIGN.md" download="DESIGN.md" class="inline-flex items-center gap-2 rounded-md border border-neutral-200 px-4 py-2 no-underline">
+    📄 Download DESIGN.md
+  </a>
+</div>
