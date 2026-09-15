@@ -1,8 +1,10 @@
 // https://vitepress.dev/guide/custom-theme
+import { h } from 'vue';
 import DefaultTheme from 'vitepress/theme';
 import type { Theme } from 'vitepress';
 import './custom.css';
 
+import HeroActions from './components/HeroActions.vue';
 import Button from './components/Button.vue';
 import Badge from './components/Badge.vue';
 import InputField from './components/InputField.vue';
@@ -43,6 +45,13 @@ import EmptyState from './components/EmptyState.vue';
 
 export default {
   extends: DefaultTheme,
+  Layout: () =>
+    h(DefaultTheme.Layout, null, {
+      // Home hero: adds "Download DESIGN.md" alongside "Get Started" / "Browse
+      // Components" as one button row (see index.md's hero frontmatter, which
+      // omits `actions` — HeroActions.vue renders all three itself).
+      'home-hero-actions-after': () => h(HeroActions),
+    }),
   enhanceApp({ app }) {
     // Registered globally so every .md page can use these directly, e.g.
     // `<Button variant="primary" />`, with no per-page import.

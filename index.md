@@ -5,13 +5,6 @@ hero:
   name: Tahche Design System
   text: Tokens, components, and guidelines
   tagline: A live reference for tahche-design-tokens — colors, typography, spacing, elevation, radius, motion, and the composite component specs built from them.
-  actions:
-    - theme: brand
-      text: Get Started
-      link: /guide/introduction
-    - theme: alt
-      text: Browse Components
-      link: /components/button
 
 features:
   - title: Real, not guessed
@@ -21,9 +14,3 @@ features:
   - title: Never drifts
     details: Token pages render values imported directly from tahche-design-tokens' own JSON files, so this site can't silently go stale.
 ---
-
-<div class="ds-demo flex justify-center py-4">
-  <a href="./DESIGN.md" download="DESIGN.md" class="inline-flex items-center gap-2 rounded-md border border-neutral-200 px-4 py-2 no-underline">
-    📄 Download DESIGN.md
-  </a>
-</div>
