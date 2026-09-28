@@ -23,19 +23,12 @@ onMounted(() => {
 | Black | `#000000` | 0, 0, 0 | 0, 0, 0, 100 | — |
 | White | `#FFFFFF` | 255, 255, 255 | 0, 0, 0, 0 | — |
 
-**⚠️ A real conflict between two marketing-sourced guidelines, flagged rather than silently
-picked**: these are the values printed on this PDF's own Color Palette page (uploaded
-2026-09-15), and they're internally consistent — the swatch and the hex/RGB/CMYK/Pantone chip
-agree with each other on the same slide. But they don't match what's currently ratified as the
-`brand-royalBlue` / `brand-yellow` tokens in `DESIGN.md` and shipped in `tahche-design-tokens` —
-`#353DD7` / `#FBD249` — sourced from an earlier Brand Guideline dated 2026-07-24. `#3733CF` and
-`#353DD7` are close but not identical, and `#FBD24D` vs `#FBD249` is a single-digit drift in the
-opposite direction from what the tokens file already flagged as "corrected."
-
-This page documents what the new PDF says, as-is. It does **not** change `brand-royalBlue` /
-`brand-yellow` in the design tokens — that's a decision for whoever owns the brand guideline to
-make deliberately (confirm which round is current, then update `tahche-design-tokens/DESIGN.md`
-and rebuild), not something to resolve by quietly picking one file over another.
+**RESOLVED 2026-09-25**: this page previously flagged a conflict between this PDF's blue/yellow
+(`#3733CF`/`#FBD24D`, uploaded 2026-09-15) and the `brand-royalBlue`/`primary-500` and
+`brand-yellow`/`secondary-500` values then shipped in `tahche-design-tokens` (`#353DD7`/`#FBD249`,
+from the earlier 2026-07-24 guideline). The brand owner has confirmed this PDF's values are
+current for both colors — `primary-500`/`brand.royalBlue` and `secondary-500`/`brand.yellow` have
+been updated to `#3733CF`/`#FBD24D` in `tahche-design-tokens` and rebuilt.
 
 ## Typography
 

@@ -37,7 +37,7 @@ is hand-copied.
 <ColorPalette group="request" />
 <ColorPalette group="extended" />
 
-## Dark mode — Recommended, not shipped anywhere yet
+## Dark mode: Recommended, not shipped anywhere yet
 
 None of the 5 apps have a dark mode today — this is a real, current gap, not a retrofit of
 something already live. The mapping below is a genuine, usable proposal, built on one rule: reuse
@@ -81,8 +81,9 @@ of the same ramp:
 identical in both themes (see [Accessibility Commitments](/philosophies/accessibility) for why
 that pairing doesn't transfer to other steps in the first place, in either theme).
 
-**One real, computed exception, not a guess**: `primary-500` (`#353DD7`) used as *text* directly
-on a `neutral-900` page — not as a filled background — measures **2.46:1**, a real AA failure.
+**One real, computed exception, not a guess**: `primary-500` (`#3733CF`, updated 2026-09-25 from
+`#353DD7`) used as *text* directly on a `neutral-900` page — not as a filled background — measures
+**2.23:1** (was 2.46:1), a real AA failure.
 Every other ramp's 500 tone (`success`, `warning`, `destructive`) already clears 4.5:1 as text on
 `neutral-900` without any change (8.09:1, 8.58:1, 4.90:1 respectively) — `primary` alone needs a
 lighter step for *text-only* use (a Link, an Outlined button's border/text, an icon color) on a
@@ -106,10 +107,10 @@ shows up; not done speculatively here.
 - **`progress`** is a proposed ramp for loading/in-progress states (Tailwind's stock `blue` scale),
   not yet used anywhere in real code. Its relationship to `extended.loader-blue` (a different,
   already-real blue) is an open design decision, not resolved here.
-- **`brand`** was corrected 2026-07-24 against the real Brand Guideline from Marketing. This file
-  previously assumed brand blue/gold were deliberately distinct from product primary/secondary —
-  that was wrong on the *value* (old literals were simply incorrect): `brand.royalBlue` and
-  `brand.yellow` currently match `primary-500` (`#353DD7`) and `secondary-500` (`#FBD249`) exactly.
+- **`brand`** was corrected 2026-07-24 against the real Brand Guideline from Marketing, then
+  UPDATED 2026-09-25 per Marketing's Sept 2026 brand refresh: `brand.royalBlue` and
+  `brand.yellow` currently match `primary-500` (`#3733CF`, was `#353DD7`) and `secondary-500`
+  (`#FBD24D`, was `#FBD249`) exactly.
   Each is still kept as its own independent literal, not a reference to the product token, even
   though the values coincide today — brand identity (Marketing-owned) and product UI color
   (Product/Design-owned) are separately-controlled decisions that could diverge later, not one

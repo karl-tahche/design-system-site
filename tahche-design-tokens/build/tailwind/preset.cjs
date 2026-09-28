@@ -17,7 +17,7 @@ module.exports = {
           "200": "#bcbff5",
           "300": "#8d92eb",
           "400": "#555de0",
-          "500": "#353dd7",
+          "500": "#3733cf",
           "600": "#272eb8",
           "700": "#1e248f",
           "800": "#0c1166",
@@ -30,7 +30,7 @@ module.exports = {
           "200": "#ffeba8",
           "300": "#ffe07a",
           "400": "#ffd857",
-          "500": "#fbd249",
+          "500": "#fbd24d",
           "600": "#e8bf35",
           "700": "#d1a81f",
           "800": "#b58d09",
@@ -104,8 +104,8 @@ module.exports = {
           "foreground": "#141414"
         },
         "brand": {
-          "royalBlue": "#353dd7",
-          "yellow": "#fbd249",
+          "royalBlue": "#3733cf",
+          "yellow": "#fbd24d",
           "lightGrey": "#f9f9f9",
           "red": "#ed4342",
           "darkGrey": "#a8a9ad"
