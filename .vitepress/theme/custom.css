@@ -70,3 +70,33 @@
   color: var(--vp-button-alt-hover-text);
   background-color: var(--vp-button-alt-hover-bg);
 }
+
+/* VitePress's default nav shows the full top-level item row (VPNavBarMenu) at
+   768px+, with no logic to collapse items that don't fit — it assumes the row
+   always has room. With this site's 6 nav items plus the search box, that row
+   doesn't actually fit until ~960px, so any window in the 768-959px range
+   (a laptop in split-screen, e.g.) overflows and forces the whole page to
+   scroll horizontally. Every other "real desktop" layout decision in
+   VPNavBar's own CSS (site-title position, sidebar padding, background) is
+   already gated at 960px, not 768px — so push the mobile hamburger menu to
+   match that instead, and the desktop nav then only ever renders at a width
+   it's been verified to fit. */
+@media (max-width: 959px) {
+  .VPNavBarMenu,
+  .VPNavBarExtra {
+    display: none !important;
+  }
+  .VPNavBarHamburger {
+    display: flex !important;
+  }
+}
+
+/* The hamburger's own slide-down overlay (VPNavScreen) independently hides
+   itself at 768px+ in VitePress's default CSS, regardless of open state —
+   so it needs the same 960px override as the button above, or opening the
+   menu between 768-959px does nothing visible. */
+@media (min-width: 768px) and (max-width: 959px) {
+  .VPNavScreen {
+    display: block !important;
+  }
+}
