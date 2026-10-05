@@ -134,23 +134,86 @@ module.exports = {
           "Helvetica",
           "sans-serif"
         ],
-        "mono": [
-          "'SF Mono'",
-          "'Cascadia Code'",
-          "Consolas",
-          "monospace"
+        "heading": [
+          "Montserrat",
+          "Arial",
+          "Helvetica",
+          "sans-serif"
         ]
       },
       "fontSize": {
+        "display-large-500": [
+          "52px",
+          {
+            "lineHeight": "60px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "display-large-600": [
+          "52px",
+          {
+            "lineHeight": "60px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "display-large-700": [
+          "52px",
+          {
+            "lineHeight": "60px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
         "display-large": [
           "52px",
           {
-            "lineHeight": "56px",
+            "lineHeight": "60px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "display-small-500": [
+          "44px",
+          {
+            "lineHeight": "52px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "display-small-600": [
+          "44px",
+          {
+            "lineHeight": "52px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "display-small-700": [
+          "44px",
+          {
+            "lineHeight": "52px",
             "letterSpacing": "-0.02em"
           }
         ],
         "display-small": [
           "44px",
+          {
+            "lineHeight": "52px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h1-500": [
+          "40px",
+          {
+            "lineHeight": "48px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h1-600": [
+          "40px",
+          {
+            "lineHeight": "48px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h1-700": [
+          "40px",
           {
             "lineHeight": "48px",
             "letterSpacing": "-0.02em"
@@ -163,10 +226,52 @@ module.exports = {
             "letterSpacing": "-0.02em"
           }
         ],
+        "h2-500": [
+          "36px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h2-600": [
+          "36px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h2-700": [
+          "36px",
+          {
+            "lineHeight": "44px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
         "h2": [
           "36px",
           {
             "lineHeight": "44px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h3-500": [
+          "32px",
+          {
+            "lineHeight": "40px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h3-600": [
+          "32px",
+          {
+            "lineHeight": "40px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h3-700": [
+          "32px",
+          {
+            "lineHeight": "40px",
             "letterSpacing": "-0.02em"
           }
         ],
@@ -177,6 +282,27 @@ module.exports = {
             "letterSpacing": "-0.02em"
           }
         ],
+        "h4-500": [
+          "28px",
+          {
+            "lineHeight": "36px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h4-600": [
+          "28px",
+          {
+            "lineHeight": "36px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h4-700": [
+          "28px",
+          {
+            "lineHeight": "36px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
         "h4": [
           "28px",
           {
@@ -184,10 +310,52 @@ module.exports = {
             "letterSpacing": "-0.02em"
           }
         ],
+        "h5-500": [
+          "24px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h5-600": [
+          "24px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h5-700": [
+          "24px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
         "h5": [
           "24px",
           {
             "lineHeight": "32px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h6-500": [
+          "20px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h6-600": [
+          "20px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "-0.02em"
+          }
+        ],
+        "h6-700": [
+          "20px",
+          {
+            "lineHeight": "28px",
             "letterSpacing": "-0.02em"
           }
         ],
@@ -219,7 +387,7 @@ module.exports = {
             "letterSpacing": "0"
           }
         ],
-        "paragraph-medium": [
+        "paragraph-medium-400": [
           "16px",
           {
             "lineHeight": "24px",
@@ -233,7 +401,21 @@ module.exports = {
             "letterSpacing": "0"
           }
         ],
-        "paragraph-small": [
+        "paragraph-medium-600": [
+          "16px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "0"
+          }
+        ],
+        "paragraph-medium": [
+          "16px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "0"
+          }
+        ],
+        "paragraph-small-400": [
           "14px",
           {
             "lineHeight": "20px",
@@ -244,6 +426,34 @@ module.exports = {
           "14px",
           {
             "lineHeight": "20px",
+            "letterSpacing": "0"
+          }
+        ],
+        "paragraph-small-600": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0"
+          }
+        ],
+        "paragraph-small": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0"
+          }
+        ],
+        "paragraph-xsmall-400": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0"
+          }
+        ],
+        "paragraph-xsmall-600": [
+          "12px",
+          {
+            "lineHeight": "16px",
             "letterSpacing": "0"
           }
         ],
@@ -259,6 +469,20 @@ module.exports = {
           {
             "lineHeight": "15px",
             "letterSpacing": "0"
+          }
+        ],
+        "overline-12": [
+          "12px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "1px"
+          }
+        ],
+        "overline-14": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "1px"
           }
         ],
         "overline": [
@@ -321,61 +545,357 @@ module.exports = {
   "plugins": [
     function ({ addComponents }) {
       addComponents({
-  ".text-display-large": {
-    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+  ".text-display-large-500": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
     "fontSize": "52px",
-    "lineHeight": "56px",
-    "fontWeight": "800",
-    "letterSpacing": "-0.02em"
+    "lineHeight": "60px",
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "40px",
+      "lineHeight": "48px"
+    }
+  },
+  ".text-display-large-600": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "52px",
+    "lineHeight": "60px",
+    "fontWeight": "600",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "40px",
+      "lineHeight": "48px"
+    }
+  },
+  ".text-display-large-700": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "52px",
+    "lineHeight": "60px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "40px",
+      "lineHeight": "48px"
+    }
+  },
+  ".text-display-large": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "52px",
+    "lineHeight": "60px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "40px",
+      "lineHeight": "48px"
+    }
+  },
+  ".text-display-small-500": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "44px",
+    "lineHeight": "52px",
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "36px",
+      "lineHeight": "44px"
+    }
+  },
+  ".text-display-small-600": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "44px",
+    "lineHeight": "52px",
+    "fontWeight": "600",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "36px",
+      "lineHeight": "44px"
+    }
+  },
+  ".text-display-small-700": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "44px",
+    "lineHeight": "52px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "36px",
+      "lineHeight": "44px"
+    }
   },
   ".text-display-small": {
-    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
     "fontSize": "40px",
     "lineHeight": "48px",
-    "fontWeight": "800",
-    "letterSpacing": "-0.02em"
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "32px",
+      "lineHeight": "40px"
+    }
+  },
+  ".text-h1-500": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "40px",
+    "lineHeight": "48px",
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "32px",
+      "lineHeight": "40px"
+    }
+  },
+  ".text-h1-600": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "40px",
+    "lineHeight": "48px",
+    "fontWeight": "600",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "32px",
+      "lineHeight": "40px"
+    }
+  },
+  ".text-h1-700": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "40px",
+    "lineHeight": "48px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "32px",
+      "lineHeight": "40px"
+    }
   },
   ".text-h1": {
-    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
     "fontSize": "40px",
     "lineHeight": "48px",
-    "fontWeight": "800",
-    "letterSpacing": "-0.02em"
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "32px",
+      "lineHeight": "40px"
+    }
   },
-  ".text-h2": {
-    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+  ".text-h2-500": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
     "fontSize": "36px",
     "lineHeight": "44px",
-    "fontWeight": "800",
-    "letterSpacing": "-0.02em"
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "28px",
+      "lineHeight": "36px"
+    }
   },
-  ".text-h3": {
-    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+  ".text-h2-600": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "36px",
+    "lineHeight": "44px",
+    "fontWeight": "600",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "28px",
+      "lineHeight": "36px"
+    }
+  },
+  ".text-h2-700": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "36px",
+    "lineHeight": "44px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "28px",
+      "lineHeight": "36px"
+    }
+  },
+  ".text-h2": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "36px",
+    "lineHeight": "44px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "28px",
+      "lineHeight": "36px"
+    }
+  },
+  ".text-h3-500": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "32px",
+    "lineHeight": "40px",
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "24px",
+      "lineHeight": "32px"
+    }
+  },
+  ".text-h3-600": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
     "fontSize": "32px",
     "lineHeight": "40px",
     "fontWeight": "600",
-    "letterSpacing": "-0.02em"
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "24px",
+      "lineHeight": "32px"
+    }
   },
-  ".text-h4": {
-    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+  ".text-h3-700": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "32px",
+    "lineHeight": "40px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "24px",
+      "lineHeight": "32px"
+    }
+  },
+  ".text-h3": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "32px",
+    "lineHeight": "40px",
+    "fontWeight": "600",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "24px",
+      "lineHeight": "32px"
+    }
+  },
+  ".text-h4-500": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
     "fontSize": "28px",
     "lineHeight": "36px",
     "fontWeight": "500",
-    "letterSpacing": "-0.02em"
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "22px",
+      "lineHeight": "28px"
+    }
   },
-  ".text-h5": {
-    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+  ".text-h4-600": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "28px",
+    "lineHeight": "36px",
+    "fontWeight": "600",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "22px",
+      "lineHeight": "28px"
+    }
+  },
+  ".text-h4-700": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "28px",
+    "lineHeight": "36px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "22px",
+      "lineHeight": "28px"
+    }
+  },
+  ".text-h4": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "28px",
+    "lineHeight": "36px",
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "22px",
+      "lineHeight": "28px"
+    }
+  },
+  ".text-h5-500": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
     "fontSize": "24px",
     "lineHeight": "32px",
     "fontWeight": "500",
-    "letterSpacing": "-0.02em"
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "20px",
+      "lineHeight": "28px"
+    }
   },
-  ".text-h6": {
-    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+  ".text-h5-600": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "24px",
+    "lineHeight": "32px",
+    "fontWeight": "600",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "20px",
+      "lineHeight": "28px"
+    }
+  },
+  ".text-h5-700": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "24px",
+    "lineHeight": "32px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "20px",
+      "lineHeight": "28px"
+    }
+  },
+  ".text-h5": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "24px",
+    "lineHeight": "32px",
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "20px",
+      "lineHeight": "28px"
+    }
+  },
+  ".text-h6-500": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
     "fontSize": "20px",
     "lineHeight": "28px",
     "fontWeight": "500",
-    "letterSpacing": "-0.02em"
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "18px",
+      "lineHeight": "24px"
+    }
+  },
+  ".text-h6-600": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "20px",
+    "lineHeight": "28px",
+    "fontWeight": "600",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "18px",
+      "lineHeight": "24px"
+    }
+  },
+  ".text-h6-700": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "20px",
+    "lineHeight": "28px",
+    "fontWeight": "700",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "18px",
+      "lineHeight": "24px"
+    }
+  },
+  ".text-h6": {
+    "fontFamily": "Montserrat, Arial, Helvetica, sans-serif",
+    "fontSize": "20px",
+    "lineHeight": "28px",
+    "fontWeight": "500",
+    "letterSpacing": "-0.02em",
+    "@media (max-width: 767px)": {
+      "fontSize": "18px",
+      "lineHeight": "24px"
+    }
   },
   ".text-paragraph-large-400": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
@@ -395,7 +915,7 @@ module.exports = {
     "lineHeight": "28px",
     "fontWeight": "600"
   },
-  ".text-paragraph-medium": {
+  ".text-paragraph-medium-400": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "16px",
     "lineHeight": "24px",
@@ -407,7 +927,19 @@ module.exports = {
     "lineHeight": "24px",
     "fontWeight": "500"
   },
-  ".text-paragraph-small": {
+  ".text-paragraph-medium-600": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "24px",
+    "fontWeight": "600"
+  },
+  ".text-paragraph-medium": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "24px",
+    "fontWeight": "400"
+  },
+  ".text-paragraph-small-400": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "14px",
     "lineHeight": "20px",
@@ -419,6 +951,30 @@ module.exports = {
     "lineHeight": "20px",
     "fontWeight": "500"
   },
+  ".text-paragraph-small-600": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "14px",
+    "lineHeight": "20px",
+    "fontWeight": "600"
+  },
+  ".text-paragraph-small": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "14px",
+    "lineHeight": "20px",
+    "fontWeight": "400"
+  },
+  ".text-paragraph-xsmall-400": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "12px",
+    "lineHeight": "16px",
+    "fontWeight": "400"
+  },
+  ".text-paragraph-xsmall-600": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "12px",
+    "lineHeight": "16px",
+    "fontWeight": "600"
+  },
   ".text-paragraph-xsmall": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "12px",
@@ -429,7 +985,31 @@ module.exports = {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
     "fontSize": "12px",
     "lineHeight": "15px",
-    "fontWeight": "500"
+    "fontWeight": "500",
+    "@media (max-width: 767px)": {
+      "fontSize": "12px",
+      "lineHeight": "16px"
+    }
+  },
+  ".text-overline-12": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "12px",
+    "lineHeight": "20px",
+    "fontWeight": "600",
+    "letterSpacing": "1px",
+    "textTransform": "uppercase",
+    "@media (max-width: 767px)": {
+      "fontSize": "12px",
+      "lineHeight": "16px"
+    }
+  },
+  ".text-overline-14": {
+    "fontFamily": "Inter, Arial, Helvetica, sans-serif",
+    "fontSize": "14px",
+    "lineHeight": "20px",
+    "fontWeight": "600",
+    "letterSpacing": "1px",
+    "textTransform": "uppercase"
   },
   ".text-overline": {
     "fontFamily": "Inter, Arial, Helvetica, sans-serif",
@@ -437,7 +1017,11 @@ module.exports = {
     "lineHeight": "20px",
     "fontWeight": "600",
     "letterSpacing": "1px",
-    "textTransform": "uppercase"
+    "textTransform": "uppercase",
+    "@media (max-width: 767px)": {
+      "fontSize": "12px",
+      "lineHeight": "16px"
+    }
   }
 });
     },

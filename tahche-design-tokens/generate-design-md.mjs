@@ -59,17 +59,35 @@ colors.progress = '{colors.progress-500}';
 // ── Typography: fontFamily is inlined per style (the spec's own examples do
 // the same) rather than referenced, since a bare string primitive doesn't
 // fit inside a group whose schema expects every entry to be a Typography composite.
+//
+// NEW 2026-10-05: headings now carry their own fontFamily reference
+// ("{typography.fontFamily.heading}" = Montserrat) distinct from the
+// body/paragraph/label/overline default ("{typography.fontFamily.sans}" =
+// Inter) — this script parses tokens/*.json directly rather than going
+// through Style Dictionary, so that reference has to be resolved by hand
+// here too, same as the color REF_RE handling above.
 const sansStack = typographyTokens.fontFamily.sans.$value;
+const headingStack = typographyTokens.fontFamily.heading.$value;
+function resolveTypographyFamily(fam) {
+  if (fam === '{typography.fontFamily.heading}') return headingStack;
+  if (fam === '{typography.fontFamily.sans}') return sansStack;
+  return fam || sansStack;
+}
 const typographyOut = {};
 for (const [name, token] of Object.entries(typographyTokens)) {
   if (name === 'fontFamily' || name.startsWith('$')) continue;
   const v = token.$value;
   typographyOut[name] = {
-    fontFamily: sansStack,
+    fontFamily: resolveTypographyFamily(v.fontFamily),
     fontSize: v.fontSize,
     fontWeight: v.fontWeight,
     lineHeight: v.lineHeight,
     ...(v.letterSpacing && v.letterSpacing !== '0' ? { letterSpacing: v.letterSpacing } : {}),
+    // NOTE: v.mobile (NEW 2026-10-05) is intentionally NOT included here —
+    // DESIGN.md's component-sub-token schema is fixed by the real
+    // design.md lint CLI and has no room for a breakpoint-specific
+    // override; Web-default values only, same as every other style here.
+    // The mobile value still ships to the Tailwind preset (see build.mjs).
   };
 }
 

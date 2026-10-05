@@ -1,44 +1,171 @@
 {
+  "display-large-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "display-large-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "display-large-700": {
+    "fontWeight": 700,
+    "confirmed": true,
+    "deprecated": false
+  },
   "display-large": {
-    "fontWeight": 800,
+    "fontWeight": 700,
     "confirmed": false,
+    "deprecated": true,
+    "alias": "display-large-700"
+  },
+  "display-small-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "display-small-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "display-small-700": {
+    "fontWeight": 700,
+    "confirmed": true,
     "deprecated": false
   },
   "display-small": {
     "fontWeight": 700,
     "confirmed": false,
     "deprecated": true,
-    "alias": "h1"
+    "alias": "h1-700"
+  },
+  "h1-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h1-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h1-700": {
+    "fontWeight": 700,
+    "confirmed": true,
+    "deprecated": false
   },
   "h1": {
-    "fontWeight": 800,
+    "fontWeight": 700,
     "confirmed": false,
+    "deprecated": true,
+    "alias": "h1-700"
+  },
+  "h2-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h2-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h2-700": {
+    "fontWeight": 700,
+    "confirmed": true,
     "deprecated": false
   },
   "h2": {
-    "fontWeight": 800,
+    "fontWeight": 700,
+    "confirmed": false,
+    "deprecated": true,
+    "alias": "h2-700"
+  },
+  "h3-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h3-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h3-700": {
+    "fontWeight": 700,
     "confirmed": true,
     "deprecated": false
   },
   "h3": {
     "fontWeight": 600,
+    "confirmed": false,
+    "deprecated": true,
+    "alias": "h3-600"
+  },
+  "h4-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h4-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h4-700": {
+    "fontWeight": 700,
     "confirmed": true,
     "deprecated": false
   },
   "h4": {
     "fontWeight": 500,
+    "confirmed": false,
+    "deprecated": true,
+    "alias": "h4-500"
+  },
+  "h5-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h5-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h5-700": {
+    "fontWeight": 700,
     "confirmed": true,
     "deprecated": false
   },
   "h5": {
     "fontWeight": 500,
     "confirmed": false,
+    "deprecated": true,
+    "alias": "h5-500"
+  },
+  "h6-500": {
+    "fontWeight": 500,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h6-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "h6-700": {
+    "fontWeight": 700,
+    "confirmed": true,
     "deprecated": false
   },
   "h6": {
     "fontWeight": 500,
     "confirmed": false,
-    "deprecated": false
+    "deprecated": true,
+    "alias": "h6-500"
   },
   "paragraph-large-400": {
     "fontWeight": 400,
@@ -55,9 +182,9 @@
     "confirmed": true,
     "deprecated": false
   },
-  "paragraph-medium": {
+  "paragraph-medium-400": {
     "fontWeight": 400,
-    "confirmed": false,
+    "confirmed": true,
     "deprecated": false
   },
   "paragraph-medium-500": {
@@ -65,7 +192,18 @@
     "confirmed": true,
     "deprecated": false
   },
-  "paragraph-small": {
+  "paragraph-medium-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "paragraph-medium": {
+    "fontWeight": 400,
+    "confirmed": false,
+    "deprecated": true,
+    "alias": "paragraph-medium-400"
+  },
+  "paragraph-small-400": {
     "fontWeight": 400,
     "confirmed": true,
     "deprecated": false
@@ -75,19 +213,52 @@
     "confirmed": true,
     "deprecated": false
   },
-  "paragraph-xsmall": {
+  "paragraph-small-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "paragraph-small": {
+    "fontWeight": 400,
+    "confirmed": false,
+    "deprecated": true,
+    "alias": "paragraph-small-400"
+  },
+  "paragraph-xsmall-400": {
     "fontWeight": 400,
     "confirmed": true,
     "deprecated": false
+  },
+  "paragraph-xsmall-600": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "paragraph-xsmall": {
+    "fontWeight": 400,
+    "confirmed": false,
+    "deprecated": true,
+    "alias": "paragraph-xsmall-400"
   },
   "label-xsmall": {
     "fontWeight": 500,
     "confirmed": true,
     "deprecated": false
   },
-  "overline": {
+  "overline-12": {
     "fontWeight": 600,
     "confirmed": true,
     "deprecated": false
+  },
+  "overline-14": {
+    "fontWeight": 600,
+    "confirmed": true,
+    "deprecated": false
+  },
+  "overline": {
+    "fontWeight": 600,
+    "confirmed": false,
+    "deprecated": true,
+    "alias": "overline-12"
   }
 }

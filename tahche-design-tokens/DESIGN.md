@@ -106,50 +106,194 @@ colors:
   destructive: "{colors.destructive-500}"
   progress: "{colors.progress-500}"
 typography:
-  display-large:
-    fontFamily: Inter, Arial, Helvetica, sans-serif
+  display-large-500:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
     fontSize: 52px
-    fontWeight: 800
-    lineHeight: 56px
+    fontWeight: 500
+    lineHeight: 60px
+    letterSpacing: -0.02em
+  display-large-600:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 52px
+    fontWeight: 600
+    lineHeight: 60px
+    letterSpacing: -0.02em
+  display-large-700:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 52px
+    fontWeight: 700
+    lineHeight: 60px
+    letterSpacing: -0.02em
+  display-large:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 52px
+    fontWeight: 700
+    lineHeight: 60px
+    letterSpacing: -0.02em
+  display-small-500:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 44px
+    fontWeight: 500
+    lineHeight: 52px
+    letterSpacing: -0.02em
+  display-small-600:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 44px
+    fontWeight: 600
+    lineHeight: 52px
+    letterSpacing: -0.02em
+  display-small-700:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 44px
+    fontWeight: 700
+    lineHeight: 52px
     letterSpacing: -0.02em
   display-small:
-    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
     fontSize: 44px
+    fontWeight: 700
+    lineHeight: 52px
+    letterSpacing: -0.02em
+  h1-500:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 40px
+    fontWeight: 500
+    lineHeight: 48px
+    letterSpacing: -0.02em
+  h1-600:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 40px
+    fontWeight: 600
+    lineHeight: 48px
+    letterSpacing: -0.02em
+  h1-700:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 40px
     fontWeight: 700
     lineHeight: 48px
     letterSpacing: -0.02em
   h1:
-    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
     fontSize: 40px
-    fontWeight: 800
+    fontWeight: 700
     lineHeight: 48px
     letterSpacing: -0.02em
-  h2:
-    fontFamily: Inter, Arial, Helvetica, sans-serif
+  h2-500:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
     fontSize: 36px
-    fontWeight: 800
+    fontWeight: 500
     lineHeight: 44px
     letterSpacing: -0.02em
-  h3:
-    fontFamily: Inter, Arial, Helvetica, sans-serif
+  h2-600:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 36px
+    fontWeight: 600
+    lineHeight: 44px
+    letterSpacing: -0.02em
+  h2-700:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 36px
+    fontWeight: 700
+    lineHeight: 44px
+    letterSpacing: -0.02em
+  h2:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 36px
+    fontWeight: 700
+    lineHeight: 44px
+    letterSpacing: -0.02em
+  h3-500:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 32px
+    fontWeight: 500
+    lineHeight: 40px
+    letterSpacing: -0.02em
+  h3-600:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
     fontSize: 32px
     fontWeight: 600
     lineHeight: 40px
     letterSpacing: -0.02em
-  h4:
-    fontFamily: Inter, Arial, Helvetica, sans-serif
+  h3-700:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 32px
+    fontWeight: 700
+    lineHeight: 40px
+    letterSpacing: -0.02em
+  h3:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 32px
+    fontWeight: 600
+    lineHeight: 40px
+    letterSpacing: -0.02em
+  h4-500:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
     fontSize: 28px
     fontWeight: 500
     lineHeight: 36px
     letterSpacing: -0.02em
-  h5:
-    fontFamily: Inter, Arial, Helvetica, sans-serif
+  h4-600:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 28px
+    fontWeight: 600
+    lineHeight: 36px
+    letterSpacing: -0.02em
+  h4-700:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 28px
+    fontWeight: 700
+    lineHeight: 36px
+    letterSpacing: -0.02em
+  h4:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 28px
+    fontWeight: 500
+    lineHeight: 36px
+    letterSpacing: -0.02em
+  h5-500:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
     fontSize: 24px
     fontWeight: 500
     lineHeight: 32px
     letterSpacing: -0.02em
+  h5-600:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 24px
+    fontWeight: 600
+    lineHeight: 32px
+    letterSpacing: -0.02em
+  h5-700:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 24px
+    fontWeight: 700
+    lineHeight: 32px
+    letterSpacing: -0.02em
+  h5:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 24px
+    fontWeight: 500
+    lineHeight: 32px
+    letterSpacing: -0.02em
+  h6-500:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 20px
+    fontWeight: 500
+    lineHeight: 28px
+    letterSpacing: -0.02em
+  h6-600:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 20px
+    fontWeight: 600
+    lineHeight: 28px
+    letterSpacing: -0.02em
+  h6-700:
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
+    fontSize: 20px
+    fontWeight: 700
+    lineHeight: 28px
+    letterSpacing: -0.02em
   h6:
-    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontFamily: Montserrat, Arial, Helvetica, sans-serif
     fontSize: 20px
     fontWeight: 500
     lineHeight: 28px
@@ -169,7 +313,7 @@ typography:
     fontSize: 18px
     fontWeight: 600
     lineHeight: 28px
-  paragraph-medium:
+  paragraph-medium-400:
     fontFamily: Inter, Arial, Helvetica, sans-serif
     fontSize: 16px
     fontWeight: 400
@@ -179,7 +323,17 @@ typography:
     fontSize: 16px
     fontWeight: 500
     lineHeight: 24px
-  paragraph-small:
+  paragraph-medium-600:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 16px
+    fontWeight: 600
+    lineHeight: 24px
+  paragraph-medium:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 24px
+  paragraph-small-400:
     fontFamily: Inter, Arial, Helvetica, sans-serif
     fontSize: 14px
     fontWeight: 400
@@ -189,6 +343,26 @@ typography:
     fontSize: 14px
     fontWeight: 500
     lineHeight: 20px
+  paragraph-small-600:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 14px
+    fontWeight: 600
+    lineHeight: 20px
+  paragraph-small:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 20px
+  paragraph-xsmall-400:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 12px
+    fontWeight: 400
+    lineHeight: 16px
+  paragraph-xsmall-600:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 12px
+    fontWeight: 600
+    lineHeight: 16px
   paragraph-xsmall:
     fontFamily: Inter, Arial, Helvetica, sans-serif
     fontSize: 12px
@@ -199,6 +373,18 @@ typography:
     fontSize: 12px
     fontWeight: 500
     lineHeight: 15px
+  overline-12:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 12px
+    fontWeight: 600
+    lineHeight: 20px
+    letterSpacing: 1px
+  overline-14:
+    fontFamily: Inter, Arial, Helvetica, sans-serif
+    fontSize: 14px
+    fontWeight: 600
+    lineHeight: 20px
+    letterSpacing: 1px
   overline:
     fontFamily: Inter, Arial, Helvetica, sans-serif
     fontSize: 12px

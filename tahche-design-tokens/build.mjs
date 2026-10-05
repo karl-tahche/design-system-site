@@ -43,10 +43,12 @@ StyleDictionary.registerFormat({
             { lineHeight: v.lineHeight, letterSpacing: v.letterSpacing },
           ];
           textStylesRaw[name] = {
+            fontFamily: v.fontFamily,
             fontSize: v.fontSize,
             lineHeight: v.lineHeight,
             letterSpacing: v.letterSpacing,
             fontWeight: v.fontWeight,
+            mobile: v.mobile,
             alias: token.$alias,
           };
         }
@@ -86,11 +88,22 @@ StyleDictionary.registerFormat({
     // the deprecated class looks identical to the replacement rather than subtly
     // different, while docs point authors at the replacement going forward.
     const sansStack = fontFamily.sans ? fontFamily.sans.join(', ') : 'Inter, Arial, Helvetica, sans-serif';
+    // Each typography token may carry its own fontFamily reference (e.g.
+    // "{typography.fontFamily.heading}" for headings vs "{typography.fontFamily.sans}"
+    // for everything else) — Style Dictionary's js transform group resolves that
+    // reference to the literal comma-joined stack already by the time we see it
+    // here, EXCEPT it comes through as an array (same shape as fontFamily.sans
+    // above), so normalize both the array and (defensively) a raw string.
+    function resolveFamily(fam) {
+      if (!fam) return sansStack;
+      if (Array.isArray(fam)) return fam.join(', ');
+      return fam;
+    }
     const textStyles = {};
     for (const [name, style] of Object.entries(textStylesRaw)) {
       const resolved = (style.alias && textStylesRaw[style.alias]) || style;
       const decl = {
-        fontFamily: sansStack,
+        fontFamily: resolveFamily(resolved.fontFamily),
         fontSize: resolved.fontSize,
         lineHeight: resolved.lineHeight,
         fontWeight: String(resolved.fontWeight),
@@ -98,7 +111,20 @@ StyleDictionary.registerFormat({
       if (resolved.letterSpacing && resolved.letterSpacing !== '0') decl.letterSpacing = resolved.letterSpacing;
       // Real, confirmed usage (Table Header) — uppercase isn't part of the
       // token's own fontSize/lineHeight/weight value, so it's applied here.
-      if (name === 'overline') decl.textTransform = 'uppercase';
+      if (name === 'overline' || name === 'overline-12' || name === 'overline-14') decl.textTransform = 'uppercase';
+      // Mobile override (NEW 2026-10-05, see typography.json's group
+      // description): a max-width media query one pixel under the ratified
+      // breakpoint.md "md" cutoff (768px), so "Web" values apply at md and up.
+      // Only fontSize/lineHeight differ by breakpoint in the source data today
+      // (weight/letterSpacing/family are constant across breakpoints) — this
+      // intentionally only overrides those two, so a future mobile value that
+      // also changes weight or family would need this block extended.
+      if (resolved.mobile) {
+        decl['@media (max-width: 767px)'] = {
+          fontSize: resolved.mobile.fontSize,
+          lineHeight: resolved.mobile.lineHeight,
+        };
+      }
       textStyles[`.text-${name}`] = decl;
     }
 
