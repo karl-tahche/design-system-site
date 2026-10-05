@@ -9,7 +9,7 @@ const steps = Object.entries(radiusTokens.radius)
 # Radius
 
 `sm`/`md`/`full` are confirmed directly against real components (Button, Input Field, Modal,
-Stat, Tooltip, Avatar, Badge, Side Navigation, File Upload). `lg`/`xl`/`2xl`/`3xl` are inferred
+Stat, Tooltip, Avatar, Badge, Side Navigation). `lg`/`xl`/`2xl`/`3xl` are inferred
 from real, high-volume arbitrary `rounded-[Npx]` usage in the 5 codebases rather than a Figma
 spec — no dedicated border-radius foundation page exists there.
 

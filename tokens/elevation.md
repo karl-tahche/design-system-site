@@ -8,10 +8,12 @@ const steps = Object.entries(elevationTokens.elevation)
 
 # Elevation
 
-A 6-step shadow scale, already identical across Figma and all 5 apps. Use `xsmall` for subtle
-separation between adjacent surfaces, `small`/`medium` for dropdowns and popovers, `large`/`xlarge`
-for modals and sheets, and reserve `xxlarge` for the single heaviest overlay in a view
-(real-usage audit found it dead as a class in every app — kept for scale completeness only).
+A 6-step shadow scale (`xsmall` through `xxlarge`), already identical across Figma and all 5 apps,
+plus a separate `focus-ring` token below (a ring, not a drop shadow — shown alongside the scale in
+the swatches below for convenience). Use `xsmall` for subtle separation between adjacent surfaces,
+`small`/`medium` for dropdowns and popovers, `large`/`xlarge` for modals and sheets, and reserve
+`xxlarge` for the single heaviest overlay in a view (real-usage audit found it dead as a class in
+every app — kept for scale completeness only).
 
 `focus-ring` was **replaced 2026-07-25**, real code over Figma: the original `#E1E1FE` solid
 ring had zero real usage anywhere; the translucent `primary-500`-at-12%-alpha ring shown here is
