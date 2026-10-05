@@ -20,10 +20,13 @@ one this system doesn't have a name for yet.
 ## Types
 
 <div class="ds-demo flex flex-col gap-3">
+  <Toast type="primary" title="New message received" />
   <Toast type="success" title="Application submitted" />
   <Toast type="warning" title="Draft not yet published" description="Finish required fields to publish." />
   <Toast type="destructive" title="Failed to save changes" />
 </div>
+
+`primary` is the component's default type, for a neutral, non-status notification.
 
 ## When to use
 
