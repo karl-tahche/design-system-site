@@ -18,17 +18,14 @@ onMounted(() => {
 
 | Color | HEX | RGB | CMYK | Pantone |
 |---|---|---|---|---|
-| Blue | `#3733CF` | 55, 51, 207 | 73, 75, 0, 19 | 2126 |
-| Yellow | `#FBD24D` | 251, 210, 77 | 0, 16, 69, 2 | 113 |
+| Blue | `#353DD7` | 53, 61, 215 | — | — |
+| Yellow | `#fbd249` | 251, 210, 73 | — | — |
 | Black | `#000000` | 0, 0, 0 | 0, 0, 0, 100 | — |
 | White | `#FFFFFF` | 255, 255, 255 | 0, 0, 0, 0 | — |
 
-**RESOLVED 2026-09-25**: this page previously flagged a conflict between this PDF's blue/yellow
-(`#3733CF`/`#FBD24D`, uploaded 2026-09-15) and the `brand-royalBlue`/`primary-500` and
-`brand-yellow`/`secondary-500` values then shipped in `tahche-design-tokens` (`#353DD7`/`#FBD249`,
-from the earlier 2026-07-24 guideline). The brand owner has confirmed this PDF's values are
-current for both colors — `primary-500`/`brand.royalBlue` and `secondary-500`/`brand.yellow` have
-been updated to `#3733CF`/`#FBD24D` in `tahche-design-tokens` and rebuilt.
+`primary-500`/`brand-royalBlue` (`#353DD7`) and `secondary-500`/`brand-yellow` (`#FBD249`) in
+`tahche-design-tokens` are the values of record. The palette image above predates them, so the
+CMYK and Pantone values for blue and yellow are not listed.
 
 ## Typography
 

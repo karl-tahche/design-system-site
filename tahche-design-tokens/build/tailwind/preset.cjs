@@ -12,6 +12,7 @@ module.exports = {
     "extend": {
       "colors": {
         "primary": {
+          "20": "#f9f9ff",
           "50": "#f2f3ff",
           "100": "#e0e2ff",
           "200": "#bcbff5",
@@ -49,6 +50,8 @@ module.exports = {
           "750": "#3f3f3f",
           "800": "#2e2e2e",
           "900": "#141414",
+          "white": "#ffffff",
+          "black": "#000000",
           "foreground": "#141414"
         },
         "success": {
@@ -108,11 +111,14 @@ module.exports = {
           "yellow": "#fbd249",
           "lightGrey": "#f9f9f9",
           "red": "#ed4342",
-          "darkGrey": "#a8a9ad"
+          "darkGrey": "#a8a9ad",
+          "black": "#000000",
+          "white": "#ffffff"
         },
         "request": {
           "facilities": "#ef9a49",
           "cashAdvance": "#a954b7",
+          "cashAdvanceBg": "#ecdaee",
           "room": "#ef7d7c",
           "pettyCash": "#e255ac",
           "procurement": "#8277bb",
@@ -125,6 +131,10 @@ module.exports = {
           "charcoal": "#2f3537",
           "indigo-navy": "#393960",
           "loader-blue": "#30699d"
+        },
+        "overlay": {
+          "white-20": "#ffffff33",
+          "black-20": "#00000033"
         }
       },
       "fontFamily": {
@@ -509,7 +519,8 @@ module.exports = {
         "24": "96px",
         "32": "128px",
         "40": "160px",
-        "48": "192px"
+        "48": "192px",
+        "0.5": "2px"
       },
       "borderRadius": {
         "none": "0px",

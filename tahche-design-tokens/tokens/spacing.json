@@ -1,6 +1,7 @@
 {
   "spacing": {
     "$description": "Confirmed from the Figma Spacing page. Every value here already exists at the same pixel value in Tailwind's default spacing scale (see the generated Tailwind preset) — so adopting this scale requires zero Tailwind config changes, only the discipline to stop using arbitrary bracket values (px-[0.938rem] etc.) found throughout all 5 apps.",
+    "0_5": { "$value": "2px", "$type": "dimension", "$description": "NEW (2026-10-21), synced from the Figma v2 file's Spacing/0_5 variable — a hairline step for 2px gaps and padding. Keyed 0_5, not 0.5, because Style Dictionary reads a dot in a key as a path separator; the Tailwind preset and DESIGN.md convert it back to 0.5, which matches Tailwind's own default step." },
     "1": { "$value": "4px", "$type": "dimension" },
     "2": { "$value": "8px", "$type": "dimension" },
     "3": { "$value": "12px", "$type": "dimension" },
@@ -9,13 +10,13 @@
     "6": { "$value": "24px", "$type": "dimension" },
     "7": { "$value": "28px", "$type": "dimension" },
     "8": { "$value": "32px", "$type": "dimension" },
-    "10": { "$value": "40px", "$type": "dimension" },
-    "12": { "$value": "48px", "$type": "dimension" },
-    "16": { "$value": "64px", "$type": "dimension" },
-    "20": { "$value": "80px", "$type": "dimension" },
-    "24": { "$value": "96px", "$type": "dimension" },
-    "32": { "$value": "128px", "$type": "dimension" },
-    "40": { "$value": "160px", "$type": "dimension" },
-    "48": { "$value": "192px", "$type": "dimension" }
+    "10": { "$value": "40px", "$type": "dimension", "mobile": "32px" },
+    "12": { "$value": "48px", "$type": "dimension", "mobile": "40px" },
+    "16": { "$value": "64px", "$type": "dimension", "mobile": "48px" },
+    "20": { "$value": "80px", "$type": "dimension", "mobile": "64px" },
+    "24": { "$value": "96px", "$type": "dimension", "mobile": "72px" },
+    "32": { "$value": "128px", "$type": "dimension", "mobile": "96px" },
+    "40": { "$value": "160px", "$type": "dimension", "mobile": "120px" },
+    "48": { "$value": "192px", "$type": "dimension", "mobile": "144px" }
   }
 }

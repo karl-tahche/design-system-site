@@ -3,6 +3,7 @@ version: alpha
 name: Tahche
 description: Design system for Tahche's internal product suite — 5 Vue 3 + Tailwind apps, moving toward a shared PWA.
 colors:
+  primary-20: "#F9F9FF"
   primary-50: "#F2F3FF"
   primary-100: "#E0E2FF"
   primary-200: "#BCBFF5"
@@ -36,6 +37,8 @@ colors:
   neutral-750: "#3F3F3F"
   neutral-800: "#2E2E2E"
   neutral-900: "#141414"
+  neutral-white: "#FFFFFF"
+  neutral-black: "#000000"
   neutral-foreground: "#141414"
   success-50: "#F0FDF4"
   success-100: "#DCFCE7"
@@ -86,8 +89,11 @@ colors:
   brand-lightGrey: "#F9F9F9"
   brand-red: "#ED4342"
   brand-darkGrey: "#A8A9AD"
+  brand-black: "#000000"
+  brand-white: "#FFFFFF"
   request-facilities: "#EF9A49"
   request-cashAdvance: "#A954B7"
+  request-cashAdvanceBg: "#ECDAEE"
   request-room: "#EF7D7C"
   request-pettyCash: "#E255AC"
   request-procurement: "#8277BB"
@@ -98,6 +104,8 @@ colors:
   extended-charcoal: "#2F3537"
   extended-indigo-navy: "#393960"
   extended-loader-blue: "#30699D"
+  overlay-white-20: "#FFFFFF33"
+  overlay-black-20: "#00000033"
   primary: "{colors.primary-500}"
   secondary: "{colors.secondary-500}"
   neutral: "{colors.neutral-500}"
@@ -417,6 +425,7 @@ spacing:
   "32": 128px
   "40": 160px
   "48": 192px
+  "0.5": 2px
 motion:
   duration:
     fast: 150ms
@@ -690,7 +699,9 @@ Figma is a design reference here, not the final source of truth — the strategy
 Two tiers, deliberately kept separate:
 
 - **Product colors** (`primary`, `secondary`, `neutral`, `success`, `warning`, `destructive`) — for UI. `primary` is `#353DD7`, the value already live across all 5 apps; kept as-is rather than migrated, since re-theming five production apps for a color that was only ever a brand-guide value, never a shipped one, wasn't worth the churn.
-- **Brand colors** (`brand-royalBlue` `#353DD7`, `brand-yellow` `#FBD249`, `brand-lightGrey` `#F9F9F9`, `brand-red` `#ED4342`, `brand-darkGrey` `#A8A9AD`) — for marketing/document contexts only, per the real Brand Guideline from Marketing (2026-07-24). Royal Blue and Yellow are confirmed identical to `primary`/`secondary` — do not use these in product UI, that's what `primary`/`secondary` are for. Light Grey, Red, and Dark Grey are genuinely new brand-only colors with no product-ramp equivalent.
+- **Brand colors** (`brand-royalBlue` `#353DD7`, `brand-yellow` `#FBD249`, `brand-lightGrey` `#F9F9F9`, `brand-red` `#ED4342`, `brand-darkGrey` `#A8A9AD`) — for marketing/document contexts only, per the real Brand Guideline from Marketing (2026-07-24). Royal Blue and Yellow are confirmed identical to `primary`/`secondary` — do not use these in product UI, that's what `primary`/`secondary` are for. Light Grey, Red, and Dark Grey are genuinely new brand-only colors with no product-ramp equivalent. `brand-black` (`#000000`) and `brand-white` (`#FFFFFF`) were added 2026-10-21 from the Figma v2 file. **Open flag**: that Figma file's `Brand/yellow` variable currently reads `#FBD24D` while its own `Secondary/500` reads `#FBD249`; this file keeps `#FBD249` (Marketing's confirmed value, 2026-10-05) until the Figma side is corrected.
+
+**Synced from the Figma v2 file on 2026-10-21**: `primary-20` (`#F9F9FF`, a tint one step lighter than `primary-50`), `neutral-white` / `neutral-black` (pure white and black, for the rare case `neutral-50` / `neutral-900` aren't right), `request-cashAdvanceBg` (`#ECDAEE`, the tinted background paired with `request-cashAdvance`), and a new `overlay` group — `overlay-white-20` and `overlay-black-20`, fixed 20%-alpha scrims (Figma calls these `Opacity/white 20%` and `Opacity/black 20%`; renamed `overlay` here so the Tailwind class `bg-overlay-white-20` can't be mistaken for a `bg-opacity-*` utility).
 
 Each semantic ramp (`success`/`warning`/`destructive`) runs 50→900 and should only be used for state communication — a destructive action, a warning banner, a success toast — never as a decorative accent. Within any ramp: 50/100 for tinted backgrounds and hover fills, 500 for the primary interactive tone, 700–900 for high-contrast text or dark-surface contexts.
 
@@ -739,11 +750,13 @@ variant — only the text *color* paired with a style changes by theme (see Colo
 
 ## Layout
 
-The spacing scale (4px→192px) matches Tailwind's own default scale exactly at every step — adopting it requires no Tailwind config changes, only the discipline to stop reaching for arbitrary bracket values (`px-[0.938rem]`, `w-[6.25rem]`) that show up throughout all 5 codebases today.
+The spacing scale (2px→192px; the 2px `0.5` step was added 2026-10-21 from the Figma v2 file) matches Tailwind's own default scale exactly at every step — adopting it requires no Tailwind config changes, only the discipline to stop reaching for arbitrary bracket values (`px-[0.938rem]`, `w-[6.25rem]`) that show up throughout all 5 codebases today.
 
-**Breakpoints are ratified (2026-07-25), not just proposed.** Every app currently carries three parallel, conflicting breakpoint definitions (custom Tailwind `screens`, SCSS `$breakpoint-*` variables, and CSS custom properties) — but a 2026-07-23 audit found that regardless of what's configured, every single app already overwhelmingly uses standard Tailwind `sm/md/lg/xl/2xl` in real markup (217 to 2,844 instances per app), while the custom scheme sees only 0-46 instances per app, almost entirely confined to legacy Auth screens. Consolidating onto the standard scale isn't a risky migration into unfamiliar territory — it's formalizing what's already the dominant pattern in every codebase. `tablet:768` already equals `md:768`, so nothing is lost; the remaining work (updating the small number of legacy Auth-screen classes, wiring this scale into each app's actual Tailwind config) is mechanical, not a design question anymore.
+**Breakpoints are ratified (2026-07-25), not just proposed.** (2026-10-21: the Figma v2 file also defines an `xs` breakpoint at 320px — the smallest supported phone width. It isn't part of Tailwind's default scale, so treat it as a design-time reference width; there's no `xs:` class unless an app adds one.) Every app currently carries three parallel, conflicting breakpoint definitions (custom Tailwind `screens`, SCSS `$breakpoint-*` variables, and CSS custom properties) — but a 2026-07-23 audit found that regardless of what's configured, every single app already overwhelmingly uses standard Tailwind `sm/md/lg/xl/2xl` in real markup (217 to 2,844 instances per app), while the custom scheme sees only 0-46 instances per app, almost entirely confined to legacy Auth screens. Consolidating onto the standard scale isn't a risky migration into unfamiliar territory — it's formalizing what's already the dominant pattern in every codebase. `tablet:768` already equals `md:768`, so nothing is lost; the remaining work (updating the small number of legacy Auth-screen classes, wiring this scale into each app's actual Tailwind config) is mechanical, not a design question anymore.
 
 **Theme-agnostic**: spacing doesn't change by theme; no dark-mode variant needed here.
+
+**Mobile spacing values (synced 2026-10-21 from the Figma v2 file's Spacing collection, which has Web and Mobile modes)**: steps up to `8` (32px) are identical in both modes; the larger steps shrink on mobile — `10` 40→32px, `12` 48→40px, `16` 64→48px, `20` 80→64px, `24` 96→72px, `32` 128→96px, `40` 160→120px, `48` 192→144px. This frontmatter and the Tailwind preset carry the Web values only (the schema has no breakpoint concept); apply the Mobile values yourself below the `md` breakpoint (767px and under) for section and page-level gaps.
 
 ## Elevation & Depth
 

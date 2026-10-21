@@ -2,8 +2,8 @@
 
 Two tiers, deliberately kept separate: **product colors** (`primary`/`secondary`/`neutral`/
 `success`/`warning`/`destructive`/`progress`) for UI, and **brand colors** (`brand.royalBlue`/
-`brand.yellow`/`brand.lightGrey`/`brand.red`/`brand.darkGrey`) for marketing/document contexts
-only — do not use brand colors in product UI. Royal Blue and Yellow are confirmed identical to
+`brand.yellow`/`brand.lightGrey`/`brand.red`/`brand.darkGrey`/`brand.black`/`brand.white`) for
+marketing/document contexts only — do not use brand colors in product UI. Royal Blue and Yellow are confirmed identical to
 `primary`/`secondary-500` (see Real usage notes below); Light Grey, Red, and Dark Grey have no
 product-ramp equivalent.
 
@@ -36,6 +36,7 @@ is hand-copied.
 <ColorPalette group="brand" />
 <ColorPalette group="request" />
 <ColorPalette group="extended" />
+<ColorPalette group="overlay" />
 
 ## Dark mode: Recommended, not shipped anywhere yet
 
@@ -81,9 +82,8 @@ of the same ramp:
 identical in both themes (see [Accessibility Commitments](/philosophies/accessibility) for why
 that pairing doesn't transfer to other steps in the first place, in either theme).
 
-**One real, computed exception, not a guess**: `primary-500` (`#3733CF`, updated 2026-09-25 from
-`#353DD7`) used as *text* directly on a `neutral-900` page — not as a filled background — measures
-**2.23:1** (was 2.46:1), a real AA failure.
+**One real, computed exception, not a guess**: `primary-500` (`#353DD7`) used as *text* directly on a
+`neutral-900` page — not as a filled background — measures **2.46:1**, a real AA failure.
 Every other ramp's 500 tone (`success`, `warning`, `destructive`) already clears 4.5:1 as text on
 `neutral-900` without any change (8.09:1, 8.58:1, 4.90:1 respectively) — `primary` alone needs a
 lighter step for *text-only* use (a Link, an Outlined button's border/text, an icon color) on a
@@ -109,8 +109,8 @@ shows up; not done speculatively here.
   already-real blue) is an open design decision, not resolved here.
 - **`brand`** was corrected 2026-07-24 against the real Brand Guideline from Marketing, then
   UPDATED 2026-09-25 per Marketing's Sept 2026 brand refresh: `brand.royalBlue` and
-  `brand.yellow` currently match `primary-500` (`#3733CF`, was `#353DD7`) and `secondary-500`
-  (`#FBD24D`, was `#FBD249`) exactly.
+  `brand.yellow` currently match `primary-500` (`#353DD7`) and `secondary-500`
+  (`#FBD249`) exactly.
   Each is still kept as its own independent literal, not a reference to the product token, even
   though the values coincide today — brand identity (Marketing-owned) and product UI color
   (Product/Design-owned) are separately-controlled decisions that could diverge later, not one
@@ -118,3 +118,14 @@ shows up; not done speculatively here.
   `brand.darkGrey` (`#A8A9AD`) are newly added from the same guideline — genuinely distinct
   values with no equivalent elsewhere in this file, despite Red and Dark Grey sitting close to
   `destructive-500`/`neutral-500` respectively.
+- **Synced from the Figma v2 file on 2026-10-21**: `primary-20` (`#F9F9FF`), `neutral-white`
+  (`#FFFFFF`) and `neutral-black` (`#000000`), `brand.black` and `brand.white`,
+  `request.cashAdvanceBg` (`#ECDAEE`), and the new **`overlay`** group (`overlay-white-20`,
+  `overlay-black-20` — fixed 20%-alpha scrims; Figma names them `Opacity/white 20%` and
+  `Opacity/black 20%`). `overlay` is renamed from "opacity" so the Tailwind class
+  `bg-overlay-white-20` can't be confused with Tailwind's own `bg-opacity-*` utilities. None of
+  these are used by a shipped component yet. Every other color already matched Figma exactly.
+- **⚠️ Open flag — Brand Yellow**: Figma v2's `Brand/yellow` variable currently reads `#FBD24D`,
+  while its own `Secondary/500` reads `#FBD249`. This site and the tokens keep **`#FBD249`**
+  (Marketing's confirmed value, 2026-10-05) until the Figma variable is corrected or Marketing
+  says otherwise.

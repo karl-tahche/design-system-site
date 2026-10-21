@@ -55,7 +55,8 @@ StyleDictionary.registerFormat({
       }
 
       if (category === 'spacing') {
-        spacing[rest[0]] = token.$value ?? token.value;
+        // 0_5 -> 0.5 (Tailwind's own key; a literal dot in the JSON key would be a path separator)
+        spacing[rest[0].replace('_', '.')] = token.$value ?? token.value;
       }
 
       if (category === 'radius') {
