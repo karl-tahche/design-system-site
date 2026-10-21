@@ -43,7 +43,8 @@ non-issue or, worse, teaches the wrong lesson about when the exception genuinely
 
 A 2026-07-25 audit found **zero** focus-visible styling anywhere on any of the 5 apps' shared
 Button components. The recommended fix — applying `elevation.focus-ring` (the same ring now used
-on Input Field) — is documented on [Button](/components/button)'s page, but not yet shipped
+on Input Field; since 2026-10-21 a 2px gap plus a 2px solid `primary-500` ring at 7.5:1, up from
+about 1.2:1) — is documented on [Button](/components/button)'s page, but not yet shipped
 anywhere. Treat this as a live punch-list item, not a solved problem.
 
 ## Reduced motion is handled in only 1 of 5 apps

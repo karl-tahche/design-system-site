@@ -16,9 +16,27 @@ the swatches below for convenience). Use `xsmall` for subtle separation between 
 `xxlarge` for the single heaviest overlay in a view (real-usage audit found it dead as a class in
 every app — kept for scale completeness only).
 
-`focus-ring` was **replaced 2026-07-25**, real code over Figma: the original `#E1E1FE` solid
-ring had zero real usage anywhere; the translucent `primary-500`-at-12%-alpha ring shown here is
-a real, repeated pattern across multiple apps in the product suite.
+## Focus ring
+
+`focus-ring` was **replaced 2026-10-21** with Tailwind's classic offset ring (`ring-2 ring-offset-2`):
+a 2px gap in the surface color, then a 2px solid `primary-500` ring, drawn as a box-shadow so it
+follows `border-radius` and never shifts layout. The old 3px ring at 12% alpha measured about
+**1.2:1** against white (the Figma halo about 1.3:1) — too faint to carry focus on its own. The new
+ring is **7.5:1**, past the 3:1 non-text contrast minimum, and its 2px thickness meets the perimeter
+rule in WCAG 2.2's Focus Appearance (2.4.13, AAA). Use it with `focus-visible`, not `focus`.
+
+| Token | Ring color | On | Contrast |
+|---|---|---|---|
+| `focus-ring` | `primary-500` `#353DD7` | white | 7.5:1 |
+| `focus-ring-dark` | `primary-300` `#8D92EB` | `neutral-900` | 6.5:1 |
+| `focus-ring-destructive` | `destructive-600` `#DC2626` | white | 4.8:1 |
+| `focus-ring-success` | `success-600` `#16A34A` | white | 3.3:1 |
+| `focus-ring-warning` | `warning-600` `#D97706` | white | 3.2:1 |
+
+The gap color is the CSS variable `--focus-ring-offset` (falls back to white; `#141414` in
+`focus-ring-dark`). Set it on any surface that isn't plain white so the gap matches the background.
+The state variants are for fields in an error, success or warning state — one ring in the state's
+color instead of a separate tinted halo.
 
 Values rendered directly from `tahche-design-tokens/tokens/elevation.json`.
 

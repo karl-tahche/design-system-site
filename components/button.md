@@ -57,6 +57,7 @@ matrix — not an inference. Radius is `6px` (`rounded.sm`) on every variant and
   for perceptual clarity — WCAG's inactive-component exception means this was never a compliance
   requirement, just a legibility improvement).
 - Focus has zero real implementation in any of the 5 apps today — this reference applies
-  `elevation.focus-ring` as the recommended fix.
+  `elevation.focus-ring` (2px gap + 2px `primary-500` ring, via `focus-visible`) as the recommended
+  fix; `elevation.focus-ring-dark` on dark surfaces.
 - Loading reuses Disabled's appearance plus a spinner beside the label — it is not a fourth
   distinct color state.

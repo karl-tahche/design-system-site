@@ -43,6 +43,7 @@ Try typing below — this is a real, functioning `<input>`, not a static mockup.
 
 ## Known findings
 
-- `Box`'s focus ring was reconciled 2026-07-25: the token now used (`elevation.focus-ring`, a
-  translucent `primary-500` ring) replaced an earlier Figma-only value that had zero real usage
-  anywhere in the 5 apps.
+- `Box`'s focus ring was redone 2026-10-21: `elevation.focus-ring` is now a 2px gap plus a 2px solid
+  `primary-500` ring (7.5:1 on white), replacing a 12%-alpha ring that measured about 1.2:1. Fields
+  in an error state use `elevation.focus-ring-destructive`; on dark surfaces use
+  `elevation.focus-ring-dark`. The Figma file's `Focus ring/*` styles match.
