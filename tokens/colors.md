@@ -125,7 +125,6 @@ shows up; not done speculatively here.
   `Opacity/black 20%`). `overlay` is renamed from "opacity" so the Tailwind class
   `bg-overlay-white-20` can't be confused with Tailwind's own `bg-opacity-*` utilities. None of
   these are used by a shipped component yet. Every other color already matched Figma exactly.
-- **⚠️ Open flag — Brand Yellow**: Figma v2's `Brand/yellow` variable currently reads `#FBD24D`,
-  while its own `Secondary/500` reads `#FBD249`. This site and the tokens keep **`#FBD249`**
-  (Marketing's confirmed value, 2026-10-05) until the Figma variable is corrected or Marketing
-  says otherwise.
+- **Brand Yellow is `#FBD249` everywhere**: `brand.yellow` and `secondary-500` are the same
+  value in the tokens, this site, `DESIGN.md`, and the Figma v2 file (whose `Brand/yellow`
+  variable was aligned on 2026-10-21).

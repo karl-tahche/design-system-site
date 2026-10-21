@@ -8,8 +8,9 @@ const steps = Object.entries(elevationTokens.elevation)
 
 # Elevation
 
-A 6-step shadow scale (`xsmall` through `xxlarge`), already identical across Figma and all 5 apps,
-plus a separate `focus-ring` token below (a ring, not a drop shadow — shown alongside the scale in
+A 6-step shadow scale (`xsmall` through `xxlarge`) that **is the stock Tailwind v3 shadow scale**,
+standardized 2026-10-21 so Figma, code and these docs carry identical values — plus a separate
+`focus-ring` token below (a ring, not a drop shadow — shown alongside the scale in
 the swatches below for convenience). Use `xsmall` for subtle separation between adjacent surfaces,
 `small`/`medium` for dropdowns and popovers, `large`/`xlarge` for modals and sheets, and reserve
 `xxlarge` for the single heaviest overlay in a view (real-usage audit found it dead as a class in
@@ -20,6 +21,25 @@ ring had zero real usage anywhere; the translucent `primary-500`-at-12%-alpha ri
 a real, repeated pattern across multiple apps in the product suite.
 
 Values rendered directly from `tahche-design-tokens/tokens/elevation.json`.
+
+## Mapping to Tailwind
+
+Same offsets, blurs, spreads and alphas as Tailwind v3's defaults. The one deliberate difference is
+color: the slate `rgb(16 24 40)` (already the `extended.dark-slate` token) instead of pure black, so
+shadows read cool against Tahche's blue-tinted neutrals. The Tailwind preset defines both
+spellings, so `shadow-md` and `shadow-medium` render identically.
+
+| Token | Tailwind class | CSS |
+|---|---|---|
+| `xsmall` | `shadow-sm` | `0 1px 2px rgb(16 24 40 / 0.05)` |
+| `small` | `shadow` | `0 1px 3px rgb(16 24 40 / 0.1), 0 1px 2px -1px rgb(16 24 40 / 0.1)` |
+| `medium` | `shadow-md` | `0 4px 6px -1px rgb(16 24 40 / 0.1), 0 2px 4px -2px rgb(16 24 40 / 0.1)` |
+| `large` | `shadow-lg` | `0 10px 15px -3px rgb(16 24 40 / 0.1), 0 4px 6px -4px rgb(16 24 40 / 0.1)` |
+| `xlarge` | `shadow-xl` | `0 20px 25px -5px rgb(16 24 40 / 0.1), 0 8px 10px -6px rgb(16 24 40 / 0.1)` |
+| `xxlarge` | `shadow-2xl` | `0 25px 50px -12px rgb(16 24 40 / 0.25)` |
+
+The Figma file's `Drop shadow/*` effect styles use the same values (rewritten 2026-10-21; they had
+drifted, including layers with negative y offsets that cast shadows upward).
 
 <div class="flex flex-wrap gap-8 p-4">
   <div v-for="step in steps" :key="step.key" class="text-center">

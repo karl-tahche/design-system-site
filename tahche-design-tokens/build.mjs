@@ -74,6 +74,15 @@ StyleDictionary.registerFormat({
       }
     }
 
+    // Tailwind-native aliases (2026-10-21): the named elevation tokens ARE the stock
+    // Tailwind v3 shadow scale, so also define Tailwind's own keys from them. Stock
+    // shadow-sm/shadow/shadow-md/... then render identically to shadow-xsmall/small/medium/...
+    // instead of silently falling back to Tailwind's pure-black defaults.
+    const tailwindShadowAlias = { xsmall: 'sm', small: 'DEFAULT', medium: 'md', large: 'lg', xlarge: 'xl', xxlarge: '2xl' };
+    for (const [name, alias] of Object.entries(tailwindShadowAlias)) {
+      if (boxShadow[name]) boxShadow[alias] = boxShadow[name];
+    }
+
     // ── Best practice: composite text-style classes ─────────────────────
     // Tailwind's own `fontSize` theme key can bundle size/line-height/tracking
     // into one value, but NOT font-weight — so a design-system text style built
